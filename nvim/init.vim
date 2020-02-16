@@ -4,11 +4,6 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'chrisbra/Colorizer'  
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc-tsserver'
-Plug 'neoclide/coc-json'
-Plug 'neoclide/coc-git'
-Plug 'neoclide/coc-tslint-plugin'
-Plug 'neoclide/coc-eslint'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'chriskempson/base16-vim'
@@ -31,6 +26,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'mzlogin/vim-markdown-toc'
 Plug 'Asheq/close-buffers.vim'
 Plug 'liuchengxu/vista.vim'
+Plug 'mzlogin/vim-markdown-toc'
 
 call plug#end()
 

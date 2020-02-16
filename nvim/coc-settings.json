@@ -1,0 +1,10 @@
+{
+  "eslint.filetypes": ["javascript", "javascriptreact", "typescript"],
+  "javascript.validate.enable": false,
+  "git.enableGutters": true,
+  "coc.preferences.formatOnSaveFiletypes": [],
+  "prettier.semi": false,
+  "prettier.tslintIntegration": true,
+  "prettier.eslintIntegration": true,
+  "eslint.autoFixOnSave": false
+}

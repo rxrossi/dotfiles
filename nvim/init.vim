@@ -36,6 +36,7 @@ source $HOME/.config/nvim/coc-git.vim
 set foldmethod=indent
 set foldlevelstart=1000
 set mouse=a
+set linebreak
 
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1

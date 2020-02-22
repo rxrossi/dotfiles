@@ -109,8 +109,7 @@ nnoremap <C-n> :call MyNerdToggle()<CR>
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 set backupdir=.backup/,~/.backup/,/tmp//
-"set directory=.swp/,~/.swp/,/tmp//
-set dir=~/tmp
+set directory=.swp/,~/.swp/,/tmp//
 set undodir=.undo/,~/.undo/,/tmp//
 
 " Save with ctrl-s

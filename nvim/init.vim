@@ -80,8 +80,10 @@ set splitbelow
 set splitright
 noremap <space>tv :vsplit\|terminal<CR>a
 noremap <space>ts :split\|terminal<CR>a
+
 noremap <space>f :GFiles --exclude-standard --others --cached<CR>
 noremap <space>F :Rg<CR>
+noremap <space>b :Buffers<CR>
 tnoremap <C-w> <C-\><C-n><C-w>
 
 " Tab related config

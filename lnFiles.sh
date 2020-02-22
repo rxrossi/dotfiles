@@ -5,5 +5,8 @@ ln -s -f ~/dotfiles/karabiner.json ~/.config/karabiner/karabiner.json
 ln -s -f ~/dotfiles/zshrc ~/.zshrc
 
 # Neovim
-#mkdir ~/.config/nvim/
+mkdir ~/.config/nvim/
 ln -s -f ~/dotfiles/nvim/ ~/.config
+
+ln -s -f ~/dotfiles/nvim/ultisnips/ ~/.config/coc/
+

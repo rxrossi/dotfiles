@@ -20,4 +20,4 @@ Vim Vista requires more than just putting it into Plug list [Vista github page](
 
 ## COC PLUGINS
 
-:CocInstall coc-tsserver coc-json coc-git coc-tslint-plugin coc-eslint coc-prettier coc-jest
+:CocInstall coc-tsserver coc-json coc-git coc-tslint-plugin coc-eslint coc-prettier coc-jest coc-snippets

@@ -48,6 +48,8 @@ command! -nargs=0 JestCurrent :call  CocAction('runCommand', 'jest.fileTest', ['
 command! -nargs=0 Bdt :b#<bar>bd#<CR>
 " Run jest for current test
 nnoremap <leader>te :call CocAction('runCommand', 'jest.singleTest')<CR>
+" Run jest for current test file
+nnoremap <leader>tf :call CocAction('runCommand', 'jest.fileTest', ['%'])<CR>
 "
 " statusline
 set laststatus=2

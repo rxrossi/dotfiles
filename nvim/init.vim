@@ -93,16 +93,9 @@ set shiftwidth=2
 
 " NERDTree
 :let g:NERDTreeWinSize=60
-" map nerdtree to the ctrl+n
-function MyNerdToggle()
-    if &filetype == 'nerdtree' || !exists("g:NERDTreeFind") || exists("g:NERDTree") && g:NERDTree.IsOpen() 
-        :NERDTreeToggle
-    else
-        :NERDTreeFind
-    endif
-endfunction
 
-nnoremap <C-n> :call MyNerdToggle()<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <space>n :NERDTreeFind<CR>
 
 
 " COC Prettier

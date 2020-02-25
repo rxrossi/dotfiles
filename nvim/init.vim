@@ -93,7 +93,10 @@ tnoremap <C-w> <C-\><C-n><C-w>
 set expandtab
 set shiftwidth=2
 
-set autochdir
+"autocmd BufReadPost,BufNewFile * silent! cd %:p:h | e % | exec "cd %:h | cd `git rev-parse --show-toplevel`"
+"set autocmd
+"nmap <silent>fl lcd %:p:h | e %"
+noremap <silent><space>l :exec "lcd %:p:h"\| e %<CR>\| :sleep 150m <CR> \| :exec "cd %:h \| cd `git rev-parse --show-toplevel`"<CR>
 
 " NERDTree
 :let g:NERDTreeWinSize=60

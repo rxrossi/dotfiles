@@ -1,8 +1,9 @@
 {
+  "coc.preferences.rootPatterns": ["tsconfig.json", "node_modules", ".git"],
+  "coc.preferences.formatOnSaveFiletypes": [],
   "eslint.filetypes": ["javascript", "javascriptreact", "typescript"],
   "javascript.validate.enable": false,
   "git.enableGutters": true,
-  "coc.preferences.formatOnSaveFiletypes": [],
   "prettier.semi": false,
   "prettier.tslintIntegration": true,
   "prettier.eslintIntegration": true,

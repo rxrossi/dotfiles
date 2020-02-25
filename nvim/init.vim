@@ -93,12 +93,13 @@ tnoremap <C-w> <C-\><C-n><C-w>
 set expandtab
 set shiftwidth=2
 
+set autochdir
+
 " NERDTree
 :let g:NERDTreeWinSize=60
 
 nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <space>n :NERDTreeFind<CR>
-
 
 " COC Prettier
 command! -nargs=0 Prettier :CocCommand prettier.formatFile

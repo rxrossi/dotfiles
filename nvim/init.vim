@@ -27,11 +27,17 @@ Plug 'mzlogin/vim-markdown-toc'
 Plug 'Asheq/close-buffers.vim'
 Plug 'liuchengxu/vista.vim'
 Plug 'mzlogin/vim-markdown-toc'
+Plug 'shmup/vim-sql-syntax'
 
 call plug#end()
 
 source $HOME/.config/nvim/coc-default.vim
 source $HOME/.config/nvim/coc-git.vim
+
+
+let wiki = {}
+let wiki.nested_syntaxes = { 'python': 'python', 'c++': 'cpp', 'sql': 'sql', 'javascript': 'javascript', 'typescript': 'typescript' }
+let g:vimwiki_list = [wiki]
 
 set foldmethod=indent
 set foldlevelstart=1000

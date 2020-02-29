@@ -92,6 +92,7 @@ noremap <space>ts :split\|terminal<CR>a
 noremap <space>f :GFiles --exclude-standard --others --cached<CR>
 noremap <space>F :Rg<CR>
 noremap <space>b :Buffers<CR>
+noremap <space>h :History:<CR>
 tnoremap <C-w> <C-\><C-n><C-w>
 
 " Tab related config

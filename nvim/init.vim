@@ -100,6 +100,8 @@ tnoremap <C-w> <C-\><C-n><C-w>
 set expandtab
 set shiftwidth=2
 
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 noremap <silent><space>w :update<CR> :exec "lcd %:p:h"\| e!<CR>\| :sleep 150m <CR> \| :exec "cd %:h \| cd `git rev-parse --show-toplevel`"<CR> :call CocAction('runCommand', 'eslint.executeAutofix') <CR>
 
 " NERDTree

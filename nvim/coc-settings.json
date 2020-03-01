@@ -1,5 +1,5 @@
 {
-  "coc.preferences.rootPatterns": ["tsconfig.json", "node_modules", ".git"],
+  "coc.preferences.rootPatterns": ["node_modules", "tsconfig.json", ".git"],
   "coc.preferences.formatOnSaveFiletypes": [],
   "eslint.filetypes": ["javascript", "javascriptreact", "typescript"],
   "javascript.validate.enable": false,

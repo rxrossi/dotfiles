@@ -102,7 +102,17 @@ set shiftwidth=2
 
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
-noremap <silent><space>w :update<CR> :exec "lcd %:p:h"\| e!<CR>\| :sleep 150m <CR> \| :exec "cd %:h \| cd `git rev-parse --show-toplevel`"<CR> :call CocAction('runCommand', 'eslint.executeAutofix') <CR>
+
+function! GetCurrentWorkspace() 
+  lcd %:p:h
+  lcd `upfind package.json` 
+  CocRestart
+  cd `git rev-parse --show-toplevel`
+  redraw
+endfunction
+
+noremap <space>w :call GetCurrentWorkspace()<CR>
+autocmd BufRead *.ts :call GetCurrentWorkspace()
 
 " NERDTree
 :let g:NERDTreeWinSize=60

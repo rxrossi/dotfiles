@@ -1,10 +1,10 @@
 {
-  "coc.preferences.rootPatterns": ["node_modules", "tsconfig.json", ".git"],
+  "coc.preferences.rootPatterns": [".editorconfig", "node_modules", "tsconfig.json", ".git"],
   "coc.preferences.formatOnSaveFiletypes": [],
   "eslint.filetypes": ["javascript", "javascriptreact", "typescript"],
   "javascript.validate.enable": false,
   "git.enableGutters": true,
-  "prettier.semi": false,
+  "prettier.semi": true,
   "prettier.tslintIntegration": true,
   "prettier.eslintIntegration": true,
   "eslint.autoFixOnSave": true

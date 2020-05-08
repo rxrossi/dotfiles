@@ -55,6 +55,7 @@ ENABLE_CORRECTION="true"
 # Add wisely, as too many plugins slow down shell startup.
 
 source $ZSH/oh-my-zsh.sh
+source $HOME/z.sh
 
 # User configuration
 
@@ -119,3 +120,7 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
         eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Fix character not in range when cding into a git dir
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8

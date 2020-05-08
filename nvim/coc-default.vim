@@ -1,21 +1,5 @@
-" if hidden is not set, TextEdit might fail.
-set hidden
-
-" Some servers have issues with backup files, see #649
-set nobackup
-set nowritebackup
-
-" Better display for messages
-set cmdheight=2
-
-" You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
-
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
-
-" always show signcolumns
-set signcolumn=yes
+set updatetime=300 " You will have bad experience for diagnostic messages when it's default 4000.
+set signcolumn=yes " always show signcolumns
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -118,11 +102,54 @@ nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
 nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" Snippets related
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+function! GetCurrentWorkspace()
+  lcd %:p:h
+  lcd `upfind package.json`
+  CocRestart
+  cd `git rev-parse --show-toplevel`
+  redraw
+endfunction
+
+noremap <space>w :call GetCurrentWorkspace()<CR>
+
+" COC Prettier
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+" press <esc> to cancel.
+nmap <silent> <space>f <Plug>(coc-smartf-forward)
+nmap <silent> <space>F <Plug>(coc-smartf-backward)
+nmap <silent> <space>; <Plug>(coc-smartf-repeat)
+nmap <silent> <space>, <Plug>(coc-smartf-repeat-opposite)
+
+augroup Smartf
+  autocmd User SmartfEnter :hi Conceal ctermfg=220 guifg=#FF0000
+  autocmd User SmartfLeave :hi Conceal ctermfg=239 guifg=#FF0000
+augroup end
+
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+nmap <space>l  <Plug>(coc-float-hide)

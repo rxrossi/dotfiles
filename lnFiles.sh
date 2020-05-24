@@ -13,3 +13,5 @@ ln -s -f ~/dotfiles/nvim/ ~/.config
 
 ln -s -f ~/dotfiles/nvim/ultisnips/ ~/.config/coc
 
+# Vim wiki on Box
+ln -s -f ~/Box/vimwiki ~/vimwiki

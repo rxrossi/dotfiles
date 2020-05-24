@@ -9,8 +9,7 @@ ln -s -f ~/dotfiles/zshenv ~/.zshenv
 ln -s -f ~/dotfiles/tmux.conf ~/.tmux.conf
 
 # Neovim
-mkdir ~/.config/nvim/
 ln -s -f ~/dotfiles/nvim/ ~/.config
 
-ln -s -f ~/dotfiles/nvim/ultisnips/ ~/.config/coc/
+ln -s -f ~/dotfiles/nvim/ultisnips/ ~/.config/coc
 

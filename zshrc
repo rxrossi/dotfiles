@@ -55,7 +55,6 @@ ENABLE_CORRECTION="true"
 # Add wisely, as too many plugins slow down shell startup.
 
 source $ZSH/oh-my-zsh.sh
-source $HOME/z.sh
 
 # User configuration
 

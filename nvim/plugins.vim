@@ -30,7 +30,6 @@ Plug 'shmup/vim-sql-syntax'
 Plug 'yysfire/vimwiki2markdown'
 Plug 'lifepillar/pgsql.vim'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'yuttie/comfortable-motion.vim'
 Plug 'mbbill/undotree'
 Plug 'simnalamburt/vim-mundo'
 

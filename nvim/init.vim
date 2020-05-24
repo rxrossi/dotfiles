@@ -8,5 +8,5 @@ source $HOME/.config/nvim/wiki.vim
 source $HOME/.config/nvim/spelunker.vim
 source $HOME/.config/nvim/NERDTree.vim
 
-let g:python2_host_prog = '/usr/local/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python2_host_prog = '/usr/bin/python'
+let g:python3_host_prog = '/usr/bin/python3'

@@ -1,17 +1,22 @@
-# Karabiner
+# Make dirs
+mkdir ~/.vim/undodir
+
+# Ln
+
+## Karabiner
 ln -s -f ~/dotfiles/karabiner.json ~/.config/karabiner/karabiner.json
 
-# ZSH
+## ZSH
 ln -s -f ~/dotfiles/zshrc ~/.zshrc
 ln -s -f ~/dotfiles/zshenv ~/.zshenv
 
-# TMUX
+## TMUX
 ln -s -f ~/dotfiles/tmux.conf ~/.tmux.conf
 
-# Neovim
+## Neovim
 ln -s -f ~/dotfiles/nvim/ ~/.config
 
 ln -s -f ~/dotfiles/nvim/ultisnips/ ~/.config/coc
 
-# Vim wiki on Box
+## Vim wiki on Box
 ln -s -f ~/Box/vimwiki ~/vimwiki

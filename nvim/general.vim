@@ -52,6 +52,4 @@ command! -nargs=0 Bdt :b#<bar>bd#<CR> " Kill current buffer
 
 tnoremap <C-w> <C-\><C-n><C-w>
 
-nmap <C-a> :b#<CR>
-
 lua require'colorizer'.setup()

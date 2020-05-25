@@ -7,6 +7,7 @@ source $HOME/.config/nvim/airline.vim
 source $HOME/.config/nvim/wiki.vim
 source $HOME/.config/nvim/spelunker.vim
 source $HOME/.config/nvim/NERDTree.vim
+source $HOME/.config/nvim/fugitive.vim
 
 let g:python2_host_prog = '/usr/bin/python'
 let g:python3_host_prog = '/usr/bin/python3'

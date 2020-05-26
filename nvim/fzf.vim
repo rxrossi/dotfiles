@@ -17,8 +17,6 @@ let g:fzf_action = {
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
 
-" let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
-
 " Enable per-command history.
 " CTRL-N and CTRL-P will be automatically bound to next-history and
 " previous-history instead of down and up. If you don't like the change,

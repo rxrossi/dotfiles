@@ -53,3 +53,5 @@ command! -nargs=0 Bdt :b#<bar>bd#<CR> " Kill current buffer
 tnoremap <C-w> <C-\><C-n><C-w>
 
 lua require'colorizer'.setup()
+
+au TermOpen * setlocal nonumber norelativenumber

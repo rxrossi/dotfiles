@@ -54,4 +54,9 @@ tnoremap <C-w> <C-\><C-n><C-w>
 
 lua require'colorizer'.setup()
 
-au TermOpen * setlocal nonumber norelativenumber
+au TermOpen * setlocal nonumber norelativenumber signcolumn=no
+
+highlight SignColumn guibg=NONE
+highlight LineNr guibg=NONE
+set cursorline
+set fcs=eob:\ " replace tilde on empty lines with space

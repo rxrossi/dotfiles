@@ -20,3 +20,6 @@ ln -s -f ~/dotfiles/nvim/ultisnips/ ~/.config/coc
 
 ## Vim wiki on Box
 ln -s -f ~/Box/vimwiki ~/vimwiki
+
+## Alacritty
+ln -s -f ~/dotfiles/alacritty.yml ~/.config/alacritty.yml

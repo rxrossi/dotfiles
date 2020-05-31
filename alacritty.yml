@@ -1,0 +1,15 @@
+key_bindings:
+  - { key: Space, mods: Control, chars: "\x00" }
+
+font:
+  normal:
+    family: Source Code Pro
+
+  bold:
+    family: Source Code Pro
+
+  italic:
+    family: Source Code Pro
+
+  size: 12.0
+

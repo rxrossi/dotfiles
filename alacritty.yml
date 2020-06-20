@@ -3,13 +3,16 @@ key_bindings:
 
 font:
   normal:
+    # family: Source Code Pro
     family: Source Code Pro
 
   bold:
-    family: Source Code Pro
+    # family: Source Code Pro
+    family: Source Code Pro Bold
 
   italic:
-    family: Source Code Pro
+    # family: Source Code Pro
+    family: Source Code Pro Italic
 
   size: 12.0
 

@@ -3,7 +3,6 @@ noremap <space>s :Rg<CR>
 
 noremap <space>b :Buffers<CR>
 noremap <space>h :History:<CR>
-noremap ; :Commands<CR>
 
 function! s:build_quickfix_list(lines)
   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))

@@ -28,10 +28,10 @@ nmap <silent> [d <Plug>(coc-diagnostic-prev)
 nmap <silent> ]d <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent> <leader>gd <Plug>(coc-definition)
+nmap <silent> <leader>gy <Plug>(coc-type-definition)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
+nmap <silent> <leader>gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -137,17 +137,6 @@ noremap <space>w :call GetCurrentWorkspace()<CR>
 
 " COC Prettier
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
-" press <esc> to cancel.
-nmap <silent> <space>f <Plug>(coc-smartf-forward)
-nmap <silent> <space>F <Plug>(coc-smartf-backward)
-nmap <silent> <space>; <Plug>(coc-smartf-repeat)
-nmap <silent> <space>, <Plug>(coc-smartf-repeat-opposite)
-
-augroup Smartf
-  autocmd User SmartfEnter :hi Conceal ctermfg=220 guifg=#FF0000
-  autocmd User SmartfLeave :hi Conceal ctermfg=239 guifg=#FF0000
-augroup end
 
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)

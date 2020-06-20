@@ -32,5 +32,6 @@ Plug 'lifepillar/pgsql.vim'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'mbbill/undotree'
 Plug 'simnalamburt/vim-mundo'
+Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }
 
 call plug#end()

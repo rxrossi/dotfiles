@@ -20,3 +20,5 @@ function! CopyMatches(reg)
 endfunction
 
 command! -register CopyMatches call CopyMatches(<q-reg>)
+
+noremap <C-6> <C-^>

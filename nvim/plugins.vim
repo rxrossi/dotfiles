@@ -33,5 +33,10 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'mbbill/undotree'
 Plug 'simnalamburt/vim-mundo'
 Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }
+Plug 'tpope/vim-dadbod'
+Plug 'acamso/vim-dadbod-ui'
 
 call plug#end()
+
+nmap <leader>s <Plug>(DBUI_SaveQuery)
+let g:db_ui_auto_execute_table_helpers=1

@@ -12,7 +12,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'mattn/emmet-vim'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'kamykn/spelunker.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-abolish'
@@ -34,7 +33,8 @@ Plug 'mbbill/undotree'
 Plug 'simnalamburt/vim-mundo'
 Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }
 Plug 'tpope/vim-dadbod'
-Plug 'acamso/vim-dadbod-ui'
+Plug 'kristijanhusak/vim-dadbod-ui'
+Plug 'JMcKiern/vim-venter'
 
 call plug#end()
 

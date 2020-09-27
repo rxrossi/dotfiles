@@ -1,0 +1,10 @@
+prettier.formatFile
+document.renameCurrentWord
+git.chunkUndo
+git.copyUrl
+cSpell.addWordToWorkspaceDictionary
+cSpell.addWordToDictionary
+cSpell.enableLanguage
+cSpell.toggleEnableSpellChecker
+snippets.editSnippets
+json.retryResolveSchema

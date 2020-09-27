@@ -1,5 +1,5 @@
 # Make dirs
-mkdir ~/.vim/undodir
+mkdir -p  ~/.vim/undodir
 
 # Ln
 

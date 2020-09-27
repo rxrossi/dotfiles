@@ -23,37 +23,3 @@
 #		endsnippet
 #
 # Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
-snippet it "it" b
-it('${1}', ${2}() => {
-  ${0}
-})
-endsnippet
-
-snippet desc "describe" b
-describe('${1}', () => {
-  ${0}
-})
-endsnippet
-
-snippet afo "arrow function implicity object return" i
-${1}(${2}) => ({
-  ${0}
-})
-endsnippet
-
-snippet clg "console.log" i
-console.log(${0})
-endsnippet
-
-snippet clgjs "console.log json strigified" i
-console.log(JSON.stringify(${0}, null, 2))
-endsnippet
-
-snippet pall "Promise all" i
-Promise.all([
-  ${0}
-])
-endsnippet
-
-snippet imp "Import" b
-import ${1} from ${0}

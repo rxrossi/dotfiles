@@ -5,12 +5,12 @@ source $HOME/.config/nvim/coc-git.vim
 source $HOME/.config/nvim/fzf.vim
 source $HOME/.config/nvim/airline.vim
 source $HOME/.config/nvim/wiki.vim
-source $HOME/.config/nvim/spelunker.vim
 source $HOME/.config/nvim/NERDTree.vim
 source $HOME/.config/nvim/fugitive.vim
 
-let g:python2_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/bin/python3'
+
+"let g:python2_host_prog = '/usr/bin/python'
+"let g:python3_host_prog = '/usr/bin/python3'
 
 function! CopyMatches(reg)
   let hits = []
@@ -22,3 +22,8 @@ endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
 
 noremap <C-6> <C-^>
+
+"set foldmethod=indent
+"set foldlevelstart=0
+
+let g:vimwiki_url_maxsave=0

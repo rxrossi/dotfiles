@@ -1,6 +1,12 @@
 prettier.formatFile
 document.renameCurrentWord
 git.chunkUndo
+workspace.renameCurrentFile
+cSpell.addIgnoreWordToWorkspace
+eslint.createConfig
+eslint.executeAutofix
+cSpellExt_portuguese-brazilian.disableCatalanWorkspace
+tsserver.openTsServerLog
 git.copyUrl
 cSpell.addWordToWorkspaceDictionary
 cSpell.addWordToDictionary

@@ -35,8 +35,12 @@ Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }
 Plug 'tpope/vim-dadbod'
 Plug 'kristijanhusak/vim-dadbod-ui'
 Plug 'JMcKiern/vim-venter'
+Plug 'tpope/vim-obsession'
 
 call plug#end()
 
 nmap <leader>s <Plug>(DBUI_SaveQuery)
+
+autocmd! bufwritepost .vimrc source %
+
 let g:db_ui_auto_execute_table_helpers=1

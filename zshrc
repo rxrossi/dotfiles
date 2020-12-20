@@ -129,3 +129,6 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+. /usr/local/opt/asdf/asdf.sh
+. /usr/local/opt/asdf/asdf.sh

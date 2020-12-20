@@ -8,6 +8,7 @@
   - vim plug
 - ohmyzsh
 - tmux
+  - tmux plugins (tpm)
 
 ## Install
 

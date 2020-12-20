@@ -4,7 +4,7 @@ set autoread
 set smartcase
 
 highlight ColorColumn ctermbg=gray
-set colorcolumn=80
+"set colorcolumn=80
 
 set laststatus=2
 set tabstop=2

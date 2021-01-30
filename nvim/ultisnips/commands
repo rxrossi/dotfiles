@@ -1,6 +1,7 @@
 prettier.formatFile
-document.renameCurrentWord
 git.chunkUndo
+document.renameCurrentWord
+eslint.showOutputChannel
 workspace.renameCurrentFile
 cSpell.addIgnoreWordToWorkspace
 eslint.createConfig

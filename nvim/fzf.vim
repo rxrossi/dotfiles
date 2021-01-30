@@ -10,7 +10,6 @@ function! s:build_quickfix_list(lines)
   cc
 endfunction
 
-let $FZF_DEFAULT_OPTS .= ' --inline-info'
 
 let g:fzf_action = {
   \ 'ctrl-q': function('s:build_quickfix_list'),
@@ -26,6 +25,10 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 "" fzf.vim
 let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
-let $FZF_DEFAULT_OPTS='--layout=reverse  --margin=1,4'
+let $FZF_DEFAULT_OPTS='--layout=reverse  --margin=1,4 --inline-info'
 let g:fzf_layout = { 'down': '100%' }
 let g:fzf_preview_window = ['up:80%']
+
+" Rg2 ignores the filename when searching
+command! -bang -nargs=* Rg2 call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+

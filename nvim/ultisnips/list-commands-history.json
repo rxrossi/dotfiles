@@ -2,7 +2,9 @@
   "L1VzZXJzL3J4cm9zc2kvZG90ZmlsZXM=": [
     "spelldi",
     "config",
-    "eslit"
+    "eslit",
+    "col",
+    "undo"
   ],
   "L1VzZXJzL3J4cm9zc2kvemsvYXBp": [
     "ren",
@@ -11,6 +13,7 @@
     "renam",
     "rname",
     "rn",
+    "prett",
     "rename"
   ],
   "L1VzZXJzL3J4cm9zc2kvemsvaW1hZ2UtcHJvY2Vzc2luZy1sYW1iZGE=": [
@@ -51,16 +54,23 @@
     "rena"
   ],
   "L1VzZXJzL3J4cm9zc2kvemsvbXMtc2VhcmNo": [
-    "ren",
     "renam",
     " ss",
     "rena",
     "renae",
-    "undo",
+    "iw",
+    "ren",
+    "form",
+    "t\"",
+    "uno",
     "rename",
-    "iw"
+    "undo",
+    "und"
   ],
   "L1VzZXJzL3J4cm9zc2kvazhzLXR1dG9yaWFsLW5hbmE=": [
     "yml"
+  ],
+  "L1VzZXJzL3J4cm9zc2kvemsvd2ViYXBw": [
+    "undo"
   ]
 }

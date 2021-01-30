@@ -8,8 +8,8 @@
     "remove",
     "post",
     "login",
-    "find",
-    "sendToTop"
+    "sendToTop",
+    "find"
   ],
   "L1VzZXJzL3J4cm9zc2kvQm94L3ZpbXdpa2k=": [
     "jk"
@@ -86,6 +86,9 @@
     "get",
     "calcul",
     "avai",
-    "setup"
+    "sea",
+    "remo",
+    "setup",
+    "clean"
   ]
 }

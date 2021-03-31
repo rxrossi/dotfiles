@@ -1,4 +1,5 @@
 noremap <space>p :GFiles --exclude-standard --others --cached<CR>
+noremap <space>f :Files<CR>
 noremap <space>s :Rg<CR>
 
 noremap <space>b :Buffers<CR>

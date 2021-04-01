@@ -1,9 +1,8 @@
 # Make dirs
 mkdir -p  ~/.vim/undodir
 
-# Ln
-
 ## Karabiner
+mkdir -p ~/.config/karabiner
 ln -s -f ~/dotfiles/karabiner.json ~/.config/karabiner/karabiner.json
 
 ## ZSH
@@ -18,8 +17,8 @@ ln -s -f ~/dotfiles/nvim/ ~/.config
 
 ln -s -f ~/dotfiles/nvim/ultisnips/ ~/.config/coc
 
-## Vim wiki on Box
-ln -s -f ~/Box/vimwiki ~/vimwiki
-
 ## Alacritty
 ln -s -f ~/dotfiles/alacritty.yml ~/.config/alacritty.yml
+
+## Vim wiki on Box
+ln -s -f ~/Box/vimwiki ~/vimwiki

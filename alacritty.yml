@@ -3,7 +3,6 @@ key_bindings:
 
 font:
   normal:
-    # family: Source Code Pro
     family: Source Code Pro
 
   size: 12.0

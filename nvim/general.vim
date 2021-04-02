@@ -15,7 +15,7 @@ set foldlevelstart=1000
 set mouse=a
 set linebreak
 
-autocmd! bufwritepost init.vim source %
+autocmd! bufwritepost *.vim source %
 
 set hidden " if hidden is not set, TextEdit might fail. (COC)
 
@@ -39,16 +39,12 @@ set splitright
 set expandtab
 set shiftwidth=2
 
-set undodir=.undo/,~/.undo/,/tmp//
-
 noremap  <silent> <C-S>         :update<CR>
 vnoremap <silent> <C-S>         <C-C>:update<CR><ESC>
 inoremap <silent> <C-S>         <C-O>:update<CR><ESC>
 
 noremap <space>tv :vsplit\|terminal<CR>a
 noremap <space>ts :split\|terminal<CR>a
-
-command! -nargs=0 Bdt :b#<bar>bd#<CR> " Kill current buffer
 
 tnoremap <C-w> <C-\><C-n><C-w>
 

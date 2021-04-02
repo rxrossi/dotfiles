@@ -132,4 +132,4 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # . /usr/local/opt/asdf/asdf.sh
 # . /usr/local/opt/asdf/asdf.sh
-if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
+# if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi

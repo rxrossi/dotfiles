@@ -1,46 +1,38 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
+" Syntax
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'shmup/vim-sql-syntax'
+Plug 'lifepillar/pgsql.vim'
+
 Plug 'scrooloose/nerdtree'
-Plug 'norcalli/nvim-colorizer.lua'
-Plug 'sheerun/vim-polyglot'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
 Plug 'chriskempson/base16-vim'
+Plug 'norcalli/nvim-colorizer.lua'
+
+Plug 'mbbill/undotree'
+Plug 'simnalamburt/vim-mundo'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-obsession'
+
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-abolish'
 Plug 'Raimondi/delimitMate'
 Plug 'jeetsukumaran/vim-indentwise'
-Plug 'zacacollier/vim-javascript-sql', { 'branch': 'add-typescript-support' }
-Plug 'junegunn/goyo.vim'
 Plug 'vimwiki/vimwiki'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-dispatch'
 Plug 'mzlogin/vim-markdown-toc'
-Plug 'Asheq/close-buffers.vim'
-Plug 'mzlogin/vim-markdown-toc'
-Plug 'shmup/vim-sql-syntax'
 Plug 'yysfire/vimwiki2markdown'
-Plug 'lifepillar/pgsql.vim'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'mbbill/undotree'
-Plug 'simnalamburt/vim-mundo'
 Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }
-Plug 'tpope/vim-dadbod'
-Plug 'kristijanhusak/vim-dadbod-ui'
-Plug 'JMcKiern/vim-venter'
-Plug 'tpope/vim-obsession'
 
 call plug#end()
 
-nmap <leader>s <Plug>(DBUI_SaveQuery)
-
-autocmd! bufwritepost .vimrc source %
-
-let g:db_ui_auto_execute_table_helpers=1
+autocmd! bufwritepost .vim source %

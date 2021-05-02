@@ -26,8 +26,11 @@ set cmdheight=2 " Better display for messages
 
 set shortmess+=c " don't give |ins-completion-menu| messages.
 
+set smartcase
+set ignorecase
+
 let base16colorspace=256
-colorscheme base16-materia
+colorscheme base16-onedark
 hi Normal guibg=NONE ctermbg=NONE
 set termguicolors
 set number

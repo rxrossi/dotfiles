@@ -1,9 +1,11 @@
+services
+gstatus
+symbols
+diagnostics
 folders
 sources
 bcommits
 extensions
-diagnostics
 outline
-symbols
 branches
 commands

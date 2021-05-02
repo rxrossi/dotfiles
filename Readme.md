@@ -16,4 +16,4 @@ Open install.sh and check when it makes sense to run it. It should create dirs
 and run some ln commands
 
 ## COC PLUGINS
-:CocInstall coc-tsserver coc-json coc-git coc-tslint-plugin coc-eslint coc-prettier coc-jest coc-snippets coc-db coc-spell-checker coc-cspell-dicts
+:CocInstall coc-tsserver coc-json coc-git coc-tslint-plugin coc-eslint coc-prettier coc-jest coc-snippets coc-db coc-spell-checker coc-cspell-dicts coc-graphql

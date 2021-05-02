@@ -17,3 +17,15 @@ endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
 
 let g:vimwiki_url_maxsave=0
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = { "tsx" }
+  },
+}
+EOF
+
+set noswapfile

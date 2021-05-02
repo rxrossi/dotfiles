@@ -1,9 +1,12 @@
-prettier.formatFile
 git.chunkUndo
 document.renameCurrentWord
-eslint.showOutputChannel
+git.keepCurrent
 workspace.renameCurrentFile
 cSpell.addIgnoreWordToWorkspace
+cSpell.addIgnoreWord
+workspace.diagnosticRelated
+prettier.formatFile
+eslint.showOutputChannel
 eslint.createConfig
 eslint.executeAutofix
 cSpellExt_portuguese-brazilian.disableCatalanWorkspace

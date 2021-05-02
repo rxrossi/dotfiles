@@ -4,7 +4,12 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'shmup/vim-sql-syntax'
 Plug 'lifepillar/pgsql.vim'
+Plug 'jparise/vim-graphql'
+Plug 'pangloss/vim-javascript'
+Plug 'vim-airline/vim-airline'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'kristijanhusak/defx-icons'
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 

@@ -4,8 +4,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'shmup/vim-sql-syntax'
 Plug 'lifepillar/pgsql.vim'
+Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 
-Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'chriskempson/base16-vim'
@@ -30,7 +30,7 @@ Plug 'jeetsukumaran/vim-indentwise'
 Plug 'vimwiki/vimwiki'
 Plug 'mzlogin/vim-markdown-toc'
 Plug 'yysfire/vimwiki2markdown'
-Plug 'bronson/vim-trailing-whitespace'
+"Plug 'bronson/vim-trailing-whitespace'
 Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }
 
 call plug#end()

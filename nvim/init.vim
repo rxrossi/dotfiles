@@ -4,8 +4,8 @@ source $HOME/.config/nvim/coc-default.vim
 source $HOME/.config/nvim/coc-git.vim
 source $HOME/.config/nvim/fzf.vim
 source $HOME/.config/nvim/wiki.vim
-source $HOME/.config/nvim/NERDTree.vim
 source $HOME/.config/nvim/fugitive.vim
+source $HOME/.config/nvim/defx.vim
 
 function! CopyMatches(reg)
   let hits = []

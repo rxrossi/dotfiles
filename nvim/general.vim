@@ -1,5 +1,7 @@
 set undodir=~/.vim/undodir
 set undofile " Maintain undo history between sessions
+set noswapfile
+
 set autoread
 set smartcase
 

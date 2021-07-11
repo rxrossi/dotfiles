@@ -46,3 +46,16 @@ let g:airline#extensions#tabline#tab_min_count = 2     " minimum of 2 tabs neede
 let g:airline#extensions#tabline#show_splits = 0       " disables the buffer name that displays on the right of the tabline               
 let g:airline#extensions#tabline#show_tab_nr = 1       " disable tab numbers                                                              
 let g:airline#extensions#tabline#show_tab_type = 0     " disables the weird orange arrow on the tabline
+
+" Copy file name
+" relative path
+nmap <silent> <leader>y% :let @+ = expand("%")<cr>
+
+" full path
+:nmap <silent> <leader>yp :let @+ = expand("%:p")<cr>
+
+" just filename
+:nmap <silent> <leader>yt :let @+ = expand("%:t")<cr>
+
+:nmap <silent> <leader>at :let @+ = expand("%:t")<cr><space>p
+

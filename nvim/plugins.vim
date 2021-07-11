@@ -2,17 +2,16 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Syntax
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'shmup/vim-sql-syntax'
+" Plug 'shmup/vim-sql-syntax'
 Plug 'lifepillar/pgsql.vim'
 Plug 'jparise/vim-graphql'
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
 Plug 'vim-airline/vim-airline'
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-
 " BLOCKSTART When treesitter gets stable for tsx, we could remove both
-Plug 'leafgarland/typescript-vim'
-Plug 'maxmellon/vim-jsx-pretty'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'maxmellon/vim-jsx-pretty'
 " BLOCKEND
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'kristijanhusak/defx-icons'

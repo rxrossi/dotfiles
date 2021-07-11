@@ -1,15 +1,19 @@
 git.chunkUndo
 document.renameCurrentWord
-git.keepCurrent
+workspace.diagnosticRelated
+cSpellExt_portuguese-brazilian.disableCatalanWorkspace
 workspace.renameCurrentFile
+json.retryResolveSchema
+git.keepIncoming
+jest.fileTest
+git.chunkInfo
+git.keepCurrent
 cSpell.addIgnoreWordToWorkspace
 cSpell.addIgnoreWord
-workspace.diagnosticRelated
 prettier.formatFile
 eslint.showOutputChannel
 eslint.createConfig
 eslint.executeAutofix
-cSpellExt_portuguese-brazilian.disableCatalanWorkspace
 tsserver.openTsServerLog
 git.copyUrl
 cSpell.addWordToWorkspaceDictionary
@@ -17,4 +21,3 @@ cSpell.addWordToDictionary
 cSpell.enableLanguage
 cSpell.toggleEnableSpellChecker
 snippets.editSnippets
-json.retryResolveSchema

@@ -64,7 +64,14 @@ function! s:defx_my_settings() abort
         \ defx#do_action('change_vim_cwd')
 endfunction
 
-nnoremap <silent><C-n> :Defx <CR>
-nnoremap <silent><space>n :Defx -search=`expand('%:p')`<CR>
+
+	call defx#custom#column('filename', {
+	      \ 'min_width': 80,
+	      \ 'max_width': 160,
+	      \ })
+
+
+nnoremap <silent><C-n> :Defx -show-ignored-files <CR>
+nnoremap <silent><space>n :Defx -show-ignored-files -search=`expand('%:p')`<CR>
 
 nnoremap <silent><buffer><expr> <CR> defx#do_action('drop')

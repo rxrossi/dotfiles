@@ -1,6 +1,6 @@
 :lua require'init'
 
-source ./defx_settings.vim
+source  $HOME/.config/nvim/defx_settings.vim
 
 let mapleader=" "
 

@@ -28,6 +28,7 @@ return require('packer').startup(function()
   use 'Raimondi/delimitMate'
   use 'jeetsukumaran/vim-indentwise'
   use 'Shougo/defx.nvim'
+  use 'styled-components/vim-styled-components'
 
 end)
 

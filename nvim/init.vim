@@ -29,22 +29,23 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope command_history<cr>
 nnoremap <leader>fc <cmd>Telescope commands<cr>
 
-"Fugitive
+" Fugitive
 nnoremap <leader>g <cmd>:G<cr>
 
-"wiki
+" wiki
 let wiki = {}
 let wiki.nested_syntaxes = { 'python': 'python', 'c++': 'cpp', 'sql': 'sql', 'pgsql': 'pgsql',  'javascript': 'javascript', 'typescript': 'typescript' }
 let g:vimwiki_list = [wiki]
 let g:vimwiki_url_maxsave=0
 
-"Compe
+" Compe
 inoremap <silent><expr> <C-Space> compe#complete()
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
+" Spelling
 set spell
 set spelllang=en_gb
 set spelloptions=camel

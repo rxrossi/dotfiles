@@ -18,3 +18,9 @@ vim.api.nvim_exec(
 ]],
   false
 )
+
+require('telescope').setup({
+  defaults = {
+    layout_strategy = "vertical",
+  },
+})

@@ -11,8 +11,6 @@ return require('packer').startup(function()
 
   use 'RRethy/nvim-base16'
   use 'nvim-treesitter/nvim-treesitter'
-  use 'neovim/nvim-lspconfig'
-  use 'kabouzeid/nvim-lspinstall'
   use 'vimwiki/vimwiki'
   use {
     'nvim-telescope/telescope.nvim',
@@ -24,7 +22,6 @@ return require('packer').startup(function()
       'nvim-lua/plenary.nvim'
     }
   }
-  use 'hrsh7th/nvim-compe'
   use 'Raimondi/delimitMate'
   use 'jeetsukumaran/vim-indentwise'
   use 'Shougo/defx.nvim'

@@ -1,8 +1,6 @@
 require'bootstrap_packer'
 require'plugins'
 require'treesitter_settings'
-require'lsp_settings'
-require'compe_settings'
 require'gitsigns_settings'
 
 vim.wo.relativenumber = true

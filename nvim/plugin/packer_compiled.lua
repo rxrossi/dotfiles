@@ -69,6 +69,10 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["coc.nvim"] = {
+    loaded = true,
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/coc.nvim"
+  },
   ["defx.nvim"] = {
     loaded = true,
     path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/defx.nvim"
@@ -84,18 +88,6 @@ _G.packer_plugins = {
   ["nvim-base16"] = {
     loaded = true,
     path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/nvim-base16"
-  },
-  ["nvim-compe"] = {
-    loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/nvim-compe"
-  },
-  ["nvim-lspconfig"] = {
-    loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
-  },
-  ["nvim-lspinstall"] = {
-    loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/nvim-lspinstall"
   },
   ["nvim-treesitter"] = {
     loaded = true,

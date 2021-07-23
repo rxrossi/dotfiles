@@ -1,0 +1,47 @@
+{
+  "languageserver": {
+    "graphql": {
+      "enable": true,
+      "command": "graphql-lsp",
+      "args": ["server", "-m", "stream"],
+      "filetypes": ["typescript", "typescriptreact", "graphql"]
+    },
+    "ccls": {
+      "command": "ccls",
+      "filetypes": [
+        "c",
+        "cpp",
+        "objc",
+        "objcpp"
+      ],
+      "rootPatterns": [
+        ".ccls",
+        "compile_commands.json",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls"
+        }
+      }
+    }
+  },
+  "diagnostic.errorSign": "✘",
+  "diagnostic.virtualText": true,
+  "diagnostic.virtualTextLines": 1,
+  "diagnostic.virtualTextPrefix": " ",
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.virtualTextCurrentLineOnly": false,
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "coc.preferences.enableMessageDialog": true,
+  "diagnostic.messageTarget": "float",
+  "coc.preferences.rootPatterns": [".editorconfig", "node_modules", "tsconfig.json", ".git"],
+  "javascript.validate.enable": false,
+  "prettier.semi": true,
+  "prettier.tslintIntegration": true,
+  "prettier.eslintIntegration": true,
+  "eslint.autoFixOnSave": true,
+  "coc.preferences.useQuickfixForLocations": true
+}

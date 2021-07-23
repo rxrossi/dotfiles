@@ -1,8 +1,15 @@
 :lua require'init'
 
 source  $HOME/.config/nvim/defx_settings.vim
+source  $HOME/.config/nvim/coc.vim
 
 let mapleader=" "
+
+set encoding=utf-8
+set nobackup
+set nowritebackup
+set updatetime=300
+set signcolumn=number
 
 set tabstop=2 shiftwidth=2 expandtab
 set hidden

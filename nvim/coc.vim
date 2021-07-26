@@ -1,4 +1,4 @@
-let g:coc_global_extensions=[ 'coc-tsserver', 'coc-css', 'coc-prettier', 'coc-tslint-plugin', 'coc-eslint', 'coc-json', 'coc-graphql', 'coc-styled-components' ]
+let g:coc_global_extensions=[ 'coc-tsserver', 'coc-css', 'coc-prettier', 'coc-tslint-plugin', 'coc-eslint', 'coc-json', 'coc-graphql', 'coc-styled-components', 'coc-vimlsp', 'coc-sumneko-lua', 'coc-sh', 'coc-svg', 'coc-pyright' ]
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -10,13 +10,13 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> [d <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gY <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
@@ -34,9 +34,11 @@ endfunction
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
+" Change the default CocHighlightText colors
+autocmd ColorScheme * highlight CocHighlightText     ctermbg=LightYellow  guibg=LightYellow
 
 " Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>rn <cmd>CocCommand document.renameCurrentWord<CR>
 
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)

@@ -133,10 +133,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-obsession"
   },
-  ["vim-styled-components"] = {
-    loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-styled-components"
-  },
   ["vim-unimpaired"] = {
     loaded = true,
     path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-unimpaired"

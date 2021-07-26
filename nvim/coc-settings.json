@@ -43,5 +43,8 @@
   "prettier.tslintIntegration": true,
   "prettier.eslintIntegration": true,
   "eslint.autoFixOnSave": true,
+  "coc.preferences.floatActions": false,
+  "coc.preferences.silentAutoupdate": true,
+  "coc.preferences.enableFloatHighlight": true,
   "coc.preferences.useQuickfixForLocations": true
 }

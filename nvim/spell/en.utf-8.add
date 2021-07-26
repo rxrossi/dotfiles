@@ -119,3 +119,10 @@ Offs
 LSP
 coc
 plugin
+args
+js
+#ostgre
+PostgreSQL/!
+PostgreSQL
+Postgre/!
+JSDoc

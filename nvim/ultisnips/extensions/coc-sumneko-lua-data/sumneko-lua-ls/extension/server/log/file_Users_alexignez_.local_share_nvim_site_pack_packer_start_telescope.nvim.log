@@ -1,0 +1,969 @@
+[09:31:26.167][info] [#0:/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/main.lua:44]: Lua Lsp startup, root: 	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server
+[09:31:26.167][debug][#0:/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/main.lua:45]: ROOT:	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server
+[09:31:26.167][debug][#0:/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/main.lua:46]: LOGPATH:	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/log
+[09:31:26.167][debug][#0:/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/main.lua:47]: METAPATH:	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta
+[09:31:26.167][debug][#0:/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/main.lua:48]: VERSION:	2.3.2
+[09:31:26.172][info] [#0:script/service/telemetry.lua:21]: Telemetry Token:	3730A6575B77BFFA
+[09:31:26.395][info] [#0:script/pub/pub.lua:48]: Create brave:	1
+[09:31:26.395][info] [#0:script/pub/pub.lua:48]: Create brave:	2
+[09:31:26.395][info] [#0:script/pub/pub.lua:48]: Create brave:	3
+[09:31:26.395][info] [#0:script/pub/pub.lua:48]: Create brave:	4
+[09:31:26.395][debug][#0:script/service/service.lua:137]: 
+========= Medical Examination Report =========
+    --------------- Memory ---------------
+        Total: 2.518 MB
+        # 00 : 2.518 MB
+        # 01 : 0.000 MB
+        # 02 : 0.000 MB
+        # 03 : 0.000 MB
+        # 04 : 0.000 MB
+    --------------- Coroutine ---------------
+        Total:     0
+        Running:   0
+        Suspended: 0
+        Normal:    0
+        Dead:      0
+    --------------- Cache ---------------
+        Total: 1
+        Dead:  0
+    --------------- Proto ---------------
+        Holdon:   0
+        Waiting:  0
+==============================================
+[09:31:26.424][debug][#0:script/client.lua:181]: Client init	{
+    capabilities = {
+        general = {
+            markdown = {
+                parser = "marked",
+                version = "1.1.0",
+            },
+            regularExpressions = {
+                engine = "ECMAScript",
+                version = "ES2020",
+            },
+        },
+        textDocument = {
+            callHierarchy = {
+                dynamicRegistration = true,
+            },
+            codeAction = {
+                codeActionLiteralSupport = {
+                    codeActionKind = {
+                        valueSet = {
+                            [1] = "",
+                            [2] = "quickfix",
+                            [3] = "refactor",
+                            [4] = "refactor.extract",
+                            [5] = "refactor.inline",
+                            [6] = "refactor.rewrite",
+                            [7] = "source",
+                            [8] = "source.organizeImports",
+                        },
+                    },
+                },
+                dataSupport = true,
+                disabledSupport = true,
+                dynamicRegistration = true,
+                honorsChangeAnnotations = false,
+                isPreferredSupport = true,
+                resolveSupport = {
+                    properties = {
+                        [1] = "edit",
+                    },
+                },
+            },
+            codeLens = {
+                dynamicRegistration = true,
+            },
+            colorProvider = {
+                dynamicRegistration = true,
+            },
+            completion = {
+                completionItem = {
+                    commitCharactersSupport = true,
+                    deprecatedSupport = true,
+                    documentationFormat = {
+                        [1] = "markdown",
+                        [2] = "plaintext",
+                    },
+                    insertReplaceSupport = true,
+                    insertTextModeSupport = {
+                        valueSet = {
+                            [1] = 1,
+                            [2] = 2,
+                        },
+                    },
+                    preselectSupport = true,
+                    resolveSupport = {
+                        properties = {
+                            [1] = "documentation",
+                            [2] = "detail",
+                            [3] = "additionalTextEdits",
+                        },
+                    },
+                    snippetSupport = true,
+                    tagSupport = {
+                        valueSet = {
+                            [1] = 1,
+                        },
+                    },
+                },
+                completionItemKind = {
+                    valueSet = {
+                        [01] = 1,
+                        [02] = 2,
+                        [03] = 3,
+                        [04] = 4,
+                        [05] = 5,
+                        [06] = 6,
+                        [07] = 7,
+                        [08] = 8,
+                        [09] = 9,
+                        [10] = 10,
+                        [11] = 11,
+                        [12] = 12,
+                        [13] = 13,
+                        [14] = 14,
+                        [15] = 15,
+                        [16] = 16,
+                        [17] = 17,
+                        [18] = 18,
+                        [19] = 19,
+                        [20] = 20,
+                        [21] = 21,
+                        [22] = 22,
+                        [23] = 23,
+                        [24] = 24,
+                        [25] = 25,
+                    },
+                },
+                contextSupport = true,
+                dynamicRegistration = true,
+            },
+            declaration = {
+                dynamicRegistration = true,
+            },
+            definition = {
+                dynamicRegistration = true,
+            },
+            documentHighlight = {
+                dynamicRegistration = true,
+            },
+            documentLink = {
+                dynamicRegistration = true,
+                tooltipSupport = true,
+            },
+            documentSymbol = {
+                dynamicRegistration = true,
+                hierarchicalDocumentSymbolSupport = true,
+                symbolKind = {
+                    valueSet = {
+                        [01] = 1,
+                        [02] = 2,
+                        [03] = 3,
+                        [04] = 4,
+                        [05] = 5,
+                        [06] = 6,
+                        [07] = 7,
+                        [08] = 8,
+                        [09] = 9,
+                        [10] = 10,
+                        [11] = 11,
+                        [12] = 12,
+                        [13] = 13,
+                        [14] = 14,
+                        [15] = 15,
+                        [16] = 16,
+                        [17] = 17,
+                        [18] = 18,
+                        [19] = 19,
+                        [20] = 20,
+                        [21] = 21,
+                        [22] = 22,
+                        [23] = 23,
+                        [24] = 24,
+                        [25] = 25,
+                        [26] = 26,
+                    },
+                },
+                tagSupport = {
+                    valueSet = {
+                        [1] = 1,
+                    },
+                },
+            },
+            foldingRange = {
+                dynamicRegistration = true,
+                lineFoldingOnly = true,
+                rangeLimit = 5000,
+            },
+            formatting = {
+                dynamicRegistration = true,
+            },
+            hover = {
+                contentFormat = {
+                    [1] = "markdown",
+                    [2] = "plaintext",
+                },
+                dynamicRegistration = true,
+            },
+            implementation = {
+                dynamicRegistration = true,
+            },
+            linkedEditingRange = {
+                dynamicRegistration = true,
+            },
+            onTypeFormatting = {
+                dynamicRegistration = true,
+            },
+            publishDiagnostics = {
+                relatedInformation = true,
+                tagSupport = {
+                    valueSet = {
+                        [1] = 1,
+                        [2] = 2,
+                    },
+                },
+                versionSupport = false,
+            },
+            rangeFormatting = {
+                dynamicRegistration = true,
+            },
+            references = {
+                dynamicRegistration = true,
+            },
+            rename = {
+                dynamicRegistration = true,
+                prepareSupport = true,
+            },
+            selectionRange = {
+                dynamicRegistration = true,
+            },
+            semanticTokens = {
+                dynamicRegistration = true,
+                formats = {
+                    [1] = "relative",
+                },
+                multilineTokenSupport = false,
+                overlappingTokenSupport = false,
+                requests = {
+                    full = {
+                        delta = true,
+                    },
+                    range = true,
+                },
+                tokenModifiers = {
+                    [01] = "declaration",
+                    [02] = "definition",
+                    [03] = "readonly",
+                    [04] = "static",
+                    [05] = "deprecated",
+                    [06] = "abstract",
+                    [07] = "async",
+                    [08] = "modification",
+                    [09] = "documentation",
+                    [10] = "defaultLibrary",
+                },
+                tokenTypes = {
+                    [01] = "namespace",
+                    [02] = "type",
+                    [03] = "class",
+                    [04] = "enum",
+                    [05] = "interface",
+                    [06] = "struct",
+                    [07] = "typeParameter",
+                    [08] = "parameter",
+                    [09] = "variable",
+                    [10] = "property",
+                    [11] = "enumMember",
+                    [12] = "event",
+                    [13] = "function",
+                    [14] = "method",
+                    [15] = "macro",
+                    [16] = "keyword",
+                    [17] = "modifier",
+                    [18] = "comment",
+                    [19] = "string",
+                    [20] = "number",
+                    [21] = "regexp",
+                    [22] = "operator",
+                },
+            },
+            signatureHelp = {
+                contextSupport = true,
+                dynamicRegistration = true,
+                signatureInformation = {
+                    activeParameterSupport = true,
+                    documentationFormat = {
+                        [1] = "markdown",
+                        [2] = "plaintext",
+                    },
+                    parameterInformation = {
+                        labelOffsetSupport = true,
+                    },
+                },
+            },
+            synchronization = {
+                didSave = true,
+                dynamicRegistration = true,
+                willSave = true,
+                willSaveWaitUntil = true,
+            },
+            typeDefinition = {
+                dynamicRegistration = true,
+            },
+        },
+        window = {
+            showDocument = {
+                support = false,
+            },
+            showMessage = {
+                messageActionItem = {
+                    additionalPropertiesSupport = false,
+                },
+            },
+            workDoneProgress = true,
+        },
+        workspace = {
+            applyEdit = true,
+            codeLens = {
+                refreshSupport = true,
+            },
+            configuration = true,
+            didChangeConfiguration = {
+                dynamicRegistration = true,
+            },
+            didChangeWatchedFiles = {
+                dynamicRegistration = true,
+            },
+            executeCommand = {
+                dynamicRegistration = true,
+            },
+            fileOperations = {
+                didCreate = true,
+                didDelete = true,
+                didRename = true,
+                dynamicRegistration = true,
+                willCreate = true,
+                willDelete = true,
+                willRename = true,
+            },
+            semanticTokens = {
+                refreshSupport = true,
+            },
+            symbol = {
+                dynamicRegistration = true,
+                symbolKind = {
+                    valueSet = {
+                        [01] = 1,
+                        [02] = 2,
+                        [03] = 3,
+                        [04] = 4,
+                        [05] = 5,
+                        [06] = 6,
+                        [07] = 7,
+                        [08] = 8,
+                        [09] = 9,
+                        [10] = 10,
+                        [11] = 11,
+                        [12] = 12,
+                        [13] = 13,
+                        [14] = 14,
+                        [15] = 15,
+                        [16] = 16,
+                        [17] = 17,
+                        [18] = 18,
+                        [19] = 19,
+                        [20] = 20,
+                        [21] = 21,
+                        [22] = 22,
+                        [23] = 23,
+                        [24] = 24,
+                        [25] = 25,
+                        [26] = 26,
+                    },
+                },
+                tagSupport = {
+                    valueSet = {
+                        [1] = 1,
+                    },
+                },
+            },
+            workspaceEdit = {
+                documentChanges = true,
+                failureHandling = "textOnlyTransactional",
+                resourceOperations = {
+                    [1] = "create",
+                    [2] = "rename",
+                    [3] = "delete",
+                },
+            },
+            workspaceFolders = true,
+        },
+    },
+    clientInfo = {
+        name = "coc.nvim",
+        version = "0.0.80",
+    },
+    locale = "en_US",
+    processId = 68852,
+    rootPath = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    rootUri = "file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    trace = "off",
+    workspaceFolders = {
+        [1] = {
+            name = "telescope.nvim",
+            uri = "file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+        },
+    },
+}
+[09:31:26.424][info] [#0:script/language.lua:135]: VSC language: en-us
+[09:31:26.424][info] [#0:script/language.lua:136]: LS  language: en-us
+[09:31:26.424][info] [#0:script/workspace/workspace.lua:34]: Workspace inited: 	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim
+[09:31:26.424][info] [#0:script/workspace/workspace.lua:43]: Log path: 	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/log/file_Users_alexignez_.local_share_nvim_site_pack_packer_start_telescope.nvim.log
+[09:31:26.425][debug][#0:script/provider/semantic-tokens.lua:105]: Refresh semantic tokens.
+[09:31:26.425][debug][#0:script/provider/semantic-tokens.lua:105]: Refresh semantic tokens.
+[09:31:26.425][debug][#0:script/provider/semantic-tokens.lua:105]: Refresh semantic tokens.
+[09:31:26.425][debug][#0:script/provider/semantic-tokens.lua:105]: Refresh semantic tokens.
+[09:31:26.425][debug][#0:script/provider/semantic-tokens.lua:105]: Refresh semantic tokens.
+[09:31:26.425][debug][#0:script/provider/semantic-tokens.lua:105]: Refresh semantic tokens.
+[09:31:26.425][debug][#0:script/provider/semantic-tokens.lua:105]: Refresh semantic tokens.
+[09:31:26.425][debug][#0:script/provider/semantic-tokens.lua:105]: Refresh semantic tokens.
+[09:31:26.425][debug][#0:script/provider/semantic-tokens.lua:105]: Refresh semantic tokens.
+[09:31:26.425][debug][#0:script/provider/semantic-tokens.lua:105]: Refresh semantic tokens.
+[09:31:26.425][debug][#0:script/provider/semantic-tokens.lua:105]: Refresh semantic tokens.
+[09:31:26.425][debug][#0:script/provider/completion.lua:27]: Enable completion.
+[09:31:26.425][debug][#0:script/provider/semantic-tokens.lua:105]: Refresh semantic tokens.
+[09:31:26.425][debug][#0:script/provider/semantic-tokens.lua:105]: Refresh semantic tokens.
+[09:31:26.425][debug][#0:script/provider/semantic-tokens.lua:105]: Refresh semantic tokens.
+[09:31:26.425][debug][#0:script/provider/semantic-tokens.lua:105]: Refresh semantic tokens.
+[09:31:26.425][debug][#0:script/provider/semantic-tokens.lua:105]: Refresh semantic tokens.
+[09:31:26.426][debug][#0:script/provider/semantic-tokens.lua:33]: Enable semantic tokens.
+[09:31:26.426][debug][#0:script/provider/semantic-tokens.lua:105]: Refresh semantic tokens.
+[09:31:26.426][debug][#0:script/provider/semantic-tokens.lua:105]: Refresh semantic tokens.
+[09:31:26.426][debug][#0:script/provider/semantic-tokens.lua:105]: Refresh semantic tokens.
+[09:31:26.435][debug][#0:script/provider/provider.lua:28]: load config from client
+[09:31:26.436][debug][#0:script/provider/provider.lua:35]: loaded config dump:	{
+    Lua = {
+        color = {
+            mode = "Semantic",
+        },
+        completion = {
+            autoRequire = true,
+            callSnippet = "Disable",
+            displayContext = 6,
+            enable = true,
+            keywordSnippet = "Replace",
+            showParams = true,
+            workspaceWord = true,
+        },
+        diagnostics = {
+            enable = true,
+            workspaceDelay = 0,
+            workspaceRate = 100,
+        },
+        hint = {
+            enable = false,
+            paramName = true,
+            paramType = true,
+            setType = false,
+        },
+        hover = {
+            enable = true,
+            enumsLimit = 5,
+            previewFields = 20,
+            viewNumber = true,
+            viewString = true,
+            viewStringMax = 1000,
+        },
+        runtime = {
+            fileEncoding = "utf8",
+            path = {
+                [1] = "?.lua",
+                [2] = "?/init.lua",
+                [3] = "?/?.lua",
+            },
+            plugin = "",
+            unicodeName = false,
+            version = "Lua 5.4",
+        },
+        signatureHelp = {
+            enable = true,
+        },
+        window = {
+            progressBar = true,
+            statusBar = true,
+        },
+        workspace = {
+            checkThirdParty = true,
+            ignoreDir = {
+                [1] = ".vscode",
+            },
+            ignoreSubmodules = true,
+            maxPreload = 1000,
+            preloadFileSize = 100,
+            useGitIgnore = true,
+        },
+    },
+}
+[09:31:26.436][debug][#0:script/provider/semantic-tokens.lua:105]: Refresh semantic tokens.
+[09:31:26.454][info] [#0:script/plugin.lua:52]: plugin path:	nil
+[09:31:27.425][info] [#0:script/workspace/workspace.lua:313]: Preload start.
+[09:31:27.426][info] [#0:script/workspace/workspace.lua:97]: Ignore by .gitignore:	build/
+[09:31:27.426][info] [#0:script/workspace/workspace.lua:97]: Ignore by .gitignore:	doc/tags
+[09:31:27.426][info] [#0:script/workspace/workspace.lua:97]: Ignore by .gitignore:	.luacheckcache
+[09:31:27.427][info] [#0:script/workspace/workspace.lua:132]: Ignore directory:	.vscode
+[09:31:27.427][debug][#0:script/workspace/workspace.lua:165]: getLibraryMatchers	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua 5.4 en-us	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua 5.4 en-us
+[09:31:27.428][info] [#0:script/workspace/workspace.lua:318]: Scan files at:	/Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim
+[09:31:27.463][info] [#0:script/workspace/workspace.lua:323]: Scan library at:	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua 5.4 en-us
+[09:31:27.464][info] [#0:script/workspace/workspace.lua:346]: Found 115 files.
+[09:31:27.464][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/package.lua , size = 2.917 KB
+[09:31:27.464][info] [#0:script/workspace/workspace.lua:233]: ++++As library of:	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua 5.4 en-us
+[09:31:27.467][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/package.lua
+[09:31:27.467][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/package.lua
+[09:31:27.468][info] [#0:script/workspace/workspace.lua:349]: Loaded 1/115 files
+[09:31:27.468][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/builtin.lua , size = 0.280 KB
+[09:31:27.468][info] [#0:script/workspace/workspace.lua:233]: ++++As library of:	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua 5.4 en-us
+[09:31:27.468][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/builtin.lua
+[09:31:27.469][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/builtin.lua
+[09:31:27.469][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/utf8.lua , size = 2.294 KB
+[09:31:27.469][info] [#0:script/workspace/workspace.lua:233]: ++++As library of:	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua 5.4 en-us
+[09:31:27.470][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/utf8.lua
+[09:31:27.471][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/utf8.lua
+[09:31:27.471][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/io.lua , size = 6.292 KB
+[09:31:27.471][info] [#0:script/workspace/workspace.lua:233]: ++++As library of:	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua 5.4 en-us
+[09:31:27.475][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/io.lua
+[09:31:27.479][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/io.lua
+[09:31:27.479][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/debug.lua , size = 7.291 KB
+[09:31:27.479][info] [#0:script/workspace/workspace.lua:233]: ++++As library of:	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua 5.4 en-us
+[09:31:27.487][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/debug.lua
+[09:31:27.490][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/debug.lua
+[09:31:27.491][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/coroutine.lua , size = 2.496 KB
+[09:31:27.491][info] [#0:script/workspace/workspace.lua:233]: ++++As library of:	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua 5.4 en-us
+[09:31:27.492][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/coroutine.lua
+[09:31:27.493][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/coroutine.lua
+[09:31:27.493][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/math.lua , size = 8.216 KB
+[09:31:27.493][info] [#0:script/workspace/workspace.lua:233]: ++++As library of:	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua 5.4 en-us
+[09:31:27.498][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/math.lua
+[09:31:27.500][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/math.lua
+[09:31:27.501][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/string.lua , size = 5.968 KB
+[09:31:27.501][info] [#0:script/workspace/workspace.lua:233]: ++++As library of:	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua 5.4 en-us
+[09:31:27.504][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/string.lua
+[09:31:27.506][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/string.lua
+[09:31:27.506][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/os.lua , size = 4.217 KB
+[09:31:27.506][info] [#0:script/workspace/workspace.lua:233]: ++++As library of:	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua 5.4 en-us
+[09:31:27.510][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/os.lua
+[09:31:27.511][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/os.lua
+[09:31:27.511][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/table.lua , size = 2.702 KB
+[09:31:27.511][info] [#0:script/workspace/workspace.lua:233]: ++++As library of:	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua 5.4 en-us
+[09:31:27.512][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/table.lua
+[09:31:27.513][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/table.lua
+[09:31:27.514][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/basic.lua , size = 13.748 KB
+[09:31:27.514][info] [#0:script/workspace/workspace.lua:233]: ++++As library of:	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua 5.4 en-us
+[09:31:27.518][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/basic.lua
+[09:31:27.520][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta/Lua%205.4%20en-us/basic.lua
+[09:31:27.521][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/sorters.lua , size = 15.447 KB
+[09:31:27.531][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/sorters.lua
+[09:31:27.543][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/sorters.lua
+[09:31:27.543][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/entry_manager.lua , size = 4.484 KB
+[09:31:27.546][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/entry_manager.lua
+[09:31:27.549][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/entry_manager.lua
+[09:31:27.550][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/init.lua , size = 2.312 KB
+[09:31:27.551][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/init.lua
+[09:31:27.553][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/init.lua
+[09:31:27.553][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/finders.lua , size = 5.468 KB
+[09:31:27.557][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/finders.lua
+[09:31:27.559][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/finders.lua
+[09:31:27.559][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/themes.lua , size = 3.282 KB
+[09:31:27.561][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/themes.lua
+[09:31:27.562][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/themes.lua
+[09:31:27.562][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/previewers/init.lua , size = 15.095 KB
+[09:31:27.566][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/previewers/init.lua
+[09:31:27.567][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/previewers/init.lua
+[09:31:27.567][info] [#0:script/workspace/workspace.lua:349]: Loaded 17/115 files
+[09:31:27.567][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/previewers/term_previewer.lua , size = 8.168 KB
+[09:31:27.572][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/previewers/term_previewer.lua
+[09:31:27.576][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/previewers/term_previewer.lua
+[09:31:27.577][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/previewers/previewer.lua , size = 1.360 KB
+[09:31:27.578][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/previewers/previewer.lua
+[09:31:27.579][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/previewers/previewer.lua
+[09:31:27.579][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/previewers/buffer_previewer.lua , size = 25.398 KB
+[09:31:27.600][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/previewers/buffer_previewer.lua
+[09:31:27.613][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/previewers/buffer_previewer.lua
+[09:31:27.613][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/previewers/utils.lua , size = 3.351 KB
+[09:31:27.615][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/previewers/utils.lua
+[09:31:27.617][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/previewers/utils.lua
+[09:31:27.617][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/path.lua , size = 2.449 KB
+[09:31:27.619][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/path.lua
+[09:31:27.620][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/path.lua
+[09:31:27.621][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/config/resolve.lua , size = 6.285 KB
+[09:31:27.623][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/config/resolve.lua
+[09:31:27.625][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/config/resolve.lua
+[09:31:27.625][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/debounce.lua , size = 4.719 KB
+[09:31:27.628][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/debounce.lua
+[09:31:27.631][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/debounce.lua
+[09:31:27.632][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/algos/fzy.lua , size = 4.908 KB
+[09:31:27.636][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/algos/fzy.lua
+[09:31:27.639][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/algos/fzy.lua
+[09:31:27.639][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/algos/linked_list.lua , size = 4.172 KB
+[09:31:27.642][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/algos/linked_list.lua
+[09:31:27.643][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/algos/linked_list.lua
+[09:31:27.643][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/algos/string_distance.lua , size = 0.856 KB
+[09:31:27.649][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/algos/string_distance.lua
+[09:31:27.650][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/algos/string_distance.lua
+[09:31:27.650][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/finders/async_job_finder.lua , size = 1.771 KB
+[09:31:27.651][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/finders/async_job_finder.lua
+[09:31:27.652][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/finders/async_job_finder.lua
+[09:31:27.652][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/config.lua , size = 11.626 KB
+[09:31:27.656][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/config.lua
+[09:31:27.659][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/config.lua
+[09:31:27.660][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/state.lua , size = 0.716 KB
+[09:31:27.660][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/state.lua
+[09:31:27.660][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/state.lua
+[09:31:27.661][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/finders/async_static_finder.lua , size = 0.933 KB
+[09:31:27.661][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/finders/async_static_finder.lua
+[09:31:27.662][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/finders/async_static_finder.lua
+[09:31:27.662][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/finders/async_oneshot_finder.lua , size = 1.979 KB
+[09:31:27.663][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/finders/async_oneshot_finder.lua
+[09:31:27.664][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/finders/async_oneshot_finder.lua
+[09:31:27.664][info] [#0:script/workspace/workspace.lua:349]: Loaded 32/115 files
+[09:31:27.664][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/WIP.lua , size = 2.143 KB
+[09:31:27.666][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/WIP.lua
+[09:31:27.667][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/WIP.lua
+[09:31:27.667][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/_extensions/init.lua , size = 1.728 KB
+[09:31:27.668][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/_extensions/init.lua
+[09:31:27.668][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/_extensions/init.lua
+[09:31:27.668][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers.lua , size = 34.767 KB
+[09:31:27.692][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers.lua
+[09:31:27.710][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers.lua
+[09:31:27.710][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/mappings.lua , size = 6.350 KB
+[09:31:27.713][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/mappings.lua
+[09:31:27.716][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/mappings.lua
+[09:31:27.716][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/init.lua , size = 25.299 KB
+[09:31:27.745][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/init.lua
+[09:31:27.759][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/init.lua
+[09:31:27.760][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/mt.lua , size = 3.610 KB
+[09:31:27.762][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/mt.lua
+[09:31:27.764][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/mt.lua
+[09:31:27.764][info] [#0:script/workspace/workspace.lua:349]: Loaded 38/115 files
+[09:31:27.765][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/state.lua , size = 1.403 KB
+[09:31:27.766][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/state.lua
+[09:31:27.766][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/state.lua
+[09:31:27.767][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/set.lua , size = 5.332 KB
+[09:31:27.769][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/set.lua
+[09:31:27.771][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/set.lua
+[09:31:27.771][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/history.lua , size = 5.953 KB
+[09:31:27.775][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/history.lua
+[09:31:27.778][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/history.lua
+[09:31:27.779][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/utils.lua , size = 2.917 KB
+[09:31:27.781][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/utils.lua
+[09:31:27.782][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/utils.lua
+[09:31:27.782][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/command.lua , size = 3.627 KB
+[09:31:27.786][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/command.lua
+[09:31:27.788][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/command.lua
+[09:31:27.789][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/_test_helpers.lua , size = 1.704 KB
+[09:31:27.790][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/_test_helpers.lua
+[09:31:27.790][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/_test_helpers.lua
+[09:31:27.791][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/entry_display.lua , size = 2.717 KB
+[09:31:27.792][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/entry_display.lua
+[09:31:27.794][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/entry_display.lua
+[09:31:27.794][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/multi.lua , size = 0.958 KB
+[09:31:27.795][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/multi.lua
+[09:31:27.796][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/multi.lua
+[09:31:27.796][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/_test.lua , size = 5.022 KB
+[09:31:27.799][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/_test.lua
+[09:31:27.802][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/_test.lua
+[09:31:27.802][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/window.lua , size = 1.175 KB
+[09:31:27.802][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/window.lua
+[09:31:27.803][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/window.lua
+[09:31:27.803][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/layout_strategies.lua , size = 28.517 KB
+[09:31:27.815][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/layout_strategies.lua
+[09:31:27.824][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/layout_strategies.lua
+[09:31:27.824][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/scroller.lua , size = 2.780 KB
+[09:31:27.826][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/scroller.lua
+[09:31:27.828][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/scroller.lua
+[09:31:27.829][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/highlights.lua , size = 3.120 KB
+[09:31:27.832][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/highlights.lua
+[09:31:27.834][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/highlights.lua
+[09:31:27.835][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/log.lua , size = 0.172 KB
+[09:31:27.835][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/log.lua
+[09:31:27.836][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/log.lua
+[09:31:27.836][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/utils.lua , size = 13.177 KB
+[09:31:27.844][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/utils.lua
+[09:31:27.851][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/utils.lua
+[09:31:27.851][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/make_entry.lua , size = 26.919 KB
+[09:31:27.889][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/make_entry.lua
+[09:31:27.908][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/make_entry.lua
+[09:31:27.908][info] [#0:script/workspace/workspace.lua:349]: Loaded 54/115 files
+[09:31:27.909][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/from_entry.lua , size = 0.757 KB
+[09:31:27.909][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/from_entry.lua
+[09:31:27.910][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/from_entry.lua
+[09:31:27.911][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua , size = 19.527 KB
+[09:31:27.919][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua
+[09:31:27.923][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua
+[09:31:27.924][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/_compat.lua , size = 1.169 KB
+[09:31:27.925][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/_compat.lua
+[09:31:27.926][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/_compat.lua
+[09:31:27.927][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/files.lua , size = 16.365 KB
+[09:31:27.941][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/files.lua
+[09:31:27.950][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/files.lua
+[09:31:27.951][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/git.lua , size = 10.805 KB
+[09:31:27.957][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/git.lua
+[09:31:27.963][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/git.lua
+[09:31:27.963][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/lsp.lua , size = 11.167 KB
+[09:31:27.969][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/lsp.lua
+[09:31:27.975][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/lsp.lua
+[09:31:27.975][info] [#0:script/workspace/workspace.lua:349]: Loaded 60/115 files
+[09:31:27.976][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/internal.lua , size = 30.410 KB
+[09:31:27.999][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/internal.lua
+[09:31:28.015][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/internal.lua
+[09:31:28.016][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/deprecated.lua , size = 2.234 KB
+[09:31:28.016][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/deprecated.lua
+[09:31:28.017][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/deprecated.lua
+[09:31:28.018][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/action_spec.lua , size = 5.807 KB
+[09:31:28.023][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/action_spec.lua
+[09:31:28.028][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/action_spec.lua
+[09:31:28.029][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/entry_display_spec.lua , size = 1.761 KB
+[09:31:28.031][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/entry_display_spec.lua
+[09:31:28.033][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/entry_display_spec.lua
+[09:31:28.034][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/linked_list_spec.lua , size = 2.909 KB
+[09:31:28.038][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/linked_list_spec.lua
+[09:31:28.041][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/linked_list_spec.lua
+[09:31:28.041][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/entry_manager_spec.lua , size = 3.938 KB
+[09:31:28.045][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/entry_manager_spec.lua
+[09:31:28.049][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/entry_manager_spec.lua
+[09:31:28.050][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/telescope_spec.lua , size = 7.598 KB
+[09:31:28.100][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/telescope_spec.lua
+[09:31:28.104][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/telescope_spec.lua
+[09:31:28.105][info] [#0:script/workspace/workspace.lua:349]: Loaded 67/115 files
+[09:31:28.105][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/pickers/find_files_spec.lua , size = 4.548 KB
+[09:31:28.107][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/pickers/find_files_spec.lua
+[09:31:28.108][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/pickers/find_files_spec.lua
+[09:31:28.108][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/scroller_spec.lua , size = 4.632 KB
+[09:31:28.115][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/scroller_spec.lua
+[09:31:28.117][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/scroller_spec.lua
+[09:31:28.118][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/pickers/scrolling_spec.lua , size = 0.333 KB
+[09:31:28.118][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/pickers/scrolling_spec.lua
+[09:31:28.118][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/pickers/scrolling_spec.lua
+[09:31:28.118][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/layout_strategies_spec.lua , size = 3.531 KB
+[09:31:28.121][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/layout_strategies_spec.lua
+[09:31:28.123][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/layout_strategies_spec.lua
+[09:31:28.123][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/resolver_spec.lua , size = 2.001 KB
+[09:31:28.127][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/resolver_spec.lua
+[09:31:28.129][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/resolver_spec.lua
+[09:31:28.129][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/large_search.lua , size = 0.782 KB
+[09:31:28.130][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/large_search.lua
+[09:31:28.131][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/large_search.lua
+[09:31:28.132][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/profile_for_sorters.lua , size = 1.621 KB
+[09:31:28.134][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/profile_for_sorters.lua
+[09:31:28.136][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/profile_for_sorters.lua
+[09:31:28.136][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/all_defaults.lua , size = 0.786 KB
+[09:31:28.137][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/all_defaults.lua
+[09:31:28.138][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/all_defaults.lua
+[09:31:28.138][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/slow_oneshot.lua , size = 1.554 KB
+[09:31:28.139][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/slow_oneshot.lua
+[09:31:28.140][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/slow_oneshot.lua
+[09:31:28.140][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/reference_tracker.lua , size = 1.334 KB
+[09:31:28.141][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/reference_tracker.lua
+[09:31:28.142][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/reference_tracker.lua
+[09:31:28.142][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/find_and_sort_spec.lua , size = 2.699 KB
+[09:31:28.144][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/find_and_sort_spec.lua
+[09:31:28.145][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/find_and_sort_spec.lua
+[09:31:28.145][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/auto_picker.lua , size = 1.833 KB
+[09:31:28.147][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/auto_picker.lua
+[09:31:28.148][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/auto_picker.lua
+[09:31:28.148][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/resolver_spec.lua , size = 1.501 KB
+[09:31:28.149][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/resolver_spec.lua
+[09:31:28.150][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/resolver_spec.lua
+[09:31:28.150][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/newline_tables.lua , size = 0.621 KB
+[09:31:28.150][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/newline_tables.lua
+[09:31:28.151][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/newline_tables.lua
+[09:31:28.151][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/pickers/find_files__with_ctrl_n.lua , size = 0.260 KB
+[09:31:28.151][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/pickers/find_files__with_ctrl_n.lua
+[09:31:28.151][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/pickers/find_files__with_ctrl_n.lua
+[09:31:28.151][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/pickers/find_files__readme.lua , size = 0.216 KB
+[09:31:28.151][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/pickers/find_files__readme.lua
+[09:31:28.152][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/pickers/find_files__readme.lua
+[09:31:28.152][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/pickers/find_files__scrolling_descending_cycle.lua , size = 0.415 KB
+[09:31:28.152][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/pickers/find_files__scrolling_descending_cycle.lua
+[09:31:28.152][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/pickers/find_files__scrolling_descending_cycle.lua
+[09:31:28.152][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/helpers.lua , size = 1.974 KB
+[09:31:28.154][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/helpers.lua
+[09:31:28.155][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/helpers.lua
+[09:31:28.155][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/new_index.lua , size = 0.132 KB
+[09:31:28.155][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/new_index.lua
+[09:31:28.155][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/new_index.lua
+[09:31:28.155][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/file_finder.lua , size = 1.730 KB
+[09:31:28.156][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/file_finder.lua
+[09:31:28.156][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/file_finder.lua
+[09:31:28.156][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/batched_finder_and_sorter.lua , size = 1.318 KB
+[09:31:28.157][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/batched_finder_and_sorter.lua
+[09:31:28.158][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/batched_finder_and_sorter.lua
+[09:31:28.158][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/threaded_lua.lua , size = 0.243 KB
+[09:31:28.158][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/threaded_lua.lua
+[09:31:28.158][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/threaded_lua.lua
+[09:31:28.158][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/short_buf.lua , size = 0.063 KB
+[09:31:28.158][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/short_buf.lua
+[09:31:28.159][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/short_buf.lua
+[09:31:28.159][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/simplest_test.lua , size = 0.899 KB
+[09:31:28.159][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/simplest_test.lua
+[09:31:28.159][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/simplest_test.lua
+[09:31:28.159][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/simple_rg.lua , size = 0.522 KB
+[09:31:28.160][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/simple_rg.lua
+[09:31:28.160][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/simple_rg.lua
+[09:31:28.160][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/bk_tree.lua , size = 6.253 KB
+[09:31:28.163][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/bk_tree.lua
+[09:31:28.166][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/bk_tree.lua
+[09:31:28.166][info] [#0:script/workspace/workspace.lua:349]: Loaded 93/115 files
+[09:31:28.166][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/picker_locations.lua , size = 0.173 KB
+[09:31:28.166][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/picker_locations.lua
+[09:31:28.166][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/picker_locations.lua
+[09:31:28.166][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/fuzzy_tester.lua , size = 0.161 KB
+[09:31:28.167][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/fuzzy_tester.lua
+[09:31:28.167][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/fuzzy_tester.lua
+[09:31:28.167][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/ivy.lua , size = 0.145 KB
+[09:31:28.167][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/ivy.lua
+[09:31:28.167][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/ivy.lua
+[09:31:28.167][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/fast_split.lua , size = 0.593 KB
+[09:31:28.168][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/fast_split.lua
+[09:31:28.168][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/fast_split.lua
+[09:31:28.168][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/buffer_highlights.lua , size = 0.733 KB
+[09:31:28.169][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/buffer_highlights.lua
+[09:31:28.169][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/buffer_highlights.lua
+[09:31:28.170][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/ts_example.lua , size = 1.247 KB
+[09:31:28.171][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/ts_example.lua
+[09:31:28.171][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/ts_example.lua
+[09:31:28.172][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/prime_prompt_cache.lua , size = 2.599 KB
+[09:31:28.173][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/prime_prompt_cache.lua
+[09:31:28.174][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/prime_prompt_cache.lua
+[09:31:28.175][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/rocker_example.lua , size = 0.479 KB
+[09:31:28.175][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/rocker_example.lua
+[09:31:28.175][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/rocker_example.lua
+[09:31:28.176][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/rg_lua_jobstart.lua , size = 0.489 KB
+[09:31:28.176][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/rg_lua_jobstart.lua
+[09:31:28.177][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/rg_lua_jobstart.lua
+[09:31:28.177][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/clason_finders.lua , size = 4.005 KB
+[09:31:28.181][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/clason_finders.lua
+[09:31:28.185][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/clason_finders.lua
+[09:31:28.186][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/test_fuzzy_file.lua , size = 0.812 KB
+[09:31:28.186][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/test_fuzzy_file.lua
+[09:31:28.187][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/test_fuzzy_file.lua
+[09:31:28.187][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/ngrams.lua , size = 2.123 KB
+[09:31:28.189][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/ngrams.lua
+[09:31:28.190][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/ngrams.lua
+[09:31:28.190][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/nvim_ffi.lua , size = 0.334 KB
+[09:31:28.191][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/nvim_ffi.lua
+[09:31:28.191][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/nvim_ffi.lua
+[09:31:28.191][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/how_long_does_time_take.lua , size = 0.158 KB
+[09:31:28.191][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/how_long_does_time_take.lua
+[09:31:28.191][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/how_long_does_time_take.lua
+[09:31:28.191][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/string_distance_stuff.lua , size = 0.187 KB
+[09:31:28.192][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/string_distance_stuff.lua
+[09:31:28.192][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/string_distance_stuff.lua
+[09:31:28.192][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/diag_test.lua , size = 0.077 KB
+[09:31:28.192][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/diag_test.lua
+[09:31:28.192][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/diag_test.lua
+[09:31:28.192][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/piped_to_fzf.lua , size = 0.720 KB
+[09:31:28.192][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/piped_to_fzf.lua
+[09:31:28.193][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/piped_to_fzf.lua
+[09:31:28.193][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/example.lua , size = 1.265 KB
+[09:31:28.194][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/example.lua
+[09:31:28.195][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/example.lua
+[09:31:28.195][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scripts/gendocs.lua , size = 1.036 KB
+[09:31:28.195][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scripts/gendocs.lua
+[09:31:28.196][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scripts/gendocs.lua
+[09:31:28.196][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/data/options/options.lua , size = 95.896 KB
+[09:31:28.241][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/data/options/options.lua
+[09:31:28.303][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/data/options/options.lua
+[09:31:28.303][warn] [#0:script/await.lua:178]: Await step takes [0.107] sec.
+[09:31:28.303][info] [#0:script/workspace/workspace.lua:349]: Loaded 113/115 files
+[09:31:28.305][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/media/demo_script_2.lua , size = 0.869 KB
+[09:31:28.306][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/media/demo_script_2.lua
+[09:31:28.306][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/media/demo_script_2.lua
+[09:31:28.308][info] [#0:script/workspace/workspace.lua:231]: Preload file at: file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/media/demo_script.lua , size = 1.291 KB
+[09:31:28.308][debug][#0:script/core/noder.lua:1305]: compileNodes:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/media/demo_script.lua
+[09:31:28.309][debug][#0:script/core/noder.lua:1311]: compileNodes finish:	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/media/demo_script.lua
+[09:31:28.426][info] [#0:script/workspace/workspace.lua:349]: Loaded 115/115 files
+[09:31:28.426][info] [#0:script/workspace/workspace.lua:358]: Preload finish.
+[09:31:28.426][debug][#0:script/provider/provider.lua:214]: didOpen	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua
+[09:31:29.517][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/WIP.lua	3
+[09:31:29.527][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/_compat.lua	6
+[09:31:29.542][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua	48
+[09:31:29.542][debug][#0:script/proto/proto.lua:131]: Method [textDocument/didOpen] takes [1.026]sec.
+[09:31:29.543][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/history.lua	6
+[09:31:29.550][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/init.lua	35
+[09:31:29.554][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/set.lua	9
+[09:31:29.556][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/actions/utils.lua	2
+[09:31:29.568][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/files.lua	49
+[09:31:29.572][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/git.lua	21
+[09:31:29.597][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/internal.lua	104
+[09:31:29.602][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/lsp.lua	40
+[09:31:29.604][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/command.lua	2
+[09:31:29.607][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/config.lua	6
+[09:31:29.608][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/config/resolve.lua	2
+[09:31:29.610][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/debounce.lua	15
+[09:31:29.611][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/deprecated.lua	1
+[09:31:29.615][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/finders.lua	1
+[09:31:29.615][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/finders/async_job_finder.lua	1
+[09:31:29.616][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/finders/async_oneshot_finder.lua	1
+[09:31:29.617][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/finders/async_static_finder.lua	1
+[09:31:29.618][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/from_entry.lua	3
+[09:31:29.618][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/init.lua	2
+[09:31:29.619][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/log.lua	1
+[09:31:29.628][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/make_entry.lua	32
+[09:31:29.631][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/mappings.lua	2
+[09:31:29.633][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/path.lua	10
+[09:31:29.644][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers.lua	60
+[09:31:29.646][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/_test.lua	15
+[09:31:29.647][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/_test_helpers.lua	6
+[09:31:29.650][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/highlights.lua	6
+[09:31:29.656][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/pickers/layout_strategies.lua	27
+[09:31:29.669][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/previewers/buffer_previewer.lua	89
+[09:31:29.672][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/previewers/previewer.lua	2
+[09:31:29.677][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/previewers/term_previewer.lua	32
+[09:31:29.680][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/previewers/utils.lua	14
+[09:31:29.688][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/sorters.lua	4
+[09:31:29.689][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/state.lua	1
+[09:31:29.691][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/themes.lua	3
+[09:31:29.696][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/utils.lua	34
+[09:31:29.699][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/action_spec.lua	17
+[09:31:29.700][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/entry_display_spec.lua	5
+[09:31:29.702][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/entry_manager_spec.lua	12
+[09:31:29.704][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/layout_strategies_spec.lua	4
+[09:31:29.706][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/linked_list_spec.lua	13
+[09:31:29.708][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/pickers/find_files_spec.lua	15
+[09:31:29.708][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/pickers/scrolling_spec.lua	2
+[09:31:29.710][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/resolver_spec.lua	9
+[09:31:29.712][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/scroller_spec.lua	30
+[09:31:29.715][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/automated/telescope_spec.lua	41
+[09:31:29.716][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/helpers.lua	9
+[09:31:29.717][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/all_defaults.lua	2
+[09:31:29.718][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/auto_picker.lua	9
+[09:31:29.719][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/find_and_sort_spec.lua	6
+[09:31:29.720][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/large_search.lua	3
+[09:31:29.721][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/profile_for_sorters.lua	8
+[09:31:29.722][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/reference_tracker.lua	1
+[09:31:29.723][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/resolver_spec.lua	3
+[09:31:29.724][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/tests/manual/slow_oneshot.lua	9
+[09:31:29.726][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/media/demo_script.lua	3
+[09:31:29.729][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/batched_finder_and_sorter.lua	4
+[09:31:29.732][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/bk_tree.lua	3
+[09:31:29.733][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/buffer_highlights.lua	5
+[09:31:29.735][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/clason_finders.lua	22
+[09:31:29.736][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/diag_test.lua	2
+[09:31:29.738][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/example.lua	15
+[09:31:29.738][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/fast_split.lua	1
+[09:31:29.739][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/fuzzy_tester.lua	4
+[09:31:29.740][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/how_long_does_time_take.lua	3
+[09:31:29.740][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/ivy.lua	1
+[09:31:29.741][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/ngrams.lua	3
+[09:31:29.742][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/nvim_ffi.lua	1
+[09:31:29.743][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/piped_to_fzf.lua	2
+[09:31:29.744][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/prime_prompt_cache.lua	1
+[09:31:29.744][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/rg_lua_jobstart.lua	5
+[09:31:29.745][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/rocker_example.lua	6
+[09:31:29.747][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/test_fuzzy_file.lua	1
+[09:31:29.748][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scratch/ts_example.lua	5
+[09:31:29.749][debug][#0:script/provider/diagnostic.lua:223]: publishDiagnostics	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/scripts/gendocs.lua	3
+[09:31:29.749][debug][#0:script/provider/diagnostic.lua:338]: 全文诊断耗时：	0.321842
+[09:32:00.249][debug][#0:script/provider/provider.lua:222]: didClose	file:///Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua

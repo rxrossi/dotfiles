@@ -4,20 +4,29 @@ source  $HOME/.config/nvim/defx_settings.vim
 source  $HOME/.config/nvim/coc.vim
 
 set encoding=utf-8
+set hidden
+
 set nobackup
 set nowritebackup
+
 set updatetime=300
 
 set foldmethod=indent
 set foldlevelstart=999
 
 set tabstop=2 shiftwidth=2 expandtab
-set hidden
-set mouse=a
+
+set ignorecase
 set smartcase
+
+set mouse=a
+
 set laststatus=2
+
 set cmdheight=2
+
 set undofile
+
 set completeopt=menuone,noselect
 
 colorscheme base16-materia
@@ -56,3 +65,4 @@ set spellcapcheck=
 let g:fugitive_pty = 0
 autocmd FileType fugitive          nnoremap <buffer> cc :G commit -n <CR>
 autocmd FileType fugitive          nnoremap <buffer> ca :G commit -n --amend<CR>
+

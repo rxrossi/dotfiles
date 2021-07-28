@@ -9,7 +9,7 @@ set nowritebackup
 set updatetime=300
 
 set foldmethod=indent
-set foldlevelstart=2
+set foldlevelstart=999
 
 set tabstop=2 shiftwidth=2 expandtab
 set hidden

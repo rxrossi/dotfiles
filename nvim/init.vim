@@ -51,3 +51,8 @@ set spell
 set spelllang=en_gb
 set spelloptions=camel
 set spellcapcheck=
+
+" Fugitive
+let g:fugitive_pty = 0
+autocmd FileType fugitive          nnoremap <buffer> cc :G commit -n <CR>
+autocmd FileType fugitive          nnoremap <buffer> ca :G commit -n --amend<CR>

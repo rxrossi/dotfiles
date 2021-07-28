@@ -35,6 +35,7 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope command_history<cr>
 nnoremap <leader>fc <cmd>Telescope commands<cr>
+nnoremap <leader>fo <cmd>Telescope oldfiles<cr>
 
 " Fugitive
 nnoremap <leader>g <cmd>:G<cr>

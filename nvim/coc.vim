@@ -35,7 +35,7 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 " Change the default CocHighlightText colors
-autocmd ColorScheme * highlight CocHighlightText     ctermbg=LightYellow  guibg=LightYellow
+" autocmd ColorScheme * highlight CocHighlightText     ctermbg=LightYellow  guibg=LightYellow " this looks like a good idea, but the problem is that it also highlight strings and template strings the gql utility
 
 " Symbol renaming.
 nmap <leader>rn <cmd>CocCommand document.renameCurrentWord<CR>

@@ -29,7 +29,6 @@ set undofile
 
 set completeopt=menuone,noselect
 
-colorscheme base16-materia
 
 set fcs=eob:\ " replace tilde on empty lines with space
 
@@ -66,3 +65,13 @@ let g:fugitive_pty = 0
 autocmd FileType fugitive          nnoremap <buffer> cc :G commit -n <CR>
 autocmd FileType fugitive          nnoremap <buffer> ca :G commit -n --amend<CR>
 
+" ColorScheme
+colorscheme base16-materia
+function! TweakBase16()
+    " Override the diff-mode highlights of base16.
+    highlight DiffAdd    term=bold ctermfg=0 ctermbg=2 guifg=#2b2b2b guibg=#a5c261
+    highlight DiffDelete term=bold ctermfg=0 ctermbg=1 gui=bold guifg=#2b2b2b guibg=#da4939
+    highlight DiffChange term=bold ctermfg=0 ctermbg=4 guifg=#2b2b2b guibg=#6d9cbe
+    highlight DiffText   term=reverse cterm=bold ctermfg=0 ctermbg=4 gui=bold guifg=#2b2b2b guibg=#6d9cbe
+endfunction
+autocmd BufEnter * if &diff |  call TweakBase16() | endif

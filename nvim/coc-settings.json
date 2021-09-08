@@ -46,5 +46,11 @@
   "coc.preferences.floatActions": false,
   "coc.preferences.silentAutoupdate": true,
   "coc.preferences.enableFloatHighlight": true,
-  "coc.preferences.useQuickfixForLocations": true
+  "coc.preferences.useQuickfixForLocations": true,
+  "cSpellExt.enableDictionaries": ["portuguese"],
+  "cSpell.language": "en,pt",
+  "cSpell.showCommandsInEditorContextMenu": false,
+  "cSpell.userWords": [
+    "SKUs"
+  ]
 }

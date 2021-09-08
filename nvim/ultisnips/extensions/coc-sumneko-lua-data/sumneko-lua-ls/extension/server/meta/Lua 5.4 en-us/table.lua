@@ -60,7 +60,7 @@ function table.maxn(table) end
 ---@return table a2
 function table.move(a1, f, e, t, a2) end
 
----@version >5.2
+---@version >5.2, JIT
 ---
 ---Returns a new table with all arguments stored into keys `1`, `2`, etc. and with a field `"n"` with the total number of arguments.
 ---
@@ -88,7 +88,7 @@ function table.remove(list, pos) end
 ---@param comp fun(a: any, b: any):boolean
 function table.sort(list, comp) end
 
----@version >5.2
+---@version >5.2, JIT
 ---
 ---Returns the elements from the given list. This function is equivalent to
 ---```lua

@@ -425,7 +425,8 @@ local function searchInfer(source, infers, mark)
     local value = searcher.getObjectValue(source)
     if value then
         if  value.type ~= 'function'
-        and value.type ~= 'table' then
+        and value.type ~= 'table'
+        and value.type ~= 'nil' then
             searchInferOfValue(value, infers, mark)
         end
         return
@@ -534,11 +535,9 @@ function m.searchInfers(source, field, mark)
         searchInfer(source, infers, mark)
         local id = noder.getID(source)
         if id then
-            local node = noder.getNodeByID(source, id)
-            if node and node.source then
-                for src in noder.eachSource(node) do
-                    searchInfer(src, infers, mark)
-                end
+            local noders = noder.getNoders(source)
+            for src in noder.eachSource(noders, id) do
+                searchInfer(src, infers, mark)
             end
         end
         if source.type == 'field' or source.type == 'method' then
@@ -559,11 +558,9 @@ function m.searchInfers(source, field, mark)
         end
     end
     if source.type == 'doc.type' then
-        if source.type == 'doc.type' then
-            for _, def in ipairs(source.types) do
-                if def.typeGeneric then
-                    searchInfer(def, infers, mark)
-                end
+        for _, def in ipairs(source.types) do
+            if def.typeGeneric then
+                searchInfer(def, infers, mark)
             end
         end
     end
@@ -675,7 +672,8 @@ function m.getClass(source)
         end
     end
     local view = m.viewInfers(infers)
-    if view == 'any' then
+    if view == 'any'
+    or view == 'nil' then
         return nil
     end
     return view

@@ -212,8 +212,8 @@ proto.on('textDocument/didOpen', function (params)
     local uri   = doc.uri
     local text  = doc.text
     log.debug('didOpen', uri)
-    files.open(uri)
     files.setText(uri, text, true)
+    files.open(uri)
 end)
 
 proto.on('textDocument/didClose', function (params)
@@ -291,11 +291,17 @@ proto.on('textDocument/definition', function (params)
         local targetUri = info.uri
         if targetUri then
             if files.exists(targetUri) then
-                response[i] = define.locationLink(targetUri
-                    , files.range(targetUri, info.target.start, info.target.finish)
-                    , files.range(targetUri, info.target.start, info.target.finish)
-                    , files.range(uri,       info.source.start, info.source.finish)
-                )
+                if client.getAbility 'textDocument.definition.linkSupport' then
+                    response[i] = define.locationLink(targetUri
+                        , files.range(targetUri, info.target.start, info.target.finish)
+                        , files.range(targetUri, info.target.start, info.target.finish)
+                        , files.range(uri,       info.source.start, info.source.finish)
+                    )
+                else
+                    response[i] = define.location(targetUri
+                        , files.range(targetUri, info.target.start, info.target.finish)
+                    )
+                end
             end
         end
     end
@@ -320,11 +326,17 @@ proto.on('textDocument/typeDefinition', function (params)
         local targetUri = info.uri
         if targetUri then
             if files.exists(targetUri) then
-                response[i] = define.locationLink(targetUri
-                    , files.range(targetUri, info.target.start, info.target.finish)
-                    , files.range(targetUri, info.target.start, info.target.finish)
-                    , files.range(uri,       info.source.start, info.source.finish)
-                )
+                if client.getAbility 'textDocument.typeDefinition.linkSupport' then
+                    response[i] = define.locationLink(targetUri
+                        , files.range(targetUri, info.target.start, info.target.finish)
+                        , files.range(targetUri, info.target.start, info.target.finish)
+                        , files.range(uri,       info.source.start, info.source.finish)
+                    )
+                else
+                    response[i] = define.location(targetUri
+                        , files.range(targetUri, info.target.start, info.target.finish)
+                    )
+                end
             end
         end
     end

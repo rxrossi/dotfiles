@@ -59,7 +59,7 @@ function debug.gethook(co) end
 ---|+'"S"'     # `source`, `short_src`, `linedefined`, `lastlinedefined`, and `what`
 ---|+'"l"'     # `currentline`
 ---|+'"t"'     # `istailcall`
----|+'"u>5.2"' # `nups`, `nparams`, and `isvararg`
+---|+'"u"' # `nups`, `nparams`, and `isvararg`
 ---|+'"f"'     # `func`
 ---|+'"r"'     # `ftransfer` and `ntransfer`
 ---|+'"L"'     # `activelines`
@@ -235,7 +235,7 @@ function debug.setuservalue(udata, value, n) end
 ---@return string  message
 function debug.traceback(thread, message, level) end
 
----@version >5.2
+---@version >5.2, JIT
 ---
 ---Returns a unique identifier (as a light userdata) for the upvalue numbered `n` from the given function.
 ---
@@ -246,7 +246,7 @@ function debug.traceback(thread, message, level) end
 ---@return lightuserdata id
 function debug.upvalueid(f, n) end
 
----@version >5.2
+---@version >5.2, JIT
 ---
 ---Make the `n1`-th upvalue of the Lua closure `f1` refer to the `n2`-th upvalue of the Lua closure `f2`.
 ---

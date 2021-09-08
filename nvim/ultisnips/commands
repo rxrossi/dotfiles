@@ -1,2 +1,3 @@
 document.renameCurrentWord
+prettier.formatFile
 eslint.showOutputChannel

@@ -38,6 +38,26 @@ function m.getOption(name)
     return option
 end
 
+function m.getAbility(name)
+    local current = m.info.capabilities
+    while true do
+        local parent, nextPos = name:match '^([^%.]+)()'
+        if not parent then
+            break
+        end
+        current = current[parent]
+        if not current then
+            return nil
+        end
+        if nextPos > #name then
+            break
+        else
+            name = name:sub(nextPos + 1)
+        end
+    end
+    return current
+end
+
 local function packMessage(...)
     local strs = table.pack(...)
     for i = 1, strs.n do
@@ -99,8 +119,9 @@ end
 
 ---@class config.change
 ---@field key       string
+---@field prop?     string
 ---@field value     any
----@field action    '"add"'|'"set"'
+---@field action    '"add"'|'"set"'|'"prop"'
 ---@field isGlobal? boolean
 ---@field uri?      uri
 
@@ -116,6 +137,11 @@ function m.setConfig(changes, onlyMemory)
             end
         elseif change.action == 'set' then
             local suc = config.set(change.key, change.value)
+            if suc then
+                finalChanges[#finalChanges+1] = change
+            end
+        elseif change.action == 'prop' then
+            local suc = config.prop(change.key, change.prop, change.value)
             if suc then
                 finalChanges[#finalChanges+1] = change
             end
@@ -139,8 +165,10 @@ function m.setConfig(changes, onlyMemory)
         for _, change in ipairs(finalChanges) do
             if change.action == 'add' then
                 messages[#messages+1] = lang.script('WINDOW_MANUAL_CONFIG_ADD', change)
-            else
+            elseif change.action == 'set' then
                 messages[#messages+1] = lang.script('WINDOW_MANUAL_CONFIG_SET', change)
+            elseif change.action == 'prop' then
+                messages[#messages+1] = lang.script('WINDOW_MANUAL_CONFIG_PROP', change)
             end
         end
         local message = table.concat(messages, '\n')

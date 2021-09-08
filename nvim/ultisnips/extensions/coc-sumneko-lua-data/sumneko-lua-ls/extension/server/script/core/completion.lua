@@ -210,6 +210,10 @@ local function buildFunction(results, source, value, oop, data)
         snipData.kind = define.CompletionItemKind.Snippet
         snipData.insertText = buildFunctionSnip(source, value, oop)
         snipData.insertTextFormat = 2
+        snipData.command = {
+            title = 'trigger signature',
+            command = 'editor.action.triggerParameterHints',
+        }
         snipData.id  = stack(function ()
             return {
                 detail      = buildDetail(source),
@@ -283,7 +287,7 @@ end
 
 local function checkLocal(ast, word, offset, results)
     local locals = guide.getVisibleLocals(ast.ast, offset)
-    for name, source in pairs(locals) do
+    for name, source in util.sortPairs(locals) do
         if isSameSource(ast, source, offset) then
             goto CONTINUE
         end
@@ -512,6 +516,7 @@ end
 
 local function checkFieldOfRefs(refs, ast, word, start, offset, parent, oop, results, locals, isGlobal)
     local fields = {}
+    local funcs  = {}
     local count = 0
     for _, src in ipairs(refs) do
         local name = vm.getKeyName(src)
@@ -543,11 +548,15 @@ local function checkFieldOfRefs(refs, ast, word, start, offset, parent, oop, res
                         end
                     end
                 end
+                funcs[name] = true
+                if fields[name] and not guide.isSet(fields[name]) then
+                    fields[name] = nil
+                end
                 goto CONTINUE
             end
         end
         local last = fields[name]
-        if last == nil then
+        if last == nil and not funcs[name] then
             fields[name] = src
             count = count + 1
             goto CONTINUE
@@ -555,12 +564,7 @@ local function checkFieldOfRefs(refs, ast, word, start, offset, parent, oop, res
         if vm.isDeprecated(src) then
             goto CONTINUE
         end
-        if src.type == 'tablefield'
-        or src.type == 'setfield'
-        or src.type == 'tableindex'
-        or src.type == 'setindex'
-        or src.type == 'setmethod'
-        or src.type == 'setglobal' then
+        if guide.isSet(src) then
             fields[name] = src
             goto CONTINUE
         end
@@ -636,22 +640,11 @@ local function checkCommon(myUri, word, text, offset, results)
             if myUri and files.eq(myUri, uri) then
                 goto CONTINUE
             end
-            local cache = files.getCache(uri)
-            if not cache.commonWords then
-                cache.commonWords = {}
-                local mark = {}
-                for str in files.getText(uri):gmatch '([%a_][%w_]+)' do
-                    if #str >= 3 and not mark[str] then
-                        mark[str] = true
-                        local head = str:sub(1, 2)
-                        if not cache.commonWords[head] then
-                            cache.commonWords[head] = {}
-                        end
-                        cache.commonWords[head][#cache.commonWords[head]+1] = str
-                    end
-                end
+            local words = files.getWordsOfHead(uri, myHead)
+            if not words then
+                goto CONTINUE
             end
-            for _, str in ipairs(cache.commonWords[myHead] or {}) do
+            for _, str in ipairs(words) do
                 if #results >= 100 then
                     break
                 end
@@ -1607,7 +1600,7 @@ end
 local function tryLuaDocBySource(ast, offset, source, results)
     if source.type == 'doc.extends.name' then
         if source.parent.type == 'doc.class' then
-            for _, doc in ipairs(vm.getDocDefines()) do
+            for _, doc in ipairs(vm.getDocDefines '*') do
                 if  doc.type == 'doc.class.name'
                 and doc.parent ~= source.parent
                 and matchKey(source[1], doc[1]) then
@@ -1625,7 +1618,7 @@ local function tryLuaDocBySource(ast, offset, source, results)
         end
         return true
     elseif source.type == 'doc.type.name' then
-        for _, doc in ipairs(vm.getDocDefines()) do
+        for _, doc in ipairs(vm.getDocDefines '*') do
             if  (doc.type == 'doc.class.name' or doc.type == 'doc.alias.name')
             and doc.parent ~= source.parent
             and matchKey(source[1], doc[1]) then
@@ -1680,7 +1673,7 @@ local function tryLuaDocBySource(ast, offset, source, results)
         end
         return true
     elseif source.type == 'doc.diagnostic.name' then
-        for name in pairs(define.DiagnosticDefaultSeverity) do
+        for name in util.sortPairs(define.DiagnosticDefaultSeverity) do
             if matchKey(source[1], name) then
                 results[#results+1] = {
                     label = name,
@@ -1699,7 +1692,7 @@ end
 
 local function tryLuaDocByErr(ast, offset, err, docState, results)
     if err.type == 'LUADOC_MISS_CLASS_EXTENDS_NAME' then
-        for _, doc in ipairs(vm.getDocDefines()) do
+        for _, doc in ipairs(vm.getDocDefines '*') do
             if  doc.type == 'doc.class.name'
             and doc.parent ~= docState then
                 results[#results+1] = {
@@ -1709,7 +1702,7 @@ local function tryLuaDocByErr(ast, offset, err, docState, results)
             end
         end
     elseif err.type == 'LUADOC_MISS_TYPE_NAME' then
-        for _, doc in ipairs(vm.getDocDefines()) do
+        for _, doc in ipairs(vm.getDocDefines '*') do
             if  (doc.type == 'doc.class.name' or doc.type == 'doc.alias.name') then
                 results[#results+1] = {
                     label       = doc[1],
@@ -1765,7 +1758,7 @@ local function tryLuaDocByErr(ast, offset, err, docState, results)
             }
         end
     elseif err.type == 'LUADOC_MISS_DIAG_NAME' then
-        for name in pairs(define.DiagnosticDefaultSeverity) do
+        for name in util.sortPairs(define.DiagnosticDefaultSeverity) do
             results[#results+1] = {
                 label = name,
                 kind  = define.CompletionItemKind.Value,

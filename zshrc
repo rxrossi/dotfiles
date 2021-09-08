@@ -93,6 +93,7 @@ bindkey '^E' edit-command-line                   # Opens Vim to edit current com
 # Aliases
 alias dot="cd ~/dotfiles"
 alias dotv="cd ~/dotfiles && v"
+alias bujo="cd ~/Box/bujo && v index.md"
 alias wws="cd ~/winWorkSpace"
 alias vim="nvim"
 alias v="nvim"
@@ -129,7 +130,9 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+export NPM_TOKEN=kQzyw86PijUYBWm1eKte
 
-# . /usr/local/opt/asdf/asdf.sh
-# . /usr/local/opt/asdf/asdf.sh
-# if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
+ alias python='python3'
+
+# Added by serverless binary installer
+export PATH="$HOME/.serverless/bin:$PATH"

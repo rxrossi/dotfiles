@@ -1,5 +1,34 @@
 # changelog
 
+## 2.3.7
+`2021-8-17`
+* `CHG` improve performance
+* `FIX` [#244](https://github.com/sumneko/lua-language-server/issues/244)
+
+## 2.3.6
+`2021-8-9`
+* `FIX` completion: can not find global fields
+* `FIX` globals and class may lost
+
+## 2.3.5
+`2021-8-9`
+* `CHG` improve memory usage
+* `CHG` completion: call snip triggers signature (VSCode only)
+* `FIX` completion: may not find results
+
+## 2.3.4
+`2021-8-6`
+* `CHG` improve performance
+* `FIX` [#625](https://github.com/sumneko/lua-language-server/issues/625)
+
+## 2.3.3
+`2021-7-26`
+* `NEW` config supports prop
+* `FIX` [#612](https://github.com/sumneko/lua-language-server/issues/612)
+* `FIX` [#613](https://github.com/sumneko/lua-language-server/issues/613)
+* `FIX` [#618](https://github.com/sumneko/lua-language-server/issues/618)
+* `FIX` [#620](https://github.com/sumneko/lua-language-server/issues/620)
+
 ## 2.3.2
 `2021-7-21`
 * `NEW` `LuaDoc`: supports `['string']` as field:

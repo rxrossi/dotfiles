@@ -46,19 +46,17 @@ nnoremap <leader>fc <cmd>Telescope commands<cr>
 nnoremap <leader>fo <cmd>Telescope oldfiles<cr>
 
 " Fugitive
-nnoremap <leader>g <cmd>:G<cr>
+let branchn = "master"
+nnoremap <leader>dm <cmd>execute "Git difftool --name-status " . branchn . "... ':!**/graphql.types*'"<cr>
+nnoremap dm <cmd>execute "Gvdiffsplit " . branchn . "..."<cr>
+map <leader>p <C-w>q[qdm
+map <leader>n <C-w>q]qdm
 
 " wiki
 let wiki = {}
 let wiki.nested_syntaxes = { 'python': 'python', 'c++': 'cpp', 'sql': 'sql', 'pgsql': 'pgsql',  'javascript': 'javascript', 'typescript': 'typescript' }
 let g:vimwiki_list = [wiki]
 let g:vimwiki_url_maxsave=0
-
-" Spelling
-set spell
-set spelllang=en_gb
-set spelloptions=camel
-set spellcapcheck=
 
 " Fugitive
 let g:fugitive_pty = 0
@@ -75,3 +73,17 @@ function! TweakBase16()
     highlight DiffText   term=reverse cterm=bold ctermfg=0 ctermbg=4 gui=bold guifg=#2b2b2b guibg=#6d9cbe
 endfunction
 autocmd BufEnter * if &diff |  call TweakBase16() | endif
+
+nnoremap Y y$
+nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
+nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
+
+nnoremap <leader>cn :tabnew ~/Box/bujo/index.md
+nnoremap <leader>cs <cmd>source $MYVIMRC<cr>
+
+" tsconfig.json is actually jsonc, help TypeScript set the correct filetype
+autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
+
+
+let g:context_enabled = 1
+set noswapfile

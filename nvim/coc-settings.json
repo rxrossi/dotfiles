@@ -8,12 +8,7 @@
     },
     "ccls": {
       "command": "ccls",
-      "filetypes": [
-        "c",
-        "cpp",
-        "objc",
-        "objcpp"
-      ],
+      "filetypes": ["c", "cpp", "objc", "objcpp"],
       "rootPatterns": [
         ".ccls",
         "compile_commands.json",
@@ -37,7 +32,12 @@
   "typescript.preferences.importModuleSpecifier": "relative",
   "coc.preferences.enableMessageDialog": true,
   "diagnostic.messageTarget": "float",
-  "coc.preferences.rootPatterns": [".editorconfig", "node_modules", "tsconfig.json", ".git"],
+  "coc.preferences.rootPatterns": [
+    ".editorconfig",
+    "node_modules",
+    "tsconfig.json",
+    ".git"
+  ],
   "javascript.validate.enable": false,
   "prettier.semi": true,
   "prettier.tslintIntegration": true,
@@ -51,6 +51,36 @@
   "cSpell.language": "en,pt",
   "cSpell.showCommandsInEditorContextMenu": false,
   "cSpell.userWords": [
-    "SKUs"
+    "Collatable",
+    "DSVs",
+    "DTCs",
+    "Fulfilment",
+    "IFORCE",
+    "Postgraphile",
+    "Redrive",
+    "SKUs",
+    "TESTCONTAINERS",
+    "UKMAIL",
+    "Wrapabble",
+    "Wrappable",
+    "algoliasearch",
+    "browserslist",
+    "buyability",
+    "consts",
+    "deliverypromise",
+    "dryrun",
+    "dunelm",
+    "dunlocal",
+    "fastify",
+    "graphile",
+    "initialise",
+    "lockdown",
+    "pactfile",
+    "precommit",
+    "retryable",
+    "testcafe",
+    "unbuyable",
+    "worldstores",
+    "wsrun"
   ]
 }

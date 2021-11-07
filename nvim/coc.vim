@@ -1,4 +1,4 @@
-let g:coc_global_extensions=[ 'coc-tsserver', 'coc-css', 'coc-prettier', 'coc-tslint-plugin', 'coc-eslint', 'coc-json', 'coc-graphql', 'coc-styled-components', 'coc-vimlsp', 'coc-sumneko-lua', 'coc-sh', 'coc-svg', 'coc-pyright', 'coc-spell-checker', 'coc-cspell-dicts' ]
+let g:coc_global_extensions=[ 'coc-tsserver', 'coc-css', 'coc-prettier', 'coc-tslint-plugin', 'coc-eslint', 'coc-json', 'coc-graphql', 'coc-styled-components', 'coc-vimlsp', 'coc-sumneko-lua', 'coc-sh', 'coc-svg', 'coc-pyright', 'coc-spell-checker', 'coc-cspell-dicts', 'coc-flow' ]
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -34,8 +34,10 @@ endfunction
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
 " Change the default CocHighlightText colors
-" autocmd ColorScheme * highlight CocHighlightText     ctermbg=LightYellow  guibg=LightYellow " this looks like a good idea, but the problem is that it also highlight strings and template strings the gql utility
+autocmd ColorScheme * highlight CocHighlightText ctermfg=11 gui=bold guifg=#2c393f guibg=#ea9560
+
 
 " Symbol renaming.
 nmap <leader>rn <cmd>CocCommand document.renameCurrentWord<CR>

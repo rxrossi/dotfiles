@@ -71,112 +71,139 @@ time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   ["DAPInstall.nvim"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/DAPInstall.nvim"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/DAPInstall.nvim",
+    url = "https://github.com/Pocco81/DAPInstall.nvim"
   },
   ["coc.nvim"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/coc.nvim"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/coc.nvim",
+    url = "https://github.com/neoclide/coc.nvim"
   },
   ["context.vim"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/context.vim"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/context.vim",
+    url = "https://github.com/wellle/context.vim"
   },
   ["defx.nvim"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/defx.nvim"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/defx.nvim",
+    url = "https://github.com/Shougo/defx.nvim"
   },
   delimitMate = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/delimitMate"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/delimitMate",
+    url = "https://github.com/Raimondi/delimitMate"
   },
   ["gitsigns.nvim"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
+    url = "https://github.com/lewis6991/gitsigns.nvim"
   },
   ["linediff.vim"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/linediff.vim"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/linediff.vim",
+    url = "https://github.com/AndrewRadev/linediff.vim"
   },
   ["nvim-base16"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/nvim-base16"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/nvim-base16",
+    url = "https://github.com/RRethy/nvim-base16"
   },
   ["nvim-dap"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/nvim-dap"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/nvim-dap",
+    url = "https://github.com/mfussenegger/nvim-dap"
   },
   ["nvim-dap-virtual-text"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/nvim-dap-virtual-text"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/nvim-dap-virtual-text",
+    url = "https://github.com/theHamsta/nvim-dap-virtual-text"
   },
   ["nvim-treesitter"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["packer.nvim"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/packer.nvim"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/packer.nvim",
+    url = "https://github.com/wbthomason/packer.nvim"
   },
   ["plenary.nvim"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/plenary.nvim"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+    url = "https://github.com/nvim-lua/plenary.nvim"
   },
   ["popup.nvim"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/popup.nvim"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/popup.nvim",
+    url = "https://github.com/nvim-lua/popup.nvim"
   },
   ["telescope-dap.nvim"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope-dap.nvim"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope-dap.nvim",
+    url = "https://github.com/nvim-telescope/telescope-dap.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["vim-better-whitespace"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-better-whitespace"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-better-whitespace",
+    url = "https://github.com/ntpeters/vim-better-whitespace"
   },
   ["vim-commentary"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-commentary"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-commentary",
+    url = "https://github.com/tpope/vim-commentary"
   },
   ["vim-dispatch"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-dispatch"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-dispatch",
+    url = "https://github.com/tpope/vim-dispatch"
   },
   ["vim-fugitive"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-fugitive"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
   },
   ["vim-indent-object"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-indent-object"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-indent-object",
+    url = "https://github.com/michaeljsmith/vim-indent-object"
   },
   ["vim-indentwise"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-indentwise"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-indentwise",
+    url = "https://github.com/jeetsukumaran/vim-indentwise"
   },
   ["vim-maximizer"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-maximizer"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-maximizer",
+    url = "https://github.com/szw/vim-maximizer"
   },
   ["vim-obsession"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-obsession"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-obsession",
+    url = "https://github.com/tpope/vim-obsession"
   },
   ["vim-unimpaired"] = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-unimpaired"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-unimpaired",
+    url = "https://github.com/tpope/vim-unimpaired"
   },
   vimwiki = {
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vimwiki"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vimwiki",
+    url = "https://github.com/vimwiki/vimwiki"
   },
   ["zen-mode.nvim"] = {
     config = { "\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rzen-mode\frequire\0" },
     loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/zen-mode.nvim"
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/zen-mode.nvim",
+    url = "https://github.com/folke/zen-mode.nvim"
   }
 }
 

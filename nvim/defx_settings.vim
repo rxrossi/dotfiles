@@ -72,6 +72,6 @@
 
 
 nnoremap <silent><C-n> :Defx -show-ignored-files <CR>
-nnoremap <silent><space>n :Defx -show-ignored-files -search=`expand('%:p')`<CR>
+nnoremap <silent><space>n :Defx -show-ignored-files -search-recursive=`expand('%:p')`<CR>
 
 nnoremap <silent><buffer><expr> <CR> defx#do_action('drop')

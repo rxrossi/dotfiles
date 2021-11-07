@@ -2,7 +2,12 @@
   "L1VzZXJzL2FsZXhpZ25lei9kdW5lbG0vZGVsaXZlcnktcHJvbWlzZQ==": [
     "rename",
     "action",
-    "pre"
+    "pre",
+    "snii",
+    "snippet",
+    "cpell",
+    "cspell",
+    "cpellremove"
   ],
   "L1VzZXJzL2FsZXhpZ25lei9Cb3gvdmltd2lraQ==": [
     "forma",
@@ -11,5 +16,12 @@
   ],
   "L1VzZXJzL2FsZXhpZ25leg==": [
     "for"
+  ],
+  "L1VzZXJzL2FsZXhpZ25lei9maW5hbmNlcy1leGNlbC1nZW5lcmF0b3I=": [
+    "prettier",
+    "per"
+  ],
+  "L1VzZXJzL2FsZXhpZ25lei9kdW5lbG0vcmVwb3J0LW9mLWJ1eWFiaWxpdHk=": [
+    "pret"
   ]
 }

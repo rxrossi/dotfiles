@@ -46,7 +46,7 @@ nnoremap <leader>fc <cmd>Telescope commands<cr>
 nnoremap <leader>fo <cmd>Telescope oldfiles<cr>
 
 " Fugitive
-let branchn = "master"
+let branchn = "main"
 nnoremap <leader>dm <cmd>execute "Git difftool --name-status " . branchn . "... ':!**/graphql.types*'"<cr>
 nnoremap dm <cmd>execute "Gvdiffsplit " . branchn . "..."<cr>
 map <leader>p <C-w>q[qdm
@@ -85,5 +85,5 @@ nnoremap <leader>cs <cmd>source $MYVIMRC<cr>
 autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
 
 
-let g:context_enabled = 1
+let g:context_enabled = 0
 set noswapfile

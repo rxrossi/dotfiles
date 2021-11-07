@@ -1,3 +1,6 @@
 document.renameCurrentWord
 prettier.formatFile
+cSpell.removeWordFromUserDictionary
+cSpell.addIgnoreWord
+snippets.editSnippets
 eslint.showOutputChannel

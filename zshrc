@@ -130,9 +130,9 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
-export NPM_TOKEN='placeholder'
 
  alias python='python3'
 
 # Added by serverless binary installer
 export PATH="$HOME/.serverless/bin:$PATH"
+source ~/dotfiles/zshignored

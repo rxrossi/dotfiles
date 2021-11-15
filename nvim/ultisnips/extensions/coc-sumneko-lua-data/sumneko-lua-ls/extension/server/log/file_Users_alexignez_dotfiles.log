@@ -59198,3 +59198,1015 @@
         Holdon:   0
         Waiting:  0
 ==============================================
+[08:44:11.803][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/1f/abc8ce92062f46dee55195922976c81595804e
+[08:44:11.803][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.804][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/65/tmp_obj_UxthFC
+[08:44:11.804][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/03/tmp_obj_Arjhsy
+[08:44:11.805][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/25/tmp_obj_eOiMWB
+[08:44:11.805][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/25/457219df65e8362a716354558d4cfacd7bfe13
+[08:44:11.805][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.805][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/3f/df55d63cbe46afbd2a0a932f7faaa47877a046
+[08:44:11.805][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.805][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/index.lock
+[08:44:11.806][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/50/tmp_obj_cfnjIy
+[08:44:11.807][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/be/03d277d5629bdc34f405ea1ba8706563d4e37d
+[08:44:11.807][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.807][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/b5/2b78b9016352b319ec25da54d54f556512f612
+[08:44:11.807][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.807][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/fe/a26ee945cf39a307c721c17eaf21d212335173
+[08:44:11.807][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.807][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/ed/6bf46f44700ac0fef1921aee18f33ea8c4e2d5
+[08:44:11.807][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.807][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/1b/f95c8678ac202ce6d19d3b4cdd23aa3c1dfadf
+[08:44:11.807][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.807][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/ea/b208e2595a40fe4d8e2c8f6b21f954f237d415
+[08:44:11.807][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.807][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/65/4233db9b0ab9f547a2320935baa488e72854ad
+[08:44:11.807][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.807][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/ca/tmp_obj_8M10Ay
+[08:44:11.808][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/93/tmp_obj_oPOB2F
+[08:44:11.808][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/30/c070a305854db6816d5f6ae8d51804e9cc3293
+[08:44:11.808][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.808][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/18/5a7f504e94cd1ae18a552b8bc333b373b77f71
+[08:44:11.808][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.808][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/c0/286af0c1ca4c022f66dd579c393b4f23020e28
+[08:44:11.808][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.808][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/1b/tmp_obj_WiNxKG
+[08:44:11.808][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/6a/bd3b08d16ecbaeaf9ecd0279dee4025b5121a7
+[08:44:11.808][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.809][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/dd/tmp_obj_qU8CMB
+[08:44:11.809][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/93/1bce0484d918505b6a432042db04671054bf8e
+[08:44:11.809][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.809][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/43/17f1611925bc78af3bf6940ebfb9c63d162eb9
+[08:44:11.809][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.809][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/e5/4826265da849ac458655bd5b03564ea5f5827d
+[08:44:11.809][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.809][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/15/b72937aacdaa96f141a31e5fa7d3b7e41fcc64
+[08:44:11.809][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.809][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/03/511690f8f851d1ca2fbdb6b14371ffcc4ee1f5
+[08:44:11.809][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.809][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/bd/tmp_obj_IR0tyy
+[08:44:11.809][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/15/tmp_obj_mcVELB
+[08:44:11.810][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/e6/tmp_obj_OMuXUE
+[08:44:11.810][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/f1/tmp_obj_gpLZ2E
+[08:44:11.810][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/51/8dd33683318a347233f556f13fbf04235ea2d5
+[08:44:11.810][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.810][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/9f/2bbff3b8866185243618bdf475f97eddb60a9c
+[08:44:11.810][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.810][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/f1/4d0ae582018145a5fd62bcb42532b183576813
+[08:44:11.810][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.810][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/fe/tmp_obj_E58n7x
+[08:44:11.811][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/c9/ee49c1dd2c25ff709cd9509b2aba9a175f1b21
+[08:44:11.811][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.811][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/be/tmp_obj_ABOiWE
+[08:44:11.811][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/18/tmp_obj_snjdEx
+[08:44:11.811][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/bd/0aba2f05949e5bfe3bb18299c5d1cffad273ee
+[08:44:11.811][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.811][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/c0/tmp_obj_SWwQXD
+[08:44:11.812][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/2c/5796297322b315761738be3a966a07e88a59d9
+[08:44:11.812][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.812][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/ea/tmp_obj_oTK2NG
+[08:44:11.812][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/e5/tmp_obj_qmlgfG
+[08:44:11.812][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/50/02d6257e4a61c85770222ab1468d836de1251b
+[08:44:11.812][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.812][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/51/tmp_obj_KmWhly
+[08:44:11.812][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/40/tmp_obj_mE5eXF
+[08:44:11.813][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/40/d8eea787b733021b5f997c4a6182447900b000
+[08:44:11.813][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.813][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/dd/04cc2bf69de0c2f1097babe1f3670e59f53eb5
+[08:44:11.813][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.813][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/99/b132ed4b446cb379d16e57f2da1f9ae8afaef6
+[08:44:11.813][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.813][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/7c/tmp_obj_aqhvTF
+[08:44:11.813][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/b5/tmp_obj_Gun3JB
+[08:44:11.813][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/2c/tmp_obj_qqXkoG
+[08:44:11.814][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/99/tmp_obj_aE0mzy
+[08:44:11.814][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/6a/tmp_obj_yaBsRB
+[08:44:11.814][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/3f/tmp_obj_M9w2dC
+[08:44:11.814][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/7c/4df4fa6bdc8870f8ba30a76832e4655eea2d94
+[08:44:11.814][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.814][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/9f/tmp_obj_8QrbuD
+[08:44:11.815][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/ed/tmp_obj_4sCyqy
+[08:44:11.815][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/30/tmp_obj_MtB9Gy
+[08:44:11.815][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/c9/tmp_obj_imTa2E
+[08:44:11.815][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/ca/3483c20c4c7053071fbb830f101b04ea8865f0
+[08:44:11.815][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.815][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/e6/235b98f4246610753fc4a463f82f96a38e9f3c
+[08:44:11.815][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:11.815][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/1f/tmp_obj_6JWa7x
+[08:44:12.806][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/9d/tmp_obj_gbe2CH
+[08:44:12.806][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/f6/tmp_obj_eEp44G
+[08:44:12.806][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/24/19688a25b2ec5e61269398f8d3e5c136b915d4
+[08:44:12.806][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.807][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/53/a51d4bccb7176f55d1b4147d51145831f66465
+[08:44:12.807][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.807][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/5c/d0c64f881e040f7e75b19e2a5f333de5662aea
+[08:44:12.807][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.807][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/1e/2515bec5cf64e03bb6a21d2403551e70028a4a
+[08:44:12.807][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.807][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/af/3e9226449329c2e46c1fba204feccd3e4ad6e8
+[08:44:12.807][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.807][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/46/e2188dce2fd5541ba30405887057d6a9b6b189
+[08:44:12.807][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.808][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/27/f49d0ec0f77dd8dbffc32839d5817e31d72984
+[08:44:12.808][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.808][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/c3/tmp_obj_IHh9bH
+[08:44:12.808][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/de/tmp_obj_cbhheH
+[08:44:12.808][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/3e/tmp_obj_8CcFxI
+[08:44:12.808][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/f6/tmp_obj_cTrt9H
+[08:44:12.809][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/79/tmp_obj_g3zv1H
+[08:44:12.809][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/79/3eb5ac7dd72277b37a44616618ccdca2871c4e
+[08:44:12.809][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.809][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/3e/8d7ff4cef333b654038bb63ebcc06035863b2f
+[08:44:12.809][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.809][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/24/tmp_obj_oHQQWH
+[08:44:12.809][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/13/5c864a25272c06e9d22ce96a0fef2b03f5634c
+[08:44:12.809][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.809][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/9d/c9c6e75c33e262ad37b33fa03ad79bb67d387e
+[08:44:12.809][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.809][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/ac/d593846da4934e6d7ecefe6c06187014f07538
+[08:44:12.809][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.810][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/71/fa332c5702b6a7585ae0dedf7839d8f324f2a1
+[08:44:12.810][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.810][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/53/tmp_obj_CApovI
+[08:44:12.810][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/1e/tmp_obj_YHVVpH
+[08:44:12.810][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/43/tmp_obj_AXRQ7E
+[08:44:12.810][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/c5/897608ee5918dc695d4b4154c7c5f3d619362e
+[08:44:12.811][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.811][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/eb/321ea219d40099b6c6cbda640e43ec8a19431e
+[08:44:12.811][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.811][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/cf/9f78206e023032a29c445b533399197ab5d4fd
+[08:44:12.811][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.811][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/ad/tmp_obj_yG5VYH
+[08:44:12.811][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/c5/tmp_obj_OQUZFH
+[08:44:12.811][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/71/tmp_obj_crTG3G
+[08:44:12.812][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/ac/tmp_obj_2vUopI
+[08:44:12.812][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/ac/tmp_obj_CYjV2G
+[08:44:12.812][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/35/9ffdbe1e5c7c118f18468a1fcd508a05a44130
+[08:44:12.812][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.812][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/16/9fb945e15f94bc5ebbb656f5359592ab316fa2
+[08:44:12.812][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.812][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/70/0b4318e9f912cd82d4ba74e62f86913b9b3a04
+[08:44:12.812][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.812][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/f6/2d94ec011ee986432a24ad078e13574f93ce19
+[08:44:12.812][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.812][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/1d/9daf519b66d312b1df927ca0c4a36d719f4744
+[08:44:12.812][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.813][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/13/tmp_obj_yYGwgH
+[08:44:12.813][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/c3/353e30a57fa341884ba1f7b2afd4e7cb004beb
+[08:44:12.813][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.813][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/2d/tmp_obj_uAhFUH
+[08:44:12.813][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/35/tmp_obj_Q7Oe3H
+[08:44:12.813][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/de/c9bedd105dcbdbbb67159fe862aacc92c83f8d
+[08:44:12.813][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.814][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/98/tmp_obj_wFvN5G
+[08:44:12.814][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/9f/tmp_obj_QXDXzI
+[08:44:12.814][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/70/tmp_obj_ojcslH
+[08:44:12.814][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/98/39886e2e516418d824393bcab2ab99dddf53bc
+[08:44:12.814][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.814][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/a0/313d41ca22f6a0224c070cfbdad42b3be5c482
+[08:44:12.814][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.814][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/46/tmp_obj_AZ6xUI
+[08:44:12.815][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/cf/tmp_obj_8844iH
+[08:44:12.815][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/c6/b5ead8b915bd81b670bb10cc3cea6ada605388
+[08:44:12.815][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.815][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/ac/dd440179acd882e0fa1b993561c5b8323661b6
+[08:44:12.815][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.815][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/7d/tmp_obj_u0oIPH
+[08:44:12.815][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/02/b5e12f6f5488cf26bf5e6399bf3add3e3dc627
+[08:44:12.815][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.815][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/3e/9de39c3f8d37f1e87f77d31c7751e9a70ddfe1
+[08:44:12.815][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.816][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/02/tmp_obj_w5CQ0G
+[08:44:12.816][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/c6/tmp_obj_UnWYGI
+[08:44:12.816][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/9f/2d9ce8808d5918d14820ce18eb6112ed20f1c7
+[08:44:12.816][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.816][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/5c/tmp_obj_Iv3AIH
+[08:44:12.816][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/f6/ea178664d7c62594591aab9046ac182b515850
+[08:44:12.816][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.817][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/27/tmp_obj_AhgIBI
+[08:44:12.817][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/1d/tmp_obj_COeNoI
+[08:44:12.817][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/65/tmp_obj_uIrIEH
+[08:44:12.817][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/65/cfdc6b790347281838ab707ef9afdc8d667d04
+[08:44:12.817][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.817][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/a0/tmp_obj_CiQImH
+[08:44:12.817][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/7d/3cd04d2c5672c188971408fce66b34a58281d9
+[08:44:12.817][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.818][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/af/tmp_obj_uuGpjI
+[08:44:12.818][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/3e/tmp_obj_ohX0OH
+[08:44:12.818][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/eb/tmp_obj_WWrOlI
+[08:44:12.818][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/ad/9e97716f9ef01efb87f22830788238f4617662
+[08:44:12.818][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:12.818][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/2d/d18b6dcd243e29198f275801c347d5e4f31863
+[08:44:12.818][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.807][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/d8/9ec9ee4ac306e23bc9207bfd11fd1ee064d35f
+[08:44:13.807][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.808][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/45/2299ad6cc68fd9d284354ee30826741d12165f
+[08:44:13.808][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.808][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/96/tmp_obj_c5DeCL
+[08:44:13.808][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/de/tmp_obj_8qsI3K
+[08:44:13.809][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/19/9a225eb2a0551c1a89d2c420c90abc52d900e7
+[08:44:13.809][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.809][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/03/4ea629c3b008ee201cb15c20882a6e0d48b108
+[08:44:13.809][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.809][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/de/32d53f8455c13e873b246021c912ae0dac19a9
+[08:44:13.809][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.809][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/03/tmp_obj_glXSvH
+[08:44:13.809][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/71/46e0912c5b0cc321038765522a756f5e12e582
+[08:44:13.809][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.809][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/7b/tmp_obj_8WqhEK
+[08:44:13.809][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/c7/tmp_obj_EX09qL
+[08:44:13.810][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/11/tmp_obj_gVN2zL
+[08:44:13.810][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/16/tmp_obj_0UrjrH
+[08:44:13.810][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/1a/tmp_obj_eWAxjL
+[08:44:13.810][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/fb/bb5d279a17f08ce075cfee4a64004f1796e4f8
+[08:44:13.810][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.810][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/85/0c86432eba42da04083db68fead58635e5afc8
+[08:44:13.810][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.811][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/b3/dbc71527f670cc561e02d3dead6afe169092cc
+[08:44:13.811][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.811][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/d8/tmp_obj_sD1x5K
+[08:44:13.811][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/58/13019bf97d5659b474855d4d5a6b8ac29f6ee3
+[08:44:13.811][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.811][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/a3/tmp_obj_8q0htL
+[08:44:13.811][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/61/tmp_obj_iKRbwK
+[08:44:13.811][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/e8/e22e5353da4992b10185a0084164983cecf168
+[08:44:13.811][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.811][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/8d/tmp_obj_0qcVuL
+[08:44:13.812][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/68/tmp_obj_s9hq1K
+[08:44:13.812][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/45/tmp_obj_eOecVJ
+[08:44:13.812][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/11/9f80f69d8472d75e668a164695cde4073826b0
+[08:44:13.812][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.812][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/3d/tmp_obj_KE5dPK
+[08:44:13.812][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/7b/7ee5702be84a52634ff6da1de4c5920c8a56f7
+[08:44:13.812][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.812][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/82/tmp_obj_mSgj0K
+[08:44:13.813][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/24/tmp_obj_4KNxbL
+[08:44:13.813][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/68/bc96030f13fdd5816f1f04dbd37f18ac512a2f
+[08:44:13.813][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.813][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/c7/7db29c7318823642717be3e4b100fafe3d7707
+[08:44:13.813][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.813][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/e8/tmp_obj_YrJ99K
+[08:44:13.813][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/82/4b879c9d754a47cb0981bb2be3db307a51dd8f
+[08:44:13.813][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.813][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/e1/tmp_obj_Y3m4TK
+[08:44:13.814][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/61/0b1bfe63ddaa48832174cdcdf985edbc773efa
+[08:44:13.814][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.814][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/7a/tmp_obj_awmmuH
+[08:44:13.814][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/1a/a08d9116de9488a4c8ae099c3bef1f4c640f32
+[08:44:13.814][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.814][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/7a/2146d49a58a15a23bcde36768baeead9d2e533
+[08:44:13.814][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.814][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/8d/5769b531577aad386eacabb3afcc8e9d778809
+[08:44:13.814][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.814][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/24/ddb67c0206a76e289f4d1763ce6a6e52a20b08
+[08:44:13.814][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.814][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/19/tmp_obj_WKvHlL
+[08:44:13.814][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/17/d794e034be48f5f650e70942452bc89ec144ce
+[08:44:13.815][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.815][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/e1/d84a18ae5f63491a4afe0fd764a8a3a94ef264
+[08:44:13.815][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.815][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/37/9232c9328364e35a47800343158cc51c09ece9
+[08:44:13.815][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.815][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/e8/a7ba11e57af9e2c8b6cef295645f3f892981bc
+[08:44:13.815][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.815][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/03/tmp_obj_iK9uRK
+[08:44:13.815][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/3d/259297a53f648fc2bd843d514fb2065a57505b
+[08:44:13.815][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.815][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/72/1e8ad129af4a852aaa3aa241a08ffa39a78b09
+[08:44:13.815][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.815][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/66/1e86d45f828d11f010e41ba4bf1865c0707293
+[08:44:13.815][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.815][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/71/tmp_obj_cZCtzK
+[08:44:13.816][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/a5/f1054a66afb7bd54300c6d4e7426a7298093f1
+[08:44:13.816][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.816][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/72/tmp_obj_yi5nKK
+[08:44:13.816][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/b3/tmp_obj_WQODBK
+[08:44:13.816][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/46/b5c6b216b93840170760075efef498b953507d
+[08:44:13.816][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.816][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/e8/tmp_obj_6Z4SRK
+[08:44:13.816][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/85/tmp_obj_kd67bL
+[08:44:13.817][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/1c/70c47ae0fd97a7d9912a9f162170e1ed602d7e
+[08:44:13.817][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.817][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/96/15947b209dfe5a8a4e2068d391d5abb02083c3
+[08:44:13.817][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.817][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/66/tmp_obj_yQsDeL
+[08:44:13.817][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/03/24e7c32d32c265e46ca50ba181eb1a901e5569
+[08:44:13.817][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.817][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/a5/tmp_obj_kdyyMK
+[08:44:13.817][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/58/tmp_obj_6TtDgL
+[08:44:13.827][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/46/tmp_obj_AZoZnL
+[08:44:13.838][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/a3/6b417af4540ae8b7a3f4db1e47cdc0bb2d0a16
+[08:44:13.838][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:13.838][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/17/tmp_obj_AXnLEL
+[08:44:13.850][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/1c/tmp_obj_6DvOxK
+[08:44:13.862][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/37/tmp_obj_iIGQxL
+[08:44:14.818][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/74/tmp_obj_29YiAN
+[08:44:14.828][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/ae/dd45126c20ab49af74ed6f087dc187bcbe131a
+[08:44:14.828][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.832][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/61/tmp_obj_yEsaqJ
+[08:44:14.841][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/4d/tmp_obj_egDJDJ
+[08:44:14.847][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/8c/18043a8ccdb0d24931b08013edeeb7eeaf33ce
+[08:44:14.847][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.848][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/32/4ff5f138b598c08d1ce41d476ebfc1944b1d78
+[08:44:14.848][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.848][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/de/0a9dc32dc651f458e12f54ba3b984a493e6aba
+[08:44:14.848][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.849][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/c8/7333c770718f68acc1e9d845cca60588fe8e94
+[08:44:14.849][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.849][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/5c/f74438a082d43dffe81d95a016e5daac341bf7
+[08:44:14.849][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.849][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/1e/e5013fb9ee7716ea67c96eb318660c360817d9
+[08:44:14.849][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.850][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/ef/766774bbc037eb328721c1b671a9308e600217
+[08:44:14.850][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.851][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/8c/tmp_obj_AjFovJ
+[08:44:14.859][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/eb/tmp_obj_2DgKNJ
+[08:44:14.868][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/da/tmp_obj_kBiY4J
+[08:44:14.875][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/e9/74178fbc9ab136be5137f2c966396b60074919
+[08:44:14.875][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.875][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/83/tmp_obj_2FLHEN
+[08:44:14.888][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/4d/tmp_obj_wVVaxJ
+[08:44:14.898][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/93/73969fc760ed74687e9fc3f2cca4d9b151e6a3
+[08:44:14.899][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.899][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/f1/tmp_obj_kjPrLJ
+[08:44:14.907][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/c6/0a18f7353ed36fb272918b98709c1cfd74c5de
+[08:44:14.908][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.908][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/99/3a32e8e4cb011b2af06eaa6ef1a644dd39b734
+[08:44:14.908][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.908][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/c8/tmp_obj_qidVdK
+[08:44:14.951][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/2a/0bd055979077029c9dc63ea39fde94d1acea41
+[08:44:14.951][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.958][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/6d/63ff45a50b743a87b3230ce8865f236287c34a
+[08:44:14.960][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.960][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/fb/tmp_obj_QtklXJ
+[08:44:14.969][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/c6/tmp_obj_K04FsK
+[08:44:14.971][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/89/tmp_obj_QnnWIN
+[08:44:14.971][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/10/tmp_obj_0yE9rJ
+[08:44:14.972][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/93/tmp_obj_AbrvtN
+[08:44:14.972][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/ef/tmp_obj_AXbt0J
+[08:44:14.972][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/e2/tmp_obj_cdcCoK
+[08:44:14.972][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/ef/tmp_obj_0ySCvN
+[08:44:14.972][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/8f/tmp_obj_WS11QJ
+[08:44:14.973][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/de/tmp_obj_kRcHfK
+[08:44:14.973][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/15/a396e4c251c315caccec82d3b62ec38850ab16
+[08:44:14.973][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.973][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/1e/tmp_obj_mIndKJ
+[08:44:14.973][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/f1/a403b14ac1eb41591428d27087b0f26d2456bf
+[08:44:14.973][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.973][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/83/8098b947881ebbc9b45f6b1f2e08aac7966646
+[08:44:14.973][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.973][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/32/tmp_obj_8ycwCN
+[08:44:14.974][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/d7/tmp_obj_CgRF2J
+[08:44:14.974][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/99/tmp_obj_4guNqK
+[08:44:14.974][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/74/7cbaffb631185e5d4b05b0bb71a3467633e4bd
+[08:44:14.974][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.974][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/da/9b55ca7e1a1fa95d0b1c64d10a6ffebd36e62e
+[08:44:14.974][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.974][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/ef/tmp_obj_WA41FJ
+[08:44:14.974][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/ef/200f00cb7a4bf9d0cb8837c5436a30c7a0c708
+[08:44:14.974][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.974][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/ef/af68238c4052e859a3c63d90f5fecdc7cd8ce4
+[08:44:14.974][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.975][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/79/tmp_obj_MjmqkJ
+[08:44:14.975][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/44/tmp_obj_mA7grN
+[08:44:14.975][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/8f/2088861bd38b18882e4d2083e83902ce08cde1
+[08:44:14.975][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.975][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/44/e8ede1de0b0a8b812fd43e2b0e2284a676a4d5
+[08:44:14.975][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.975][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/ae/tmp_obj_WKDLjK
+[08:44:14.975][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/15/tmp_obj_KsDAGN
+[08:44:14.975][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/4d/077ebe812c48385bca7144b92f6e852c9fc195
+[08:44:14.976][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.976][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/f8/tmp_obj_kn9czJ
+[08:44:14.976][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/2a/tmp_obj_CyujBJ
+[08:44:14.976][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/eb/1657c58763b42d534bd5e89b2972c70c735b8a
+[08:44:14.976][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.976][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/79/tmp_obj_MXmYGJ
+[08:44:14.976][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/e2/f72d816b0b6c75b0431119704c33de8d28853d
+[08:44:14.976][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.976][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/e9/tmp_obj_WmNccK
+[08:44:14.977][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/d7/c736d7b4392ca9d917afcf493835d245d56ce0
+[08:44:14.977][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.977][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/cd/tmp_obj_Ggw75J
+[08:44:14.977][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/f8/18093361e4329b3ed2d71669f5d5173e5da64f
+[08:44:14.977][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.977][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/6d/tmp_obj_KMdeiK
+[08:44:14.977][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/cd/e2506274daba97b91121a681a63107763d86dc
+[08:44:14.977][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.977][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/89/a8dcb49bf81c04e42b338db519e41c7dc3d45c
+[08:44:14.977][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.978][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/4d/a7d3e3c4bfadd206e380eebb280ce62737ccc3
+[08:44:14.978][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.978][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/10/35ac9e1612ffaf6c2f0e5b4fa2706e04d0dfcc
+[08:44:14.978][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.978][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/5c/tmp_obj_M1UcyN
+[08:44:14.978][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/79/8d88ef5ecdcf178fcf2fa05c801df9c687e250
+[08:44:14.978][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.978][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/79/5def56c1afe4fae502c6406a18b04956a0e30f
+[08:44:14.978][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:14.978][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/61/dd23bd906bf7f54c249517e72c56e64b4b9a4d
+[08:44:14.978][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.815][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/38/tmp_obj_6PPDYM
+[08:44:15.816][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/c8/tmp_obj_WMA9KN
+[08:44:15.816][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/34/tmp_obj_uUDBfN
+[08:44:15.816][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/ec/tmp_obj_Qhg2QL
+[08:44:15.816][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/e4/tmp_obj_uoHXNL
+[08:44:15.816][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/89/tmp_obj_aiRztM
+[08:44:15.817][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/c8/a45c2953aa2ed339d75b5c67d1a97421a11c8a
+[08:44:15.817][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.817][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/e6/tmp_obj_u0iXoN
+[08:44:15.818][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/cd/4e8c51c0d8e7527f0e0cc718a85fdac46f2c52
+[08:44:15.818][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.818][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/cd/tmp_obj_wJfkBM
+[08:44:15.818][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/d4/be2fe09fa78ba0ce580dc48d95bfe7fba93b3b
+[08:44:15.818][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.818][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/4b/tmp_obj_awsLzM
+[08:44:15.818][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/d1/1c10f9563ba0baf21e3d958dba6807293befbc
+[08:44:15.818][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.818][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/e6/b92005921d2229f3186621e99bb15f82fe88ba
+[08:44:15.818][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.818][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/00/tmp_obj_aunriM
+[08:44:15.819][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/e5/b5c923fb00e502901c207de6e7e832fce719a7
+[08:44:15.819][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.819][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/f7/da2d70179532caa5340290ac6f68f6d3d99e3f
+[08:44:15.819][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.819][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/bc/tmp_obj_IjJhON
+[08:44:15.819][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/7d/tmp_obj_65nXfM
+[08:44:15.819][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/65/890615c53e6d916fa4aae4883babc49a1559a1
+[08:44:15.819][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.819][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/ee/tmp_obj_igW13M
+[08:44:15.819][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/25/tmp_obj_GmD1XL
+[08:44:15.820][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/e4/456c8d7035feeab6ab5e12753afb1eee0a6eeb
+[08:44:15.820][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.820][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/1a/e81be056bc5c4a22259898f479c015057ac086
+[08:44:15.820][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.820][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/6e/056ba96d6eb97a71c5aab521f3d9a563763de9
+[08:44:15.820][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.820][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/d1/tmp_obj_uI3DSM
+[08:44:15.820][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/5b/tmp_obj_6LnG4L
+[08:44:15.820][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/c1/tmp_obj_s7oooM
+[08:44:15.821][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/25/12ceb80ed5e54e020227cb525de6c4064dfbd9
+[08:44:15.821][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.821][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/e9/tmp_obj_MxJETN
+[08:44:15.821][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/c1/tmp_obj_WizIlN
+[08:44:15.821][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/ee/5b576427754efd270faf7852ea341c2c950712
+[08:44:15.821][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.821][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/ec/fd8e9598637768e9641bb2f8b54a9f7435ddbc
+[08:44:15.821][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.821][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/5b/6f9a902938eae9b3ca6cd03c50f1fa17b57483
+[08:44:15.821][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.821][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/c1/ef5636abe8edb527474f38cdb8ce48fb399f3b
+[08:44:15.821][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.821][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/bc/1bcb05d2124cfe60eab2255d045415f72af52d
+[08:44:15.822][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.822][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/2c/tmp_obj_E3nknN
+[08:44:15.822][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/4b/f4eae3747d96fd9e8fbb40256f954374cf8736
+[08:44:15.822][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.822][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/6e/tmp_obj_cLF0HL
+[08:44:15.822][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/d4/tmp_obj_AL18cN
+[08:44:15.822][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/1a/tmp_obj_cnBmVN
+[08:44:15.822][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/89/5f9797daf5f9551ab67e7af5728390a4c637b5
+[08:44:15.823][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.823][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/4b/tmp_obj_svh0MM
+[08:44:15.823][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/c1/98e8523f3b1a59b4d94bd5a74153568bbe4516
+[08:44:15.823][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.823][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/0a/tmp_obj_2ZnwFM
+[08:44:15.823][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/65/tmp_obj_A9PE3M
+[08:44:15.823][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/e5/tmp_obj_sDbNsM
+[08:44:15.824][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/00/2daf7d17c2971aecd9a7ae5d2202e08ff1a38b
+[08:44:15.824][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.824][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/0a/adaca2907086d7805a63a921c47641f0eedab2
+[08:44:15.824][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.824][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/38/51f4db92d5f3fc7ac807206a2849aeb22bec2c
+[08:44:15.824][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.824][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/89/dfff83e1f0321200dc3cb8612428dddef83d65
+[08:44:15.824][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.824][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/29/73261c2ccc0ed0e26e35978463014584267625
+[08:44:15.824][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.824][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/00/tmp_obj_4Kni0N
+[08:44:15.824][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/00/0e0c84b00a56b55c6fdb9c1c6284a11ab52ffd
+[08:44:15.824][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.824][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/89/tmp_obj_y2YCbN
+[08:44:15.825][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/e9/e61c77bea53b943b1db9e3ec0bb77335b05781
+[08:44:15.825][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.825][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/34/a067540fd7a53a4dcc6a125e432ff33edc71fe
+[08:44:15.825][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.825][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/2c/b6fcead31936b58e651f436a5f8424567ffc5f
+[08:44:15.825][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.825][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/29/tmp_obj_mi47qM
+[08:44:15.825][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/7d/90efbf531e895149936d0dfb12c6fb2eec380b
+[08:44:15.825][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:15.825][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/f7/tmp_obj_EZvZ9M
+[08:44:15.825][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/4b/fc3a47ebdd5b97a16e8c4f00e4a418796613b1
+[08:44:15.825][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.818][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/ca/1859f7ee8b1dd793181e506c5934fe276c125a
+[08:44:16.818][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.818][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/f5/tmp_obj_2NDzbP
+[08:44:16.819][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/e2/2e36090c5d3aaf34da26b7675feb5214ea3b50
+[08:44:16.819][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.819][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/91/tmp_obj_RDgDtu
+[08:44:16.819][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/1f/tmp_obj_BNRdhu
+[08:44:16.819][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/5a/tmp_obj_EnqMXP
+[08:44:16.820][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/index.lock
+[08:44:16.820][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/0b/246bc0f58836d5c1821672fa944ce05cc346f3
+[08:44:16.820][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.820][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/ff/tmp_obj_c5Fx9P
+[08:44:16.820][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/42/e3c3cfc702977dcb1379dbbc95c8bb46b2756c
+[08:44:16.820][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.820][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/c0/8b55ca9d0a49910a07f7b7bac473ee0c9d9e02
+[08:44:16.820][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.820][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/2d/tmp_obj_p9Hdvu
+[08:44:16.821][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/f1/1969d779cefad990434ec2c3d205c89f66ea6c
+[08:44:16.821][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.821][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/42/tmp_obj_j6pmyt
+[08:44:16.821][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/f5/d12ab5324c387f6d398b97295e4038b5c6f8dd
+[08:44:16.821][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.821][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/c0/tmp_obj_wfa3TP
+[08:44:16.821][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/index
+[08:44:16.821][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.821][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/01/780c7cc2214944a7d6989a1530b66b6e35a1c4
+[08:44:16.821][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.821][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/01/tmp_obj_56lIdu
+[08:44:16.822][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/4e/tmp_obj_JLSzju
+[08:44:16.822][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/25/tmp_obj_bYZvfu
+[08:44:16.822][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/25/e8be3e263c5c2db13503cd1e382489cc595ef1
+[08:44:16.822][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.822][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/1f/59d604ece14872359f3a7017104f5f71cc0a0e
+[08:44:16.822][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.822][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/d7/86cdc8ae1889049a5029db3952e853d49cc865
+[08:44:16.822][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.823][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/cb/347de851cb7d1138237ddbb2ad0b5b8b9cf4b7
+[08:44:16.823][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.823][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/9d/tmp_obj_gt9u3P
+[08:44:16.823][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/5a/500de5f9d0701c3545157479be0d2f55fe141b
+[08:44:16.823][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.823][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/65/tmp_obj_nKpIAu
+[08:44:16.823][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/60/5d79f19c840e141e707148ed41ce880152b52c
+[08:44:16.823][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.823][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/91/81cf162b49313ef27b6d9a1934fc97035b71ed
+[08:44:16.823][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.823][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/16/babd23e0197c3cd423e0f318d0ceb059665316
+[08:44:16.823][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.823][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/72/0003207beba6f34e691f63c8579dfeee89584a
+[08:44:16.824][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.824][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/15/tmp_obj_jGOPLt
+[08:44:16.824][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/4c/tmp_obj_9QyRGt
+[08:44:16.824][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/4c/23e65c44178e7137f8a2eedf4dfcca1d3a105c
+[08:44:16.824][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.824][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/35/839237da8ec6efd65427b2fd8289f6877cf845
+[08:44:16.824][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.824][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/09/tmp_obj_9Kp2Ft
+[08:44:16.824][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/b1/c45b81f41fcfbfc162c06f2d9475e75ae5b661
+[08:44:16.824][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.825][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/1f/tmp_obj_VdGPvt
+[08:44:16.825][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/e9/f0c50057d36ed1b9523ff6af51d540462ae296
+[08:44:16.825][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.825][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/a3/tmp_obj_xZ2ZEu
+[08:44:16.825][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/ca/tmp_obj_UTCucM
+[08:44:16.825][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/16/tmp_obj_zKSwCu
+[08:44:16.826][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/a3/85dfe638c5df9b40ae78f78a0fcd8e215a2bfc
+[08:44:16.826][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.826][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/2d/ca4a8278107d5c8c8f91e59c1c28c92bdb14b4
+[08:44:16.826][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.826][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/15/ba2a1d4c0ad7f7a5aae1a29a9c9731223b4ccc
+[08:44:16.826][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.826][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/4c/tmp_obj_grmu7P
+[08:44:16.826][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/9d/870f02392b7601be4d033dbe3820269cb24ad6
+[08:44:16.826][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.826][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/09/f8016c488a8c3acde892b123ea5694c4dd3dbc
+[08:44:16.826][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.826][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/ff/1c762794c495eaa61965fc435381955feecdaa
+[08:44:16.826][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.826][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/f1/tmp_obj_S2BldQ
+[08:44:16.827][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/65/d55a00207bc645f7a042fec6bd1b910f1865e8
+[08:44:16.827][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.827][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/e9/tmp_obj_6JkFkQ
+[08:44:16.827][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/0b/tmp_obj_7lH9ru
+[08:44:16.827][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/cb/tmp_obj_khufOP
+[08:44:16.827][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/60/tmp_obj_kR8Y5P
+[08:44:16.828][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/4e/1ca07b61ededf395e15dabe3c3716cb3b5041f
+[08:44:16.828][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.828][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/d7/tmp_obj_uuOZNP
+[08:44:16.828][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/33/7e35a41fcbb0432f419b2cd55a2e4f46b14346
+[08:44:16.828][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.828][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/e2/tmp_obj_fa7Izt
+[08:44:16.828][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/4c/cc67c7f5d5c3654bcffd97e5d4e0c767c2d19d
+[08:44:16.828][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.828][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/1f/c16267ed4b6faebbf25c10a3c86eeb29910c57
+[08:44:16.828][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.828][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/b1/tmp_obj_5YVopu
+[08:44:16.829][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/.watchman-cookie-Alexs-MacBook-Pro.local-1958-423
+[08:44:16.829][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/6e/1c6f82aa67a7270bc7083b9b91517e399b9cc5
+[08:44:16.829][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:16.830][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/35/tmp_obj_aA0JaM
+[08:44:16.830][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/33/tmp_obj_R5oU7t
+[08:44:16.830][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/6e/tmp_obj_1cAP6t
+[08:44:17.819][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/9b/tmp_obj_fQ4o7s
+[08:44:17.820][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/f6/783d691a961a56f553281ead98eecefafa1c24
+[08:44:17.820][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.820][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/03/tmp_obj_NRS0Tt
+[08:44:17.821][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/97/e9a7eb2f863aca157208013f5e67de4ab7ac38
+[08:44:17.821][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.821][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/90/tmp_obj_3JI18s
+[08:44:17.821][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/31/3fbbe7dbef7f3216ac8eb9ecd3a2f029e32c0a
+[08:44:17.821][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.821][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/index.lock
+[08:44:17.821][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/35/tmp_obj_rsJXyx
+[08:44:17.821][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/42/c16506a72e19ff1ed335cef9b70ccd6316694e
+[08:44:17.821][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.822][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/c7/tmp_obj_Pq4tWs
+[08:44:17.822][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/85/5b12d2a311eec8dc4b2c0ead53b004e01cf1c4
+[08:44:17.822][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.822][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/9a/tmp_obj_NNImlt
+[08:44:17.822][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/a4/f4b70ec95c91c4d4e9fee67027af43406b61c8
+[08:44:17.822][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.822][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/index
+[08:44:17.822][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.822][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/2e/9c1816015bd6d507b2fce01ea968f3bf3e2de4
+[08:44:17.822][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.822][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/9a/e2475b2888b67bf45e5d1be93443228929cdb5
+[08:44:17.822][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.823][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/a3/tmp_obj_NDp91w
+[08:44:17.823][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/03/2638fc704fae5536c13f1349f6f078a653755b
+[08:44:17.823][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.823][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/a3/ee52108e137f8484d4ad5d5bfda6be6a2748ce
+[08:44:17.823][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.823][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/35/4b7d72a19b8b9d839138c96687ee058cf1aa70
+[08:44:17.823][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.823][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/ba/tmp_obj_9ipPZs
+[08:44:17.823][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/90/b800284fe49db433537c2b5e62e56f69db6c81
+[08:44:17.823][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.823][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/be/tmp_obj_RneYsx
+[08:44:17.824][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/97/tmp_obj_D2gTbx
+[08:44:17.824][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/7d/3950e01854eea2df8c79e997d5037c5a3b4077
+[08:44:17.824][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.825][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/29/645838f953901291c71327976b74ae15dc7183
+[08:44:17.825][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.825][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/49/043ba2ac50e67df1b4dd22fd0dba7969bb6600
+[08:44:17.825][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.825][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/85/tmp_obj_Vb5Y5s
+[08:44:17.826][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/44/tmp_obj_1G9X3w
+[08:44:17.826][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/42/tmp_obj_5OG9vw
+[08:44:17.826][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/42/cf8df5d1e55de230ab6313354db662530baf04
+[08:44:17.826][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.826][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/82/tmp_obj_jwTWuw
+[08:44:17.826][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/4c/tmp_obj_1K1ihx
+[08:44:17.826][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/7d/tmp_obj_xzX78w
+[08:44:17.827][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/29/tmp_obj_lpbQxw
+[08:44:17.827][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/ba/fd33b09028842484691ef053d56a2badd87e58
+[08:44:17.827][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.827][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/be/410bd26cfe0ebdb7662c7eda566f27dcb97112
+[08:44:17.827][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.827][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/9b/075f627e6364450a1068034d7d8e2c75d97bf3
+[08:44:17.827][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.827][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/50/tmp_obj_l356Wt
+[08:44:17.827][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/72/tmp_obj_p74jOt
+[08:44:17.828][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/c9/ab458cdc18984ffbce6a465e2f4a9b32bb141e
+[08:44:17.828][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.828][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/56/tmp_obj_DwOAtt
+[08:44:17.828][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/02/tmp_obj_Tg0knx
+[08:44:17.828][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/42/tmp_obj_V9xeet
+[08:44:17.829][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/3e/tmp_obj_fEgeXs
+[08:44:17.829][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/02/97a3179fa234c117773739cf1f544463d60e34
+[08:44:17.829][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.829][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/4c/586feb753122b11da9ce5055a2b5b25da033cd
+[08:44:17.829][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.829][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/a4/tmp_obj_vgQegt
+[08:44:17.829][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/2f/fb63a035b4bf52b86509f6ea1eda5cd252384f
+[08:44:17.829][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.829][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/50/98e5803e9cb9431377c4a843537c9bf247fbe8
+[08:44:17.829][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.829][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/49/tmp_obj_pNKWgx
+[08:44:17.830][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/e0/tmp_obj_3VQyVt
+[08:44:17.830][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/31/tmp_obj_TOba5t
+[08:44:17.831][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/2f/tmp_obj_50kdrx
+[08:44:17.831][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/15/ee5cb12520d87ddd072e3905e4b820dbb3e863
+[08:44:17.831][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.831][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/c9/tmp_obj_JLunpx
+[08:44:17.831][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/f6/tmp_obj_JVPDZt
+[08:44:17.831][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/15/tmp_obj_BBdamt
+[08:44:17.832][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/2e/tmp_obj_7x7Rrt
+[08:44:17.832][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/56/cd12a02e584abfe1793dfe1ed41f57277c9aea
+[08:44:17.832][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.832][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/3e/88ed2c699c76d992d4b1de7c8728e98080f475
+[08:44:17.832][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.832][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/44/aeffa56670ed85dc193d7efcab25a8da9b1959
+[08:44:17.832][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.832][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/82/751b95dde1fb080ee8f03d2459434f3dc88e06
+[08:44:17.832][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.832][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/c7/ffb14a2873248477832065bf0aa7e4ca2d23f8
+[08:44:17.832][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:17.832][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/e0/eed1ffb4aa80848d24438fa8a39a0b8feefb09
+[08:44:17.832][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:21.835][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/HEAD.lock
+[08:44:21.835][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/objects/6e/39d864d1c8db617c9ed7ec1955874e5c2a9a2a
+[08:44:21.835][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:21.836][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/6e/tmp_obj_ZnUfCg
+[08:44:21.836][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/refs/heads/master
+[08:44:21.836][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:21.836][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/objects/maintenance.lock
+[08:44:21.836][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/refs/heads/master.lock
+[08:44:35.886][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/refs/remotes/origin/master.lock
+[08:44:35.887][debug][#0:script/workspace/workspace.lua:623]: FileChangeType.Created	file:///Users/alexignez/dotfiles/.git/refs/remotes/origin/master
+[08:44:35.887][info] [#0:script/workspace/workspace.lua:296]: Scan files at:	/Users/alexignez/dotfiles
+[08:44:36.889][debug][#0:script/service/service.lua:138]: 
+========= Medical Examination Report =========
+    --------------- Memory ---------------
+        Total: 152.075 MB
+        # 00 : 146.308 MB
+        # 01 : 1.800 MB
+        # 02 : 1.280 MB
+        # 03 : 1.344 MB
+        # 04 : 1.344 MB
+    --------------- Coroutine ---------------
+        Total:     17
+        Running:   0
+        Suspended: 0
+        Normal:    0
+        Dead:      17
+    --------------- Cache ---------------
+        Total: 1
+        Dead:  0
+    --------------- Proto ---------------
+        Holdon:   0
+        Waiting:  0
+==============================================
+[08:45:16.010][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/.watchman-cookie-Alexs-MacBook-Pro.local-1958-424
+[08:45:37.087][debug][#0:script/service/service.lua:138]: 
+========= Medical Examination Report =========
+    --------------- Memory ---------------
+        Total: 152.498 MB
+        # 00 : 146.730 MB
+        # 01 : 1.800 MB
+        # 02 : 1.280 MB
+        # 03 : 1.344 MB
+        # 04 : 1.344 MB
+    --------------- Coroutine ---------------
+        Total:     19
+        Running:   0
+        Suspended: 0
+        Normal:    0
+        Dead:      19
+    --------------- Cache ---------------
+        Total: 1
+        Dead:  0
+    --------------- Proto ---------------
+        Holdon:   0
+        Waiting:  0
+==============================================
+[08:46:17.217][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/.watchman-cookie-Alexs-MacBook-Pro.local-1958-425
+[08:46:37.273][debug][#0:script/service/service.lua:138]: 
+========= Medical Examination Report =========
+    --------------- Memory ---------------
+        Total: 152.917 MB
+        # 00 : 147.150 MB
+        # 01 : 1.800 MB
+        # 02 : 1.280 MB
+        # 03 : 1.344 MB
+        # 04 : 1.344 MB
+    --------------- Coroutine ---------------
+        Total:     21
+        Running:   0
+        Suspended: 0
+        Normal:    0
+        Dead:      21
+    --------------- Cache ---------------
+        Total: 1
+        Dead:  0
+    --------------- Proto ---------------
+        Holdon:   0
+        Waiting:  0
+==============================================
+[08:47:17.397][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/.watchman-cookie-Alexs-MacBook-Pro.local-1958-426
+[08:47:37.450][debug][#0:script/service/service.lua:138]: 
+========= Medical Examination Report =========
+    --------------- Memory ---------------
+        Total: 153.338 MB
+        # 00 : 147.571 MB
+        # 01 : 1.800 MB
+        # 02 : 1.280 MB
+        # 03 : 1.344 MB
+        # 04 : 1.344 MB
+    --------------- Coroutine ---------------
+        Total:     23
+        Running:   0
+        Suspended: 0
+        Normal:    0
+        Dead:      23
+    --------------- Cache ---------------
+        Total: 1
+        Dead:  0
+    --------------- Proto ---------------
+        Holdon:   0
+        Waiting:  0
+==============================================
+[08:48:19.576][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/.watchman-cookie-Alexs-MacBook-Pro.local-1958-427
+[08:48:36.638][debug][#0:script/service/service.lua:138]: 
+========= Medical Examination Report =========
+    --------------- Memory ---------------
+        Total: 153.758 MB
+        # 00 : 147.990 MB
+        # 01 : 1.800 MB
+        # 02 : 1.280 MB
+        # 03 : 1.344 MB
+        # 04 : 1.344 MB
+    --------------- Coroutine ---------------
+        Total:     25
+        Running:   0
+        Suspended: 0
+        Normal:    0
+        Dead:      25
+    --------------- Cache ---------------
+        Total: 1
+        Dead:  0
+    --------------- Proto ---------------
+        Holdon:   0
+        Waiting:  0
+==============================================
+[08:49:18.760][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/.watchman-cookie-Alexs-MacBook-Pro.local-1958-428
+[08:49:19.764][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/.watchman-cookie-Alexs-MacBook-Pro.local-1958-428
+[08:49:36.808][debug][#0:script/service/service.lua:138]: 
+========= Medical Examination Report =========
+    --------------- Memory ---------------
+        Total: 154.266 MB
+        # 00 : 148.498 MB
+        # 01 : 1.800 MB
+        # 02 : 1.280 MB
+        # 03 : 1.344 MB
+        # 04 : 1.344 MB
+    --------------- Coroutine ---------------
+        Total:     29
+        Running:   0
+        Suspended: 0
+        Normal:    0
+        Dead:      29
+    --------------- Cache ---------------
+        Total: 1
+        Dead:  0
+    --------------- Proto ---------------
+        Holdon:   0
+        Waiting:  0
+==============================================
+[08:50:19.923][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/.watchman-cookie-Alexs-MacBook-Pro.local-1958-429
+[08:50:36.971][debug][#0:script/service/service.lua:138]: 
+========= Medical Examination Report =========
+    --------------- Memory ---------------
+        Total: 154.688 MB
+        # 00 : 148.920 MB
+        # 01 : 1.800 MB
+        # 02 : 1.280 MB
+        # 03 : 1.344 MB
+        # 04 : 1.344 MB
+    --------------- Coroutine ---------------
+        Total:     31
+        Running:   0
+        Suspended: 0
+        Normal:    0
+        Dead:      31
+    --------------- Cache ---------------
+        Total: 1
+        Dead:  0
+    --------------- Proto ---------------
+        Holdon:   0
+        Waiting:  0
+==============================================
+[08:51:18.057][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/.watchman-cookie-Alexs-MacBook-Pro.local-1958-430
+[08:51:37.108][debug][#0:script/service/service.lua:138]: 
+========= Medical Examination Report =========
+    --------------- Memory ---------------
+        Total: 155.107 MB
+        # 00 : 149.339 MB
+        # 01 : 1.800 MB
+        # 02 : 1.280 MB
+        # 03 : 1.344 MB
+        # 04 : 1.344 MB
+    --------------- Coroutine ---------------
+        Total:     33
+        Running:   0
+        Suspended: 0
+        Normal:    0
+        Dead:      33
+    --------------- Cache ---------------
+        Total: 1
+        Dead:  0
+    --------------- Proto ---------------
+        Holdon:   0
+        Waiting:  0
+==============================================
+[08:52:20.174][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/.watchman-cookie-Alexs-MacBook-Pro.local-1958-431
+[08:52:37.208][debug][#0:script/service/service.lua:138]: 
+========= Medical Examination Report =========
+    --------------- Memory ---------------
+        Total: 155.528 MB
+        # 00 : 149.760 MB
+        # 01 : 1.800 MB
+        # 02 : 1.280 MB
+        # 03 : 1.344 MB
+        # 04 : 1.344 MB
+    --------------- Coroutine ---------------
+        Total:     35
+        Running:   0
+        Suspended: 0
+        Normal:    0
+        Dead:      35
+    --------------- Cache ---------------
+        Total: 1
+        Dead:  0
+    --------------- Proto ---------------
+        Holdon:   0
+        Waiting:  0
+==============================================
+[08:53:19.324][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/.watchman-cookie-Alexs-MacBook-Pro.local-1958-432
+[08:53:37.376][debug][#0:script/service/service.lua:138]: 
+========= Medical Examination Report =========
+    --------------- Memory ---------------
+        Total: 155.947 MB
+        # 00 : 150.179 MB
+        # 01 : 1.800 MB
+        # 02 : 1.280 MB
+        # 03 : 1.344 MB
+        # 04 : 1.344 MB
+    --------------- Coroutine ---------------
+        Total:     37
+        Running:   0
+        Suspended: 0
+        Normal:    0
+        Dead:      37
+    --------------- Cache ---------------
+        Total: 1
+        Dead:  0
+    --------------- Proto ---------------
+        Holdon:   0
+        Waiting:  0
+==============================================
+[08:54:20.492][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/.watchman-cookie-Alexs-MacBook-Pro.local-1958-433
+[08:54:37.534][debug][#0:script/service/service.lua:138]: 
+========= Medical Examination Report =========
+    --------------- Memory ---------------
+        Total: 156.368 MB
+        # 00 : 150.600 MB
+        # 01 : 1.800 MB
+        # 02 : 1.280 MB
+        # 03 : 1.344 MB
+        # 04 : 1.344 MB
+    --------------- Coroutine ---------------
+        Total:     39
+        Running:   0
+        Suspended: 0
+        Normal:    0
+        Dead:      39
+    --------------- Cache ---------------
+        Total: 1
+        Dead:  0
+    --------------- Proto ---------------
+        Holdon:   0
+        Waiting:  0
+==============================================
+[08:55:21.641][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/.watchman-cookie-Alexs-MacBook-Pro.local-1958-434
+[08:55:36.686][debug][#0:script/service/service.lua:138]: 
+========= Medical Examination Report =========
+    --------------- Memory ---------------
+        Total: 156.788 MB
+        # 00 : 151.021 MB
+        # 01 : 1.800 MB
+        # 02 : 1.280 MB
+        # 03 : 1.344 MB
+        # 04 : 1.344 MB
+    --------------- Coroutine ---------------
+        Total:     41
+        Running:   0
+        Suspended: 0
+        Normal:    0
+        Dead:      41
+    --------------- Cache ---------------
+        Total: 1
+        Dead:  0
+    --------------- Proto ---------------
+        Holdon:   0
+        Waiting:  0
+==============================================
+[08:56:21.810][debug][#0:script/workspace/workspace.lua:626]: FileChangeType.Deleted	file:///Users/alexignez/dotfiles/.git/.watchman-cookie-Alexs-MacBook-Pro.local-1958-435
+[08:56:36.630][debug][#0:script/provider/provider.lua:173]: didClose	file:///Users/alexignez/dotfiles/nvim/lua/plugins.lua
+[08:56:36.630][debug][#0:script/service/service.lua:138]: 
+========= Medical Examination Report =========
+    --------------- Memory ---------------
+        Total: 157.216 MB
+        # 00 : 151.448 MB
+        # 01 : 1.800 MB
+        # 02 : 1.280 MB
+        # 03 : 1.344 MB
+        # 04 : 1.344 MB
+    --------------- Coroutine ---------------
+        Total:     45
+        Running:   0
+        Suspended: 0
+        Normal:    0
+        Dead:      45
+    --------------- Cache ---------------
+        Total: 1
+        Dead:  0
+    --------------- Proto ---------------
+        Holdon:   0
+        Waiting:  0
+==============================================

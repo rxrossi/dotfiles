@@ -1,7 +1,3 @@
-local currentPath = debug.getinfo(1, 'S').source:sub(2)
-local rootPath = currentPath:gsub('[/\\]*[^/\\]-$', '')
-rootPath = (rootPath == '' and '.' or rootPath)
-loadfile(rootPath .. '/platform.lua')('script')
 local fs      = require 'bee.filesystem'
 local util    = require 'utility'
 local version = require 'version'
@@ -9,11 +5,12 @@ local version = require 'version'
 local function loadArgs()
     for _, v in ipairs(arg) do
         ---@type string
-        local key, value = v:match '^%-%-([%w_]+)%=(.+)'
+        local key, tail = v:match '^%-%-([%w_]+)(.*)$'
         if not key then
             goto CONTINUE
         end
-        if value == 'true' then
+        local value = tail:match '=(.+)'
+        if value == 'true' or value == nil then
             value = true
         elseif value == 'false' then
             value = false
@@ -29,9 +26,17 @@ end
 
 loadArgs()
 
+local currentPath = debug.getinfo(1, 'S').source:sub(2)
+local rootPath = currentPath:gsub('[/\\]*[^/\\]-$', '')
+rootPath = (rootPath == '' and '.' or rootPath)
 ROOT     = fs.path(util.expandPath(rootPath))
 LOGPATH  = LOGPATH  and util.expandPath(LOGPATH)  or (ROOT:string() .. '/log')
 METAPATH = METAPATH and util.expandPath(METAPATH) or (ROOT:string() .. '/meta')
+
+if _G['VERSION'] then
+    print(version.getVersion())
+    return
+end
 
 ---@diagnostic disable-next-line: deprecated
 debug.setcstacklimit(200)
@@ -49,7 +54,7 @@ log.debug('VERSION:', version.getVersion())
 
 require 'tracy'
 
-xpcall(dofile, log.debug, rootPath .. '/debugger.lua')
+xpcall(dofile, log.debug, (ROOT / 'debugger.lua'):string())
 
 local service = require 'service'
 

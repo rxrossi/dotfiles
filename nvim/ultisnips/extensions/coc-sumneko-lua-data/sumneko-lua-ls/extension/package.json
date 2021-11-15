@@ -14,7 +14,6 @@
         "untrustedWorkspaces": {
             "description": "",
             "restrictedConfigurations": [
-                "Lua.develop.enable",
                 "Lua.runtime.plugin",
                 "Lua.misc.parameters"
             ],
@@ -33,12 +32,14 @@
                     "default": "Semantic",
                     "enum": [
                         "Grammar",
-                        "Semantic"
+                        "Semantic",
+                        "SemanticEnhanced"
                     ],
                     "markdownDescription": "%config.color.mode%",
                     "markdownEnumDescriptions": [
                         "%config.color.mode.Grammar%",
-                        "%config.color.mode.Semantic%"
+                        "%config.color.mode.Semantic%",
+                        "%config.color.mode.SemanticEnhanced%"
                     ],
                     "scope": "resource",
                     "type": "string"
@@ -66,7 +67,7 @@
                     "type": "string"
                 },
                 "Lua.completion.displayContext": {
-                    "default": 6,
+                    "default": 0,
                     "markdownDescription": "%config.completion.displayContext%",
                     "scope": "resource",
                     "type": "integer"
@@ -93,11 +94,33 @@
                     "scope": "resource",
                     "type": "string"
                 },
+                "Lua.completion.requireSeparator": {
+                    "default": ".",
+                    "markdownDescription": "%config.completion.requireSeparator%",
+                    "scope": "resource",
+                    "type": "string"
+                },
                 "Lua.completion.showParams": {
                     "default": true,
                     "markdownDescription": "%config.completion.showParams%",
                     "scope": "resource",
                     "type": "boolean"
+                },
+                "Lua.completion.showWord": {
+                    "default": "Fallback",
+                    "enum": [
+                        "Enable",
+                        "Fallback",
+                        "Disable"
+                    ],
+                    "markdownDescription": "%config.completion.showWord%",
+                    "markdownEnumDescriptions": [
+                        "%config.completion.showWord.Enable%",
+                        "%config.completion.showWord.Fallback%",
+                        "%config.completion.showWord.Disable%"
+                    ],
+                    "scope": "resource",
+                    "type": "string"
                 },
                 "Lua.completion.workspaceWord": {
                     "default": true,
@@ -126,6 +149,38 @@
                     "markdownDescription": "%config.diagnostics.globals%",
                     "scope": "resource",
                     "type": "array"
+                },
+                "Lua.diagnostics.ignoredFiles": {
+                    "default": "Opened",
+                    "enum": [
+                        "Enable",
+                        "Opened",
+                        "Disable"
+                    ],
+                    "markdownDescription": "%config.diagnostics.ignoredFiles%",
+                    "markdownEnumDescriptions": [
+                        "%config.diagnostics.files.Enable%",
+                        "%config.diagnostics.files.Opened%",
+                        "%config.diagnostics.files.Disable%"
+                    ],
+                    "scope": "resource",
+                    "type": "string"
+                },
+                "Lua.diagnostics.libraryFiles": {
+                    "default": "Opened",
+                    "enum": [
+                        "Enable",
+                        "Opened",
+                        "Disable"
+                    ],
+                    "markdownDescription": "%config.diagnostics.libraryFiles%",
+                    "markdownEnumDescriptions": [
+                        "%config.diagnostics.files.Enable%",
+                        "%config.diagnostics.files.Opened%",
+                        "%config.diagnostics.files.Disable%"
+                    ],
+                    "scope": "resource",
+                    "type": "string"
                 },
                 "Lua.diagnostics.neededFileStatus": {
                     "markdownDescription": "%config.diagnostics.neededFileStatus%",
@@ -188,6 +243,17 @@
                         "deprecated": {
                             "default": "Opened",
                             "description": "%config.diagnostics.deprecated%",
+                            "enum": [
+                                "Any",
+                                "Opened",
+                                "None"
+                            ],
+                            "scope": "resource",
+                            "type": "string"
+                        },
+                        "different-requires": {
+                            "default": "Any",
+                            "description": "%config.diagnostics.different-requires%",
                             "enum": [
                                 "Any",
                                 "Opened",
@@ -350,6 +416,17 @@
                             "scope": "resource",
                             "type": "string"
                         },
+                        "redundant-return": {
+                            "default": "Opened",
+                            "description": "%config.diagnostics.redundant-return%",
+                            "enum": [
+                                "Any",
+                                "Opened",
+                                "None"
+                            ],
+                            "scope": "resource",
+                            "type": "string"
+                        },
                         "redundant-value": {
                             "default": "Opened",
                             "description": "%config.diagnostics.redundant-value%",
@@ -364,6 +441,17 @@
                         "trailing-space": {
                             "default": "Opened",
                             "description": "%config.diagnostics.trailing-space%",
+                            "enum": [
+                                "Any",
+                                "Opened",
+                                "None"
+                            ],
+                            "scope": "resource",
+                            "type": "string"
+                        },
+                        "type-check": {
+                            "default": "None",
+                            "description": "%config.diagnostics.type-check%",
                             "enum": [
                                 "Any",
                                 "Opened",
@@ -584,6 +672,18 @@
                             "scope": "resource",
                             "type": "string"
                         },
+                        "different-requires": {
+                            "default": "Warning",
+                            "description": "%config.diagnostics.different-requires%",
+                            "enum": [
+                                "Error",
+                                "Warning",
+                                "Information",
+                                "Hint"
+                            ],
+                            "scope": "resource",
+                            "type": "string"
+                        },
                         "doc-field-no-class": {
                             "default": "Warning",
                             "description": "%config.diagnostics.doc-field-no-class%",
@@ -741,7 +841,7 @@
                             "type": "string"
                         },
                         "redundant-parameter": {
-                            "default": "Hint",
+                            "default": "Warning",
                             "description": "%config.diagnostics.redundant-parameter%",
                             "enum": [
                                 "Error",
@@ -752,8 +852,20 @@
                             "scope": "resource",
                             "type": "string"
                         },
+                        "redundant-return": {
+                            "default": "Warning",
+                            "description": "%config.diagnostics.redundant-return%",
+                            "enum": [
+                                "Error",
+                                "Warning",
+                                "Information",
+                                "Hint"
+                            ],
+                            "scope": "resource",
+                            "type": "string"
+                        },
                         "redundant-value": {
-                            "default": "Hint",
+                            "default": "Warning",
                             "description": "%config.diagnostics.redundant-value%",
                             "enum": [
                                 "Error",
@@ -767,6 +879,18 @@
                         "trailing-space": {
                             "default": "Hint",
                             "description": "%config.diagnostics.trailing-space%",
+                            "enum": [
+                                "Error",
+                                "Warning",
+                                "Information",
+                                "Hint"
+                            ],
+                            "scope": "resource",
+                            "type": "string"
+                        },
+                        "type-check": {
+                            "default": "Warning",
+                            "description": "%config.diagnostics.type-check%",
                             "enum": [
                                 "Error",
                                 "Warning",
@@ -944,10 +1068,20 @@
                     "type": "boolean"
                 },
                 "Lua.hint.paramName": {
-                    "default": true,
+                    "default": "All",
+                    "enum": [
+                        "All",
+                        "Literal",
+                        "Disable"
+                    ],
                     "markdownDescription": "%config.hint.paramName%",
+                    "markdownEnumDescriptions": [
+                        "%config.hint.paramName.All%",
+                        "%config.hint.paramName.Literal%",
+                        "%config.hint.paramName.Disable%"
+                    ],
                     "scope": "resource",
-                    "type": "boolean"
+                    "type": "string"
                 },
                 "Lua.hint.paramType": {
                     "default": true,
@@ -1212,8 +1346,7 @@
                 "Lua.runtime.path": {
                     "default": [
                         "?.lua",
-                        "?/init.lua",
-                        "?/?.lua"
+                        "?/init.lua"
                     ],
                     "items": {
                         "type": "string"
@@ -1369,23 +1502,32 @@
             {
                 "language": "lua",
                 "scopes": {
-                    "interface.declaration": [
+                    "function": [
+                        "variable.function.lua"
+                    ],
+                    "function.declaration": [
                         "entity.name.function.lua"
                     ],
-                    "namespace.deprecated": [
-                        "entity.name.label"
-                    ],
-                    "namespace.readonly": [
-                        "constant.language.lua"
-                    ],
-                    "namespace.static": [
+                    "function.defaultLibrary": [
                         "support.function.lua"
                     ],
+                    "function.static": [
+                        "entity.name.function.lua"
+                    ],
+                    "method": [
+                        "entity.name.function.lua"
+                    ],
+                    "method.declaration": [
+                        "entity.name.function.lua"
+                    ],
                     "parameter.declaration": [
-                        "variable.parameter"
+                        "variable.parameter.lua"
+                    ],
+                    "property": [
+                        "entity.other.attribute.lua"
                     ],
                     "property.declaration": [
-                        "entity.other.attribute"
+                        "entity.other.property.lua"
                     ],
                     "variable": [
                         "variable.other.lua"
@@ -1393,8 +1535,20 @@
                     "variable.abstract": [
                         "variable.other.constant.lua"
                     ],
-                    "variable.static": [
+                    "variable.declaration": [
+                        "variable.other.lua"
+                    ],
+                    "variable.defaultLibrary": [
+                        "support.constant.lua"
+                    ],
+                    "variable.local": [
+                        "variable.other.lua"
+                    ],
+                    "variable.readonly": [
                         "variable.other.constant.lua"
+                    ],
+                    "variable.static": [
+                        "variable.other.lua"
                     ]
                 }
             }
@@ -1419,5 +1573,5 @@
         "type": "git",
         "url": "https://github.com/sumneko/lua-language-server"
     },
-    "version": "2.3.7"
+    "version": "2.4.7"
 }

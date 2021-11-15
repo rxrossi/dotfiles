@@ -2,6 +2,8 @@ local util   = require 'utility'
 local define = require 'proto.define'
 local timer  = require 'timer'
 
+---@alias config.source '"client"'|'"path"'|'"local"'
+
 ---@class config.unit
 ---@field caller function
 local mt = {}
@@ -148,10 +150,9 @@ local Template = {
     ['Lua.runtime.path']                    = Type.Array(Type.String) >> {
                                                 "?.lua",
                                                 "?/init.lua",
-                                                "?/?.lua"
                                             },
     ['Lua.runtime.special']                 = Type.Hash(Type.String, Type.String),
-    ['Lua.runtime.meta']                    = Type.String >> '${version} ${language}',
+    ['Lua.runtime.meta']                    = Type.String >> '${version} ${language} ${encoding}',
     ['Lua.runtime.unicodeName']             = Type.Boolean,
     ['Lua.runtime.nonstandardSymbol']       = Type.Hash(Type.String, Type.Boolean, ';'),
     ['Lua.runtime.plugin']                  = Type.String,
@@ -166,6 +167,8 @@ local Template = {
                                             >> util.deepCopy(define.DiagnosticDefaultNeededFileStatus),
     ['Lua.diagnostics.workspaceDelay']      = Type.Integer >> 0,
     ['Lua.diagnostics.workspaceRate']       = Type.Integer >> 100,
+    ['Lua.diagnostics.libraryFiles']        = Type.String  >> 'Opened',
+    ['Lua.diagnostics.ignoredFiles']        = Type.String  >> 'Opened',
     ['Lua.workspace.ignoreDir']             = Type.Hash(Type.String, Type.Boolean, ';'),
     ['Lua.workspace.ignoreSubmodules']      = Type.Boolean >> true,
     ['Lua.workspace.useGitIgnore']          = Type.Boolean >> true,
@@ -177,10 +180,12 @@ local Template = {
     ['Lua.completion.enable']               = Type.Boolean >> true,
     ['Lua.completion.callSnippet']          = Type.String  >> 'Disable',
     ['Lua.completion.keywordSnippet']       = Type.String  >> 'Replace',
-    ['Lua.completion.displayContext']       = Type.Integer >> 6,
+    ['Lua.completion.displayContext']       = Type.Integer >> 0,
     ['Lua.completion.workspaceWord']        = Type.Boolean >> true,
+    ['Lua.completion.showWord']             = Type.String  >> 'Fallback',
     ['Lua.completion.autoRequire']          = Type.Boolean >> true,
     ['Lua.completion.showParams']           = Type.Boolean >> true,
+    ['Lua.completion.requireSeparator']     = Type.String  >> '.',
     ['Lua.signatureHelp.enable']            = Type.Boolean >> true,
     ['Lua.hover.enable']                    = Type.Boolean >> true,
     ['Lua.hover.viewString']                = Type.Boolean >> true,
@@ -192,7 +197,7 @@ local Template = {
     ['Lua.hint.enable']                     = Type.Boolean >> false,
     ['Lua.hint.paramType']                  = Type.Boolean >> true,
     ['Lua.hint.setType']                    = Type.Boolean >> false,
-    ['Lua.hint.paramName']                  = Type.Boolean >> true,
+    ['Lua.hint.paramName']                  = Type.String  >> 'All',
     ['Lua.window.statusBar']                = Type.Boolean >> true,
     ['Lua.window.progressBar']              = Type.Boolean >> true,
     ['Lua.telemetry.enable']                = Type.Or(Type.Boolean >> false, Type.Nil),
@@ -312,6 +317,8 @@ function m.update(new)
             end
             if Template[fullKey] then
                 m.set(fullKey, value)
+            elseif Template['Lua.' .. fullKey] then
+                m.set('Lua.' .. fullKey, value)
             elseif type(value) == 'table' then
                 expand(value, fullKey)
             end
@@ -321,6 +328,7 @@ function m.update(new)
     expand(new)
 end
 
+---@param callback fun(key: string, value: any, oldValue: any)
 function m.watch(callback)
     m.watchList[#m.watchList+1] = callback
 end
@@ -343,6 +351,16 @@ function m.event(key, value, oldValue)
         value    = value,
         oldValue = oldValue,
     }
+end
+
+---@param source config.source
+function m.setSource(source)
+    m._source = source
+end
+
+---@return config.source
+function m.getSource()
+    return m._source
 end
 
 function m.init()

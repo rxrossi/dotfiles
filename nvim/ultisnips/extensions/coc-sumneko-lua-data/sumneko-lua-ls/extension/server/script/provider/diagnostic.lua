@@ -1,14 +1,15 @@
-local await    = require 'await'
-local proto    = require 'proto.proto'
-local define   = require 'proto.define'
-local lang     = require 'language'
-local files    = require 'files'
-local config   = require 'config'
-local core     = require 'core.diagnostics'
-local util     = require 'utility'
-local ws       = require 'workspace'
-local progress = require "progress"
-local client   = require 'client'
+local await     = require 'await'
+local proto     = require 'proto.proto'
+local define    = require 'proto.define'
+local lang      = require 'language'
+local files     = require 'files'
+local config    = require 'config'
+local core      = require 'core.diagnostics'
+local util      = require 'utility'
+local ws        = require 'workspace'
+local progress  = require "progress"
+local client    = require 'client'
+local converter = require 'proto.converter'
 
 local m = {}
 m._start = false
@@ -45,17 +46,17 @@ local function buildSyntaxError(uri, err)
             else
                 rmessage = text:sub(rel.start, rel.finish)
             end
-            local relUri = files.getOriginUri(rel.uri)
+            local relUri = rel.uri or uri
             relatedInformation[#relatedInformation+1] = {
                 message  = rmessage,
-                location = define.location(relUri, files.range(relUri, rel.start, rel.finish)),
+                location = converter.location(relUri, converter.packRange(relUri, rel.start, rel.finish)),
             }
         end
     end
 
     return {
         code     = err.type:lower():gsub('_', '-'),
-        range    = files.range(uri, err.start, err.finish),
+        range    = converter.packRange(uri, err.start, err.finish),
         severity = define.DiagnosticSeverity.Error,
         source   = lang.script.DIAG_SYNTAX_CHECK,
         message  = message,
@@ -75,13 +76,13 @@ local function buildDiagnostic(uri, diag)
             local rtext  = files.getText(rel.uri)
             relatedInformation[#relatedInformation+1] = {
                 message  = rel.message or rtext:sub(rel.start, rel.finish),
-                location = define.location(rel.uri, files.range(rel.uri, rel.start, rel.finish))
+                location = converter.location(rel.uri, converter.packRange(rel.uri, rel.start, rel.finish))
             }
         end
     end
 
     return {
-        range    = files.range(uri, diag.start, diag.finish),
+        range    = converter.packRange(uri, diag.start, diag.finish),
         source   = lang.script.DIAG_DIAGNOSTICS,
         severity = diag.level,
         message  = diag.message,
@@ -126,16 +127,16 @@ local function mergeSyntaxAndDiags(a, b)
 end
 
 function m.clear(uri)
-    local luri = files.asKey(uri)
-    if not m.cache[luri] then
+    await.close('diag:' .. uri)
+    if not m.cache[uri] then
         return
     end
-    m.cache[luri] = nil
+    m.cache[uri] = nil
     proto.notify('textDocument/publishDiagnostics', {
-        uri = files.getOriginUri(luri) or uri,
+        uri = uri,
         diagnostics = {},
     })
-    log.debug('clearDiagnostics', files.getOriginUri(uri))
+    log.debug('clearDiagnostics', uri)
 end
 
 function m.clearAll()
@@ -183,9 +184,25 @@ function m.doDiagnostic(uri)
     if not config.get 'Lua.diagnostics.enable' then
         return
     end
-    uri = files.asKey(uri)
-    if files.isLibrary(uri) or ws.isIgnored(uri) then
-        return
+    if files.isLibrary(uri) then
+        local status = config.get 'Lua.diagnostics.libraryFiles'
+        if status == 'Disable' then
+            return
+        elseif status == 'Opened' then
+            if not files.isOpen(uri) then
+                return
+            end
+        end
+    end
+    if ws.isIgnored(uri) then
+        local status = config.get 'Lua.diagnostics.ignoredFiles'
+        if status == 'Disable' then
+            return
+        elseif status == 'Opened' then
+            if not files.isOpen(uri) then
+                return
+            end
+        end
     end
 
     await.delay()
@@ -196,8 +213,10 @@ function m.doDiagnostic(uri)
         return
     end
 
+    await.setID('diag:' .. uri)
+
     local prog <close> = progress.create(lang.script.WINDOW_DIAGNOSING, 0.5)
-    prog:setMessage(ws.getRelativePath(files.getOriginUri(uri)))
+    prog:setMessage(ws.getRelativePath(uri))
 
     local syntax = m.syntaxErrors(uri, ast)
     local diags = {}
@@ -216,11 +235,11 @@ function m.doDiagnostic(uri)
         m.cache[uri] = full
 
         proto.notify('textDocument/publishDiagnostics', {
-            uri = files.getOriginUri(uri),
+            uri = uri,
             diagnostics = full,
         })
         if #full > 0 then
-            log.debug('publishDiagnostics', files.getOriginUri(uri), #full)
+            log.debug('publishDiagnostics', uri, #full)
         end
     end
 
@@ -245,6 +264,7 @@ function m.refresh(uri)
     if not m._start then
         return
     end
+    await.close('diag:' .. uri)
     await.call(function ()
         await.delay()
         if uri then

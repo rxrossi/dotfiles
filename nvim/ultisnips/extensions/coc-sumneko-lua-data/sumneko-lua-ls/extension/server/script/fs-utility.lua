@@ -56,7 +56,7 @@ function m.relative(path, base)
     local sPath = fs.absolute(path):string()
     local sBase = fs.absolute(base):string()
     --TODO 先只支持最简单的情况
-    if  sPath:sub(1, #sBase):lower() == sBase:lower()
+    if  sPath:sub(1, #sBase) == sBase
     and sPath:sub(#sBase + 1, #sBase + 1):match '^[/\\]' then
         return fs.path(sPath:sub(#sBase + 1):gsub('^[/\\]+', ''))
     end
@@ -160,7 +160,7 @@ function dfs:string()
     return self.path
 end
 
-function dfs:list_directory()
+function dfs:listDirectory()
     local dir = self:_open()
     if type(dir) ~= 'table' then
         return function () end
@@ -274,6 +274,18 @@ local function fsIsDirectory(path, option)
     return res
 end
 
+local function fsPairs(path, option)
+    if path.type == 'dummy' then
+        return path:listDirectory()
+    end
+    local suc, res = pcall(fs.pairs, path)
+    if not suc then
+        option.err[#option.err+1] = res
+        return function () end
+    end
+    return res
+end
+
 local function fsRemove(path, option)
     if path.type == 'dummy' then
         return path:remove()
@@ -361,7 +373,7 @@ local function fsCopy(source, target, option)
             end
             return fsSave(target, sourceText, option)
         else
-            local suc, res = pcall(fs.copy_file, source, target, true)
+            local suc, res = pcall(fs.copy_file, source, target, fs.copy_options.overwrite_existing)
             if not suc then
                 option.err[#option.err+1] = res
                 return false
@@ -388,7 +400,7 @@ local function fileRemove(path, option)
         return
     end
     if fsIsDirectory(path, option) then
-        for child in path:list_directory() do
+        for child in fsPairs(path) do
             fileRemove(child, option)
         end
     end
@@ -403,7 +415,7 @@ local function fileCopy(source, target, option)
     local isExists = fsExists(target, option)
     if isDir1 then
         if isDir2 or fsCreateDirectories(target, option) then
-            for filePath in source:list_directory() do
+            for filePath in fsPairs(source) do
                 local name = filePath:filename():string()
                 fileCopy(filePath, target / name, option)
             end
@@ -434,10 +446,10 @@ local function fileSync(source, target, option)
     if isDir1 then
         if isDir2 then
             local fileList = m.fileList()
-            for filePath in target:list_directory() do
+            for filePath in fs.pairs(target) do
                 fileList[filePath] = true
             end
-            for filePath in source:list_directory() do
+            for filePath in fsPairs(source) do
                 local name = filePath:filename():string()
                 local targetPath = target / name
                 fileSync(filePath, targetPath, option)
@@ -451,7 +463,7 @@ local function fileSync(source, target, option)
                 fileRemove(target, option)
             end
             if fsCreateDirectories(target) then
-                for filePath in source:list_directory() do
+                for filePath in fsPairs(source) do
                     local name = filePath:filename():string()
                     fileCopy(filePath, target / name, option)
                 end
@@ -490,13 +502,7 @@ function m.fileList(option)
         if not path then
             return nil
         end
-        local key
-        if os == 'Windows' then
-            key = path:string():lower()
-        else
-            key = path:string()
-        end
-        return key
+        return path:string()
     end
     return setmetatable({}, {
         __index = function (_, path)
@@ -564,12 +570,20 @@ function m.fileSync(source, target, option)
 end
 
 function m.scanDirectory(dir, callback)
-    for fullpath in dir:list_directory() do
+    for fullpath in fs.pairs(dir) do
         if fs.is_directory(fullpath) then
             m.scanDirectory(fullpath, callback)
         else
             callback(fullpath)
         end
+    end
+end
+
+function m.listDirectory(dir)
+    if dir.type == 'dummy' then
+        return dir:listDirectory()
+    else
+        return fs.pairs(dir)
     end
 end
 

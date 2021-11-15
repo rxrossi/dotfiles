@@ -4,11 +4,9 @@ local noder    = require 'core.noder'
 local util     = require 'utility'
 local vm       = require "vm.vm"
 
-local STRING_OR_TABLE = {'STRING_OR_TABLE'}
-local BE_RETURN       = {'BE_RETURN'}
-local BE_CONNACT      = {'BE_CONNACT'}
 local CLASS           = {'CLASS'}
 local TABLE           = {'TABLE'}
+local CACHE           = {'CACHE'}
 
 local TypeSort = {
     ['boolean']  = 1,
@@ -19,7 +17,6 @@ local TypeSort = {
     ['function'] = 6,
     ['true']     = 101,
     ['false']    = 102,
-    ['nil']      = 999,
 }
 
 local m = {}
@@ -33,6 +30,12 @@ local function mergeTable(a, b)
     end
 end
 
+local function isBaseType(source, mark)
+    return m.hasType(source, 'number', mark)
+        or m.hasType(source, 'integer', mark)
+        or m.hasType(source, 'string', mark)
+end
+
 local function searchInferOfUnary(value, infers, mark)
     local op = value.op.type
     if op == 'not' then
@@ -40,19 +43,24 @@ local function searchInferOfUnary(value, infers, mark)
         return
     end
     if op == '#' then
-        infers['integer'] = true
+        if m.hasType(value[1], 'table', mark)
+        or m.hasType(value[1], 'string', mark) then
+            infers['integer'] = true
+        end
         return
     end
     if op == '-' then
         if m.hasType(value[1], 'integer', mark) then
             infers['integer'] = true
-        else
+        elseif isBaseType(value[1], mark) then
             infers['number'] = true
         end
         return
     end
     if op == '~' then
-        infers['integer'] = true
+        if isBaseType(value[1], mark) then
+            infers['integer'] = true
+        end
         return
     end
 end
@@ -75,6 +83,7 @@ local function searchInferOfBinary(value, infers, mark)
         end
         return
     end
+    -- must return boolean
     if op == '=='
     or op == '~='
     or op == '<'
@@ -84,21 +93,31 @@ local function searchInferOfBinary(value, infers, mark)
         infers['boolean'] = true
         return
     end
+    -- check number
     if op == '<<'
     or op == '>>'
     or op == '~'
     or op == '&'
     or op == '|' then
-        infers['integer'] = true
+        if  isBaseType(value[1], mark)
+        and isBaseType(value[2], mark) then
+            infers['integer'] = true
+        end
         return
     end
     if op == '..' then
-        infers['string'] = true
+        if  isBaseType(value[1], mark)
+        and isBaseType(value[2], mark) then
+            infers['string'] = true
+        end
         return
     end
     if op == '^'
     or op == '/' then
-        infers['number'] = true
+        if  isBaseType(value[1], mark)
+        and isBaseType(value[2], mark) then
+            infers['number'] = true
+        end
         return
     end
     if op == '+'
@@ -109,7 +128,8 @@ local function searchInferOfBinary(value, infers, mark)
         if  m.hasType(value[1], 'integer', mark)
         and m.hasType(value[2], 'integer', mark) then
             infers['integer'] = true
-        else
+        elseif isBaseType(value[1], mark)
+        and    isBaseType(value[2], mark) then
             infers['number'] = true
         end
         return
@@ -143,10 +163,6 @@ local function searchInferOfValue(value, infers, mark)
     end
     if value.type == 'number' then
         infers['number'] = true
-        return true
-    end
-    if value.type == 'nil' then
-        infers['nil'] = true
         return true
     end
     if value.type == 'function' then
@@ -200,7 +216,6 @@ local function searchLiteralOfValue(value, literals, mark)
             end
         end
     end
-    return
 end
 
 local function bindClassOrType(source)
@@ -220,9 +235,6 @@ local function cleanInfers(infers)
     local version = config.get 'Lua.runtime.version'
     local enableInteger = version == 'Lua 5.3' or version == 'Lua 5.4'
     infers['unknown'] = nil
-    if infers['any'] and infers['nil'] then
-        infers['nil'] = nil
-    end
     if infers['number'] then
         enableInteger = false
     end
@@ -234,23 +246,6 @@ local function cleanInfers(infers)
     if infers['stringlib'] and infers['string'] then
         infers['stringlib'] = nil
     end
-    -- 如果是通过 .. 来推测的，且结果里没有 number 与 integer，则推测为string
-    if infers[BE_CONNACT] then
-        infers[BE_CONNACT] = nil
-        if not infers['number'] and not infers['integer'] then
-            infers['string'] = true
-        end
-    end
-    -- 如果是通过 # 来推测的，且结果里没有其他的 table 与 string，则加入这2个类型
-    if infers[STRING_OR_TABLE] then
-        infers[STRING_OR_TABLE] = nil
-        if  not infers['table']
-        and not infers['string']
-        and not infers[CLASS] then
-            infers['table']  = true
-            infers['string'] = true
-        end
-    end
     --  如果有doc标记，则先移除table类型
     if infers[CLASS] then
         infers[CLASS] = nil
@@ -261,10 +256,6 @@ local function cleanInfers(infers)
         infers[TABLE] = nil
         infers['table'] = true
     end
-    if infers[BE_RETURN] then
-        infers[BE_RETURN] = nil
-        infers['nil'] = nil
-    end
     if infers['function'] then
         for k in pairs(infers) do
             if k:sub(1, 4) == 'fun(' then
@@ -272,19 +263,18 @@ local function cleanInfers(infers)
             end
         end
     end
-    infers['any'] = nil
 end
 
 ---合并对象的推断类型
 ---@param infers string[]
 ---@return string
 function m.viewInfers(infers)
-    if infers[0] then
-        return infers[0]
+    if infers[CACHE] then
+        return infers[CACHE]
     end
     -- 如果有显性的 any ，则直接显示为 any
     if infers['any'] then
-        infers[0] = 'any'
+        infers[CACHE] = 'any'
         return 'any'
     end
     local result = {}
@@ -295,7 +285,7 @@ function m.viewInfers(infers)
     end
     -- 如果没有任何显性类型，则推测为 unkonwn ，显示为 any
     if count == 0 then
-        infers[0] = 'any'
+        infers[CACHE] = 'any'
         return 'any'
     end
     table.sort(result, function (a, b)
@@ -311,11 +301,11 @@ function m.viewInfers(infers)
     if limit < 0 then
         limit = 0
     end
-    infers[0] = table.concat(result, '|', 1, math.min(count, limit))
+    infers[CACHE] = table.concat(result, '|', 1, math.min(count, limit))
     if count > limit then
-        infers[0] = ('%s...(+%d)'):format(infers[0], count - limit)
+        infers[CACHE] = ('%s...(+%d)'):format(infers[CACHE], count - limit)
     end
-    return infers[0]
+    return infers[CACHE]
 end
 
 ---合并对象的值
@@ -363,7 +353,7 @@ function m.getDocName(doc)
         if doc.typeGeneric then
             return '<' .. name .. '>'
         else
-            return name
+            return tostring(name)
         end
     end
     if doc.type == 'doc.type.array' then
@@ -371,9 +361,10 @@ function m.getDocName(doc)
         return nodeName .. '[]'
     end
     if doc.type == 'doc.type.table' then
-        local key = m.viewDocName(doc.tkey) or '?'
+        local node  = m.viewDocName(doc.node)   or '?'
+        local key   = m.viewDocName(doc.tkey)   or '?'
         local value = m.viewDocName(doc.tvalue) or '?'
-        return ('table<%s, %s>'):format(key, value)
+        return ('%s<%s, %s>'):format(node, key, value)
     end
     if doc.type == 'doc.type.function' then
         return m.viewDocFunction(doc)
@@ -381,7 +372,7 @@ function m.getDocName(doc)
     if doc.type == 'doc.type.enum'
     or doc.type == 'doc.resume' then
         local value = doc[1] or '?'
-        return value
+        return tostring(value)
     end
     if doc.type == 'doc.type.ltable' then
         return 'table'
@@ -433,73 +424,14 @@ local function searchInfer(source, infers, mark)
     end
     -- check LuaDoc
     local docName = m.getDocName(source)
-    if docName then
+    if docName and docName ~= 'nil' and docName ~= 'unknown' then
         infers[docName] = true
-        if docName ~= 'unknown' then
-            infers[CLASS]   = true
+        if not vm.isBuiltinType(docName) then
+            infers[CLASS] = true
         end
         if docName == 'table' then
             infers[TABLE] = true
         end
-    end
-    if source.parent.type == 'unary' then
-        local op = source.parent.op.type
-        -- # XX -> string | table
-        if op == '#' then
-            infers[STRING_OR_TABLE] = true
-            return
-        end
-        if op == '-' then
-            infers['number'] = true
-            return
-        end
-        if op == '~' then
-            infers['integer'] = true
-            return
-        end
-        return
-    end
-    if source.parent.type == 'binary' then
-        local op = source.parent.op.type
-        if op == '+'
-        or op == '-'
-        or op == '*'
-        or op == '/'
-        or op == '//'
-        or op == '^'
-        or op == '%' then
-            infers['number'] = true
-            return
-        end
-        if op == '<<'
-        or op == '>>'
-        or op == '~'
-        or op == '|'
-        or op == '&' then
-            infers['integer'] = true
-            return
-        end
-        if op == '..' then
-            infers[BE_CONNACT] = true
-            return
-        end
-    end
-    -- X.a -> table
-    if source.next and source.next.node == source then
-        if source.next.type == 'setfield'
-        or source.next.type == 'setindex'
-        or source.next.type == 'setmethod'
-        or source.next.type == 'getfield'
-        or source.next.type == 'getindex' then
-            infers['table'] = true
-        end
-        if source.next.type == 'getmethod' then
-            infers[STRING_OR_TABLE] = true
-        end
-    end
-    -- return XX
-    if source.parent.type == 'return' then
-        infers[BE_RETURN] = true
     end
 end
 
@@ -519,6 +451,24 @@ local function searchLiteral(source, literals, mark)
     end
 end
 
+local function getCachedInfers(source, field)
+    local inferCache = vm.getCache 'infers'
+    local sourceCache = inferCache[source]
+    if not sourceCache then
+        sourceCache = {}
+        inferCache[source] = sourceCache
+    end
+    if not field then
+        field = ''
+    end
+    if sourceCache[field] then
+        return true, sourceCache[field]
+    end
+    local infers = {}
+    sourceCache[field] = infers
+    return false, infers
+end
+
 ---搜索对象的推断类型
 ---@param source parser.guide.object
 ---@param field? string
@@ -528,8 +478,12 @@ function m.searchInfers(source, field, mark)
     if not source then
         return nil
     end
+    local suc, infers = getCachedInfers(source, field)
+    if suc then
+        return infers
+    end
+    local isParam = source.parent.type == 'funcargs'
     local defs = vm.getDefs(source, field)
-    local infers = {}
     mark = mark or {}
     if not field then
         searchInfer(source, infers, mark)
@@ -545,16 +499,9 @@ function m.searchInfers(source, field, mark)
         end
     end
     for _, def in ipairs(defs) do
-        searchInfer(def, infers, mark)
-    end
-    if source.docParam then
-        local docType = source.docParam.extends
-        if docType and docType.type == 'doc.type' then
-            for _, def in ipairs(docType.types) do
-                if def.typeGeneric then
-                    searchInfer(def, infers, mark)
-                end
-            end
+        if def.typeGeneric and not isParam then
+        else
+            searchInfer(def, infers, mark)
         end
     end
     if source.type == 'doc.type' then
@@ -626,22 +573,21 @@ end
 ---判断对象的推断类型是否包含某个类型
 function m.hasType(source, tp, mark)
     mark = mark or {}
-    if not mark.hasType then
-        mark.hasType = {}
+    local infers = m.searchInfers(source, nil, mark)
+    if not infers then
+        return false
     end
-    if mark.hasType[source] == nil then
-        local infers = m.searchInfers(source, nil, mark)
-        mark.hasType[source] = infers[tp] or false
-        if tp == 'function' and not infers[tp] then
-            for infer in pairs(infers) do
-                if infer:sub(1, 4) == 'fun(' then
-                    mark.hasType[source] = true
-                    break
-                end
+    if infers[tp] then
+        return true
+    end
+    if tp == 'function' then
+        for infer in pairs(infers) do
+            if infer ~= CACHE and infer:sub(1, 4) == 'fun(' then
+                return true
             end
         end
     end
-    return mark.hasType[source]
+    return false
 end
 
 ---搜索并显示推断类型
@@ -668,12 +614,14 @@ function m.getClass(source)
     local defs = vm.getDefs(source)
     for _, def in ipairs(defs) do
         if def.type == 'doc.class.name' then
-            infers[def[1]] = true
+            if not vm.isBuiltinType(def[1]) then
+                infers[def[1]] = true
+            end
         end
     end
+    cleanInfers(infers)
     local view = m.viewInfers(infers)
-    if view == 'any'
-    or view == 'nil' then
+    if view == 'any' then
         return nil
     end
     return view

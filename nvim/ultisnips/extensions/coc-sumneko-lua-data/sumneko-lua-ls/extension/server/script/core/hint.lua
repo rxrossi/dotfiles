@@ -4,8 +4,9 @@ local vm       = require 'vm'
 local config   = require 'config'
 local guide    = require 'parser.guide'
 local await    = require 'await'
+local define   = require 'proto.define'
 
-local function typeHint(uri, edits, start, finish)
+local function typeHint(uri, results, start, finish)
     local ast = files.getState(uri)
     if not ast then
         return
@@ -57,10 +58,11 @@ local function typeHint(uri, edits, start, finish)
             return
         end
         mark[src] = true
-        edits[#edits+1] = {
-            newText = (':%s'):format(view),
-            start   = src.finish,
-            finish  = src.finish,
+        results[#results+1] = {
+            text   = ':' .. view,
+            offset = src.finish,
+            kind   = define.InlayHintKind.Type,
+            where  = 'right',
         }
     end)
 end
@@ -70,9 +72,6 @@ local function getArgNames(func)
         return nil
     end
     local names = {}
-    if func.parent.type == 'setmethod' then
-        names[#names+1] = 'self'
-    end
     for _, arg in ipairs(func.args) do
         if arg.type == '...' then
             break
@@ -97,8 +96,9 @@ local function hasLiteralArgInCall(call)
     return false
 end
 
-local function paramName(uri, edits, start, finish)
-    if not config.get 'Lua.hint.paramName' then
+local function paramName(uri, results, start, finish)
+    local paramConfig = config.get 'Lua.hint.paramName'
+    if not paramConfig or paramConfig == 'None' then
         return
     end
     local ast = files.getState(uri)
@@ -110,7 +110,10 @@ local function paramName(uri, edits, start, finish)
         if source.type ~= 'call' then
             return
         end
-        if not hasLiteralArgInCall(source) then
+        if paramConfig == 'Literal' and not hasLiteralArgInCall(source) then
+            return
+        end
+        if not source.args then
             return
         end
         await.delay()
@@ -133,17 +136,21 @@ local function paramName(uri, edits, start, finish)
         if not args then
             return
         end
+        local firstIndex = 1
         if source.node and source.node.type == 'getmethod' then
-            table.remove(args, 1)
+            firstIndex = 2
         end
-        for i, arg in ipairs(source.args) do
-            if not mark[arg] and guide.isLiteral(arg) then
+        for i = firstIndex, #source.args do
+            local arg = source.args[i]
+            if  not mark[arg]
+            and (paramConfig ~= 'Literal' or guide.isLiteral(arg)) then
                 mark[arg] = true
                 if args[i] and args[i] ~= '' then
-                    edits[#edits+1] = {
-                        newText = ('%s:'):format(args[i]),
-                        start   = arg.start,
-                        finish  = arg.start - 1,
+                    results[#results+1] = {
+                        text   = args[i] .. ':',
+                        offset = arg.start,
+                        kind   = define.InlayHintKind.Parameter,
+                        where  = 'left',
                     }
                 end
             end
@@ -152,8 +159,8 @@ local function paramName(uri, edits, start, finish)
 end
 
 return function (uri, start, finish)
-    local edits = {}
-    typeHint(uri, edits, start, finish)
-    paramName(uri, edits, start, finish)
-    return edits
+    local results = {}
+    typeHint(uri, results, start, finish)
+    paramName(uri, results, start, finish)
+    return results
 end

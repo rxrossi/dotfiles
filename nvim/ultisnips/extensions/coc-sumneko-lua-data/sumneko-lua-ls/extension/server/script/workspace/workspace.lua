@@ -14,6 +14,7 @@ local define     = require "proto.define"
 local client     = require 'client'
 local plugin     = require 'plugin'
 local util       = require 'utility'
+local fw         = require 'filewatch'
 
 local m = {}
 m.type = 'workspace'
@@ -25,9 +26,8 @@ m.fileFound  = 0
 m.waitingReady   = {}
 m.requireCache   = {}
 m.cache          = {}
-m.matchOption    = {
-    ignoreCase = platform.OS == 'Windows',
-}
+m.watchers       = {}
+m.matchOption    = {}
 
 --- 初始化工作区
 function m.initPath(uri)
@@ -42,6 +42,8 @@ function m.initPath(uri)
     client.logMessage('Log', 'Log path: ' .. furi.encode(logPath:string()))
     log.info('Log path: ', logPath)
     log.init(ROOT, logPath)
+
+    fw.watch(m.path)
 end
 
 local globInteferFace = {
@@ -63,7 +65,7 @@ local globInteferFace = {
         end
         local paths = {}
         pcall(function ()
-            for fullpath in fullPath:list_directory() do
+            for fullpath in fs.pairs(fullPath) do
                 paths[#paths+1] = fullpath:string()
             end
         end)
@@ -184,6 +186,17 @@ function m.isIgnored(uri)
     return ignore(path)
 end
 
+function m.isValidLuaUri(uri)
+    if not files.isLua(uri) then
+        return false
+    end
+    if  m.isIgnored(uri)
+    and not files.isLibrary(uri) then
+        return false
+    end
+    return true
+end
+
 local function loadFileFactory(root, progressData, isLibrary)
     return function (path)
         local uri = furi.encode(path)
@@ -297,6 +310,10 @@ function m.awaitPreload()
     m.fileLoaded      = 0
     m.fileFound       = 0
     m.cache           = {}
+    for i, watchers in ipairs(m.watchers) do
+        watchers()
+        m.watchers[i] = nil
+    end
     local progressBar <close> = progress.create(lang.script.WORKSPACE_LOADING)
     local progressData = {
         max     = 0,
@@ -322,6 +339,7 @@ function m.awaitPreload()
         local libraryLoader = loadFileFactory(library.path, progressData, true)
         log.info('Scan library at:', library.path)
         library.matcher:scan(library.path, libraryLoader)
+        m.watchers[#m.watchers+1] = fw.watch(library.path)
     end
 
     local isLoadingFiles = false
@@ -367,9 +385,6 @@ function m.findUrisByFilePath(path)
         return {}
     end
     local lpath = furi.encode(path):gsub('^file:///', '')
-    if platform.OS == 'Windows' then
-        lpath = lpath:lower()
-    end
     local vm    = require 'vm'
     local resultCache = vm.getCache 'findUrisByRequirePath.result'
     if resultCache[path] then
@@ -379,19 +394,16 @@ function m.findUrisByFilePath(path)
     local results = {}
     local posts = {}
     for uri in files.eachFile() do
-        if platform.OS ~= 'Windows' then
-            uri = files.getOriginUri(uri)
-        end
         if not uri:find(lpath, 1, true) then
             goto CONTINUE
         end
         local pathLen = #path
-        local curPath = furi.decode(files.getOriginUri(uri))
+        local curPath = furi.decode(uri)
         local curLen  = #curPath
         local seg = curPath:sub(curLen - pathLen, curLen - pathLen)
         if seg == '/' or seg == '\\' or seg == '' then
             local see = curPath:sub(curLen - pathLen + 1, curLen)
-            if files.eq(see, path) then
+            if see == path then
                 results[#results+1] = uri
                 local post = curPath:sub(1, curLen - pathLen)
                 posts[uri] = post:gsub('^[/\\]+', '')
@@ -500,12 +512,7 @@ function m.getRelativePath(uriOrPath)
         local relative = m.normalize(path)
         return relative:gsub('^[/\\]+', '')
     end
-    local _, pos
-    if platform.OS == 'Windows' then
-        _, pos = m.normalize(path):lower():find(m.path:lower(), 1, true)
-    else
-        _, pos = m.normalize(path):find(m.path, 1, true)
-    end
+    local _, pos = m.normalize(path):find(m.path, 1, true)
     if pos then
         return m.normalize(path:sub(pos + 1)):gsub('^[/\\]+', '')
     else
@@ -517,9 +524,8 @@ function m.isWorkspaceUri(uri)
     if not m.uri then
         return false
     end
-    local luri = files.getUri(uri)
-    local ruri = files.getUri(m.uri)
-    return luri:sub(1, #ruri) == ruri
+    local ruri = m.uri
+    return uri:sub(1, #ruri) == ruri
 end
 
 --- 获取工作区等级的缓存
@@ -601,6 +607,46 @@ config.watch(function (key, value, oldValue)
         if value ~= oldValue then
             m.reload()
         end
+    end
+end)
+
+fw.event(function (changes)
+    m.awaitReady()
+    for _, change in ipairs(changes) do
+        local path = change.path
+        local uri  = furi.encode(path)
+        if  not m.isWorkspaceUri(uri)
+        and not files.isLibrary(uri) then
+            goto CONTINUE
+        end
+        if     change.type == 'create' then
+            log.debug('FileChangeType.Created', uri)
+            m.awaitLoadFile(uri)
+        elseif change.type == 'delete' then
+            log.debug('FileChangeType.Deleted', uri)
+            files.remove(uri)
+            local childs = files.getChildFiles(uri)
+            for _, curi in ipairs(childs) do
+                log.debug('FileChangeType.Deleted.Child', curi)
+                files.remove(curi)
+            end
+        elseif change.type == 'change' then
+            if m.isValidLuaUri(uri) then
+                -- 如果文件处于关闭状态，则立即更新；否则等待didChange协议来更新
+                if not files.isOpen(uri) then
+                    files.setText(uri, pub.awaitTask('loadFile', uri), false)
+                end
+            else
+                local filename = fs.path(path):filename():string()
+                -- 排除类文件发生更改需要重新扫描
+                if filename == '.gitignore'
+                or filename == '.gitmodules' then
+                    m.reload()
+                    break
+                end
+            end
+        end
+        ::CONTINUE::
     end
 end)
 

@@ -1,17 +1,28 @@
 local timer = require 'timer'
-local util  = require 'utility'
+
+local wkmt = { __mode = 'k' }
 
 ---@class await
 local m = {}
 m.type = 'await'
 
-m.coMap = setmetatable({}, { __mode = 'k' })
+m.coMap = setmetatable({}, wkmt)
 m.idMap = {}
 m.delayQueue = {}
 m.delayQueueIndex = 1
 m.watchList = {}
 m.needClose = {}
 m._enable = true
+
+local function setID(id, co, callback)
+    if not coroutine.isyieldable(co) then
+        return
+    end
+    if not m.idMap[id] then
+        m.idMap[id] = setmetatable({}, wkmt)
+    end
+    m.idMap[id][co] = callback or true
+end
 
 --- 设置错误处理器
 ---@param errHandle function {comment = '当有错误发生时，会以错误堆栈为参数调用该函数'}
@@ -40,7 +51,7 @@ function m.call(callback, ...)
         if not id then
             break
         end
-        m.setID(id, co)
+        setID(id, co)
     end
 
     local currentCo = coroutine.running()
@@ -68,15 +79,9 @@ function m.await(callback, ...)
 end
 
 --- 设置一个id，用于批量关闭任务
-function m.setID(id, co)
-    co = co or coroutine.running()
-    if not coroutine.isyieldable(co) then
-        return
-    end
-    if not m.idMap[id] then
-        m.idMap[id] = setmetatable({}, { __mode = 'k' })
-    end
-    m.idMap[id][co] = true
+function m.setID(id, callback)
+    local co = coroutine.running()
+    setID(id, co, callback)
 end
 
 --- 根据id批量关闭任务
@@ -85,9 +90,13 @@ function m.close(id)
     if not map then
         return
     end
-    for co in pairs(map) do
+    m.idMap[id] = nil
+    for co, callback in pairs(map) do
         if coroutine.status(co) == 'suspended' then
             map[co] = nil
+            if type(callback) == 'function' then
+                xpcall(callback, log.error)
+            end
             coroutine.close(co)
         end
     end

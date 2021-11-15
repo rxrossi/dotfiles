@@ -17,12 +17,6 @@ function require(modname) end
 ---
 ---@class packagelib
 ---
----A string describing some compile-time configurations for packages.
----
----[View documents](http://www.lua.org/manual/5.4/manual.html#pdf-package.config)
----
----@field config    string
----
 ---The path used by `require` to search for a C loader.
 ---
 ---[View documents](http://www.lua.org/manual/5.4/manual.html#pdf-package.cpath)
@@ -47,6 +41,18 @@ function require(modname) end
 ---
 ---@field preload   table
 package = {}
+
+---
+---A string describing some compile-time configurations for packages.
+---
+---[View documents](http://www.lua.org/manual/5.4/manual.html#pdf-package.config)
+---
+package.config = [[
+/
+;
+?
+!
+-]]
 
 ---@version <5.1
 ---

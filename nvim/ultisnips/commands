@@ -1,5 +1,7 @@
 document.renameCurrentWord
 prettier.formatFile
+eslint.executeAutofix
+workspace.renameCurrentFile
 cSpell.removeWordFromUserDictionary
 cSpell.addIgnoreWord
 snippets.editSnippets

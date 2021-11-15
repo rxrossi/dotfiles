@@ -26,6 +26,8 @@ local ANY_FIELD_CHAR = '*'
 local INDEX_CHAR     = '['
 local RETURN_INDEX   = SPLIT_CHAR .. '#'
 local PARAM_INDEX    = SPLIT_CHAR .. '&'
+local PARAM_NAME     = SPLIT_CHAR .. '$'
+local EVENT_ENUM     = SPLIT_CHAR .. '>'
 local TABLE_KEY      = SPLIT_CHAR .. '<'
 local WEAK_TABLE_KEY = SPLIT_CHAR .. '<<'
 local STRING_FIELD   = SPLIT_CHAR .. STRING_CHAR
@@ -57,8 +59,10 @@ local INFO_META_INDEX = {
     end
 }
 local INFO_CLASS_TO_EXNTENDS = {
-    filter = function (_, field)
+    filter = function (_, field, mode)
         return field ~= nil
+            or mode == 'field'
+            or mode == 'allfield'
     end,
     filterValid = function (_, field)
         return not field
@@ -114,6 +118,9 @@ local function getMethodNode(source)
     end
     source._mnode = false
     local func = guide.getParentFunction(source)
+    if not func then
+        return
+    end
     if func.isGeneric then
         return
     end
@@ -127,6 +134,45 @@ local function getMethodNode(source)
         source._mnode = setmethod.node
         return setmethod.node
     end
+end
+
+local function getFieldEventName(field)
+    if field._eventName then
+        return field._eventName or nil
+    end
+    field._eventName = false
+    local fieldType = field.extends
+    if not fieldType then
+        return nil
+    end
+    local docFunc = fieldType.types[1]
+    if not docFunc or docFunc.type ~= 'doc.type.function' then
+        return nil
+    end
+    local firstArg = docFunc.args and #docFunc.args == 2 and docFunc.args[1]
+    if not firstArg then
+        return nil
+    end
+    local secondArg = docFunc.args[2]
+    local firstType = firstArg.extends
+    if not firstType then
+        return nil
+    end
+    local firstEnum = #firstType.enums == 1 and #firstType.types == 0 and firstType.enums[1]
+    if not firstEnum then
+        return nil
+    end
+    local secondType = secondArg.extends
+    if not secondType then
+        return nil
+    end
+    local secondTypeUnit = #secondType.enums == 0 and #secondType.types == 1 and secondType.types[1]
+    if not secondTypeUnit or secondTypeUnit.type ~= 'doc.type.function' then
+        return nil
+    end
+    local eventName = firstEnum[1]:match [[^['"](.+)['"]$]]
+    field._eventName = eventName
+    return eventName
 end
 
 local getKey, getID
@@ -313,7 +359,10 @@ local getKeyMap = util.switch()
     : call(function (source)
         local name = source[1]
         if source.typeGeneric then
-            return 'dg:' .. source.typeGeneric[name][1].start, nil
+            local first = source.typeGeneric[name][1]
+            if first then
+                return 'dg:' .. first.start, nil
+            end
         else
             return 'dn:' .. name, nil
         end
@@ -738,8 +787,21 @@ local function compileCallParam(noders, call, sourceID)
     if not nodeID then
         return
     end
+    if node.type == 'getmethod' then
+        fixIndex = fixIndex + 1
+    end
+    local eventNodeID
     for firstIndex, callArg in ipairs(call.args) do
         firstIndex = firstIndex - fixIndex
+        if firstIndex == 1 and callArg.type == 'string' then
+            if callArg[1] then
+                eventNodeID = sformat('%s%s%s'
+                    , nodeID
+                    , EVENT_ENUM
+                    , callArg[1]
+                )
+            end
+        end
         if firstIndex > 0 and callArg.type == 'function' then
             if callArg.args then
                 for secondIndex, funcParam in ipairs(callArg.args) do
@@ -751,6 +813,16 @@ local function compileCallParam(noders, call, sourceID)
                         , secondIndex
                     )
                     pushForward(noders, getID(funcParam), paramID)
+                    if eventNodeID then
+                        local eventParamID = sformat('%s%s%s%s%s'
+                            , eventNodeID
+                            , PARAM_INDEX
+                            , firstIndex
+                            , PARAM_INDEX
+                            , secondIndex
+                        )
+                        pushForward(noders, getID(funcParam), eventParamID)
+                    end
                 end
             end
         end
@@ -852,7 +924,6 @@ compileNodeMap = util.switch()
     : call(function (noders, id, source)
         pushForward(noders, id, 'dn:nil')
     end)
-    -- self -> mt:xx
     : case 'local'
     : call(function (noders, id, source)
         if source[1] ~= 'self' then
@@ -878,8 +949,8 @@ compileNodeMap = util.switch()
     : call(function (noders, id, source)
         if source.bindSources then
             for _, src in ipairs(source.bindSources) do
-                pushForward(noders, getID(src), id, INFO_REJECT_SET)
-                pushForward(noders, id, getID(src))
+                pushForward(noders, getID(src), id)
+                pushBackward(noders, id, getID(src))
             end
         end
         for _, enumUnit in ipairs(source.enums) do
@@ -893,13 +964,16 @@ compileNodeMap = util.switch()
             pushForward(noders, id, unitID)
             if source.bindSources then
                 for _, src in ipairs(source.bindSources) do
-                    pushBackward(noders, unitID, getID(src), INFO_REJECT_SET)
+                    pushBackward(noders, unitID, getID(src))
                 end
             end
         end
     end)
     : case 'doc.type.table'
     : call(function (noders, id, source)
+        if source.node then
+            pushForward(noders, id, getID(source.node), INFO_CLASS_TO_EXNTENDS)
+        end
         if source.tkey then
             local keyID = id .. TABLE_KEY
             pushForward(noders, keyID, getID(source.tkey))
@@ -964,7 +1038,7 @@ compileNodeMap = util.switch()
         if source.bindSources then
             for _, src in ipairs(source.bindSources) do
                 pushForward(noders, getID(src), id)
-                pushForward(noders, id, getID(src), INFO_REJECT_SET)
+                pushForward(noders, id, getID(src))
             end
         end
         for _, field in ipairs(source.fields) do
@@ -977,6 +1051,14 @@ compileNodeMap = util.switch()
                         , STRING_FIELD
                         , key
                     )
+                    local eventName = getFieldEventName(field)
+                    if eventName then
+                        keyID = sformat('%s%s%s'
+                            , keyID
+                            , EVENT_ENUM
+                            , eventName
+                        )
+                    end
                 else
                     keyID = sformat('%s%s%s'
                         , id
@@ -991,12 +1073,39 @@ compileNodeMap = util.switch()
             end
         end
     end)
+    : case 'doc.module'
+    : call(function (noders, id, source)
+        if not source.module then
+            return
+        end
+        for _, src in ipairs(source.bindSources) do
+            if guide.isSet(src) then
+                local sourceID = getID(src)
+                if sourceID then
+                    noders.require[sourceID] = source.module
+                end
+            end
+        end
+    end)
     : case 'doc.param'
     : call(function (noders, id, source)
         pushForward(noders, id, getID(source.extends))
         for _, src in ipairs(source.bindSources) do
             if src.type == 'local' and src.parent.type == 'in' then
                 pushForward(noders, getID(src), id)
+            end
+        end
+        if source.bindSources then
+            for _, src in ipairs(source.bindSources) do
+                if src.type == 'function'
+                or guide.isSet(src) then
+                    local paramID = sformat('%s%s%s'
+                        , getID(src)
+                        , PARAM_NAME
+                        , source.param[1]
+                    )
+                    pushForward(noders, paramID, id)
+                end
             end
         end
     end)
@@ -1034,6 +1143,22 @@ compileNodeMap = util.switch()
     end)
     : case 'doc.type.function'
     : call(function (noders, id, source)
+        if source.args then
+            for index, param in ipairs(source.args) do
+                local paramID = sformat('%s%s%s'
+                    , id
+                    , PARAM_NAME
+                    , param.name[1]
+                )
+                pushForward(noders, paramID, getID(param.extends))
+                local indexID = sformat('%s%s%s'
+                    , id
+                    , PARAM_INDEX
+                    , index
+                )
+                pushForward(noders, indexID, getID(param.extends))
+            end
+        end
         if source.returns then
             for index, rtn in ipairs(source.returns) do
                 local returnID = sformat('%s%s%s'
@@ -1042,14 +1167,6 @@ compileNodeMap = util.switch()
                     , index
                 )
                 pushForward(noders, returnID, getID(rtn))
-            end
-            for index, param in ipairs(source.args) do
-                local paramID = sformat('%s%s%s'
-                    , id
-                    , PARAM_INDEX
-                    , index
-                )
-                pushForward(noders, paramID, getID(param.extends))
             end
         end
         -- @type fun(x: T):T 的情况
@@ -1122,40 +1239,12 @@ compileNodeMap = util.switch()
     end)
     : case 'function'
     : call(function (noders, id, source)
-        local hasDocReturn = {}
+        local hasDocReturn
         -- 检查 luadoc
         if source.bindDocs then
             for _, doc in ipairs(source.bindDocs) do
                 if doc.type == 'doc.return' then
-                    for _, rtn in ipairs(doc.returns) do
-                        local fullID = sformat('%s%s%s'
-                            , id
-                            , RETURN_INDEX
-                            , rtn.returnIndex
-                        )
-                        pushForward(noders, fullID, getID(rtn))
-                        for _, typeUnit in ipairs(rtn.types) do
-                            pushBackward(noders, getID(typeUnit), fullID, INFO_DEEP_AND_DONT_CROSS)
-                        end
-                        hasDocReturn[rtn.returnIndex] = true
-                    end
-                end
-                if doc.type == 'doc.param' then
-                    local paramName = doc.param[1]
-                    if source.docParamMap then
-                        local paramIndex = source.docParamMap[paramName]
-                        local param = source.args[paramIndex]
-                        if param then
-                            pushForward(noders, getID(param), getID(doc))
-                            param.docParam = doc
-                            local paramID = sformat('%s%s%s'
-                                , id
-                                , PARAM_INDEX
-                                , paramIndex
-                            )
-                            pushForward(noders, paramID, getID(doc.extends))
-                        end
-                    end
+                    hasDocReturn = true
                 end
                 if doc.type == 'doc.vararg' then
                     if source.args then
@@ -1174,26 +1263,58 @@ compileNodeMap = util.switch()
                 end
             end
         end
-        -- 检查实体返回值
-        if source.returns then
-            local returns = {}
-            for _, rtn in ipairs(source.returns) do
-                for index, rtnObj in ipairs(rtn) do
-                    if not hasDocReturn[index] then
-                        if not returns[index] then
-                            returns[index] = {}
-                        end
-                        returns[index][#returns[index]+1] = rtnObj
+        if source.args then
+            local parent = source.parent
+            local parentID = guide.isSet(parent) and getID(parent)
+            for i, arg in ipairs(source.args) do
+                if arg[1] == 'self' then
+                    goto CONTINUE
+                end
+                local indexID = sformat('%s%s%s'
+                    , id
+                    , PARAM_INDEX
+                    , i
+                )
+                pushForward(noders, indexID, getID(arg))
+                if arg.type == 'local' then
+                    pushForward(noders, getID(arg), sformat('%s%s%s'
+                        , id
+                        , PARAM_NAME
+                        , arg[1]
+                    ))
+                    if parentID then
+                        pushForward(noders, getID(arg), sformat('%s%s%s'
+                            , parentID
+                            , PARAM_NAME
+                            , arg[1]
+                        ))
+                    end
+                else
+                    pushForward(noders, getID(arg), sformat('%s%s%s'
+                        , id
+                        , PARAM_NAME
+                        , '...'
+                    ))
+                    if parentID then
+                        pushForward(noders, getID(arg), sformat('%s%s%s'
+                            , parentID
+                            , PARAM_NAME
+                            , '...'
+                        ))
                     end
                 end
+                ::CONTINUE::
             end
-            for index, rtnObjs in ipairs(returns) do
-                local returnID = sformat('%s%s%s'
-                    , id
-                    , RETURN_INDEX
-                    , index
-                )
-                for _, rtnObj in ipairs(rtnObjs) do
+        end
+        -- 检查实体返回值
+        if source.returns and not hasDocReturn then
+            for _, rtn in ipairs(source.returns) do
+                for index, rtnObj in ipairs(rtn) do
+                    local returnID = sformat('%s%s%s'
+                        , id
+                        , RETURN_INDEX
+                        , index
+                    )
                     pushForward(noders, returnID, getID(rtnObj))
                     pushBackward(noders, getID(rtnObj), returnID, INFO_DEEP_AND_DONT_CROSS)
                 end
@@ -1226,6 +1347,56 @@ compileNodeMap = util.switch()
             end
         end
     end)
+    : case 'in'
+    : call(function (noders, id, source)
+        local keys = source.keys
+        ---@type parser.guide.object[]
+        local exps = source.exps
+        if not keys or not exps then
+            return
+        end
+        local node   = exps[1]
+        local param1 = exps[2]
+        local param2 = exps[3]
+        if node.type == 'call' then
+            if not param1 then
+                param1 = {
+                    type   = 'select',
+                    dummy  = true,
+                    sindex = 2,
+                    start  = node.start,
+                    finish = node.finish,
+                    vararg = node,
+                    parent = source,
+                }
+                compileCallReturn(noders, node, getID(param1), 2)
+                if not param2 then
+                    param2 = {
+                        type   = 'select',
+                        dummy  = true,
+                        sindex = 3,
+                        start  = node.start,
+                        finish = node.finish,
+                        vararg = node,
+                        parent = source,
+                    }
+                    compileCallReturn(noders, node, getID(param2), 3)
+                end
+            end
+        end
+        local call = {
+            type   = 'call',
+            dummy  = true,
+            start  = source.keyword[3],
+            finish = exps[#exps].finish,
+            node   = node,
+            args   = { param1, param2 },
+            parent = source,
+        }
+        for i = 1, #keys do
+            compileCallReturn(noders, call, getID(keys[i]), i)
+        end
+    end)
     : case 'main'
     : call(function (noders, id, source)
         if source.returns then
@@ -1234,6 +1405,28 @@ compileNodeMap = util.switch()
                 if rtnObj then
                     pushForward(noders, 'mainreturn', getID(rtnObj), INFO_REJECT_SET)
                     pushBackward(noders, getID(rtnObj), 'mainreturn', INFO_DEEP_AND_REJECT_SET)
+                end
+            end
+        end
+    end)
+    : case 'doc.return'
+    : call(function (noders, id, source)
+        if not source.bindSources then
+            return
+        end
+        for _, rtn in ipairs(source.returns) do
+            for _, src in ipairs(source.bindSources) do
+                if src.type == 'function'
+                or guide.isSet(src) then
+                    local fullID = sformat('%s%s%s'
+                        , getID(src)
+                        , RETURN_INDEX
+                        , rtn.returnIndex
+                    )
+                    pushForward(noders, fullID, getID(rtn))
+                    for _, typeUnit in ipairs(rtn.types) do
+                        pushBackward(noders, getID(typeUnit), fullID, INFO_DEEP_AND_DONT_CROSS)
+                    end
                 end
             end
         end
@@ -1283,7 +1476,7 @@ function m.compileNode(noders, source)
     local id = getID(source)
     bindValue(noders, source, id)
 
-    if specialMap[source.special] then
+    if id and specialMap[source.special] then
         noders.skip[id] = true
     end
 
@@ -1378,7 +1571,7 @@ function m.hasField(id)
     end
     local next2Char = ssub(id, #firstID + 2, #firstID + 2)
     if next2Char == RETURN_INDEX
-    or next2Char == PARAM_INDEX then
+    or next2Char == PARAM_NAME then
         return false
     end
     return true
@@ -1402,7 +1595,7 @@ function m.isCommonField(field)
     if ssub(field, 1, #RETURN_INDEX) == RETURN_INDEX then
         return false
     end
-    if ssub(field, 1, #PARAM_INDEX) == PARAM_INDEX then
+    if ssub(field, 1, #PARAM_NAME) == PARAM_NAME then
         return false
     end
     return true
@@ -1462,6 +1655,8 @@ function m.eachID(noders)
     return next, noders.source
 end
 
+m.getFieldEventName = getFieldEventName
+
 ---获取对象的noders
 ---@param source parser.guide.object
 ---@return noders
@@ -1511,11 +1706,11 @@ function m.compileAllNodes(source)
         collector.dropUri(guide.getUri(root))
     end
     root._compiledGlobals = true
-    log.debug('compileNodes:', guide.getUri(root))
+    --log.debug('compileNodes:', guide.getUri(root))
     guide.eachSource(root, function (src)
         m.compileNode(noders, src)
     end)
-    log.debug('compileNodes finish:', files.getOriginUri(guide.getUri(root)))
+    --log.debug('compileNodes finish:', guide.getUri(root))
     return noders
 end
 
@@ -1528,11 +1723,6 @@ local partNodersMap = util.switch()
                 local ref = refs[i]
                 m.compilePartNodes(noders, ref)
             end
-        end
-
-        local nxt = source.next
-        if nxt then
-            m.compilePartNodes(noders, nxt)
         end
     end)
     : case 'setlocal'
@@ -1548,6 +1738,14 @@ local partNodersMap = util.switch()
         local parent = source.parent
         if parent.value == source then
             m.compilePartNodes(noders, parent)
+        end
+
+        if parent.type == 'call' then
+            local node = parent.node
+            if node.special == 'rawset'
+            or node.special == 'rawget' then
+                m.compilePartNodes(noders, parent)
+            end
         end
     end)
     : case 'setfield'
@@ -1579,6 +1777,14 @@ local partNodersMap = util.switch()
         local parent = source.parent
         if parent.value == source then
             m.compilePartNodes(noders, parent)
+        end
+
+        if parent.type == 'call' then
+            local node = parent.node
+            if node.special == 'rawset'
+            or node.special == 'rawget' then
+                m.compilePartNodes(noders, parent)
+            end
         end
     end)
     : case 'label'
@@ -1655,7 +1861,6 @@ function m.compileGlobalNodes(root)
 end
 
 files.watch(function (ev, uri)
-    uri = files.asKey(uri)
     if ev == 'update' then
         local state = files.getState(uri)
         if state then

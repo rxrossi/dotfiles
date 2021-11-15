@@ -229,6 +229,7 @@ function debug.setuservalue(udata, value, n) end
 ---
 ---[View documents](http://www.lua.org/manual/5.4/manual.html#pdf-debug.traceback)
 ---
+---@overload fun(message?: any, level?: integer): string
 ---@param thread   thread
 ---@param message? any
 ---@param level?   integer

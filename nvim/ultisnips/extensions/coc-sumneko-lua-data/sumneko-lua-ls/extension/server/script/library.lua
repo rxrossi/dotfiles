@@ -10,6 +10,7 @@ local define  = require "proto.define"
 local files   = require 'files'
 local await   = require 'await'
 local timer   = require 'timer'
+local encoder = require 'encoder'
 
 local m = {}
 
@@ -200,11 +201,13 @@ local function initBuiltIn()
     if not m.inited then
         return
     end
-    local langID  = lang.id
-    local version = config.get 'Lua.runtime.version'
+    local langID   = lang.id
+    local version  = config.get 'Lua.runtime.version'
+    local encoding = config.get 'Lua.runtime.fileEncoding'
     local metaPath = fs.path(METAPATH) / config.get 'Lua.runtime.meta':gsub('%$%{(.-)%}', {
         version  = version,
         language = langID,
+        encoding = encoding,
     })
 
     local metaLang = loadMetaLocale('en-US')
@@ -233,6 +236,7 @@ local function initBuiltIn()
         local metaDoc = compileSingleMetaDoc(fsu.loadFile(libPath), metaLang, status)
         if metaDoc then
             local outPath = metaPath / libName
+            encoder.encode(encoding, metaDoc)
             out:saveFile(libName, metaDoc)
             m.metaPaths[#m.metaPaths+1] = outPath:string()
         end
@@ -271,7 +275,7 @@ local function loadSingle3rdConfig(libraryDir)
     if cfg.files then
         for i, filename in ipairs(cfg.files) do
             if plat.OS == 'Windows' then
-                filename = filename:lower():gsub('/', '\\')
+                filename = filename:gsub('/', '\\')
             else
                 filename = filename:gsub('\\', '/')
             end
@@ -288,7 +292,7 @@ local function load3rdConfigInDir(dir, configs, inner)
     if not fs.is_directory(dir) then
         return
     end
-    for libraryDir in dir:list_directory() do
+    for libraryDir in fs.pairs(dir) do
         local suc, res = xpcall(loadSingle3rdConfig, log.error, libraryDir)
         if suc and res then
             if inner then
@@ -313,8 +317,10 @@ end
 
 local function apply3rd(cfg, onlyMemory)
     local changes = {}
-    for _, change in ipairs(cfg.configs) do
-        changes[#changes+1] = change
+    if cfg.configs then
+        for _, change in ipairs(cfg.configs) do
+            changes[#changes+1] = change
+        end
     end
 
     if cfg.plugin then
@@ -413,9 +419,6 @@ local function check3rdByFileName(uri, configs)
     if not path then
         return
     end
-    if plat.OS == 'Windows' then
-        path = path:lower()
-    end
     await.call(function ()
         for _, cfg in ipairs(configs) do
             if cfg.files then
@@ -473,7 +476,7 @@ end)
 files.watch(function (ev, uri)
     if ev == 'update'
     or ev == 'dll' then
-        check3rd(files.asKey(uri))
+        check3rd(uri)
     end
 end)
 

@@ -7,25 +7,33 @@ local define     = require 'proto.define'
 local workspace  = require 'workspace'
 local config     = require 'config'
 local library    = require 'library'
-local markdown   = require 'provider.markdown'
 local client     = require 'client'
-local furi       = require 'file-uri'
 local pub        = require 'pub'
-local fs         = require 'bee.filesystem'
 local lang       = require 'language'
 local progress   = require 'progress'
 local tm         = require 'text-merger'
-local nonil      = require 'without-check-nil'
 local cfgLoader  = require 'config.loader'
+local converter  = require 'proto.converter'
+local filewatch  = require 'filewatch'
 
 local function updateConfig()
     local new
     if CONFIGPATH then
         new = cfgLoader.loadLocalConfig(CONFIGPATH)
+        config.setSource 'path'
         log.debug('load config from local', CONFIGPATH)
+        -- watch directory
+        filewatch.watch(workspace.getAbsolutePath(CONFIGPATH):gsub('[^/\\]+$', ''))
     else
-        new = cfgLoader.loadClientConfig()
-        log.debug('load config from client')
+        new = cfgLoader.loadRCConfig('.luarc.json')
+        if new then
+            config.setSource 'luarc'
+            log.debug('load config from luarc')
+        else
+            new = cfgLoader.loadClientConfig()
+            config.setSource 'client'
+            log.debug('load config from client')
+        end
     end
     if not new then
         log.warn('load config failed!')
@@ -35,19 +43,18 @@ local function updateConfig()
     log.debug('loaded config dump:', util.dump(new))
 end
 
-local function isValidLuaUri(uri)
-    if not files.isLua(uri) then
-        return false
+filewatch.event(function (changes)
+    local configPath = workspace.getAbsolutePath(CONFIGPATH or '.luarc.json')
+    if not configPath then
+        return
     end
-    if not files.isOpen(uri) then
-        return false
+    for _, change in ipairs(changes) do
+        if change.path == configPath then
+            updateConfig()
+            return
+        end
     end
-    if  workspace.isIgnored(uri)
-    and not files.isLibrary(uri) then
-        return false
-    end
-    return true
-end
+end)
 
 proto.on('initialize', function (params)
     client.init(params)
@@ -67,32 +74,13 @@ proto.on('initialized', function (params)
     updateConfig()
     local registrations = {}
 
-    nonil.enable()
-    if client.info.capabilities.workspace.didChangeWatchedFiles.dynamicRegistration then
-        -- 监视文件变化
-        registrations[#registrations+1] = {
-            id = 'workspace/didChangeWatchedFiles',
-            method = 'workspace/didChangeWatchedFiles',
-            registerOptions = {
-                watchers = {
-                    {
-                        globPattern = '**/',
-                        kind = 1 | 2 | 4,
-                    }
-                },
-            },
-        }
-    end
-
-    if client.info.capabilities.workspace.didChangeConfiguration.dynamicRegistration then
+    if client.getAbility 'workspace.didChangeConfiguration.dynamicRegistration' then
         -- 监视配置变化
         registrations[#registrations+1] = {
             id = 'workspace/didChangeConfiguration',
             method = 'workspace/didChangeConfiguration',
         }
     end
-
-    nonil.disable()
 
     if #registrations ~= 0 then
         proto.awaitRequest('client/registerCapability', {
@@ -121,47 +109,10 @@ proto.on('workspace/didChangeConfiguration', function ()
     updateConfig()
 end)
 
-proto.on('workspace/didChangeWatchedFiles', function (params)
-    workspace.awaitReady()
-    for _, change in ipairs(params.changes) do
-        local uri = change.uri
-        if not workspace.isWorkspaceUri(uri) then
-            goto CONTINUE
-        end
-        if     change.type == define.FileChangeType.Created then
-            log.debug('FileChangeType.Created', uri)
-            workspace.awaitLoadFile(uri)
-        elseif change.type == define.FileChangeType.Deleted then
-            log.debug('FileChangeType.Deleted', uri)
-            files.remove(uri)
-            local childs = files.getChildFiles(uri)
-            for _, curi in ipairs(childs) do
-                log.debug('FileChangeType.Deleted.Child', curi)
-                files.remove(curi)
-            end
-        elseif change.type == define.FileChangeType.Changed then
-            -- 如果文件处于关闭状态，则立即更新；否则等待didChange协议来更新
-            if isValidLuaUri(uri) then
-                files.setText(uri, pub.awaitTask('loadFile', uri), false)
-            else
-                local path = furi.decode(uri)
-                local filename = fs.path(path):filename():string()
-                -- 排除类文件发生更改需要重新扫描
-                if files.eq(filename, '.gitignore')
-                or files.eq(filename, '.gitmodules') then
-                    workspace.reload()
-                    break
-                end
-            end
-        end
-        ::CONTINUE::
-    end
-end)
-
 proto.on('workspace/didCreateFiles', function (params)
     log.debug('workspace/didCreateFiles', util.dump(params))
     for _, file in ipairs(params.files) do
-        if isValidLuaUri(file.uri) then
+        if workspace.isValidLuaUri(file.uri) then
             files.setText(file.uri, pub.awaitTask('loadFile', file.uri), false)
         end
     end
@@ -185,7 +136,7 @@ proto.on('workspace/didRenameFiles', function (params)
         local text = files.getOriginText(file.oldUri)
         if text then
             files.remove(file.oldUri)
-            if isValidLuaUri(file.newUri) then
+            if workspace.isValidLuaUri(file.newUri) then
                 files.setText(file.newUri, text, false)
             end
         end
@@ -193,12 +144,12 @@ proto.on('workspace/didRenameFiles', function (params)
         for _, uri in ipairs(childs) do
             local ctext = files.getOriginText(uri)
             if ctext then
-                local ouri = files.getOriginUri(uri)
+                local ouri = uri
                 local tail = ouri:sub(#file.oldUri)
                 local nuri = file.newUri .. tail
                 log.debug('workspace/didRenameFiles#child', ouri, nuri)
                 files.remove(uri)
-                if isValidLuaUri(nuri) then
+                if workspace.isValidLuaUri(nuri) then
                     files.setText(nuri, text, false)
                 end
             end
@@ -237,8 +188,8 @@ proto.on('textDocument/didChange', function (params)
 end)
 
 proto.on('textDocument/hover', function (params)
-    await.close 'hover'
-    await.setID 'hover'
+    local doc    = params.textDocument
+    local uri    = doc.uri
     if not workspace.isReady() then
         local count, max = workspace.getLoadProcess()
         return {
@@ -250,26 +201,20 @@ proto.on('textDocument/hover', function (params)
     end
     local _ <close> = progress.create(lang.script.WINDOW_PROCESSING_HOVER, 0.5)
     local core = require 'core.hover'
-    local doc    = params.textDocument
-    local uri    = doc.uri
     if not files.exists(uri) then
         return nil
     end
-    local offset = files.offsetOfWord(uri, params.position)
-    local hover = core.byUri(uri, offset)
+    local pos = converter.unpackPosition(uri, params.position)
+    local hover, source = core.byUri(uri, pos)
     if not hover then
         return nil
     end
-    local md = markdown()
-    md:add('lua', hover.label)
-    md:splitLine()
-    md:add('md',  hover.description)
     return {
         contents = {
-            value = md:string(),
+            value = tostring(hover),
             kind  = 'markdown',
         },
-        range = files.range(uri, hover.source.start, hover.source.finish),
+        range = converter.packRange(uri, source.start, source.finish),
     }
 end)
 
@@ -281,8 +226,8 @@ proto.on('textDocument/definition', function (params)
     if not files.exists(uri) then
         return nil
     end
-    local offset = files.offsetOfWord(uri, params.position)
-    local result = core(uri, offset)
+    local pos = converter.unpackPosition(uri, params.position)
+    local result = core(uri, pos)
     if not result then
         return nil
     end
@@ -292,14 +237,14 @@ proto.on('textDocument/definition', function (params)
         if targetUri then
             if files.exists(targetUri) then
                 if client.getAbility 'textDocument.definition.linkSupport' then
-                    response[i] = define.locationLink(targetUri
-                        , files.range(targetUri, info.target.start, info.target.finish)
-                        , files.range(targetUri, info.target.start, info.target.finish)
-                        , files.range(uri,       info.source.start, info.source.finish)
+                    response[i] = converter.locationLink(targetUri
+                        , converter.packRange(targetUri, info.target.start, info.target.finish)
+                        , converter.packRange(targetUri, info.target.start, info.target.finish)
+                        , converter.packRange(uri,       info.source.start, info.source.finish)
                     )
                 else
-                    response[i] = define.location(targetUri
-                        , files.range(targetUri, info.target.start, info.target.finish)
+                    response[i] = converter.location(targetUri
+                        , converter.packRange(targetUri, info.target.start, info.target.finish)
                     )
                 end
             end
@@ -316,8 +261,8 @@ proto.on('textDocument/typeDefinition', function (params)
     if not files.exists(uri) then
         return nil
     end
-    local offset = files.offsetOfWord(uri, params.position)
-    local result = core(uri, offset)
+    local pos = converter.unpackPosition(uri, params.position)
+    local result = core(uri, pos)
     if not result then
         return nil
     end
@@ -327,14 +272,14 @@ proto.on('textDocument/typeDefinition', function (params)
         if targetUri then
             if files.exists(targetUri) then
                 if client.getAbility 'textDocument.typeDefinition.linkSupport' then
-                    response[i] = define.locationLink(targetUri
-                        , files.range(targetUri, info.target.start, info.target.finish)
-                        , files.range(targetUri, info.target.start, info.target.finish)
-                        , files.range(uri,       info.source.start, info.source.finish)
+                    response[i] = converter.locationLink(targetUri
+                        , converter.packRange(targetUri, info.target.start, info.target.finish)
+                        , converter.packRange(targetUri, info.target.start, info.target.finish)
+                        , converter.packRange(uri,       info.source.start, info.source.finish)
                     )
                 else
-                    response[i] = define.location(targetUri
-                        , files.range(targetUri, info.target.start, info.target.finish)
+                    response[i] = converter.location(targetUri
+                        , converter.packRange(targetUri, info.target.start, info.target.finish)
                     )
                 end
             end
@@ -351,16 +296,16 @@ proto.on('textDocument/references', function (params)
     if not files.exists(uri) then
         return nil
     end
-    local offset = files.offsetOfWord(uri, params.position)
-    local result = core(uri, offset)
+    local pos    = converter.unpackPosition(uri, params.position)
+    local result = core(uri, pos)
     if not result then
         return nil
     end
     local response = {}
     for i, info in ipairs(result) do
         local targetUri = info.uri
-        response[i] = define.location(targetUri
-            , files.range(targetUri, info.target.start, info.target.finish)
+        response[i] = converter.location(targetUri
+            , converter.packRange(targetUri, info.target.start, info.target.finish)
         )
     end
     return response
@@ -372,15 +317,15 @@ proto.on('textDocument/documentHighlight', function (params)
     if not files.exists(uri) then
         return nil
     end
-    local offset = files.offsetOfWord(uri, params.position)
-    local result = core(uri, offset)
+    local pos    = converter.unpackPosition(uri, params.position)
+    local result = core(uri, pos)
     if not result then
         return nil
     end
     local response = {}
     for _, info in ipairs(result) do
         response[#response+1] = {
-            range = files.range(uri, info.start, info.finish),
+            range = converter.packRange(uri, info.start, info.finish),
             kind  = info.kind,
         }
     end
@@ -395,8 +340,8 @@ proto.on('textDocument/rename', function (params)
     if not files.exists(uri) then
         return nil
     end
-    local offset = files.offsetOfWord(uri, params.position)
-    local result = core.rename(uri, offset, params.newName)
+    local pos    = converter.unpackPosition(uri, params.position)
+    local result = core.rename(uri, pos, params.newName)
     if not result then
         return nil
     end
@@ -408,7 +353,7 @@ proto.on('textDocument/rename', function (params)
         if not workspaceEdit.changes[ruri] then
             workspaceEdit.changes[ruri] = {}
         end
-        local textEdit = define.textEdit(files.range(ruri, info.start, info.finish), info.text)
+        local textEdit = converter.textEdit(converter.packRange(ruri, info.start, info.finish), info.text)
         workspaceEdit.changes[ruri][#workspaceEdit.changes[ruri]+1] = textEdit
     end
     return workspaceEdit
@@ -420,20 +365,19 @@ proto.on('textDocument/prepareRename', function (params)
     if not files.exists(uri) then
         return nil
     end
-    local offset = files.offsetOfWord(uri, params.position)
-    local result = core.prepareRename(uri, offset)
+    local pos    = converter.unpackPosition(uri, params.position)
+    local result = core.prepareRename(uri, pos)
     if not result then
         return nil
     end
     return {
-        range       = files.range(uri, result.start, result.finish),
+        range       = converter.packRange(uri, result.start, result.finish),
         placeholder = result.text,
     }
 end)
 
 proto.on('textDocument/completion', function (params)
-    await.close 'completion'
-    await.setID 'completion'
+    local uri  = params.textDocument.uri
     if not workspace.isReady() then
         local count, max = workspace.getLoadProcess()
         return {
@@ -453,7 +397,6 @@ proto.on('textDocument/completion', function (params)
     local core  = require 'core.completion'
     --log.debug('textDocument/completion')
     --log.debug('completion:', params.context and params.context.triggerKind, params.context and params.context.triggerCharacter)
-    local uri  = params.textDocument.uri
     if not files.exists(uri) then
         return nil
     end
@@ -467,8 +410,8 @@ proto.on('textDocument/completion', function (params)
     end
     await.setPriority(1000)
     local clock  = os.clock()
-    local offset = files.offset(uri, params.position)
-    local result = core.completion(uri, offset - 1, triggerCharacter)
+    local pos    = converter.unpackPosition(uri, params.position)
+    local result = core.completion(uri, pos, triggerCharacter)
     local passed = os.clock() - clock
     if passed > 0.1 then
         log.warn(('Completion takes %.3f sec.'):format(passed))
@@ -493,7 +436,7 @@ proto.on('textDocument/completion', function (params)
             commitCharacters = res.commitCharacters,
             command          = res.command,
             textEdit         = res.textEdit and {
-                range   = files.range(
+                range   = converter.packRange(
                     uri,
                     res.textEdit.start,
                     res.textEdit.finish
@@ -504,7 +447,7 @@ proto.on('textDocument/completion', function (params)
                 local t = {}
                 for j, edit in ipairs(res.additionalTextEdits) do
                     t[j] = {
-                        range   = files.range(
+                        range   = converter.packRange(
                             uri,
                             edit.start,
                             edit.finish
@@ -515,7 +458,7 @@ proto.on('textDocument/completion', function (params)
                 return t
             end)(),
             documentation    = res.description and {
-                value = res.description,
+                value = tostring(res.description),
                 kind  = 'markdown',
             },
         }
@@ -525,7 +468,7 @@ proto.on('textDocument/completion', function (params)
                 if resolved then
                     item.detail = resolved.detail
                     item.documentation = resolved.description and {
-                        value = resolved.description,
+                        value = tostring(resolved.description),
                         kind  = 'markdown',
                     }
                 end
@@ -540,7 +483,7 @@ proto.on('textDocument/completion', function (params)
         items[i] = item
     end
     return {
-        isIncomplete = false,
+        isIncomplete = not result.complete,
         items        = items,
     }
 end)
@@ -550,8 +493,6 @@ proto.on('completionItem/resolve', function (item)
     if not item.data then
         return item
     end
-    await.close 'completion.resolve'
-    await.setID 'completion.resolve'
     local id            = item.data.id
     local uri           = item.data.uri
     --await.setPriority(1000)
@@ -561,14 +502,14 @@ proto.on('completionItem/resolve', function (item)
     end
     item.detail = resolved.detail or item.detail
     item.documentation = resolved.description and {
-        value = resolved.description,
+        value = tostring(resolved.description),
         kind  = 'markdown',
     } or item.documentation
     item.additionalTextEdits = resolved.additionalTextEdits and (function ()
         local t = {}
         for j, edit in ipairs(resolved.additionalTextEdits) do
             t[j] = {
-                range   = files.range(
+                range   = converter.packRange(
                     uri,
                     edit.start,
                     edit.finish
@@ -591,11 +532,9 @@ proto.on('textDocument/signatureHelp', function (params)
     if not files.exists(uri) then
         return nil
     end
-    await.close('signatureHelp')
-    await.setID('signatureHelp')
-    local offset = files.offset(uri, params.position)
+    local pos = converter.unpackPosition(uri, params.position)
     local core = require 'core.signature'
-    local results = core(uri, offset - 1)
+    local results = core(uri, pos)
     if not results then
         return nil
     end
@@ -605,7 +544,7 @@ proto.on('textDocument/signatureHelp', function (params)
         for j, param in ipairs(result.params) do
             parameters[j] = {
                 label = {
-                    param.label[1] - 1,
+                    param.label[1],
                     param.label[2],
                 }
             }
@@ -615,7 +554,7 @@ proto.on('textDocument/signatureHelp', function (params)
             parameters      = parameters,
             activeParameter = result.index - 1,
             documentation   = result.description and {
-                value = result.description,
+                value = tostring(result.description),
                 kind  = 'markdown',
             },
         }
@@ -638,12 +577,12 @@ proto.on('textDocument/documentSymbol', function (params)
 
     local function convert(symbol)
         await.delay()
-        symbol.range = files.range(
+        symbol.range = converter.packRange(
             uri,
             symbol.range[1],
             symbol.range[2]
         )
-        symbol.selectionRange = files.range(
+        symbol.selectionRange = converter.packRange(
             uri,
             symbol.selectionRange[1],
             symbol.selectionRange[2]
@@ -675,7 +614,7 @@ proto.on('textDocument/codeAction', function (params)
         return nil
     end
 
-    local start, finish = files.unrange(uri, range)
+    local start, finish = converter.unpackRange(uri, range)
     local results = core(uri, start, finish, diagnostics)
 
     if not results or #results == 0 then
@@ -686,7 +625,7 @@ proto.on('textDocument/codeAction', function (params)
         if res.edit then
             for turi, changes in pairs(res.edit.changes) do
                 for _, change in ipairs(changes) do
-                    change.range = files.range(turi, change.start, change.finish)
+                    change.range = converter.packRange(turi, change.start, change.finish)
                     change.start  = nil
                     change.finish = nil
                 end
@@ -722,18 +661,15 @@ proto.on('workspace/symbol', function (params)
     local _ <close> = progress.create(lang.script.WINDOW_PROCESSING_WS_SYMBOL, 0.5)
     local core = require 'core.workspace-symbol'
 
-    await.close('workspace/symbol')
-    await.setID('workspace/symbol')
-
     local symbols = core(params.query)
     if not symbols or #symbols == 0 then
         return nil
     end
 
     local function convert(symbol)
-        symbol.location = define.location(
+        symbol.location = converter.location(
             symbol.uri,
-            files.range(
+            converter.packRange(
                 symbol.uri,
                 symbol.range[1],
                 symbol.range[2]
@@ -749,36 +685,30 @@ proto.on('workspace/symbol', function (params)
     return symbols
 end)
 
-
 proto.on('textDocument/semanticTokens/full', function (params)
+    local uri = params.textDocument.uri
     workspace.awaitReady()
     local _ <close> = progress.create(lang.script.WINDOW_PROCESSING_SEMANTIC_FULL, 0.5)
     local core = require 'core.semantic-tokens'
-    local uri = params.textDocument.uri
-    local text  = files.getText(uri)
-    if not text then
-        return nil
-    end
-    local results = core(uri, 0, #text)
+    local results = core(uri, 0, math.huge)
     return {
         data = results
     }
 end)
 
 proto.on('textDocument/semanticTokens/range', function (params)
+    local uri = params.textDocument.uri
     workspace.awaitReady()
     local _ <close> = progress.create(lang.script.WINDOW_PROCESSING_SEMANTIC_RANGE, 0.5)
     local core = require 'core.semantic-tokens'
-    local uri = params.textDocument.uri
     local cache  = files.getOpenedCache(uri)
     local start, finish
     if cache and not cache['firstSemantic'] then
         cache['firstSemantic'] = true
         start  = 0
-        finish = #files.getText(uri)
+        finish = math.huge
     else
-        start  = files.offsetOfWord(uri, params.range.start)
-        finish = files.offsetOfWord(uri, params.range['end'])
+        start, finish = converter.unpackRange(uri, params.range)
     end
     local results = core(uri, start, finish)
     return {
@@ -799,8 +729,8 @@ proto.on('textDocument/foldingRange', function (params)
 
     local results = {}
     for _, region in ipairs(regions) do
-        local startLine = files.position(uri, region.start, 'left').line
-        local endLine   = files.position(uri, region.finish, 'right').line
+        local startLine = converter.packPosition(uri, region.start).line
+        local endLine   = converter.packPosition(uri, region.finish).line
         if not region.hideLastLine then
             endLine = endLine - 1
         end
@@ -821,7 +751,11 @@ proto.on('window/workDoneProgress/cancel', function (params)
 end)
 
 proto.on('$/didChangeVisibleRanges', function (params)
-    files.setVisibles(params.uri, params.ranges)
+    local uri = params.uri
+    await.close('visible:' .. uri)
+    await.setID('visible:' .. uri)
+    await.delay()
+    files.setVisibles(uri, params.ranges)
 end)
 
 proto.on('$/status/click', function ()
@@ -848,8 +782,8 @@ proto.on('textDocument/onTypeFormatting', function (params)
         return nil
     end
     local core   = require 'core.type-formatting'
-    local offset = files.offset(uri, params.position)
-    local edits  = core(uri, offset - 1, ch)
+    local pos    = converter.unpackPosition(uri, params.position)
+    local edits  = core(uri, pos, ch)
     if not edits or #edits == 0 then
         return nil
     end
@@ -860,22 +794,43 @@ proto.on('textDocument/onTypeFormatting', function (params)
     local results = {}
     for i, edit in ipairs(edits) do
         results[i] = {
-            range   = files.range(uri, edit.start, edit.finish),
+            range   = converter.packRange(uri, edit.start, edit.finish),
             newText = edit.text:gsub('\t', tab),
         }
     end
     return results
 end)
 
+proto.on('$/cancelRequest', function (params)
+    proto.close(params.id, define.ErrorCodes.RequestCancelled)
+end)
+
+proto.on('$/requestHint', function (params)
+    local core = require 'core.hint'
+    if not config.get 'Lua.hint.enable' then
+        return
+    end
+    workspace.awaitReady()
+    local uri           = params.textDocument.uri
+    local start, finish = converter.unpackRange(uri, params.range)
+    local results = core(uri, start, finish)
+    local hintResults = {}
+    for i, res in ipairs(results) do
+        hintResults[i] = {
+            text = res.text,
+            pos  = converter.packPosition(uri, res.offset),
+            kind = res.kind,
+        }
+    end
+    return hintResults
+end)
+
 -- Hint
 do
     local function updateHint(uri)
-        local awaitID = 'hint:' .. uri
-        await.close(awaitID)
         if not config.get 'Lua.hint.enable' then
             return
         end
-        await.setID(awaitID)
         workspace.awaitReady()
         local visibles = files.getVisibles(uri)
         if not visibles then
@@ -889,8 +844,8 @@ do
             if piece then
                 for _, edit in ipairs(piece) do
                     edits[#edits+1] = {
-                        newText = edit.newText,
-                        range   = files.range(uri, edit.start, edit.finish)
+                        text = edit.text,
+                        pos  = converter.packPosition(uri, edit.offset),
                     }
                 end
             end
@@ -912,12 +867,33 @@ do
     end)
 end
 
+local function refreshStatusBar()
+    local value = config.get 'Lua.window.statusBar'
+    if value then
+        proto.notify('$/status/show')
+    else
+        proto.notify('$/status/hide')
+    end
+end
+
 config.watch(function (key, value)
     if key == 'Lua.window.statusBar' then
-        if value then
-            proto.notify('$/status/show')
-        else
-            proto.notify('$/status/hide')
+        refreshStatusBar()
+    end
+end)
+
+proto.on('$/status/refresh', refreshStatusBar)
+
+files.watch(function (ev, uri)
+    if not workspace.isReady() then
+        return
+    end
+    if ev == 'update'
+    or ev == 'remove' then
+        for id, p in pairs(proto.holdon) do
+            if p.params.textDocument and p.params.textDocument.uri == uri then
+                proto.close(id, define.ErrorCodes.ContentModified)
+            end
         end
     end
 end)

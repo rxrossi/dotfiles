@@ -10,48 +10,55 @@ local util     = require 'utility'
 local guide    = require 'parser.guide'
 local noder    = require 'core.noder'
 
-local function asStringInRequire(source, literal)
+local function collectRequire(mode, literal)
     local rootPath = ws.path or ''
+    local result, searchers
+    if     mode == 'require' then
+        result, searchers = ws.findUrisByRequirePath(literal)
+    elseif mode == 'dofile'
+    or     mode == 'loadfile' then
+        result = ws.findUrisByFilePath(literal)
+    end
+    if result and #result > 0 then
+        local shows = {}
+        for i, uri in ipairs(result) do
+            local searcher = searchers and searchers[uri]
+            local path = furi.decode(uri)
+            if path:sub(1, #rootPath) == rootPath then
+                path = path:sub(#rootPath + 1)
+            end
+            path = path:gsub('^[/\\]*', '')
+            if vm.isMetaFile(uri) then
+                shows[i] = ('* [[meta]](%s)'):format(uri)
+            elseif searcher then
+                searcher = searcher:sub(#rootPath + 1)
+                searcher = ws.normalize(searcher)
+                searcher = searcher:gsub('^[/\\]+', '')
+                shows[i] = ('* [%s](%s) %s'):format(path, uri, lang.script('HOVER_USE_LUA_PATH', searcher))
+            else
+                shows[i] = ('* [%s](%s)'):format(path, uri)
+            end
+        end
+        table.sort(shows)
+        local md = markdown()
+        md:add('md', table.concat(shows, '\n'))
+        return md
+    end
+end
+
+local function asStringInRequire(source, literal)
     local parent = source.parent
     if parent and parent.type == 'callargs' then
-        local result, searchers
         local call = parent.parent
         local func = call.node
         local libName = vm.getLibraryName(func)
         if not libName then
             return
         end
-        if     libName == 'require' then
-            result, searchers = ws.findUrisByRequirePath(literal)
-        elseif libName == 'dofile'
-        or     libName == 'loadfile' then
-            result = ws.findUrisByFilePath(literal)
-        end
-        if result and #result > 0 then
-            local shows = {}
-            for i, uri in ipairs(result) do
-                local searcher = searchers and searchers[uri]
-                uri = files.getOriginUri(uri)
-                local path = furi.decode(uri)
-                if files.eq(path:sub(1, #rootPath), rootPath) then
-                    path = path:sub(#rootPath + 1)
-                end
-                path = path:gsub('^[/\\]*', '')
-                if vm.isMetaFile(uri) then
-                    shows[i] = ('* [[meta]](%s)'):format(uri)
-                elseif searcher then
-                    searcher = searcher:sub(#rootPath + 1)
-                    searcher = ws.normalize(searcher)
-                    searcher = searcher:gsub('^[/\\]+', '')
-                    shows[i] = ('* [%s](%s) %s'):format(path, uri, lang.script('HOVER_USE_LUA_PATH', searcher))
-                else
-                    shows[i] = ('* [%s](%s)'):format(path, uri)
-                end
-            end
-            table.sort(shows)
-            local md = markdown()
-            md:add('md', table.concat(shows, '\n'))
-            return md:string()
+        if libName == 'require'
+        or libName == 'dofile'
+        or libName == 'loadfile' then
+            return collectRequire(libName, literal)
         end
     end
 end
@@ -69,7 +76,7 @@ local function asStringView(source, literal)
         end
         local md = markdown()
         md:add('txt', view)
-        return md:string()
+        return md
     end
 end
 
@@ -147,6 +154,13 @@ local function tryDocClassComment(source)
     end
 end
 
+local function tryDocModule(source)
+    if not source.module then
+        return
+    end
+    return collectRequire('require', source.module)
+end
+
 local function buildEnumChunk(docType, name)
     local enums = vm.getDocEnums(docType)
     if not enums or #enums == 0 then
@@ -167,13 +181,25 @@ local function buildEnumChunk(docType, name)
     end
     lines[#lines+1] = ('%s: %s'):format(name, table.concat(types))
     for _, enum in ipairs(enums) do
-        lines[#lines+1] = ('   %s %s%s'):format(
-               (enum.default    and '->')
+        local enumDes = ('   %s %s'):format(
+                (enum.default    and '->')
             or (enum.additional and '+>')
             or ' |',
-            enum[1],
-            enum.comment and (' -- %s'):format(enum.comment) or ''
+            enum[1]
         )
+        if enum.comment then
+            local first = true
+            local len = #enumDes
+            for comm in enum.comment:gmatch '[^\r\n]+' do
+                if first then
+                    first = false
+                    enumDes = ('%s -- %s'):format(enumDes, comm)
+                else
+                    enumDes = ('%s\n%s -- %s'):format(enumDes, (' '):rep(len), comm)
+                end
+            end
+        end
+        lines[#lines+1] = enumDes
     end
     return table.concat(lines, '\n')
 end
@@ -247,34 +273,23 @@ local function getFunctionComment(source)
         end
     end
 
-    local comments = {}
-    local isComment = true
+    local md = markdown()
     for _, doc in ipairs(docGroup) do
         if doc.type == 'doc.comment' then
-            if not isComment then
-                comments[#comments+1] = '\n'
-            end
-            isComment = true
             if doc.comment.text:sub(1, 1) == '-' then
-                comments[#comments+1] = doc.comment.text:sub(2)
+                md:add('md', doc.comment.text:sub(2))
             else
-                comments[#comments+1] = doc.comment.text
+                md:add('md', doc.comment.text)
             end
-            comments[#comments+1] = '\n'
         elseif doc.type == 'doc.param' then
             if doc.comment then
-                isComment = false
-                comments[#comments+1] = '\n'
-                comments[#comments+1] = ('@*param* `%s` — %s'):format(
+                md:add('md', ('@*param* `%s` — %s'):format(
                     doc.param[1],
                     doc.comment.text
-                )
-                comments[#comments+1] = '\n'
+                ))
             end
         elseif doc.type == 'doc.return' then
             if hasReturnComment then
-                isComment = false
-                comments[#comments+1] = '\n'
                 local name = {}
                 for _, rtn in ipairs(doc.returns) do
                     if rtn.name then
@@ -283,39 +298,26 @@ local function getFunctionComment(source)
                 end
                 if doc.comment then
                     if #name == 0 then
-                        comments[#comments+1] = ('@*return* — %s'):format(doc.comment.text)
+                        md:add('md', ('@*return* — %s'):format(doc.comment.text))
                     else
-                        comments[#comments+1] = ('@*return* `%s` — %s'):format(table.concat(name, ','), doc.comment.text)
+                        md:add('md', ('@*return* `%s` — %s'):format(table.concat(name, ','), doc.comment.text))
                     end
                 else
                     if #name == 0 then
-                        comments[#comments+1] = '@*return*'
+                        md:add('md', '@*return*')
                     else
-                        comments[#comments+1] = ('@*return* `%s`'):format(table.concat(name, ','))
+                        md:add('md', ('@*return* `%s`'):format(table.concat(name, ',')))
                     end
                 end
-                comments[#comments+1] = '\n'
             end
         elseif doc.type == 'doc.overload' then
-            comments[#comments+1] = '---'
+            md:splitLine()
         end
     end
-    if comments[1] == '\n' then
-        table.remove(comments, 1)
-    end
-    if comments[#comments] == '\n' then
-        table.remove(comments)
-    end
-    comments = table.concat(comments)
 
     local enums = getBindEnums(source, docGroup)
-    if comments == '' and not enums then
-        return
-    end
-    local md = markdown()
-    md:add('md', comments)
     md:add('lua', enums)
-    return md:string()
+    return md
 end
 
 local function tryDocComment(source)
@@ -357,16 +359,10 @@ local function tyrDocParamComment(source)
     if source.parent.type ~= 'funcargs' then
         return
     end
-    if not source.bindDocs then
-        return
-    end
-    for _, doc in ipairs(source.bindDocs) do
-        if doc.type == 'doc.param' then
-            if doc.param[1] == source[1] then
-                if doc.comment then
-                    return doc.comment.text
-                end
-                break
+    for _, def in ipairs(vm.getDefs(source)) do
+        if def.type == 'doc.param' then
+            if def.comment then
+                return def.comment.text
             end
         end
     end
@@ -384,4 +380,5 @@ return function (source)
         or tyrDocParamComment(source)
         or tryDocComment(source)
         or tryDocClassComment(source)
+        or tryDocModule(source)
 end

@@ -115,6 +115,7 @@ local pushDefResultsMap = util.switch()
     : case 'doc.field.name'
     : case 'doc.type.enum'
     : case 'doc.resume'
+    : case 'doc.param'
     : case 'doc.type.array'
     : case 'doc.type.table'
     : case 'doc.type.ltable'
@@ -122,6 +123,10 @@ local pushDefResultsMap = util.switch()
     : case 'doc.type.function'
     : call(function (source, status)
         return true
+    end)
+    : case 'doc.type.name'
+    : call(function (source, status)
+        return source.typeGeneric ~= nil
     end)
     : case 'call'
     : call(function (source, status)
@@ -335,9 +340,9 @@ local genercCache = {
 local function flushGeneric()
     --清除来自泛型的临时对象
     for _, closure in next, genercCache.closureCache do
-        local noders = getNoders(closure)
-        removeID(noders, getID(closure))
         if closure then
+            local noders = getNoders(closure)
+            removeID(noders, getID(closure))
             local values = closure.values
             for i = 1, #values do
                 local value = values[i]
@@ -617,7 +622,7 @@ function m.searchRefsByID(status, suri, expect, mode)
     ---@param info node.info
     local function checkInfoFilter(id, field, info)
         for filter in next, filters do
-            if not filter(id, field) then
+            if not filter(id, field, mode) then
                 return false
             end
         end
@@ -753,6 +758,7 @@ function m.searchRefsByID(status, suri, expect, mode)
             local ruri = uris[i]
             if uri ~= ruri then
                 searchID(ruri, 'mainreturn', field, uri)
+                break
             end
         end
     end
@@ -954,6 +960,7 @@ function m.searchRefsByID(status, suri, expect, mode)
     end
 
     search(suri, expect, nil)
+    flushGeneric()
 end
 
 local function prepareSearch(source)

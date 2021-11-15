@@ -5,7 +5,6 @@ local buildTable  = require 'core.hover.table'
 local infer       = require 'core.infer'
 local vm          = require 'vm'
 local util        = require 'utility'
-local searcher    = require 'core.searcher'
 local lang        = require 'language'
 local config      = require 'config'
 local files       = require 'files'
@@ -17,7 +16,7 @@ local function asFunction(source, oop)
     local arg   = buildArg(source, oop)
     local rtn   = buildReturn(source)
     local lines = {}
-    lines[1] = ('function %s(%s)'):format(name or '', arg)
+    lines[1] = ('%s %s(%s)'):format(oop and 'method' or 'function', name or '', arg)
     lines[2] = rtn
     return table.concat(lines, '\n')
 end
@@ -51,8 +50,7 @@ local function asValue(source, title)
     local literal = infer.searchAndViewLiterals(source)
     local cont
     if  not infer.hasType(source, 'string')
-    and not type:find('%[%]$')
-    and not type:find('%w%<') then
+    and not type:find('%[%]$') then
         if #vm.getRefs(source, '*') > 0
         or infer.hasType(source, 'table') then
             cont = buildTable(source)

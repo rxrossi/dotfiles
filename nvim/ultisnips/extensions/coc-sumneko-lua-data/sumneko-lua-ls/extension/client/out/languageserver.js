@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deactivate = exports.activate = void 0;
 const path = require("path");
@@ -11,6 +20,7 @@ let defaultClient;
 let clients = new Map();
 function registerCustomCommands(context) {
     context.subscriptions.push(vscode_1.commands.registerCommand('lua.config', (changes) => {
+        let propMap = new Map();
         for (const data of changes) {
             let config = vscode_1.workspace.getConfiguration(undefined, vscode_1.Uri.parse(data.uri));
             if (data.action == 'add') {
@@ -24,9 +34,11 @@ function registerCustomCommands(context) {
                 continue;
             }
             if (data.action == 'prop') {
-                let value = config.get(data.key);
-                value[data.prop] = data.value;
-                config.update(data.key, value, data.global);
+                if (!propMap[data.key]) {
+                    propMap[data.key] = config.get(data.key);
+                }
+                propMap[data.key][data.prop] = data.value;
+                config.update(data.key, propMap[data.key], data.global);
                 continue;
             }
         }
@@ -92,18 +104,9 @@ function start(context, documentSelector, folder) {
             fs.chmodSync(command, '777');
             break;
     }
-    let args = [
-        '-E',
-        context.asAbsolutePath(path.join('server', 'main.lua')),
-    ];
-    try {
-        args = args.concat(commandParam);
-    }
-    finally { }
-    ;
     let serverOptions = {
         command: command,
-        args: args,
+        args: commandParam,
     };
     let client = new node_1.LanguageClient('Lua', 'Lua', serverOptions, clientOptions);
     //client.registerProposedFeatures();
@@ -111,6 +114,7 @@ function start(context, documentSelector, folder) {
     client.onReady().then(() => {
         onCommand(client);
         onDecorations(client);
+        //onInlayHint(client);
         statusBar(client);
     });
     return client;
@@ -134,6 +138,7 @@ function statusBar(client) {
         bar.text = params.text;
         bar.tooltip = params.tooltip;
     });
+    client.sendNotification('$/status/refresh');
 }
 function onCommand(client) {
     client.onNotification('$/command', (params) => {
@@ -202,13 +207,14 @@ function onDecorations(client) {
                 let options = [];
                 for (let index = 0; index < edits.length; index++) {
                     const edit = edits[index];
+                    let pos = client.protocol2CodeConverter.asPosition(edit.pos);
                     options[index] = {
-                        hoverMessage: edit.newText,
-                        range: client.protocol2CodeConverter.asRange(edit.range),
+                        hoverMessage: edit.text,
+                        range: new vscode.Range(pos, pos),
                         renderOptions: {
                             light: {
                                 after: {
-                                    contentText: edit.newText,
+                                    contentText: edit.text,
                                     color: '#888888',
                                     backgroundColor: '#EEEEEE;border-radius: 5px;',
                                     fontWeight: '400; font-size: 12px; line-height: 1;',
@@ -216,7 +222,7 @@ function onDecorations(client) {
                             },
                             dark: {
                                 after: {
-                                    contentText: edit.newText,
+                                    contentText: edit.text,
                                     color: '#888888',
                                     backgroundColor: '#333333;border-radius: 5px;',
                                     fontWeight: '400; font-size: 12px; line-height: 1;',
@@ -228,6 +234,27 @@ function onDecorations(client) {
                 textEditor.setDecorations(textType, options);
             }
         }
+    });
+}
+function onInlayHint(client) {
+    vscode.languages.registerInlayHintsProvider(client.clientOptions.documentSelector, {
+        provideInlayHints: (model, range) => __awaiter(this, void 0, void 0, function* () {
+            let pdoc = client.code2ProtocolConverter.asTextDocumentIdentifier(model);
+            let prange = client.code2ProtocolConverter.asRange(range);
+            let results = yield client.sendRequest('$/requestHint', {
+                textDocument: pdoc,
+                range: prange,
+            });
+            if (!results) {
+                return [];
+            }
+            let hints = [];
+            for (const result of results) {
+                let hint = new vscode.InlayHint(result.text, client.protocol2CodeConverter.asPosition(result.pos), result.kind);
+                hints.push(hint);
+            }
+            return hints;
+        })
     });
 }
 function activate(context) {

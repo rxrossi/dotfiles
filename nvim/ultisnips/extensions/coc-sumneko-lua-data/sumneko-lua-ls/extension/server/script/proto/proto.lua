@@ -4,7 +4,6 @@ local await      = require 'await'
 local pub        = require 'pub'
 local jsonrpc    = require 'jsonrpc'
 local define     = require 'proto.define'
-local timer      = require 'timer'
 local json       = require 'json'
 
 local reqCounter = util.counter()
@@ -39,7 +38,7 @@ function m.response(id, res)
     data.result = res == nil and json.null or res
     local buf = jsonrpc.encode(data)
     --log.debug('Response', id, #buf)
-    io.stdout:write(buf)
+    io.write(buf)
 end
 
 function m.responseErr(id, code, message)
@@ -47,6 +46,8 @@ function m.responseErr(id, code, message)
         log.error('Response id is nil!', util.dump(message))
         return
     end
+    assert(m.holdon[id])
+    m.holdon[id] = nil
     local buf = jsonrpc.encode {
         id    = id,
         error = {
@@ -55,7 +56,7 @@ function m.responseErr(id, code, message)
         }
     }
     --log.debug('ResponseErr', id, #buf)
-    io.stdout:write(buf)
+    io.write(buf)
 end
 
 function m.notify(name, params)
@@ -64,7 +65,7 @@ function m.notify(name, params)
         params = params,
     }
     --log.debug('Notify', name, #buf)
-    io.stdout:write(buf)
+    io.write(buf)
 end
 
 function m.awaitRequest(name, params)
@@ -75,7 +76,7 @@ function m.awaitRequest(name, params)
         params = params,
     }
     --log.debug('Request', name, #buf)
-    io.stdout:write(buf)
+    io.write(buf)
     local result, error = await.wait(function (resume)
         m.waiting[id] = resume
     end)
@@ -93,7 +94,7 @@ function m.request(name, params, callback)
         params = params,
     }
     --log.debug('Request', name, #buf)
-    io.stdout:write(buf)
+    io.write(buf)
     m.waiting[id] = function (result, error)
         if error then
             log.warn(('Response of [%s] error [%d]: %s'):format(name, error.code, error.message))
@@ -117,12 +118,15 @@ function m.doMethod(proto)
         return
     end
     if proto.id then
-        m.holdon[proto.id] = method
+        m.holdon[proto.id] = proto
     end
     await.call(function ()
         --log.debug('Start method:', method)
+        if proto.id then
+            await.setID('proto:' .. proto.id)
+        end
         local clock = os.clock()
-        local ok = true
+        local ok = false
         local res
         -- 任务可能在执行过程中被中断，通过close来捕获
         local response <close> = function ()
@@ -134,14 +138,24 @@ function m.doMethod(proto)
             if not proto.id then
                 return
             end
+            await.close('proto:' .. proto.id)
             if ok then
                 m.response(proto.id, res)
             else
-                m.responseErr(proto.id, define.ErrorCodes.InternalError, res)
+                m.responseErr(proto.id, proto._closeReason or define.ErrorCodes.InternalError, res)
             end
         end
         ok, res = xpcall(abil, log.error, proto.params)
     end)
+end
+
+function m.close(id, reason)
+    local proto = m.holdon[id]
+    if not proto then
+        return
+    end
+    proto._closeReason = reason
+    await.close('proto:' .. id)
 end
 
 function m.doResponse(proto)

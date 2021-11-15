@@ -41,6 +41,8 @@ DIAG_COSE_NON_OBJECT    = '无法 close 此类型的值。（除非给此类型�
 DIAG_COUNT_DOWN_LOOP    = '你的意思是 `{}` 吗？'
 DIAG_IMPLICIT_ANY       = '无法推测出类型。'
 DIAG_DEPRECATED         = '已废弃。'
+DIAG_DIFFERENT_REQUIRES = '使用了不同的名字 require 了同一个文件。'
+DIAG_REDUNDANT_RETURN   = '冗余返回。'
 
 DIAG_CIRCLE_DOC_CLASS                 = '循环继承的类。'
 DIAG_DOC_FIELD_NO_CLASS               = '字段必须定义在类之后。'
@@ -111,6 +113,7 @@ PARSER_UNICODE_NAME      = '包含了 Unicode 字符。'
 PARSER_ERR_NONSTANDARD_SYMBOL = 'Lua中应使用符号 `{symbol}`。'
 PARSER_MISS_SPACE_BETWEEN = '符号之间必须保留空格'
 PARSER_INDEX_IN_FUNC_NAME = '命名函数的名称中不能使用 `[name]` 形式。'
+PARSER_UNKNOWN_ATTRIBUTE  = '局部变量属性应该是 `const` 或 `close`'
 
 PARSER_LUADOC_MISS_CLASS_NAME           = '缺少类名称。'
 PARSER_LUADOC_MISS_EXTENDS_SYMBOL       = '缺少符号 `:`。'
@@ -235,6 +238,7 @@ WINDOW_TELEMETRY_HINT            = '请允许发送匿名的使用数据与错�
 WINDOW_TELEMETRY_ENABLE          = '允许'
 WINDOW_TELEMETRY_DISABLE         = '禁止'
 WINDOW_CLIENT_NOT_SUPPORT_CONFIG = '你的客户端不支持从服务侧修改设置，请手动修改如下设置：'
+WINDOW_LCONFIG_NOT_SUPPORT_CONFIG= '暂不支持自动修改本地设置，请手动修改如下设置：'
 WINDOW_MANUAL_CONFIG_ADD         = '为 `{key}` 添加值 `{value:q}`;'
 WINDOW_MANUAL_CONFIG_SET         = '将 `{key}` 的值设置为 `{value:q}`;'
 WINDOW_MANUAL_CONFIG_PROP        = '将 `{key}` 的属性 `{prop}` 设置为 `{value:q}`;'
@@ -250,4 +254,15 @@ PLUGIN_RUNTIME_ERROR             = [[
 插件发生错误，请汇报给插件作者。
 请在输出或日志中查看详细信息。
 插件路径：{}
+]]
+PLUGIN_TRUST_LOAD                = [[
+当前设置试图加载位于此位置的插件：{}
+
+注意，恶意的插件可能会危害您的电脑
+]]
+PLUGIN_TRUST_YES                 = [[
+信任并加载插件
+]]
+PLUGIN_TRUST_NO                  = [[
+不要加载此插件
 ]]

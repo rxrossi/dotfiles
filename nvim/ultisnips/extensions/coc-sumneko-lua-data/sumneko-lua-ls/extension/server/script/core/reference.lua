@@ -52,13 +52,13 @@ local accept = {
     ['doc.alias.name']   = true,
 }
 
-return function (uri, offset)
+return function (uri, position)
     local ast = files.getState(uri)
     if not ast then
         return nil
     end
 
-    local source = findSource(ast, offset, accept)
+    local source = findSource(ast, position, accept)
     if not source then
         return nil
     end
@@ -111,13 +111,9 @@ return function (uri, offset)
         elseif src.type == 'table' and src.parent.type ~= 'return' then
             goto CONTINUE
         end
-        local ouri = files.getOriginUri(root.uri)
-        if not ouri then
-            goto CONTINUE
-        end
         results[#results+1] = {
             target = src,
-            uri    = ouri,
+            uri    = root.uri,
         }
         ::CONTINUE::
     end

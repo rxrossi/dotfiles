@@ -1,37 +1,5 @@
 local m = {}
 
----@alias location table
----@param uri string
----@param range range
----@return location
-function m.location(uri, range)
-    return {
-        uri   = uri,
-        range = range,
-    }
-end
-
----@alias locationLink table
----@param uri string
----@param range range
----@param selection range
----@param origin range
-function m.locationLink(uri, range, selection, origin)
-    return {
-        targetUri            = uri,
-        targetRange          = range,
-        targetSelectionRange = selection,
-        originSelectionRange = origin,
-    }
-end
-
-function m.textEdit(range, newtext)
-    return {
-        range   = range,
-        newText = newtext,
-    }
-end
-
 --- 诊断等级
 m.DiagnosticSeverity = {
     Error       = 1,
@@ -60,20 +28,23 @@ m.DiagnosticDefaultSeverity = {
     ['redefined-local']         = 'Hint',
     ['newline-call']            = 'Information',
     ['newfield-call']           = 'Warning',
-    ['redundant-parameter']     = 'Hint',
+    ['redundant-parameter']     = 'Warning',
+    ['redundant-return']        = 'Warning',
     ['ambiguity-1']             = 'Warning',
     ['lowercase-global']        = 'Information',
     ['undefined-env-child']     = 'Information',
     ['duplicate-index']         = 'Warning',
     ['duplicate-set-field']     = 'Warning',
     ['empty-block']             = 'Hint',
-    ['redundant-value']         = 'Hint',
+    ['redundant-value']         = 'Warning',
     ['code-after-break']        = 'Hint',
     ['unbalanced-assignments']  = 'Warning',
     ['close-non-object']        = 'Warning',
     ['count-down-loop']         = 'Warning',
     ['no-implicit-any']         = 'Information',
     ['deprecated']              = 'Warning',
+    ['different-requires']      = 'Warning',
+    ['type-check']              = 'Warning',
 
     ['duplicate-doc-class']     = 'Warning',
     ['undefined-doc-class']     = 'Warning',
@@ -112,6 +83,7 @@ m.DiagnosticDefaultNeededFileStatus = {
     ['newline-call']            = 'Any',
     ['newfield-call']           = 'Any',
     ['redundant-parameter']     = 'Opened',
+    ['redundant-return']        = 'Opened',
     ['ambiguity-1']             = 'Any',
     ['lowercase-global']        = 'Any',
     ['undefined-env-child']     = 'Any',
@@ -125,6 +97,8 @@ m.DiagnosticDefaultNeededFileStatus = {
     ['count-down-loop']         = 'Any',
     ['no-implicit-any']         = 'None',
     ['deprecated']              = 'Opened',
+    ['different-requires']      = 'Any',
+    ['type-check']              = 'None',
 
     ['duplicate-doc-class']     = 'Any',
     ['undefined-doc-class']     = 'Any',
@@ -203,6 +177,7 @@ m.ErrorCodes = {
     UnknownErrorCode     = -32001,
 
     -- Defined by the protocol.
+    ContentModified      = -32801,
     RequestCancelled     = -32800,
 }
 
@@ -236,34 +211,41 @@ m.SymbolKind = {
 }
 
 m.TokenModifiers = {
-    ["declaration"]   = 1 << 0,
-    ["documentation"] = 1 << 1,
-    ["static"]        = 1 << 2,
-    ["abstract"]      = 1 << 3,
-    ["deprecated"]    = 1 << 4,
-    ["readonly"]      = 1 << 5,
+    ["declaration"]    = 1 << 0,
+    ["definition"]     = 1 << 1,
+    ["readonly"]       = 1 << 2,
+    ["static"]         = 1 << 3,
+    ["deprecated"]     = 1 << 4,
+    ["abstract"]       = 1 << 5,
+    ["async"]          = 1 << 6,
+    ["modification"]   = 1 << 7,
+    ["documentation"]  = 1 << 8,
+    ["defaultLibrary"] = 1 << 9,
 }
 
 m.TokenTypes = {
-    ["comment"]       = 0,
-    ["keyword"]       = 1,
-    ["number"]        = 2,
-    ["regexp"]        = 3,
-    ["operator"]      = 4,
-    ["namespace"]     = 5,
-    ["type"]          = 6,
-    ["struct"]        = 7,
-    ["class"]         = 8,
-    ["interface"]     = 9,
-    ["enum"]          = 10,
-    ["typeParameter"] = 11,
+    ["namespace"]     = 00,
+    ["type"]          = 01,
+    ["class"]         = 02,
+    ["enum"]          = 03,
+    ["interface"]     = 04,
+    ["struct"]        = 05,
+    ["typeParameter"] = 06,
+    ["parameter"]     = 07,
+    ["variable"]      = 08,
+    ["property"]      = 09,
+    ["enumMember"]    = 10,
+    ["event"]         = 11,
     ["function"]      = 12,
-    ["member"]        = 13,
+    ["method"]        = 13,
     ["macro"]         = 14,
-    ["variable"]      = 15,
-    ["parameter"]     = 16,
-    ["property"]      = 17,
-    ["label"]         = 18,
+    ["keyword"]       = 15,
+    ["modifier"]      = 16,
+    ["comment"]       = 17,
+    ["string"]        = 18,
+    ["number"]        = 19,
+    ["regexp"]        = 20,
+    ["operator"]      = 21,
 }
 
 m.BuiltIn = {
@@ -284,7 +266,7 @@ m.BuiltIn = {
     ['utf8']      = 'default',
 }
 
-m.BuiltinClass = {
+m.BuiltinType = {
     ['unknown']       = true,
     ['any']           = true,
     ['nil']           = true,
@@ -296,7 +278,13 @@ m.BuiltinClass = {
     ['string']        = true,
     ['userdata']      = true,
     ['lightuserdata'] = true,
-    ['Function']      = true,
+    ['function']      = true,
+}
+
+m.InlayHintKind = {
+    Other     = 0,
+    Type      = 1,
+    Parameter = 2,
 }
 
 return m

@@ -1,16 +1,21 @@
-local files  = require 'files'
-local json   = require 'json'
-local util   = require 'utility'
-local proto  = require 'proto'
-local define = require 'proto.define'
-local lang   = require 'language'
+local files     = require 'files'
+local json      = require 'json'
+local util      = require 'utility'
+local proto     = require 'proto'
+local define    = require 'proto.define'
+local lang      = require 'language'
+local converter = require 'proto.converter'
+local guide     = require 'parser.guide'
 
 return function (data)
-    local text = files.getText(data.uri)
+    local state = files.getState(data.uri)
+    local text  = files.getText(data.uri)
     if not text then
         return
     end
-    local jsonStr = text:sub(data.start, data.finish)
+    local start  = guide.positionToOffset(state, data.start)
+    local finish = guide.positionToOffset(state, data.finish)
+    local jsonStr = text:sub(start + 1, finish)
     local suc, res = pcall(json.decode, jsonStr)
     if not suc then
         proto.notify('window/showMessage', {
@@ -24,9 +29,9 @@ return function (data)
         label = 'json to lua',
         edit  = {
             changes = {
-                [files.getOriginUri(data.uri)] = {
+                [data.uri] = {
                     {
-                        range   = files.range(data.uri, data.start, data.finish),
+                        range   = converter.packRange(data.uri, data.start, data.finish),
                         newText = luaStr,
                     }
                 }

@@ -69,20 +69,10 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["DAPInstall.nvim"] = {
-    loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/DAPInstall.nvim",
-    url = "https://github.com/Pocco81/DAPInstall.nvim"
-  },
   ["coc.nvim"] = {
     loaded = true,
     path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/coc.nvim",
     url = "https://github.com/neoclide/coc.nvim"
-  },
-  ["context.vim"] = {
-    loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/context.vim",
-    url = "https://github.com/wellle/context.vim"
   },
   ["defx.nvim"] = {
     loaded = true,
@@ -99,25 +89,10 @@ _G.packer_plugins = {
     path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
-  ["linediff.vim"] = {
-    loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/linediff.vim",
-    url = "https://github.com/AndrewRadev/linediff.vim"
-  },
   ["nvim-base16"] = {
     loaded = true,
     path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/nvim-base16",
     url = "https://github.com/RRethy/nvim-base16"
-  },
-  ["nvim-dap"] = {
-    loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/nvim-dap",
-    url = "https://github.com/mfussenegger/nvim-dap"
-  },
-  ["nvim-dap-virtual-text"] = {
-    loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/nvim-dap-virtual-text",
-    url = "https://github.com/theHamsta/nvim-dap-virtual-text"
   },
   ["nvim-treesitter"] = {
     loaded = true,
@@ -138,11 +113,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
-  },
-  ["telescope-dap.nvim"] = {
-    loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope-dap.nvim",
-    url = "https://github.com/nvim-telescope/telescope-dap.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
@@ -179,11 +149,6 @@ _G.packer_plugins = {
     path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-indentwise",
     url = "https://github.com/jeetsukumaran/vim-indentwise"
   },
-  ["vim-maximizer"] = {
-    loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-maximizer",
-    url = "https://github.com/szw/vim-maximizer"
-  },
   ["vim-obsession"] = {
     loaded = true,
     path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-obsession",
@@ -198,20 +163,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vimwiki",
     url = "https://github.com/vimwiki/vimwiki"
-  },
-  ["zen-mode.nvim"] = {
-    config = { "\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rzen-mode\frequire\0" },
-    loaded = true,
-    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/zen-mode.nvim",
-    url = "https://github.com/folke/zen-mode.nvim"
   }
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: zen-mode.nvim
-time([[Config for zen-mode.nvim]], true)
-try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rzen-mode\frequire\0", "config", "zen-mode.nvim")
-time([[Config for zen-mode.nvim]], false)
 if should_profile then save_profiles() end
 
 end)

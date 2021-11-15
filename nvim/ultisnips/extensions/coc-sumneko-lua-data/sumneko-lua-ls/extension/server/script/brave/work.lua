@@ -8,7 +8,7 @@ local thread  = require 'bee.thread'
 brave.on('loadProto', function ()
     local jsonrpc = require 'jsonrpc'
     while true do
-        local proto, err = jsonrpc.decode(io.read, log.error)
+        local proto, err = jsonrpc.decode(io.read)
         --log.debug('loaded proto', proto.method)
         if not proto then
             brave.push('protoerror', err)
@@ -26,12 +26,12 @@ brave.on('timer', function (time)
 end)
 
 brave.on('compile', function (text)
-    local state, err = parser:compile(text, 'lua', 'Lua 5.4')
+    local state, err = parser.compile(text, 'Lua', 'Lua 5.4')
     if not state then
         log.error(err)
         return
     end
-    local lines = parser:lines(text)
+    local lines = parser.lines(text)
     return {
         root  = state.root,
         value = state.value,
@@ -43,7 +43,7 @@ end)
 brave.on('listDirectory', function (uri)
     local path = fs.path(furi.decode(uri))
     local uris = {}
-    for child in path:list_directory() do
+    for child in fs.pairs(path) do
         local childUri = furi.encode(child:string())
         uris[#uris+1] = childUri
     end

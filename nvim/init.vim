@@ -81,9 +81,9 @@ nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
 nnoremap <leader>cn :tabnew ~/Box/bujo/index.md
 nnoremap <leader>cs <cmd>source $MYVIMRC<cr>
 
+nnoremap <leader>p <cmd>CocCommand prettier.formatFile<cr>
+
 " tsconfig.json is actually jsonc, help TypeScript set the correct filetype
 autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
 
-
-let g:context_enabled = 0
 set noswapfile

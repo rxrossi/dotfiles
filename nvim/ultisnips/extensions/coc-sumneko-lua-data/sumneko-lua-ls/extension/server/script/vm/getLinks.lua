@@ -1,18 +1,17 @@
 local guide = require 'parser.guide'
----@diagnostic disable-next-line
----@class vm
+---@type vm
 local vm    = require 'vm.vm'
 local files = require 'files'
 
 local function getFileLinks(uri)
     local ws    = require 'workspace'
     local links = {}
-    local ast = files.getState(uri)
-    if not ast then
+    local state = files.getState(uri)
+    if not state then
         return links
     end
     tracy.ZoneBeginN('getFileLinks')
-    guide.eachSpecialOf(ast.ast, 'require', function (source)
+    guide.eachSpecialOf(state.ast, 'require', function (source)
         local call = source.parent
         if not call or call.type ~= 'call' then
             return
@@ -23,7 +22,6 @@ local function getFileLinks(uri)
         end
         local uris = ws.findUrisByRequirePath(args[1][1])
         for _, u in ipairs(uris) do
-            u = files.asKey(u)
             if not links[u] then
                 links[u] = {}
             end
@@ -41,7 +39,6 @@ local function getFileLinksOrCache(uri)
 end
 
 local function getLinksTo(uri)
-    uri = files.asKey(uri)
     local links = {}
     for u in files.eachFile() do
         local ls = getFileLinksOrCache(u)

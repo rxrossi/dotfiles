@@ -41,6 +41,8 @@ DIAG_COSE_NON_OBJECT    = 'Cannot close a value of this type. (Unless set `__clo
 DIAG_COUNT_DOWN_LOOP    = 'Do you mean `{}` ?'
 DIAG_IMPLICIT_ANY       = 'Can not infer type.'
 DIAG_DEPRECATED         = 'Deprecated.'
+DIAG_DIFFERENT_REQUIRES = 'The same file is required with different names.'
+DIAG_REDUNDANT_RETURN   = 'Redundant return.'
 
 DIAG_CIRCLE_DOC_CLASS                 = 'Circularly inherited classes.'
 DIAG_DOC_FIELD_NO_CLASS               = 'The field must be defined after the class.'
@@ -111,6 +113,7 @@ PARSER_UNICODE_NAME      = 'Contains Unicode characters.'
 PARSER_ERR_NONSTANDARD_SYMBOL = 'Lua should use `{symbol}` .'
 PARSER_MISS_SPACE_BETWEEN = 'Spaces must be left between symbols.'
 PARSER_INDEX_IN_FUNC_NAME = 'The `[name]` form cannot be used in the name of a named function.'
+PARSER_UNKNOWN_ATTRIBUTE  = 'Local attribute should be `const` or `close`'
 
 PARSER_LUADOC_MISS_CLASS_NAME           = '<class name> expected.'
 PARSER_LUADOC_MISS_EXTENDS_SYMBOL       = '`:` expected.'
@@ -182,7 +185,7 @@ ACTION_ADD_END          = 'Add `end` (infer the addition location ny indentation
 ACTION_FIX_COMMENT_PREFIX = 'Modify to `--` .'
 ACTION_FIX_NONSTANDARD_SYMBOL = 'Modify to `{symbol}` .'
 ACTION_RUNTIME_UNICODE_NAME = 'Allow Unicode characters.'
-ACTION_SWAP_PARAMS      = 'Change to parameter {index} or `{node}`'
+ACTION_SWAP_PARAMS      = 'Change to parameter {index} of `{node}`'
 ACTION_FIX_INSERT_SPACE = 'Insert space.'
 ACTION_JSON_TO_LUA      = 'Convert JSON to Lua'
 ACTION_DISABLE_DIAG_LINE= 'Disable diagnostics on this line ({}).'
@@ -236,6 +239,7 @@ WINDOW_TELEMETRY_HINT            = 'Please allow sending anonymous usage data an
 WINDOW_TELEMETRY_ENABLE          = 'Allow'
 WINDOW_TELEMETRY_DISABLE         = 'Prohibit'
 WINDOW_CLIENT_NOT_SUPPORT_CONFIG = 'Your client does not support modifying settings from the server side, please manually modify the following settings:'
+WINDOW_LCONFIG_NOT_SUPPORT_CONFIG= 'Automatic modification of local settings is not currently supported, please manually modify the following settings:'
 WINDOW_MANUAL_CONFIG_ADD         = '`{key}`: add element `{value:q}` ;'
 WINDOW_MANUAL_CONFIG_SET         = '`{key}`: set to `{value:q}` ;'
 WINDOW_MANUAL_CONFIG_PROP        = '`{key}`: set the property `{prop}` to `{value:q}`;'
@@ -251,4 +255,15 @@ PLUGIN_RUNTIME_ERROR             = [[
 An error occurred in the plugin, please report it to the plugin author.
 Please check the details in the output or log.
 Plugin path: {}
+]]
+PLUGIN_TRUST_LOAD                = [[
+The current settings try to load the plugin at this location:{}
+
+Note that malicious plugin may harm your computer
+]]
+PLUGIN_TRUST_YES                 = [[
+Trust and load this plugin
+]]
+PLUGIN_TRUST_NO                  = [[
+Don't load this plugin
 ]]

@@ -16,33 +16,50 @@ end
 
 local m = {}
 
-function m.loadLocalConfig(filename)
-    local path = fs.path(workspace.getAbsolutePath(filename))
-    local ext  = path:extension():string():lower()
-    local buf  = fsu.loadFile(path)
-    if not buf then
-        errorMessage(lang.script('CONFIG_LOAD_FAILED', path:string()))
+function m.loadRCConfig(filename)
+    local path = workspace.getAbsolutePath(filename)
+    if not path then
         return
     end
-    if ext == '.json' then
+    local buf = util.loadFile(path)
+    if not buf then
+        return
+    end
+    local suc, res = pcall(json.decode, buf)
+    if not suc then
+        errorMessage(lang.script('CONFIG_LOAD_ERROR', res))
+        return
+    end
+    return res
+end
+
+function m.loadLocalConfig(filename)
+    local path = workspace.getAbsolutePath(filename)
+    if not path then
+        return
+    end
+    local buf  = util.loadFile(path)
+    if not buf then
+        errorMessage(lang.script('CONFIG_LOAD_FAILED', path))
+        return
+    end
+    local firstChar = buf:match '%S'
+    if firstChar == '{' then
         local suc, res = pcall(json.decode, buf)
         if not suc then
             errorMessage(lang.script('CONFIG_LOAD_ERROR', res))
             return
         end
         return res
-    elseif ext == '.lua' then
+    else
         local suc, res = pcall(function ()
-            return assert(load(buf, '@' .. path:string(), 't'))()
+            return assert(load(buf, '@' .. path, 't'))()
         end)
         if not suc then
             errorMessage(lang.script('CONFIG_LOAD_ERROR', res))
             return
         end
         return res
-    else
-        errorMessage(lang.script('CONFIG_TYPE_ERROR', path:string()))
-        return
     end
 end
 

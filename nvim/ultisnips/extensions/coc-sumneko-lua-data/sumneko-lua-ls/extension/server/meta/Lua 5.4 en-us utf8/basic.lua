@@ -5,7 +5,7 @@
 ---
 ---[View documents](http://www.lua.org/manual/5.4/manual.html#pdf-arg)
 ---
----@type table
+---@type string[]
 arg = {}
 
 ---
@@ -186,7 +186,7 @@ function next(table, index) end
 ---See function [next](http://www.lua.org/manual/5.4/manual.html#pdf-next) for the caveats of modifying the table during its traversal.
 ---
 ---
----[View documents](http://www.lua.org/manual/5.4/manual.html#pdf-paris)
+---[View documents](http://www.lua.org/manual/5.4/manual.html#pdf-pairs)
 ---
 ---@generic T: table, K, V
 ---@param t T

@@ -2,6 +2,7 @@
 
 source  $HOME/.config/nvim/defx_settings.vim
 source  $HOME/.config/nvim/coc.vim
+source  $HOME/.config/nvim/codereview.vim
 
 set encoding=utf-8
 set hidden
@@ -44,13 +45,6 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope command_history<cr>
 nnoremap <leader>fc <cmd>Telescope commands<cr>
 nnoremap <leader>fo <cmd>Telescope oldfiles<cr>
-
-" Fugitive
-let branchn = "main"
-nnoremap <leader>dm <cmd>execute "Git difftool --name-status " . branchn . "... ':!**/graphql.types*'"<cr>
-nnoremap dm <cmd>execute "Gvdiffsplit " . branchn . "..."<cr>
-map <leader>p <C-w>q[qdm
-map <leader>n <C-w>q]qdm
 
 " wiki
 let wiki = {}

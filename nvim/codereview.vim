@@ -21,6 +21,8 @@ function CodeReview(newBranch, mainBranch = "main")
   nnoremap dm <cmd>execute "Gvdiffsplit " . codeReviewTargetBranch . "..."<cr>
   map <leader>p <C-w>q[qdm
   map <leader>n <C-w>q]qdm
+
+  nnoremap dmq <enter> <c-w>o <cmd>copen<cr> <C-w>w <cmd>execute "Gvdiffsplit " . codeReviewTargetBranch . "..."<cr>
 endfunction
 
 command! -nargs=* -range -complete=custom,s:codeReview_complete CodeReview call CodeReview(<f-args>)

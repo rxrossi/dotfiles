@@ -1,8 +1,8 @@
-function! s:codeReview_complete(arg,line,pos)
+function! CodeReview_complete(arg,line,pos)
   return ListBranches()
 endfunction
 
-function ListBranches()
+function! ListBranches()
   let l:commandOutputAsList = split(execute("!git branch -a --sort=-committerdate"), "\n")
   let l:branches = map(map(l:commandOutputAsList, 'trim(v:val)')[2:], 'trim(v:val, "* ")')
 
@@ -12,11 +12,12 @@ endfunction
 
 let codeReviewTargetBranch = "main"
 
-function CodeReview(newBranch, mainBranch = "main")
-  let codeReviewTargetBranch = a:mainBranch
+function ReviewLocalBranches(sourceBranch, targetBranch = "main")
+  let codeReviewTargetBranch = a:targetBranch
 
-  silent execute "!git checkout " . a:newBranch
-  execute "Git difftool --name-status " . a:mainBranch . "... ':!**/graphql.types*'"
+  silent execute "!git checkout " . a:sourceBranch
+  silent execute "Git difftool --name-status " . a:targetBranch . "... ':!**/graphql.types*'"
+  silent execute "Gitsigns change_base " .  codeReviewTargetBranch . " true"
 
   nnoremap dm <cmd>execute "Gvdiffsplit " . codeReviewTargetBranch . "..."<cr>
   map <leader>p <C-w>q[qdm
@@ -25,4 +26,17 @@ function CodeReview(newBranch, mainBranch = "main")
   nnoremap dmq <enter> <c-w>o <cmd>copen<cr> <C-w>w <cmd>execute "Gvdiffsplit " . codeReviewTargetBranch . "..."<cr>
 endfunction
 
-command! -nargs=* -range -complete=custom,s:codeReview_complete CodeReview call CodeReview(<f-args>)
+command! -nargs=* -range -complete=custom,s:codeReview_complete CodeReviewLocal call ReviewLocalBranches(<f-args>)
+
+function ReviewRemoteBranch (sourceBranch, targetBranch = "main")
+  execute "!git fetch"
+
+  execute "!git checkout " . a:targetBranch
+  execute "!git pull"
+  execute "!git checkout " . a:sourceBranch
+  execute "!git pull"
+
+  call ReviewLocalBranches(a:sourceBranch, a:targetBranch)
+endfunction
+
+command! -nargs=* -range CodeReviewRemote silent call ReviewRemoteBranch(<f-args>)

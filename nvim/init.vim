@@ -59,6 +59,7 @@ autocmd FileType fugitive          nnoremap <buffer> ca :G commit -n --amend<CR>
 
 " ColorScheme
 colorscheme base16-materia
+
 function! TweakBase16()
     " Override the diff-mode highlights of base16.
     highlight DiffAdd    term=bold ctermfg=0 ctermbg=2 guifg=#2b2b2b guibg=#a5c261
@@ -81,3 +82,5 @@ nnoremap <leader>p <cmd>CocCommand prettier.formatFile<cr>
 autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
 
 set noswapfile
+
+set splitright

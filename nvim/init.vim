@@ -40,7 +40,7 @@ inoremap <silent> <C-S>         <C-O>:update<CR><ESC>
 " Find files using Telescope command-line sugar.
 nnoremap <leader><leader> <cmd>Telescope <cr>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fg <cmd>:lua require("telescope").extensions.live_grep_raw.live_grep_raw()<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope command_history<cr>
 nnoremap <leader>fc <cmd>Telescope commands<cr>

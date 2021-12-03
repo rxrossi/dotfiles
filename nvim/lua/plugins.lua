@@ -14,7 +14,11 @@ return require('packer').startup(function(use)
   use 'vimwiki/vimwiki'
   use {
     'nvim-telescope/telescope.nvim',
-    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+    requires = {
+      {'nvim-lua/popup.nvim'},
+      {'nvim-lua/plenary.nvim'},
+      {'nvim-telescope/telescope-live-grep-raw.nvim'}
+    }
   }
   use {
     'lewis6991/gitsigns.nvim',

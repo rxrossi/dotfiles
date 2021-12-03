@@ -46,6 +46,12 @@ nnoremap <leader>fh <cmd>Telescope command_history<cr>
 nnoremap <leader>fc <cmd>Telescope commands<cr>
 nnoremap <leader>fo <cmd>Telescope oldfiles<cr>
 
+let g:rooter_manual_only = 1
+let g:rooter_patterns = ['.git', '.svn', 'package.json', '!node_modules']
+" cd into Package
+command Pcd execute "cd " . FindRootDirectory()
+" cd into Git root by using Gcd
+
 " wiki
 let wiki = {}
 let wiki.nested_syntaxes = { 'python': 'python', 'c++': 'cpp', 'sql': 'sql', 'pgsql': 'pgsql',  'javascript': 'javascript', 'typescript': 'typescript' }
@@ -59,7 +65,6 @@ autocmd FileType fugitive          nnoremap <buffer> ca :G commit -n --amend<CR>
 
 " ColorScheme
 colorscheme base16-materia
-
 function! TweakBase16()
     " Override the diff-mode highlights of base16.
     highlight DiffAdd    term=bold ctermfg=0 ctermbg=2 guifg=#2b2b2b guibg=#a5c261
@@ -82,5 +87,3 @@ nnoremap <leader>p <cmd>CocCommand prettier.formatFile<cr>
 autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
 
 set noswapfile
-
-set splitright

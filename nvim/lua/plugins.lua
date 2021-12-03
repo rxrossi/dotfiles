@@ -41,6 +41,7 @@ return require('packer').startup(function(use)
   -- use 'mfussenegger/nvim-dap'
 	-- use 'nvim-telescope/telescope-dap.nvim'
 	-- use 'theHamsta/nvim-dap-virtual-text'
+  use 'airblade/vim-rooter'
   -- use 'Pocco81/DAPInstall.nvim'
 
   -- use 'szw/vim-maximizer'

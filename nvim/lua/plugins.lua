@@ -1,3 +1,5 @@
+local sep_os_replacer = require("utils").sep_os_replacer
+
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
@@ -38,20 +40,33 @@ return require('packer').startup(function(use)
 
   use 'michaeljsmith/vim-indent-object'
 
-  -- use 'mfussenegger/nvim-dap'
-	-- use 'nvim-telescope/telescope-dap.nvim'
-	-- use 'theHamsta/nvim-dap-virtual-text'
   use 'airblade/vim-rooter'
-  -- use 'Pocco81/DAPInstall.nvim'
 
-  -- use 'szw/vim-maximizer'
-  -- use 'AndrewRadev/linediff.vim'
+  -- debug
+  use({ "jbyuki/one-small-step-for-vimkind" }) -- lua debug
+  use({ "mfussenegger/nvim-dap-python", opt = true }) -- python debug
+  use({
+    "Pocco81/DAPInstall.nvim",
+    cmd = { "DIInstall", "DIList" },
+    config = function()
+      local dap_install = require("dap-install")
 
-  -- use {
-  --   "folke/zen-mode.nvim",
-  --   config = function()
-  --     require("zen-mode").setup {}
-  --   end
-  -- }
+      dap_install.setup({
+        installation_path = sep_os_replacer(
+          vim.fn.stdpath("data") .. "/dapinstall/"
+        ),
+      })
+    end,
+  }) -- install dap adapters
+  use({
+    "mfussenegger/nvim-dap",
+  }) -- dap
+  use({
+    "rcarriga/nvim-dap-ui",
+    requires = { "mfussenegger/nvim-dap" },
+  }) -- dap ui
+
+  use 'danilamihailov/beacon.nvim'
+
 end)
 

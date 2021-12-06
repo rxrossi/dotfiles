@@ -1,7 +1,10 @@
+local remap = require("utils").map_global;
+
 require'bootstrap_packer'
 require'plugins'
 require'treesitter_settings'
 require'gitsigns_settings'
+require'plugins_cfg.dap'
 
 vim.wo.relativenumber = true
 vim.wo.number = true
@@ -30,3 +33,15 @@ require('telescope').setup({
     },
   },
 })
+
+remap(
+  "n",
+  "<Leader>dc",
+  [[ <Cmd>lua require("plugins_cfg.dap.attach"):addPlug(); require'dap'.continue()<CR>]]
+);
+
+remap(
+  "n",
+  "<Leader>db",
+  [[ <Cmd>lua require("plugins_cfg.dap.attach"):addPlug(); require'dap'.toggle_breakpoint()<CR>]]
+);

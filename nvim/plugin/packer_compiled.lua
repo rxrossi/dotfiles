@@ -57,7 +57,7 @@ end
 time([[Luarocks path setup]], false)
 time([[try_loadstring definition]], true)
 local function try_loadstring(s, component, name)
-  local success, result = pcall(loadstring(s))
+  local success, result = pcall(loadstring(s), name, _G.packer_plugins[name])
   if not success then
     vim.schedule(function()
       vim.api.nvim_notify('packer.nvim: Error running ' .. component .. ' for ' .. name .. ': ' .. result, vim.log.levels.ERROR, {})
@@ -69,6 +69,20 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["DAPInstall.nvim"] = {
+    commands = { "DIInstall", "DIList" },
+    config = { "\27LJ\2\nù\1\0\0\t\1\n\0\0176\0\0\0'\2\1\0B\0\2\0029\1\2\0005\3\b\0-\4\0\0006\6\3\0009\6\4\0069\6\5\6'\b\6\0B\6\2\2'\a\a\0&\6\a\6B\4\2\2=\4\t\3B\1\2\1K\0\1\0\0\0\22installation_path\1\0\0\17/dapinstall/\tdata\fstdpath\afn\bvim\nsetup\16dap-install\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/opt/DAPInstall.nvim",
+    url = "https://github.com/Pocco81/DAPInstall.nvim"
+  },
+  ["beacon.nvim"] = {
+    loaded = true,
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/beacon.nvim",
+    url = "https://github.com/danilamihailov/beacon.nvim"
+  },
   ["coc.nvim"] = {
     loaded = true,
     path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/coc.nvim",
@@ -94,10 +108,31 @@ _G.packer_plugins = {
     path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/nvim-base16",
     url = "https://github.com/RRethy/nvim-base16"
   },
+  ["nvim-dap"] = {
+    loaded = true,
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/nvim-dap",
+    url = "https://github.com/mfussenegger/nvim-dap"
+  },
+  ["nvim-dap-python"] = {
+    loaded = false,
+    needs_bufread = false,
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/opt/nvim-dap-python",
+    url = "https://github.com/mfussenegger/nvim-dap-python"
+  },
+  ["nvim-dap-ui"] = {
+    loaded = true,
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
+    url = "https://github.com/rcarriga/nvim-dap-ui"
+  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
+  ["one-small-step-for-vimkind"] = {
+    loaded = true,
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/one-small-step-for-vimkind",
+    url = "https://github.com/jbyuki/one-small-step-for-vimkind"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -114,10 +149,20 @@ _G.packer_plugins = {
     path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
   },
+  ["telescope-live-grep-raw.nvim"] = {
+    loaded = true,
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope-live-grep-raw.nvim",
+    url = "https://github.com/nvim-telescope/telescope-live-grep-raw.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["toogle-maximize.vim"] = {
+    loaded = true,
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/toogle-maximize.vim",
+    url = "https://github.com/pmalek/toogle-maximize.vim"
   },
   ["vim-better-whitespace"] = {
     loaded = true,
@@ -154,6 +199,11 @@ _G.packer_plugins = {
     path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-obsession",
     url = "https://github.com/tpope/vim-obsession"
   },
+  ["vim-rooter"] = {
+    loaded = true,
+    path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-rooter",
+    url = "https://github.com/airblade/vim-rooter"
+  },
   ["vim-unimpaired"] = {
     loaded = true,
     path = "/Users/alexignez/.local/share/nvim/site/pack/packer/start/vim-unimpaired",
@@ -167,6 +217,13 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+
+-- Command lazy-loads
+time([[Defining lazy-load commands]], true)
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file DIInstall lua require("packer.load")({'DAPInstall.nvim'}, { cmd = "DIInstall", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file DIList lua require("packer.load")({'DAPInstall.nvim'}, { cmd = "DIList", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
+time([[Defining lazy-load commands]], false)
+
 if should_profile then save_profiles() end
 
 end)

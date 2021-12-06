@@ -87,3 +87,7 @@ nnoremap <leader>p <cmd>CocCommand prettier.formatFile<cr>
 autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
 
 set noswapfile
+
+nnoremap <Leader>df <Cmd>lua require("dapui").float_element("scopes", {enter = true})<CR>
+nnoremap <Leader>dw <Cmd>lua require("dapui").float_element("watches", {enter = true})<CR>
+nnoremap <Leader>dd <Cmd>lua require'dapui'.float_element(nil, {entrer = true})<CR>

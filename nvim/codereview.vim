@@ -26,7 +26,7 @@ function ReviewLocalBranches(sourceBranch, targetBranch = "main")
   nnoremap dmq <enter> <c-w>o <cmd>copen<cr> <C-w>w <cmd>execute "Gvdiffsplit " . codeReviewTargetBranch . "..."<cr>
 endfunction
 
-command! -nargs=* -range -complete=custom,s:codeReview_complete CodeReviewLocal call ReviewLocalBranches(<f-args>)
+command! -nargs=* -range -complete=custom,CodeReview_complete CodeReviewLocal call ReviewLocalBranches(<f-args>)
 
 function ReviewRemoteBranch (sourceBranch, targetBranch = "main")
   execute "!git fetch"
@@ -39,4 +39,4 @@ function ReviewRemoteBranch (sourceBranch, targetBranch = "main")
   call ReviewLocalBranches(a:sourceBranch, a:targetBranch)
 endfunction
 
-command! -nargs=* -range CodeReviewRemote silent call ReviewRemoteBranch(<f-args>)
+command! -nargs=* -range CodeReviewRemote call ReviewRemoteBranch(<f-args>)

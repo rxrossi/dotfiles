@@ -93,3 +93,10 @@ nnoremap <Leader>dw <Cmd>lua require("dapui").float_element("watches", {enter = 
 nnoremap <Leader>dB <Cmd>lua require("dapui").float_element("breakpoints", {enter = true})<CR>
 nnoremap <Leader>dk <Cmd>lua require("dap.ui.widgets").hover()<CR>
 nnoremap <Leader>dh <Cmd>lua require'dap'.run_to_cursor()<CR>
+
+
+" js timestamp milliseconds to date as comment
+let @t = 'yiwea //ÄkbÄkbphhxxxh"mciw//i**i=kqÄkb'
+
+
+

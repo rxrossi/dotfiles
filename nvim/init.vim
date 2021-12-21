@@ -90,4 +90,6 @@ set noswapfile
 
 nnoremap <Leader>df <Cmd>lua require("dapui").float_element("scopes", {enter = true})<CR>
 nnoremap <Leader>dw <Cmd>lua require("dapui").float_element("watches", {enter = true})<CR>
-nnoremap <Leader>dd <Cmd>lua require'dapui'.float_element(nil, {entrer = true})<CR>
+nnoremap <Leader>dB <Cmd>lua require("dapui").float_element("breakpoints", {enter = true})<CR>
+nnoremap <Leader>dk <Cmd>lua require("dap.ui.widgets").hover()<CR>
+nnoremap <Leader>dh <Cmd>lua require'dap'.run_to_cursor()<CR>

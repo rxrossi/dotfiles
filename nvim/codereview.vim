@@ -26,6 +26,18 @@ function ReviewLocalBranches(sourceBranch, targetBranch = "main")
   nnoremap dmq <enter> <c-w>o <cmd>copen<cr> <C-w>w <cmd>execute "Gvdiffsplit " . codeReviewTargetBranch . "..."<cr>
 endfunction
 
+let sourceCommit = ""
+let targetCommit = ""
+function CompareWithPrevious(sourceCommit)
+  let sourceCommit = a:sourceCommit
+  let targetCommit = sourceCommit . "~1"
+
+  execute "Git difftool --name-status " . targetCommit . " " . sourceCommit . " ':!**/graphql.types*'"
+  nnoremap dm <cmd>execute "Gvdiffsplit!"<cr>
+endfunction
+
+command! -nargs=* -range CompareWithPrevious call CompareWithPrevious(<f-args>)
+
 command! -nargs=* -range -complete=custom,CodeReview_complete CodeReviewLocal call ReviewLocalBranches(<f-args>)
 
 function ReviewRemoteBranch (sourceBranch, targetBranch = "main")

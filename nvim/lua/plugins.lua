@@ -19,6 +19,7 @@ return require('packer').startup(function(use)
     requires = {
       {'nvim-lua/popup.nvim'},
       {'nvim-lua/plenary.nvim'},
+      {'nvim-telescope/telescope-dap.nvim'},
       {'nvim-telescope/telescope-live-grep-raw.nvim'}
     }
   }
@@ -27,7 +28,6 @@ return require('packer').startup(function(use)
     requires = {
       'nvim-lua/plenary.nvim'
     },
-    -- commit = '5655cfa4c0316943c7da641f813e79a91bc0d87e'
   }
   use 'Raimondi/delimitMate'
   use 'jeetsukumaran/vim-indentwise'
@@ -67,6 +67,9 @@ return require('packer').startup(function(use)
   }) -- dap ui
 
   use 'danilamihailov/beacon.nvim'
+  use 'tpope/vim-surround'
+  use 'junegunn/goyo.vim'
+  use 'AndrewRadev/linediff.vim'
 
 end)
 

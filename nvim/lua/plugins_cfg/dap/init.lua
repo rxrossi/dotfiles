@@ -2,6 +2,7 @@ local dap = require("dap")
 local global = require("core.global")
 
 local sep_os_replacer = require("utils").sep_os_replacer
+local jestDapVars = {}
 
 vim.fn.sign_define(
   "DapBreakpoint",
@@ -103,28 +104,37 @@ dap.configurations.dart = {
   },
 }
 
+jestDapVars = {
+  testName = 'single1'
+}
+
 dap.configurations.typescript = {
   {
+      name = 'jest',
       type = 'node2',
       request = 'launch',
       cwd = vim.fn.getcwd(),
-      runtimeArgs = {'--inspect-brk', '/Users/alexignez/dunelm/delivery-promise/node_modules/.bin/jest', '--no-coverage', '--watch', '--runInBand', 'single1man'},
+      runtimeArgs = {'--inspect-brk', vim.fn.getcwd() .. '/node_modules/.bin/jest', '--no-coverage', '--watch', '--runInBand', jestDapVars.testName},
       sourceMaps = true,
       protocol = 'auto',
       skipFiles = {'<node_internals>/**/*.js'},
       console = 'integratedTerminal',
       port = 9229,
       internalConsoleOptions =  "neverOpen"
+  },
+  {
+    type = 'node2',
+    request = 'attach',
+    cwd = vim.fn.getcwd(),
+    sourceMaps = true,
+    protocol = 'inspector',
+    skipFiles = {'<node_internals>/**/*.js'},
+    program = vim.fn.getcwd() .. '/.build/main.js',
+    port = 5858,
+    internalConsoleOptions =  "neverOpen",
+    localRoot = vim.fn.getcwd(),
+    remoteRoot = '/var/task/webpack'
   }
-  -- {
-  --   type = "node2",
-  --   name = "node attach",
-  --   request = "attach",
-  --   program = vim.fn.getcwd() .. '/src/main.ts',
-  --   sourceMaps = true,
-  --   protocol = "inspector",
-  --   port = 5858
-  -- }
 }
 
 dap.set_log_level("TRACE")

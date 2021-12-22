@@ -10,33 +10,29 @@ function! ListBranches()
 endfunction
 
 
-let codeReviewTargetBranch = "main"
+let g:codeReviewTarget = "main"
+function ReviewLocalBranches(source, targetCommit = "main")
+  let g:codeReviewTarget = a:targetCommit
 
-function ReviewLocalBranches(sourceBranch, targetBranch = "main")
-  let codeReviewTargetBranch = a:targetBranch
+  silent execute "!git checkout " . a:source
+  silent execute "Git difftool --name-status " . g:codeReviewTarget . "... ':!**/graphql.types*'"
+  silent execute "Gitsigns change_base " .  g:codeReviewTarget . " true"
 
-  silent execute "!git checkout " . a:sourceBranch
-  silent execute "Git difftool --name-status " . a:targetBranch . "... ':!**/graphql.types*'"
-  silent execute "Gitsigns change_base " .  codeReviewTargetBranch . " true"
-
-  nnoremap dm <cmd>execute "Gvdiffsplit " . codeReviewTargetBranch . "..."<cr>
+  nnoremap dm <cmd>execute "Gvdiffsplit " . g:codeReviewTarget . "..."<cr>
   map <leader>p <C-w>q[qdm
   map <leader>n <C-w>q]qdm
 
-  nnoremap dmq <enter> <c-w>o <cmd>copen<cr> <C-w>w <cmd>execute "Gvdiffsplit " . codeReviewTargetBranch . "..."<cr>
+  nnoremap dmq <enter> <c-w>o <cmd>copen<cr> <C-w>w <cmd>execute "Gvdiffsplit " . g:codeReviewTarget . "..."<cr>
 endfunction
 
-let sourceCommit = ""
-let targetCommit = ""
-function CompareWithPrevious(sourceCommit)
+function CompareWithPreviousCommit(sourceCommit)
   let sourceCommit = a:sourceCommit
   let targetCommit = sourceCommit . "~1"
 
-  execute "Git difftool --name-status " . targetCommit . " " . sourceCommit . " ':!**/graphql.types*'"
-  nnoremap dm <cmd>execute "Gvdiffsplit!"<cr>
+  execute ReviewLocalBranches(sourceCommit, targetCommit)
 endfunction
 
-command! -nargs=* -range CompareWithPrevious call CompareWithPrevious(<f-args>)
+command! -nargs=* -range CompareWithPrevious call CompareWithPreviousCommit(<f-args>)
 
 command! -nargs=* -range -complete=custom,CodeReview_complete CodeReviewLocal call ReviewLocalBranches(<f-args>)
 
@@ -52,3 +48,8 @@ function ReviewRemoteBranch (sourceBranch, targetBranch = "main")
 endfunction
 
 command! -nargs=* -range CodeReviewRemote call ReviewRemoteBranch(<f-args>)
+
+augroup git_au
+    autocmd!
+    autocmd FileType git setlocal foldmethod=syntax foldlevel=0
+augroup END

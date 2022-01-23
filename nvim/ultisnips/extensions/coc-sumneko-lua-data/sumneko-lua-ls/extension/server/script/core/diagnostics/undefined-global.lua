@@ -14,6 +14,7 @@ local requireLike = {
     ['load']    = true,
 }
 
+---@async
 return function (uri, callback)
     local ast = files.getState(uri)
     if not ast then
@@ -21,15 +22,15 @@ return function (uri, callback)
     end
 
     -- 遍历全局变量，检查所有没有 set 模式的全局变量
-    guide.eachSourceType(ast.ast, 'getglobal', function (src)
+    guide.eachSourceType(ast.ast, 'getglobal', function (src) ---@async
         local key = src[1]
         if not key then
             return
         end
-        if config.get 'Lua.diagnostics.globals'[key] then
+        if config.get(uri, 'Lua.diagnostics.globals')[key] then
             return
         end
-        if config.get 'Lua.runtime.special'[key] then
+        if config.get(uri, 'Lua.runtime.special')[key] then
             return
         end
         local node = src.node

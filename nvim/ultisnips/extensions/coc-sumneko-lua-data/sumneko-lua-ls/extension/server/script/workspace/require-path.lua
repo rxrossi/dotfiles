@@ -8,8 +8,8 @@ local m = {}
 m.cache = {}
 
 --- `aaa/bbb/ccc.lua` 与 `?.lua` 将返回 `aaa.bbb.cccc`
-local function getOnePath(path, searcher)
-    local separator    = config.get 'Lua.completion.requireSeparator'
+local function getOnePath(uri, path, searcher)
+    local separator    = config.get(uri, 'Lua.completion.requireSeparator')
     local stemPath     = path
                         : gsub('%.[^%.]+$', '')
                         : gsub('[/\\%.]+', separator)
@@ -27,8 +27,10 @@ local function getOnePath(path, searcher)
     return nil
 end
 
-function m.getVisiblePath(path, searchers, strict)
-    path = path:gsub('^[/\\]+', '')
+function m.getVisiblePath(suri, path)
+    local searchers = config.get(suri, 'Lua.runtime.path')
+    local strict    = config.get(suri, 'Lua.runtime.pathStrict')
+    path = workspace.normalize(path)
     local uri = furi.encode(path)
     local libraryPath = files.getLibraryPath(uri)
     if not m.cache[path] then
@@ -40,6 +42,7 @@ function m.getVisiblePath(path, searchers, strict)
         for _, searcher in ipairs(searchers) do
             local isAbsolute = searcher:match '^[/\\]'
                             or searcher:match '^%a+%:'
+            searcher = workspace.normalize(searcher)
             local cutedPath = path
             local currentPath = path
             local head
@@ -57,12 +60,10 @@ function m.getVisiblePath(path, searchers, strict)
                 pos = currentPath:match('[/\\]+()', pos)
                 if platform.OS == 'Windows' then
                     searcher = searcher :gsub('[/\\]+', '\\')
-                                        :gsub('^[/\\]+', '')
                 else
                     searcher = searcher :gsub('[/\\]+', '/')
-                                        :gsub('^[/\\]+', '')
                 end
-                local expect = getOnePath(cutedPath, searcher)
+                local expect = getOnePath(suri, cutedPath, searcher)
                 if expect then
                     local mySearcher = searcher
                     if head then
@@ -79,6 +80,50 @@ function m.getVisiblePath(path, searchers, strict)
     return m.cache[path]
 end
 
+--- 查找符合指定require path的所有uri
+---@param path string
+function m.findUrisByRequirePath(suri, path)
+    if type(path) ~= 'string' then
+        return {}
+    end
+    local separator = config.get(suri, 'Lua.completion.requireSeparator')
+    local fspath = path:gsub('%' .. separator, '/')
+    local vm    = require 'vm'
+    local cache = vm.getCache 'findUrisByRequirePath'
+    if cache[path] then
+        return cache[path].results, cache[path].searchers
+    end
+    tracy.ZoneBeginN('findUrisByRequirePath')
+    local results = {}
+    local searchers = {}
+    for uri in files.eachDll() do
+        local opens = files.getDllOpens(uri) or {}
+        for _, open in ipairs(opens) do
+            if open == fspath then
+                results[#results+1] = uri
+            end
+        end
+    end
+
+    for uri in files.eachFile() do
+        local infos = m.getVisiblePath(suri, furi.decode(uri))
+        for _, info in ipairs(infos) do
+            local fsexpect = info.expect:gsub('%' .. separator, '/')
+            if fsexpect == fspath then
+                results[#results+1] = uri
+                searchers[uri] = info.searcher
+            end
+        end
+    end
+
+    tracy.ZoneEnd()
+    cache[path] = {
+        results   = results,
+        searchers = searchers,
+    }
+    return results, searchers
+end
+
 function m.flush()
     m.cache = {}
 end
@@ -90,8 +135,10 @@ files.watch(function (ev)
     end
 end)
 
-config.watch(function (key, value, oldValue)
-    if key == 'Lua.completion.requireSeparator' then
+config.watch(function (uri, key, value, oldValue)
+    if key == 'Lua.completion.requireSeparator'
+    or key == 'Lua.runtime.path'
+    or key == 'Lua.runtime.pathStrict' then
         m.flush()
     end
 end)

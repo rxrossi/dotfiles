@@ -367,6 +367,22 @@ local function skipNL()
     return false
 end
 
+local function getSavePoint()
+    local index = Index
+    local line  = Line
+    local lineOffset = LineOffset
+    local errs  = State.errs
+    local errCount = #errs
+    return function ()
+        Index = index
+        Line  = line
+        LineOffset = lineOffset
+        for i = errCount + 1, #errs do
+            errs[i] = nil
+        end
+    end
+end
+
 local function fastForwardToken(offset)
     while true do
         local myOffset = Tokens[Index]
@@ -487,7 +503,13 @@ end
 local function skipComment(isAction)
     local token = Tokens[Index + 1]
     if token == '--'
-    or (token == '//' and isAction) then
+    or (
+        token == '//'
+        and (
+            isAction
+            or State.options.nonstandardSymbol['//']
+        )
+    ) then
         local start = Tokens[Index]
         local left = getPosition(start, 'left')
         local chead = false
@@ -515,7 +537,7 @@ local function skipComment(isAction)
         State.comms[#State.comms+1] = {
             type   = chead and 'comment.cshort' or 'comment.short',
             start  = left,
-            finish = getPosition(Tokens[Index], 'right'),
+            finish = lastRightPosition(),
             text   = ssub(Lua, start + 2, Tokens[Index] and (Tokens[Index] - 1) or #Lua),
         }
         return true
@@ -904,6 +926,7 @@ local function parseShortString()
     Index             = Index + 2
     local stringIndex = 0
     local currentOffset = startOffset + 1
+    local escs        = {}
     while true do
         local token = Tokens[Index + 1]
         if token == mark then
@@ -920,7 +943,7 @@ local function parseShortString()
         end
         if not token then
             stringIndex = stringIndex + 1
-            stringPool[stringIndex] = ssub(Lua, currentOffset)
+            stringPool[stringIndex] = ssub(Lua, currentOffset or -1)
             missSymbol(mark)
             break
         end
@@ -932,13 +955,18 @@ local function parseShortString()
             if not Tokens[Index] then
                 goto CONTINUE
             end
+            local escLeft = getPosition(currentOffset, 'left')
             -- has space?
             if Tokens[Index] - currentOffset > 1 then
+                local right = getPosition(currentOffset + 1, 'right')
                 pushError {
                     type   = 'ERR_ESC',
-                    start  = getPosition(currentOffset, 'left'),
-                    finish = getPosition(currentOffset + 1, 'right'),
+                    start  = escLeft,
+                    finish = right,
                 }
+                escs[#escs+1] = escLeft
+                escs[#escs+1] = right
+                escs[#escs+1] = 'err'
                 goto CONTINUE
             end
             local nextToken = ssub(Tokens[Index + 1], 1, 1)
@@ -947,6 +975,9 @@ local function parseShortString()
                 stringPool[stringIndex] = EscMap[nextToken]
                 currentOffset = Tokens[Index] + #nextToken
                 Index = Index + 2
+                escs[#escs+1] = escLeft
+                escs[#escs+1] = escLeft + 2
+                escs[#escs+1] = 'normal'
                 goto CONTINUE
             end
             if nextToken == mark then
@@ -954,12 +985,18 @@ local function parseShortString()
                 stringPool[stringIndex] = mark
                 currentOffset = Tokens[Index] + #nextToken
                 Index = Index + 2
+                escs[#escs+1] = escLeft
+                escs[#escs+1] = escLeft + 2
+                escs[#escs+1] = 'normal'
                 goto CONTINUE
             end
             if nextToken == 'z' then
                 Index = Index + 2
                 repeat until not skipNL()
                 currentOffset = Tokens[Index]
+                escs[#escs+1] = escLeft
+                escs[#escs+1] = escLeft + 2
+                escs[#escs+1] = 'normal'
                 goto CONTINUE
             end
             if CharMapNumber[nextToken] then
@@ -969,13 +1006,21 @@ local function parseShortString()
                 end
                 currentOffset = Tokens[Index] + #numbers
                 fastForwardToken(currentOffset)
+                local right = getPosition(currentOffset - 1, 'right')
                 local byte = tointeger(numbers)
                 if byte <= 255 then
                     stringIndex = stringIndex + 1
                     stringPool[stringIndex] = schar(byte)
                 else
-                    -- TODO pushError
+                    pushError {
+                        type   = 'ERR_ESC',
+                        start  = escLeft,
+                        finish = right,
+                    }
                 end
+                escs[#escs+1] = escLeft
+                escs[#escs+1] = right
+                escs[#escs+1] = 'byte'
                 goto CONTINUE
             end
             if nextToken == 'x' then
@@ -994,6 +1039,10 @@ local function parseShortString()
                         finish = getPosition(currentOffset + 1, 'right'),
                     }
                 end
+                local right = getPosition(currentOffset + 1, 'right')
+                escs[#escs+1] = escLeft
+                escs[#escs+1] = right
+                escs[#escs+1] = 'byte'
                 if State.version == 'Lua 5.1' then
                     pushError {
                         type    = 'ERR_ESC',
@@ -1016,6 +1065,10 @@ local function parseShortString()
                 end
                 currentOffset = newOffset
                 fastForwardToken(currentOffset - 1)
+                local right = getPosition(currentOffset + 1, 'right')
+                escs[#escs+1] = escLeft
+                escs[#escs+1] = right
+                escs[#escs+1] = 'unicode'
                 goto CONTINUE
             end
             if NLMap[nextToken] then
@@ -1023,13 +1076,21 @@ local function parseShortString()
                 stringPool[stringIndex] = '\n'
                 currentOffset = Tokens[Index] + #nextToken
                 skipNL()
+                local right = getPosition(currentOffset + 1, 'right')
+                escs[#escs+1] = escLeft
+                escs[#escs+1] = escLeft + 1
+                escs[#escs+1] = 'normal'
                 goto CONTINUE
             end
+            local right = getPosition(currentOffset + 1, 'right')
             pushError {
                 type   = 'ERR_ESC',
-                start  = getPosition(currentOffset, 'left'),
-                finish = getPosition(currentOffset + 1, 'right'),
+                start  = escLeft,
+                finish = right,
             }
+            escs[#escs+1] = escLeft
+            escs[#escs+1] = right
+            escs[#escs+1] = 'err'
         end
         Index = Index + 2
         ::CONTINUE::
@@ -1039,6 +1100,7 @@ local function parseShortString()
         type   = 'string',
         start  = startPos,
         finish = lastRightPosition(),
+        escs   = #escs > 0 and escs or nil,
         [1]    = stringResult,
         [2]    = mark,
     }
@@ -1525,9 +1587,10 @@ local function parseTable()
     }
     Index = Index + 2
     local index = 0
+    local tindex = 0
     local wantSep = false
     while true do
-        skipSpace()
+        skipSpace(true)
         local token = Tokens[Index + 1]
         if token == '}' then
             Index = Index + 2
@@ -1542,6 +1605,47 @@ local function parseTable()
             goto CONTINUE
         end
         local lastRight = lastRightPosition()
+
+        if peekWord() then
+            local savePoint = getSavePoint()
+            local name = parseName()
+            if name then
+                skipSpace()
+                if Tokens[Index + 1] == '=' then
+                    Index = Index + 2
+                    if wantSep then
+                        pushError {
+                            type   = 'MISS_SEP_IN_TABLE',
+                            start  = lastRight,
+                            finish = getPosition(Tokens[Index], 'left'),
+                        }
+                    end
+                    wantSep = true
+                    local eqRight = lastRightPosition()
+                    skipSpace()
+                    local fvalue = parseExp()
+                    local tfield = {
+                        type   = 'tablefield',
+                        start  = name.start,
+                        finish = fvalue and fvalue.finish or eqRight,
+                        parent = tbl,
+                        field  = name,
+                        value  = fvalue,
+                    }
+                    name.type   = 'field'
+                    name.parent = tfield
+                    if fvalue then
+                        fvalue.parent = tfield
+                    else
+                        missExp()
+                    end
+                    index = index + 1
+                    tbl[index] = tfield
+                    goto CONTINUE
+                end
+            end
+            savePoint()
+        end
 
         local exp = parseExp(true)
         if exp then
@@ -1559,39 +1663,13 @@ local function parseTable()
                 exp.parent = tbl
                 goto CONTINUE
             end
-            if exp.type == 'getlocal'
-            or exp.type == 'getglobal' then
-                skipSpace()
-                if expectAssign() then
-                    local eqRight = lastRightPosition()
-                    skipSpace()
-                    local fvalue = parseExp()
-                    local tfield = {
-                        type   = 'tablefield',
-                        start  = exp.start,
-                        finish = fvalue and fvalue.finish or eqRight,
-                        parent = tbl,
-                        field  = exp,
-                        value  = fvalue,
-                    }
-                    exp.type   = 'field'
-                    exp.parent = tfield
-                    if fvalue then
-                        fvalue.parent = tfield
-                    else
-                        missExp()
-                    end
-                    index = index + 1
-                    tbl[index] = tfield
-                    goto CONTINUE
-                end
-            end
             index = index + 1
+            tindex = tindex + 1
             local texp = {
                 type   = 'tableexp',
                 start  = exp.start,
                 finish = exp.finish,
-                tindex = index,
+                tindex = tindex,
                 parent = tbl,
                 value  = exp,
             }
@@ -1611,11 +1689,13 @@ local function parseTable()
             wantSep = true
             local tindex = parseIndex()
             skipSpace()
+            tindex.type   = 'tableindex'
+            tindex.parent = tbl
+            index = index + 1
+            tbl[index] = tindex
             if expectAssign() then
                 skipSpace()
                 local ivalue = parseExp()
-                tindex.type   = 'tableindex'
-                tindex.parent = tbl
                 if ivalue then
                     ivalue.parent = tindex
                     tindex.finish = ivalue.finish
@@ -1623,8 +1703,6 @@ local function parseTable()
                 else
                     missExp()
                 end
-                index = index + 1
-                tbl[index] = tindex
             else
                 missSymbol '='
             end
@@ -2044,7 +2122,7 @@ local function parseActions()
             end
         end
         if action then
-            if action.type == 'return' then
+            if not rtn and action.type == 'return' then
                 rtn = action
             end
             last = action
@@ -2094,6 +2172,7 @@ local function parseParams(params)
                 start  = getPosition(Tokens[Index], 'left'),
                 finish = getPosition(Tokens[Index] + 2, 'right'),
                 parent = params,
+                [1]    = '...',
             }
             local chunk = Chunk[#Chunk]
             chunk.vararg = vararg
@@ -2161,7 +2240,7 @@ local function parseFunction(isLocal, isAction)
     Index = Index + 2
     local LastLocalCount = LocalCount
     LocalCount = 0
-    skipSpace()
+    skipSpace(true)
     local hasLeftParen = Tokens[Index + 1] == '('
     if not hasLeftParen then
         local name = parseName()
@@ -2191,7 +2270,7 @@ local function parseFunction(isLocal, isAction)
                     finish = simple.finish,
                 }
             end
-            skipSpace()
+            skipSpace(true)
             hasLeftParen = Tokens[Index + 1] == '('
         end
     end
@@ -2222,7 +2301,7 @@ local function parseFunction(isLocal, isAction)
             params.parent = func
             func.args     = params
         end
-        skipSpace()
+        skipSpace(true)
         if Tokens[Index + 1] == ')' then
             local parenRight = getPosition(Tokens[Index], 'right')
             func.finish = parenRight
@@ -2230,7 +2309,7 @@ local function parseFunction(isLocal, isAction)
                 params.finish = parenRight
             end
             Index = Index + 2
-            skipSpace()
+            skipSpace(true)
         else
             func.finish = lastRightPosition()
             if params then
@@ -2337,6 +2416,9 @@ local function parseBinaryOP(asAction, level)
                 or BinaryAlias[token]
                 or (not asAction and BinaryActionAlias[token])
     if not symbol then
+        return nil
+    end
+    if symbol == '//' and State.options.nonstandardSymbol['//'] then
         return nil
     end
     local myLevel = BinarySymbol[symbol]
@@ -2754,6 +2836,7 @@ local function compileExpAsAction(exp)
 end
 
 local function parseLocal()
+    local locPos = getPosition(Tokens[Index], 'left')
     Index = Index + 2
     skipSpace()
     local word = peekWord()
@@ -2770,6 +2853,7 @@ local function parseLocal()
             name.value  = func
             name.vstart = func.start
             name.range  = func.finish
+            name.locPos = locPos
             func.parent  = name
             pushActionIntoCurrentChunk(name)
             return name
@@ -2786,6 +2870,7 @@ local function parseLocal()
         return nil
     end
     local loc = createLocal(name, parseLocalAttrs())
+    loc.locPos = locPos
     loc.effect = maxinteger
     pushActionIntoCurrentChunk(loc)
     skipSpace()
@@ -2927,6 +3012,7 @@ local function parseLabel()
 end
 
 local function parseGoTo()
+    local start = getPosition(Tokens[Index], 'left')
     Index = Index + 2
     skipSpace()
 
@@ -2937,6 +3023,7 @@ local function parseGoTo()
     end
 
     action.type = 'goto'
+    action.keyStart = start
 
     for i = #Chunk, 1, -1 do
         local chunk = Chunk[i]
@@ -3551,6 +3638,16 @@ function parseAction()
             name.vstart = exp.start
             name.range  = exp.finish
             exp.parent  = name
+            if name.type == 'setlocal' then
+                local loc = name.node
+                if loc.attrs then
+                    pushError {
+                        type   = 'SET_CONST',
+                        start  = name.start,
+                        finish = name.finish,
+                    }
+                end
+            end
             pushActionIntoCurrentChunk(name)
             return name
         else
@@ -3662,7 +3759,7 @@ local function initState(lua, version, options)
                 return
             end
         end
-        err.level = err.level or 'error'
+        err.level = err.level or 'Error'
         errs[#errs+1] = err
         return err
     end

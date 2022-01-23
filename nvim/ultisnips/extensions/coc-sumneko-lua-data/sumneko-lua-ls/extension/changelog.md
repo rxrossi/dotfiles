@@ -1,5 +1,130 @@
 # changelog
 
+## 2.6.0
+`2022-1-13`
+* `NEW` supports multi-workspace in server side, for developers of language clients, please [read here](https://github.com/sumneko/lua-language-server/wiki/Multi-workspace-supports) to learn more.
+* `NEW` setting:
+  + `Lua.hint.arrayIndex`
+  + `Lua.semantic.enable`
+  + `Lua.semantic.variable`
+  + `Lua.semantic.annotation`
+  + `Lua.semantic.keyword`
+* `CHG` completion: improve response speed
+* `CHG` completion: can be triggered in `LuaDoc` and strings
+* `CHG` diagnostic: smoother
+* `CHG` settings `Lua.color.mode` removed
+* `FIX` [#876](https://github.com/sumneko/lua-language-server/issues/876)
+* `FIX` [#879](https://github.com/sumneko/lua-language-server/issues/879)
+* `FIX` [#884](https://github.com/sumneko/lua-language-server/issues/884)
+* `FIX` [#885](https://github.com/sumneko/lua-language-server/issues/885)
+* `FIX` [#886](https://github.com/sumneko/lua-language-server/issues/886)
+* `FIX` [#902](https://github.com/sumneko/lua-language-server/issues/902)
+
+## 2.5.6
+`2021-12-27`
+* `CHG` diagnostic: now syntax errors in `LuaDoc` are shown as `Warning`
+* `FIX` [#863](https://github.com/sumneko/lua-language-server/issues/863)
+* `FIX` return type of `math.floor`
+* `FIX` runtime errors
+
+## 2.5.5
+`2021-12-16`
+* `FIX` dose not work in VSCode
+
+## 2.5.4
+`2021-12-16`
+* `FIX` [#847](https://github.com/sumneko/lua-language-server/issues/847)
+* `FIX` [#848](https://github.com/sumneko/lua-language-server/issues/848)
+* `FIX` completion: incorrect cache
+* `FIX` hover: always view string
+
+## 2.5.3
+`2021-12-6`
+* `FIX` [#842](https://github.com/sumneko/lua-language-server/issues/844)
+* `FIX` [#844](https://github.com/sumneko/lua-language-server/issues/844)
+
+## 2.5.2
+`2021-12-2`
+* `FIX` [#815](https://github.com/sumneko/lua-language-server/issues/815)
+* `FIX` [#825](https://github.com/sumneko/lua-language-server/issues/825)
+* `FIX` [#826](https://github.com/sumneko/lua-language-server/issues/826)
+* `FIX` [#827](https://github.com/sumneko/lua-language-server/issues/827)
+* `FIX` [#831](https://github.com/sumneko/lua-language-server/issues/831)
+* `FIX` [#837](https://github.com/sumneko/lua-language-server/issues/837)
+* `FIX` [#838](https://github.com/sumneko/lua-language-server/issues/838)
+* `FIX` postfix
+* `FIX` runtime errors
+
+## 2.5.1
+`2021-11-29`
+* `FIX` incorrect syntax error
+
+## 2.5.0
+`2021-11-29`
+* `NEW` settings:
+  + `Lua.runtime.pathStrict`: not check subdirectories when using `runtime.path`
+  + `Lua.hint.await`: display `await` when calling a function marked as async
+  + `Lua.completion.postfix`: the symbol that triggers postfix, default is `@`
+* `NEW` add supports for `lovr`
+* `NEW` file encoding supports `utf16le` and `utf16be`
+* `NEW` full IntelliSense supports for literal tables, see [#720](https://github.com/sumneko/lua-language-server/issues/720) and [#727](https://github.com/sumneko/lua-language-server/issues/727)
+* `NEW` `LuaDoc` annotations:
+  + `---@async`: mark a function as async
+  + `---@nodiscard`: the return value of the marking function cannot be discarded
+* `NEW` diagnostics:
+  + `await-in-sync`: check whether calls async function in sync function. disabled by default.
+  + `not-yieldable`: check whether the function supports async functions as parameters. disabled by default.
+  + `discard-returns`: check whether the return value is discarded.
+* `NEW` locale `pt-br`, thanks [Jeferson Ferreira](https://github.com/jefersonf)
+* `NEW` supports [utf-8-offsets](https://clangd.llvm.org/extensions#utf-8-offsets)
+* `NEW` supports quickfix for `.luarc.json`
+* `NEW` completion postifx: `@function`, `@method`, `@pcall`, `@xpcall`, `@insert`, `@remove`, `@concat`, `++`, `++?`
+* `CHG` `LuaDoc`:
+  + `---@class` can be re-declared
+  + supports unicode
+  + supports `---@param ... number`, equivalent to `---@vararg number`
+  + supports `fun(...: string)`
+  + supports `fun(x, y, ...)`, equivalent to `fun(x: any, y: any, ...: any)`
+* `CHG` settings from `--configpath`, `.luarc.json`, `client` no longer prevent subsequent settings, instead they are merged in order
+* `CHG` no longer asks to trust plugin in VSCode, because VSCode already provides the workspace trust feature
+* `CHG` skip huge files (>= 10 MB)
+* `CHG` after using `Lua.runtime.nonstandardSymbol` to treat `//` as a comment, `//` is no longer parsed as an operator
+
+## 2.4.11
+`2021-11-25`
+* `FIX` [#816](https://github.com/sumneko/lua-language-server/issues/816)
+* `FIX` [#817](https://github.com/sumneko/lua-language-server/issues/817)
+* `FIX` [#818](https://github.com/sumneko/lua-language-server/issues/818)
+* `FIX` [#820](https://github.com/sumneko/lua-language-server/issues/820)
+
+## 2.4.10
+`2021-11-23`
+* `FIX` [#790](https://github.com/sumneko/lua-language-server/issues/790)
+* `FIX` [#798](https://github.com/sumneko/lua-language-server/issues/798)
+* `FIX` [#804](https://github.com/sumneko/lua-language-server/issues/804)
+* `FIX` [#805](https://github.com/sumneko/lua-language-server/issues/805)
+* `FIX` [#806](https://github.com/sumneko/lua-language-server/issues/806)
+* `FIX` [#807](https://github.com/sumneko/lua-language-server/issues/807)
+* `FIX` [#809](https://github.com/sumneko/lua-language-server/issues/809)
+
+## 2.4.9
+`2021-11-18`
+* `CHG` for performance reasons, some of the features that are not cost-effective in IntelliSense have been disabled by default, and you can re-enable them through the following settings:
+  + `Lua.IntelliSense.traceLocalSet`
+  + `Lua.IntelliSense.traceReturn`
+  + `Lua.IntelliSense.traceBeSetted`
+  + `Lua.IntelliSense.traceFieldInject`
+
+  [read more](https://github.com/sumneko/lua-language-server/wiki/IntelliSense-optional-features)
+
+## 2.4.8
+`2021-11-15`
+* `FIX` incorrect IntelliSense in specific situations
+* `FIX` [#777](https://github.com/sumneko/lua-language-server/issues/777)
+* `FIX` [#778](https://github.com/sumneko/lua-language-server/issues/778)
+* `FIX` [#779](https://github.com/sumneko/lua-language-server/issues/779)
+* `FIX` [#780](https://github.com/sumneko/lua-language-server/issues/780)
+
 ## 2.4.7
 `2021-10-27`
 * `FIX` [#762](https://github.com/sumneko/lua-language-server/issues/762)

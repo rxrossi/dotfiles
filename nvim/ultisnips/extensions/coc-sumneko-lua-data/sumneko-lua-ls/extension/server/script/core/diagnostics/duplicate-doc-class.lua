@@ -16,11 +16,10 @@ return function (uri, callback)
 
     local cache = {}
     for _, doc in ipairs(state.ast.docs) do
-        if doc.type == 'doc.class'
-        or doc.type == 'doc.alias' then
+        if doc.type == 'doc.alias' then
             local name = guide.getKeyName(doc)
             if not cache[name] then
-                local docs = vm.getDocDefines(name)
+                local docs = vm.getDocDefines(uri, name)
                 cache[name] = {}
                 for _, otherDoc in ipairs(docs) do
                     if otherDoc.type == 'doc.class.name'

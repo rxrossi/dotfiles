@@ -8,6 +8,20 @@ local json       = require 'json'
 
 local reqCounter = util.counter()
 
+local function logSend(buf)
+    if not RPCLOG then
+        return
+    end
+    log.debug('rpc send:', buf)
+end
+
+local function logRecieve(proto)
+    if not RPCLOG then
+        return
+    end
+    log.debug('rpc recieve:', json.encode(proto))
+end
+
 local m = {}
 
 m.ability = {}
@@ -22,6 +36,7 @@ function m.getMethodName(proto)
     end
 end
 
+---@param callback async fun()
 function m.on(method, callback)
     m.ability[method] = callback
 end
@@ -38,6 +53,7 @@ function m.response(id, res)
     data.result = res == nil and json.null or res
     local buf = jsonrpc.encode(data)
     --log.debug('Response', id, #buf)
+    logSend(buf)
     io.write(buf)
 end
 
@@ -56,6 +72,7 @@ function m.responseErr(id, code, message)
         }
     }
     --log.debug('ResponseErr', id, #buf)
+    logSend(buf)
     io.write(buf)
 end
 
@@ -65,9 +82,11 @@ function m.notify(name, params)
         params = params,
     }
     --log.debug('Notify', name, #buf)
+    logSend(buf)
     io.write(buf)
 end
 
+---@async
 function m.awaitRequest(name, params)
     local id  = reqCounter()
     local buf = jsonrpc.encode {
@@ -76,6 +95,7 @@ function m.awaitRequest(name, params)
         params = params,
     }
     --log.debug('Request', name, #buf)
+    logSend(buf)
     io.write(buf)
     local result, error = await.wait(function (resume)
         m.waiting[id] = resume
@@ -94,6 +114,7 @@ function m.request(name, params, callback)
         params = params,
     }
     --log.debug('Request', name, #buf)
+    logSend(buf)
     io.write(buf)
     m.waiting[id] = function (result, error)
         if error then
@@ -105,7 +126,21 @@ function m.request(name, params, callback)
     end
 end
 
+local secretOption = {
+    format = {
+        ['text'] = function (value, _, _, stack)
+            if  stack[1] == 'params'
+            and stack[2] == 'textDocument'
+            and stack[3] == nil then
+                return '"***"'
+            end
+            return ('%q'):format(value)
+        end
+    }
+}
+
 function m.doMethod(proto)
+    logRecieve(proto)
     local method, optional = m.getMethodName(proto)
     local abil = m.ability[method]
     if not abil then
@@ -120,7 +155,7 @@ function m.doMethod(proto)
     if proto.id then
         m.holdon[proto.id] = proto
     end
-    await.call(function ()
+    await.call(function () ---@async
         --log.debug('Start method:', method)
         if proto.id then
             await.setID('proto:' .. proto.id)
@@ -132,7 +167,7 @@ function m.doMethod(proto)
         local response <close> = function ()
             local passed = os.clock() - clock
             if passed > 0.2 then
-                log.debug(('Method [%s] takes [%.3f]sec.'):format(method, passed))
+                log.debug(('Method [%s] takes [%.3f]sec. %s'):format(method, passed, util.dump(proto, secretOption)))
             end
             --log.debug('Finish method:', method)
             if not proto.id then
@@ -142,23 +177,26 @@ function m.doMethod(proto)
             if ok then
                 m.response(proto.id, res)
             else
-                m.responseErr(proto.id, proto._closeReason or define.ErrorCodes.InternalError, res)
+                m.responseErr(proto.id, proto._closeReason or define.ErrorCodes.InternalError, proto._closeMessage or res)
             end
         end
         ok, res = xpcall(abil, log.error, proto.params)
+        await.delay()
     end)
 end
 
-function m.close(id, reason)
+function m.close(id, reason, message)
     local proto = m.holdon[id]
     if not proto then
         return
     end
     proto._closeReason = reason
+    proto._closeMessage = message
     await.close('proto:' .. id)
 end
 
 function m.doResponse(proto)
+    logRecieve(proto)
     local id = proto.id
     local resume = m.waiting[id]
     if not resume then

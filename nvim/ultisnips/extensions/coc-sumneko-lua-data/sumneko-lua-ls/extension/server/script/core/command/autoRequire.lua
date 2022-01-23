@@ -63,7 +63,8 @@ local function findInsertRow(uri)
     return row or 0, fmt
 end
 
-local function askAutoRequire(visiblePaths)
+---@async
+local function askAutoRequire(uri, visiblePaths)
     local selects = {}
     local nameMap = {}
     for _, visible in ipairs(visiblePaths) do
@@ -90,6 +91,7 @@ local function askAutoRequire(visiblePaths)
                 key    = 'Lua.completion.autoRequire',
                 action = 'set',
                 value  = false,
+                uri    = uri,
             }
         }
         return
@@ -125,6 +127,7 @@ local function applyAutoRequire(uri, row, name, result, fmt)
     })
 end
 
+---@async
 return function (data)
     local uri    = data.uri
     local target = data.target
@@ -135,7 +138,7 @@ return function (data)
     end
 
     local path = furi.decode(target)
-    local visiblePaths = rpath.getVisiblePath(path, config.get 'Lua.runtime.path')
+    local visiblePaths = rpath.getVisiblePath(uri, path)
     if not visiblePaths or #visiblePaths == 0 then
         return
     end
@@ -143,7 +146,7 @@ return function (data)
         return #a.expect < #b.expect
     end)
 
-    local result = askAutoRequire(visiblePaths)
+    local result = askAutoRequire(uri, visiblePaths)
     if not result then
         return
     end

@@ -96,7 +96,7 @@ local childMap = {
     ['repeat']      = {'#', 'filter'},
     ['while']       = {'filter', '#'},
     ['in']          = {'keys', 'exps', '#'},
-    ['loop']        = {'loc', 'max', 'step', '#'},
+    ['loop']        = {'loc', 'init', 'max', 'step', '#'},
     ['if']          = {'#'},
     ['ifblock']     = {'filter', '#'},
     ['elseifblock'] = {'filter', '#'},
@@ -141,10 +141,12 @@ local childMap = {
     ['doc.type.function']  = {'#args', '#returns', 'comment'},
     ['doc.type.ltable']    = {'#fields', 'comment'},
     ['doc.type.literal']   = {'node'},
-    ['doc.type.arg']       = {'extends'},
+    ['doc.type.arg']       = {'name', 'extends'},
     ['doc.type.field']     = {'extends'},
     ['doc.overload']       = {'overload', 'comment'},
     ['doc.see']            = {'name', 'field'},
+    ['doc.version']        = {'#versions'},
+    ['doc.diagnostic']     = {'#names'},
 }
 
 ---@type table<string, fun(obj: parser.guide.object, list: parser.guide.object[])>
@@ -781,7 +783,7 @@ function m.offsetToPositionByLines(lines, offset)
         row = (left + right) // 2
         if row == left then
             if right ~= left then
-                if lines[right] <= offset then
+                if lines[right] - 1 <= offset then
                     row = right
                 end
             end
@@ -800,6 +802,17 @@ end
 
 function m.offsetToPosition(state, offset)
     return m.offsetToPositionByLines(state.lines, offset)
+end
+
+function m.getLineRange(state, row)
+    local nextLineStart = state.lines[row + 1] or #state.lua
+    for i = nextLineStart - 1, state.lines[row], -1 do
+        local w = state.lua:sub(i, i)
+        if w ~= '\r' and w ~= '\n' then
+            return i - state.lines[row] + 1
+        end
+    end
+    return 0
 end
 
 local isSetMap = {
@@ -1148,6 +1161,28 @@ function m.isGlobal(source)
         end
     end
     source._isGlobal = false
+    return false
+end
+
+function m.isInString(ast, position)
+    return m.eachSourceContain(ast, position, function (source)
+        if  source.type == 'string'
+        and source.start < position then
+            return true
+        end
+    end)
+end
+
+function m.isOOP(source)
+    if source.type == 'setmethod'
+    or source.type == 'getmethod' then
+        return true
+    end
+    if source.type == 'method'
+    or source.type == 'field'
+    or source.type == 'function' then
+        return m.isOOP(source.parent)
+    end
     return false
 end
 

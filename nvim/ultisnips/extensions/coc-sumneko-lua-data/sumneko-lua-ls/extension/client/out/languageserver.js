@@ -73,51 +73,66 @@ function getOuterMostWorkspaceFolder(folder) {
     }
     return folder;
 }
-function start(context, documentSelector, folder) {
-    // Options to control the language client
-    let clientOptions = {
-        // Register the server for plain text documents
-        documentSelector: documentSelector,
-        workspaceFolder: folder,
-        progressOnInitialization: true,
-        markdown: {
-            isTrusted: true,
-        },
-        initializationOptions: {
-            changeConfiguration: true,
-        }
-    };
-    let config = vscode_1.workspace.getConfiguration(undefined, folder);
-    let commandParam = config.get("Lua.misc.parameters");
-    let command;
-    let platform = os.platform();
-    switch (platform) {
-        case "win32":
-            command = context.asAbsolutePath(path.join('server', 'bin', 'Windows', 'lua-language-server.exe'));
-            break;
-        case "linux":
-            command = context.asAbsolutePath(path.join('server', 'bin', 'Linux', 'lua-language-server'));
-            fs.chmodSync(command, '777');
-            break;
-        case "darwin":
-            command = context.asAbsolutePath(path.join('server', 'bin', 'macOS', 'lua-language-server'));
-            fs.chmodSync(command, '777');
-            break;
+class LuaClient {
+    constructor(context, documentSelector) {
+        this.context = context;
+        this.documentSelector = documentSelector;
     }
-    let serverOptions = {
-        command: command,
-        args: commandParam,
-    };
-    let client = new node_1.LanguageClient('Lua', 'Lua', serverOptions, clientOptions);
-    //client.registerProposedFeatures();
-    client.start();
-    client.onReady().then(() => {
-        onCommand(client);
-        onDecorations(client);
-        //onInlayHint(client);
-        statusBar(client);
-    });
-    return client;
+    start() {
+        var _a;
+        return __awaiter(this, void 0, void 0, function* () {
+            // Options to control the language client
+            let clientOptions = {
+                // Register the server for plain text documents
+                documentSelector: this.documentSelector,
+                progressOnInitialization: true,
+                markdown: {
+                    isTrusted: true,
+                },
+                initializationOptions: {
+                    changeConfiguration: true,
+                }
+            };
+            let config = vscode_1.workspace.getConfiguration(undefined, (_a = vscode.workspace.workspaceFolders) === null || _a === void 0 ? void 0 : _a[0]);
+            let commandParam = config.get("Lua.misc.parameters");
+            let command;
+            let platform = os.platform();
+            let binDir;
+            if ((yield fs.promises.stat(this.context.asAbsolutePath('server/bin'))).isDirectory()) {
+                binDir = 'bin';
+            }
+            switch (platform) {
+                case "win32":
+                    command = this.context.asAbsolutePath(path.join('server', binDir ? binDir : 'bin-Windows', 'lua-language-server.exe'));
+                    break;
+                case "linux":
+                    command = this.context.asAbsolutePath(path.join('server', binDir ? binDir : 'bin-Linux', 'lua-language-server'));
+                    yield fs.promises.chmod(command, '777');
+                    break;
+                case "darwin":
+                    command = this.context.asAbsolutePath(path.join('server', binDir ? binDir : 'bin-macOS', 'lua-language-server'));
+                    yield fs.promises.chmod(command, '777');
+                    break;
+            }
+            let serverOptions = {
+                command: command,
+                args: commandParam,
+            };
+            this.client = new node_1.LanguageClient('Lua', 'Lua', serverOptions, clientOptions);
+            //client.registerProposedFeatures();
+            this.client.start();
+            yield this.client.onReady();
+            onCommand(this.client);
+            onDecorations(this.client);
+            //onInlayHint(client);
+            statusBar(this.client);
+        });
+    }
+    stop() {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.client.stop();
+        });
+    }
 }
 let barCount = 0;
 function statusBar(client) {
@@ -264,63 +279,36 @@ function activate(context) {
         if (document.languageId !== 'lua' || (document.uri.scheme !== 'file' && document.uri.scheme !== 'untitled')) {
             return;
         }
-        let uri = document.uri;
-        let folder = vscode_1.workspace.getWorkspaceFolder(uri);
         // Untitled files go to a default client.
-        if (folder == null && vscode_1.workspace.workspaceFolders == null && !defaultClient) {
-            defaultClient = start(context, [
-                { scheme: 'file', language: 'lua' }
-            ], null);
+        if (!defaultClient) {
+            defaultClient = new LuaClient(context, [
+                { language: 'lua' }
+            ]);
+            defaultClient.start();
             return;
-        }
-        // Files outside a folder can't be handled. This might depend on the language.
-        // Single file languages like JSON might handle files outside the workspace folders.
-        if (!folder) {
-            return;
-        }
-        // If we have nested workspace folders we only start a server on the outer most workspace folder.
-        folder = getOuterMostWorkspaceFolder(folder);
-        if (!clients.has(folder.uri.toString())) {
-            let pattern = folder.uri.fsPath.replace(/(\[|\])/g, '[$1]') + '/**/*';
-            let client = start(context, [
-                { scheme: 'file', language: 'lua', pattern: pattern }
-            ], folder);
-            clients.set(folder.uri.toString(), client);
-        }
-    }
-    function didCloseTextDocument(document) {
-        let uri = document.uri;
-        if (clients.has(uri.toString())) {
-            let client = clients.get(uri.toString());
-            if (client) {
-                clients.delete(uri.toString());
-                client.stop();
-            }
         }
     }
     vscode_1.workspace.onDidOpenTextDocument(didOpenTextDocument);
-    //Workspace.onDidCloseTextDocument(didCloseTextDocument);
     vscode_1.workspace.textDocuments.forEach(didOpenTextDocument);
-    vscode_1.workspace.onDidChangeWorkspaceFolders((event) => {
-        for (let folder of event.removed) {
-            let client = clients.get(folder.uri.toString());
-            if (client) {
-                clients.delete(folder.uri.toString());
-                client.stop();
-            }
+    vscode_1.workspace.onDidChangeWorkspaceFolders(() => {
+        if (defaultClient) {
+            defaultClient.stop();
+            defaultClient = new LuaClient(context, [
+                { language: 'lua' }
+            ]);
+            defaultClient.start();
         }
     });
 }
 exports.activate = activate;
 function deactivate() {
-    let promises = [];
-    if (defaultClient) {
-        promises.push(defaultClient.stop());
-    }
-    for (let client of clients.values()) {
-        promises.push(client.stop());
-    }
-    return Promise.all(promises).then(() => undefined);
+    return __awaiter(this, void 0, void 0, function* () {
+        if (defaultClient) {
+            defaultClient.stop();
+            defaultClient = null;
+        }
+        return undefined;
+    });
 }
 exports.deactivate = deactivate;
 //# sourceMappingURL=languageserver.js.map

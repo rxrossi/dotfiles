@@ -23,6 +23,9 @@ local typeNameMap = {
 }
 
 local function isTable(name)
+    if type(name) ~= 'string' then
+        return
+    end
     if tableMap[name]
     ---table<K: number, V: string> table
     or tableMap[name:sub(1, 5)]
@@ -33,11 +36,11 @@ local function isTable(name)
     return false
 end
 
-local function isUserDefineClass(name)
+local function isUserDefineClass(uri, name)
     if vm.isBuiltinType(name) then
         return false
     else
-        local defs = vm.getDocDefines(name)
+        local defs = vm.getDocDefines(uri, name)
         for _, v in ipairs(defs) do
             if v.type == 'doc.class.name' then
                 return true
@@ -84,7 +87,8 @@ local function compatibleType(param, args)
             if param[1] and param[1]:sub(1,1) == '"' then
                 return true
             end
-        elseif isTable(v.type or v[1]) and isTable(param[1] or param.type) then
+        elseif (isTable(v.type) or isTable(v[1]))
+        and (isTable(param[1]) or isTable(param.type)) then
             return true
         end
     end
@@ -112,16 +116,18 @@ end
 --     end
 -- end
 
-local function addFatherClass(infers)
+local function addFatherClass(uri, infers)
     for k in pairs(infers) do
-        local docDefs = vm.getDocDefines(k)
-        for _, doc in ipairs(docDefs) do
-            if doc.parent
-            and doc.parent.type == 'doc.class'
-            and doc.parent.extends then
-                for _, tp in ipairs(doc.parent.extends) do
-                    if tp.type == 'doc.extends.name' then
-                        infers[tp[1]] = true
+        if type(k) == 'string' then
+            local docDefs = vm.getDocDefines(uri, k)
+            for _, doc in ipairs(docDefs) do
+                if doc.parent
+                and doc.parent.type == 'doc.class'
+                and doc.parent.extends then
+                    for _, tp in ipairs(doc.parent.extends) do
+                        if tp.type == 'doc.extends.name' then
+                            infers[tp[1]] = true
+                        end
                     end
                 end
             end
@@ -238,9 +244,6 @@ local function getInfoFromDefs(defs)
                                     and isClassOralias(v.type) then
                                         plusAlias[#plusAlias+1] = v
                                     end
-                                    if not v[1] or not v.type then
-                                        log.warn('type-check: if not v[1] or not v.type')
-                                    end
                                 end
                                 plusAlias[#plusAlias+1] = types[i]
                             end
@@ -261,7 +264,7 @@ local function getInfoFromDefs(defs)
     return paramsTypes
 end
 
-local function getArgsInfo(callArgs)
+local function getArgsInfo(uri, callArgs)
     local callArgsType = {}
     for _, arg in ipairs(callArgs) do
         -- local defs = vm.getDefs(arg)
@@ -273,7 +276,7 @@ local function getArgsInfo(callArgs)
         end
         local hasAny = infers['any']
         ---处理继承
-        addFatherClass(infers)
+        addFatherClass(uri, infers)
         if not hasAny then
             infers['any'] = nil
             infers['unknown'] = nil
@@ -282,7 +285,7 @@ local function getArgsInfo(callArgs)
         if not infers['table'] then
             for k in pairs(infers) do
                 if not vm.isBuiltinType(k)
-                and isUserDefineClass(k) then
+                and isUserDefineClass(uri, k) then
                     infers['table'] = true
                     break
                 end
@@ -409,18 +412,19 @@ local function matchParams(paramsTypes, i, arg)
     return false, messages
 end
 
+---@async
 return function (uri, callback)
     local ast = files.getState(uri)
     if not ast then
         return
     end
-    guide.eachSourceType(ast.ast, 'call', function (source)
+    guide.eachSourceType(ast.ast, 'call', function (source) ---@async
         if not source.args then
             return
         end
         await.delay()
         local callArgs = source.args
-        local suc, callArgsType = getArgsInfo(callArgs)
+        local suc, callArgsType = getArgsInfo(uri, callArgs)
         if not suc then
             return
         end

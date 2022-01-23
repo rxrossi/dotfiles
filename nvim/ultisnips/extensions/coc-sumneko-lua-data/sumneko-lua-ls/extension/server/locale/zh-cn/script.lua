@@ -43,6 +43,9 @@ DIAG_IMPLICIT_ANY       = '无法推测出类型。'
 DIAG_DEPRECATED         = '已废弃。'
 DIAG_DIFFERENT_REQUIRES = '使用了不同的名字 require 了同一个文件。'
 DIAG_REDUNDANT_RETURN   = '冗余返回。'
+DIAG_AWAIT_IN_SYNC      = '只能在标记为异步的函数中调用异步函数。'
+DIAG_NOT_YIELDABLE      = '此函数的第 {} 个参数没有被标记为可让出，但是传入了异步函数。（使用 `---@param name async fun()` 来标记为可让出）'
+DIAG_DISCARD_RETURNS    = '不能丢弃此函数的返回值。'
 
 DIAG_CIRCLE_DOC_CLASS                 = '循环继承的类。'
 DIAG_DOC_FIELD_NO_CLASS               = '字段必须定义在类之后。'
@@ -66,6 +69,7 @@ MWS_WCONFIG_UPDATED     = '工作区配置已更新。'
 WORKSPACE_SKIP_LARGE_FILE = '已跳过过大的文件：{}。当前设置的大小限制为：{} KB，该文件大小为：{} KB'
 WORKSPACE_LOADING         = '正在加载工作目录'
 WORKSPACE_DIAGNOSTIC      = '正在对工作目录进行诊断'
+WORKSPACE_SKIP_HUGE_FILE  = '出于性能考虑，已停止对此文件解析：{}'
 
 PARSER_CRASH            = '语法解析崩溃了！遗言：{}'
 PARSER_UNKNOWN          = '未知语法错误...'
@@ -189,6 +193,7 @@ ACTION_FIX_INSERT_SPACE = '插入空格'
 ACTION_JSON_TO_LUA      = '把 JSON 转成 Lua'
 ACTION_DISABLE_DIAG_LINE= '在此行禁用诊断 ({})。'
 ACTION_DISABLE_DIAG_FILE= '在此文件禁用诊断 ({})。'
+ACTION_MARK_ASYNC       = '将当前函数标记为异步。'
 
 COMMAND_DISABLE_DIAG       = '禁用诊断'
 COMMAND_MARK_GLOBAL        = '标记全局变量'
@@ -227,11 +232,9 @@ WINDOW_SETTING_WS_DIAGNOSTIC     = '你可以在设置中延迟或禁用工作�
 WINDOW_DONT_SHOW_AGAIN           = '不再提示'
 WINDOW_DELAY_WS_DIAGNOSTIC       = '空闲时诊断（延迟{}秒）'
 WINDOW_DISABLE_DIAGNOSTIC        = '禁用工作区诊断'
-WINDOW_LUA_STATUS                = [[
-工作区：{ws}
-已缓存文件：{ast}/{max}
-内存占用：{mem:.f}M
-]]
+WINDOW_LUA_STATUS_WORKSPACE      = '工作区：{}'
+WINDOW_LUA_STATUS_CACHED_FILES   = '已缓存文件：{ast}/{max}'
+WINDOW_LUA_STATUS_MEMORY_COUNT   = '内存占用：{mem:.f}M'
 WINDOW_APPLY_SETTING             = '应用设置'
 WINDOW_CHECK_SEMANTIC            = '如果你正在使用市场中的颜色主题，你可能需要同时修改 `editor.semanticHighlighting.enabled` 选项为 `true` 才会使语义着色生效。'
 WINDOW_TELEMETRY_HINT            = '请允许发送匿名的使用数据与错误报告，帮助我们进一步完善此插件。在[此处](https://github.com/sumneko/lua-language-server/wiki/%E9%9A%90%E7%A7%81%E5%A3%B0%E6%98%8E)阅读我们的隐私声明。'

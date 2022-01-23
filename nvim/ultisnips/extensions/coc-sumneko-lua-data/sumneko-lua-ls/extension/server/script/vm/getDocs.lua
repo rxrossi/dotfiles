@@ -1,6 +1,6 @@
 local files     = require 'files'
 local guide     = require 'parser.guide'
----@type vm
+---@class vm
 local vm        = require 'vm.vm'
 local config    = require 'config'
 local collector = require 'core.collector'
@@ -10,14 +10,14 @@ local noder     = require 'core.noder'
 ---获取class与alias
 ---@param name? string
 ---@return parser.guide.object[]
-function vm.getDocDefines(name)
+function vm.getDocDefines(uri, name)
     local cache = vm.getCache 'getDocDefines'
     if cache[name] then
         return cache[name]
     end
     local results = {}
     if name == '*' then
-        for noders in collector.each('def:dn:') do
+        for noders in collector.each(uri, 'def:dn:') do
             for id in noder.eachID(noders) do
                 if  id:sub(1, 3) == 'dn:'
                 and not id:find(noder.SPLIT_CHAR) then
@@ -31,7 +31,7 @@ function vm.getDocDefines(name)
         end
     else
         local id = 'dn:' .. name
-        for noders in collector.each('def:' .. id) do
+        for noders in collector.each(uri, 'def:' .. id) do
             for source in noder.eachSource(noders, id) do
                 if source.type == 'doc.class.name'
                 or source.type == 'doc.alias.name' then
@@ -153,7 +153,7 @@ local function isDeprecated(value)
             return true
         elseif doc.type == 'doc.version' then
             local valids = vm.getValidVersions(doc)
-            if not valids[config.get 'Lua.runtime.version'] then
+            if not valids[config.get(guide.getUri(value), 'Lua.runtime.version')] then
                 value._deprecated = true
                 return true
             end
@@ -178,6 +178,140 @@ function vm.isDeprecated(value, deep)
     else
         return isDeprecated(value)
     end
+end
+
+local function isAsync(value)
+    if value.type == 'function' then
+        if not value.bindDocs then
+            return false
+        end
+        if value._async ~= nil then
+            return value._async
+        end
+        for _, doc in ipairs(value.bindDocs) do
+            if doc.type == 'doc.async' then
+                value._async = true
+                return true
+            end
+        end
+        value._async = false
+        return false
+    end
+    return value.async == true
+end
+
+function vm.isAsync(value, deep)
+    if isAsync(value) then
+        return true
+    end
+    if deep then
+        local defs = vm.getDefs(value)
+        if #defs == 0 then
+            return false
+        end
+        for _, def in ipairs(defs) do
+            if isAsync(def) then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+local function isNoDiscard(value)
+    if value.type == 'function' then
+        if not value.bindDocs then
+            return false
+        end
+        if value._nodiscard ~= nil then
+            return value._nodiscard
+        end
+        for _, doc in ipairs(value.bindDocs) do
+            if doc.type == 'doc.nodiscard' then
+                value._nodiscard = true
+                return true
+            end
+        end
+        value._nodiscard = false
+        return false
+    end
+    return false
+end
+
+function vm.isNoDiscard(value, deep)
+    if isNoDiscard(value) then
+        return true
+    end
+    if deep then
+        local defs = vm.getDefs(value)
+        if #defs == 0 then
+            return false
+        end
+        for _, def in ipairs(defs) do
+            if isNoDiscard(def) then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+local function isCalledInFunction(param)
+    if not param.ref then
+        return false
+    end
+    local func = guide.getParentFunction(param)
+    for _, ref in ipairs(param.ref) do
+        if ref.type == 'getlocal' then
+            if  ref.parent.type == 'call'
+            and guide.getParentFunction(ref) == func then
+                return true
+            end
+            if  ref.parent.type == 'callargs'
+            and ref.parent[1] == ref
+            and guide.getParentFunction(ref) == func then
+                if ref.parent.parent.node.special == 'pcall'
+                or ref.parent.parent.node.special == 'xpcall' then
+                    return true
+                end
+            end
+        end
+    end
+    return false
+end
+
+local function isLinkedCall(node, index)
+    for _, def in ipairs(vm.getDefs(node)) do
+        if def.type == 'function' then
+            local param = def.args and def.args[index]
+            if param then
+                if isCalledInFunction(param) then
+                    return true
+                end
+            end
+        end
+    end
+    return false
+end
+
+function vm.isLinkedCall(node, index)
+    return isLinkedCall(node, index)
+end
+
+function vm.isAsyncCall(call)
+    if vm.isAsync(call.node, true) then
+        return true
+    end
+    if not call.args then
+        return
+    end
+    for i, arg in ipairs(call.args) do
+        if  vm.isAsync(arg, true)
+        and isLinkedCall(call.node, i) then
+            return true
+        end
+    end
+    return false
 end
 
 local function makeDiagRange(uri, doc, results)

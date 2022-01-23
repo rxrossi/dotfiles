@@ -1,7 +1,5 @@
 local vm       = require 'vm'
 local ws       = require 'workspace'
-local furi     = require 'file-uri'
-local files    = require 'files'
 local searcher = require 'core.searcher'
 local markdown = require 'provider.markdown'
 local config   = require 'config'
@@ -9,12 +7,12 @@ local lang     = require 'language'
 local util     = require 'utility'
 local guide    = require 'parser.guide'
 local noder    = require 'core.noder'
+local rpath    = require 'workspace.require-path'
 
-local function collectRequire(mode, literal)
-    local rootPath = ws.path or ''
+local function collectRequire(mode, literal, uri)
     local result, searchers
     if     mode == 'require' then
-        result, searchers = ws.findUrisByRequirePath(literal)
+        result, searchers = rpath.findUrisByRequirePath(uri, literal)
     elseif mode == 'dofile'
     or     mode == 'loadfile' then
         result = ws.findUrisByFilePath(literal)
@@ -23,16 +21,10 @@ local function collectRequire(mode, literal)
         local shows = {}
         for i, uri in ipairs(result) do
             local searcher = searchers and searchers[uri]
-            local path = furi.decode(uri)
-            if path:sub(1, #rootPath) == rootPath then
-                path = path:sub(#rootPath + 1)
-            end
-            path = path:gsub('^[/\\]*', '')
+            local path = ws.getRelativePath(uri)
             if vm.isMetaFile(uri) then
                 shows[i] = ('* [[meta]](%s)'):format(uri)
             elseif searcher then
-                searcher = searcher:sub(#rootPath + 1)
-                searcher = ws.normalize(searcher)
                 searcher = searcher:gsub('^[/\\]+', '')
                 shows[i] = ('* [%s](%s) %s'):format(path, uri, lang.script('HOVER_USE_LUA_PATH', searcher))
             else
@@ -58,19 +50,19 @@ local function asStringInRequire(source, literal)
         if libName == 'require'
         or libName == 'dofile'
         or libName == 'loadfile' then
-            return collectRequire(libName, literal)
+            return collectRequire(libName, literal, guide.getUri(source))
         end
     end
 end
 
 local function asStringView(source, literal)
     -- 内部包含转义符？
-    local rawLen = source.finish - source.start - 2 * #source[2] + 1
-    if  config.get 'Lua.hover.viewString'
+    local rawLen = source.finish - source.start - 2 * #source[2]
+    if  config.get(guide.getUri(source), 'Lua.hover.viewString')
     and (source[2] == '"' or source[2] == "'")
     and rawLen > #literal then
         local view = literal
-        local max = config.get 'Lua.hover.viewStringMax'
+        local max = config.get(guide.getUri(source), 'Lua.hover.viewStringMax')
         if #view > max then
             view = view:sub(1, max) .. '...'
         end
@@ -158,7 +150,7 @@ local function tryDocModule(source)
     if not source.module then
         return
     end
-    return collectRequire('require', source.module)
+    return collectRequire('require', source.module, guide.getUri(source))
 end
 
 local function buildEnumChunk(docType, name)

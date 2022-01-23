@@ -2,19 +2,29 @@ local proto  = require 'proto'
 local nonil  = require 'without-check-nil'
 local client = require 'client'
 local config = require 'config'
+local ws     = require 'workspace'
 
 local isEnable = false
 
 local function allWords()
-    local str = '\t\n.:(\'"[,#*@|=-{/\\ '
+    local str = '\t\n.:(\'"[,#*@|=-{/\\ +?'
+    local mark = {}
     local list = {}
     for c in str:gmatch '.' do
         list[#list+1] = c
+        mark[c] = true
+    end
+    for _, scp in ipairs(ws.folders) do
+        local postfix = config.get(scp.uri, 'Lua.completion.postfix')
+        if postfix ~= '' and not mark[postfix] then
+            list[#list+1] = postfix
+            mark[postfix] = true
+        end
     end
     return list
 end
 
-local function enable()
+local function enable(uri)
     if isEnable then
         return
     end
@@ -39,7 +49,7 @@ local function enable()
     })
 end
 
-local function disable()
+local function disable(uri)
     if not isEnable then
         return
     end
@@ -60,12 +70,22 @@ local function disable()
     })
 end
 
-config.watch(function (key, value)
+config.watch(function (uri, key, value)
+    if key == '' then
+        key   = 'Lua.completion.enable'
+        value = config.get(uri, key)
+    end
     if key == 'Lua.completion.enable' then
         if value == true then
-            enable()
+            enable(uri)
         else
-            disable()
+            disable(uri)
+        end
+    end
+    if key == 'Lua.completion.postfix' then
+        if config.get(uri, 'Lua.completion.enable') then
+            disable(uri)
+            enable(uri)
         end
     end
 end)

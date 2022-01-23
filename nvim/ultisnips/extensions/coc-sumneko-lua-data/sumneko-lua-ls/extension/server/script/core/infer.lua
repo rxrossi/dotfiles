@@ -3,6 +3,7 @@ local config   = require 'config'
 local noder    = require 'core.noder'
 local util     = require 'utility'
 local vm       = require "vm.vm"
+local guide    = require "parser.guide"
 
 local CLASS           = {'CLASS'}
 local TABLE           = {'TABLE'}
@@ -28,6 +29,7 @@ local function mergeTable(a, b)
     for v in pairs(b) do
         a[v] = true
     end
+    a[CACHE] = nil
 end
 
 local function isBaseType(source, mark)
@@ -231,8 +233,8 @@ local function bindClassOrType(source)
     return false
 end
 
-local function cleanInfers(infers)
-    local version = config.get 'Lua.runtime.version'
+local function cleanInfers(uri, infers)
+    local version = config.get(uri, 'Lua.runtime.version')
     local enableInteger = version == 'Lua 5.3' or version == 'Lua 5.4'
     infers['unknown'] = nil
     if infers['number'] then
@@ -268,7 +270,7 @@ end
 ---合并对象的推断类型
 ---@param infers string[]
 ---@return string
-function m.viewInfers(infers)
+function m.viewInfers(uri, infers)
     if infers[CACHE] then
         return infers[CACHE]
     end
@@ -297,7 +299,7 @@ function m.viewInfers(infers)
             return sa < sb
         end
     end)
-    local limit = config.get 'Lua.hover.enumsLimit'
+    local limit = config.get(uri, 'Lua.hover.enumsLimit')
     if limit < 0 then
         limit = 0
     end
@@ -385,7 +387,7 @@ function m.viewDocFunction(doc)
     end
     local args = {}
     for i, arg in ipairs(doc.args) do
-        args[i] = ('%s: %s'):format(arg.name[1], m.viewDocName(arg.extends))
+        args[i] = ('%s: %s'):format(arg.name[1], arg.extends and m.viewDocName(arg.extends) or 'any')
     end
     local label = ('fun(%s)'):format(table.concat(args, ', '))
     if #doc.returns > 0 then
@@ -478,6 +480,10 @@ function m.searchInfers(source, field, mark)
     if not source then
         return nil
     end
+    if source.type == 'setlocal'
+    or source.type == 'getlocal' then
+        source = source.node
+    end
     local suc, infers = getCachedInfers(source, field)
     if suc then
         return infers
@@ -487,22 +493,16 @@ function m.searchInfers(source, field, mark)
     mark = mark or {}
     if not field then
         searchInfer(source, infers, mark)
-        local id = noder.getID(source)
-        if id then
-            local noders = noder.getNoders(source)
-            for src in noder.eachSource(noders, id) do
-                searchInfer(src, infers, mark)
-            end
-        end
-        if source.type == 'field' or source.type == 'method' then
-            searchInfer(source.parent, infers, mark)
-        end
     end
     for _, def in ipairs(defs) do
         if def.typeGeneric and not isParam then
-        else
-            searchInfer(def, infers, mark)
+            goto CONTINUE
         end
+        if def.type == 'setlocal' then
+            goto CONTINUE
+        end
+        searchInfer(def, infers, mark)
+        ::CONTINUE::
     end
     if source.type == 'doc.type' then
         for _, def in ipairs(source.types) do
@@ -511,7 +511,7 @@ function m.searchInfers(source, field, mark)
             end
         end
     end
-    cleanInfers(infers)
+    cleanInfers(guide.getUri(source), infers)
     return infers
 end
 
@@ -521,6 +521,9 @@ end
 ---@param mark? table
 ---@return table
 function m.searchLiterals(source, field, mark)
+    if not source then
+        return nil
+    end
     local defs = vm.getDefs(source, field)
     local literals = {}
     mark = mark or {}
@@ -542,6 +545,9 @@ function m.searchAndViewLiterals(source, field, mark)
         return nil
     end
     local literals = m.searchLiterals(source, field, mark)
+    if not literals then
+        return nil
+    end
     local view = m.viewLiterals(literals)
     return view
 end
@@ -560,10 +566,12 @@ function m.isTrue(source, mark)
     if mark.isTrue[source] == nil then
         mark.isTrue[source] = false
         local literals = m.searchLiterals(source, nil, mark)
-        for literal in pairs(literals) do
-            if literal ~= false then
-                mark.isTrue[source] = true
-                break
+        if literals then
+            for literal in pairs(literals) do
+                if literal ~= false then
+                    mark.isTrue[source] = true
+                    break
+                end
             end
         end
     end
@@ -599,7 +607,11 @@ function m.searchAndViewInfers(source, field, mark)
         return 'any'
     end
     local infers = m.searchInfers(source, field, mark)
-    local view = m.viewInfers(infers)
+    local view = m.viewInfers(guide.getUri(source), infers)
+    if type(view) == 'boolean' then
+        log.error('Why view is boolean?', util.dump(infers))
+        return 'any'
+    end
     return view
 end
 
@@ -619,8 +631,8 @@ function m.getClass(source)
             end
         end
     end
-    cleanInfers(infers)
-    local view = m.viewInfers(infers)
+    cleanInfers(guide.getUri(source), infers)
+    local view = m.viewInfers(guide.getUri(source), infers)
     if view == 'any' then
         return nil
     end

@@ -38,7 +38,10 @@ local function asFunction(source, oop)
                     infer.searchAndViewInfers(arg)
                 )
             elseif arg.type == '...' then
-                args[#args+1] = '...'
+                args[#args+1] = ('%s: %s'):format(
+                    '...',
+                    infer.searchAndViewInfers(arg)
+                )
             else
                 args[#args+1] = ('%s'):format(infer.searchAndViewInfers(arg))
             end
@@ -52,7 +55,7 @@ local function asFunction(source, oop)
     end
 end
 
-local function asDocFunction(source)
+local function asDocFunction(source, oop)
     if not source.args then
         return ''
     end
@@ -60,20 +63,17 @@ local function asDocFunction(source)
     for i = 1, #source.args do
         local arg = source.args[i]
         local name = arg.name[1]
-        if arg.extends then
-            args[i] = ('%s%s: %s'):format(
-                name,
-                arg.optional and '?' or '',
-                infer.searchAndViewInfers(arg.extends)
-            )
-        else
-            args[i] = ('%s%s'):format(
-                name,
-                arg.optional and '?' or ''
-            )
-        end
+        args[i] = ('%s%s: %s'):format(
+            name,
+            arg.optional and '?' or '',
+            arg.extends and infer.searchAndViewInfers(arg.extends) or 'any'
+        )
     end
-    return table.concat(args, ', ')
+    if oop then
+        return table.concat(args, ', ', 2)
+    else
+        return table.concat(args, ', ')
+    end
 end
 
 return function (source, oop)
@@ -81,7 +81,7 @@ return function (source, oop)
         return asFunction(source, oop)
     end
     if source.type == 'doc.type.function' then
-        return asDocFunction(source)
+        return asDocFunction(source, oop)
     end
     return ''
 end

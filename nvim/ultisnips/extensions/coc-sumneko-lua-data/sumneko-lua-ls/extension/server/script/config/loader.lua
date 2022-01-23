@@ -1,5 +1,3 @@
-local fs        = require 'bee.filesystem'
-local fsu       = require 'fs-utility'
 local json      = require 'json'
 local proto     = require 'proto'
 local lang      = require 'language'
@@ -14,42 +12,54 @@ local function errorMessage(msg)
     log.error(msg)
 end
 
+---@class config.loader
 local m = {}
 
-function m.loadRCConfig(filename)
-    local path = workspace.getAbsolutePath(filename)
+function m.loadRCConfig(uri, filename)
+    local scp  = workspace.getScope(uri)
+    local path = workspace.getAbsolutePath(uri, filename)
     if not path then
-        return
+        scp:set('lastRCConfig', nil)
+        return nil
     end
     local buf = util.loadFile(path)
     if not buf then
-        return
+        scp:set('lastRCConfig', nil)
+        return nil
     end
     local suc, res = pcall(json.decode, buf)
     if not suc then
         errorMessage(lang.script('CONFIG_LOAD_ERROR', res))
-        return
+        return scp:get('lastRCConfig')
     end
+    scp:set('lastRCConfig', res)
     return res
 end
 
-function m.loadLocalConfig(filename)
-    local path = workspace.getAbsolutePath(filename)
+function m.loadLocalConfig(uri, filename)
+    local scp  = workspace.getScope(uri)
+    local path = workspace.getAbsolutePath(uri, filename)
     if not path then
-        return
+        scp:set('lastLocalConfig', nil)
+        scp:set('lastLocalType', nil)
+        return nil
     end
     local buf  = util.loadFile(path)
     if not buf then
         errorMessage(lang.script('CONFIG_LOAD_FAILED', path))
-        return
+        scp:set('lastLocalConfig', nil)
+        scp:set('lastLocalType', nil)
+        return nil
     end
     local firstChar = buf:match '%S'
     if firstChar == '{' then
         local suc, res = pcall(json.decode, buf)
         if not suc then
             errorMessage(lang.script('CONFIG_LOAD_ERROR', res))
-            return
+            return scp:get('lastLocalConfig')
         end
+        scp:set('lastLocalConfig', res)
+        scp:set('lastLocalType', 'json')
         return res
     else
         local suc, res = pcall(function ()
@@ -57,40 +67,45 @@ function m.loadLocalConfig(filename)
         end)
         if not suc then
             errorMessage(lang.script('CONFIG_LOAD_ERROR', res))
-            return
+            scp:set('lastLocalConfig', res)
         end
+        scp:set('lastLocalConfig', res)
+        scp:set('lastLocalType', 'lua')
         return res
     end
 end
 
-function m.loadClientConfig()
+---@async
+---@param uri? uri
+---@return table
+function m.loadClientConfig(uri)
     local configs = proto.awaitRequest('workspace/configuration', {
         items = {
             {
-                scopeUri = workspace.uri,
+                scopeUri = uri,
                 section = 'Lua',
             },
             {
-                scopeUri = workspace.uri,
+                scopeUri = uri,
                 section = 'files.associations',
             },
             {
-                scopeUri = workspace.uri,
+                scopeUri = uri,
                 section = 'files.exclude',
             },
             {
-                scopeUri = workspace.uri,
+                scopeUri = uri,
                 section = 'editor.semanticHighlighting.enabled',
             },
             {
-                scopeUri = workspace.uri,
+                scopeUri = uri,
                 section = 'editor.acceptSuggestionOnEnter',
             },
         },
     })
     if not configs or not configs[1] then
         log.warn('No config?', util.dump(configs))
-        return
+        return nil
     end
 
     local newConfig = {

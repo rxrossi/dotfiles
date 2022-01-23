@@ -49,7 +49,7 @@ local function disableDiagnostic(uri, code, start, results)
         kind    = 'quickfix',
         command = {
             title    = lang.script.COMMAND_DISABLE_DIAG,
-            command = 'lua.setConfig:' .. sp:get_id(),
+            command = 'lua.setConfig',
             arguments = {
                 {
                     key    = 'Lua.diagnostics.disable',
@@ -86,7 +86,7 @@ local function markGlobal(uri, name, results)
         kind    = 'quickfix',
         command = {
             title     = lang.script.COMMAND_MARK_GLOBAL,
-            command = 'lua.setConfig:' .. sp:get_id(),
+            command = 'lua.setConfig',
             arguments = {
                 {
                     key    = 'Lua.diagnostics.globals',
@@ -105,7 +105,7 @@ local function changeVersion(uri, version, results)
         kind    = 'quickfix',
         command = {
             title     = lang.script.COMMAND_RUNTIME_VERSION,
-            command   = 'lua.setConfig:' .. sp:get_id(),
+            command   = 'lua.setConfig',
             arguments = {
                 {
                     key    = 'Lua.runtime.version',
@@ -223,7 +223,7 @@ local function solveSyntaxUnicodeName(uri, err, results)
         kind    = 'quickfix',
         command = {
             title     = lang.script.COMMAND_UNICODE_NAME,
-            command   = 'lua.setConfig:' .. sp:get_id(),
+            command   = 'lua.setConfig',
             arguments = {
                 {
                     key    = 'Lua.runtime.unicodeName',
@@ -280,7 +280,7 @@ local function solveAmbiguity1(uri, diag, results)
         kind = 'quickfix',
         command = {
             title = lang.script.COMMAND_ADD_BRACKETS,
-            command = 'lua.solve:' .. sp:get_id(),
+            command = 'lua.solve',
             arguments = {
                 {
                     name  = 'ambiguity-1',
@@ -298,10 +298,48 @@ local function solveTrailingSpace(uri, diag, results)
         kind = 'quickfix',
         command = {
             title = lang.script.COMMAND_REMOVE_SPACE,
-            command = 'lua.removeSpace:' .. sp:get_id(),
+            command = 'lua.removeSpace',
             arguments = {
                 {
                     uri = uri,
+                }
+            }
+        },
+    }
+end
+
+local function solveAwaitInSync(uri, diag, results)
+    local state = files.getState(uri)
+    if not state then
+        return
+    end
+    local start, finish = converter.unpackRange(uri, diag.range)
+    local parentFunction
+    guide.eachSourceType(state.ast, 'function', function (source)
+        if source.start > finish
+        or source.finish < start then
+            return
+        end
+        if not parentFunction or parentFunction.start < source.start then
+            parentFunction = source
+        end
+    end)
+    if not parentFunction then
+        return
+    end
+    local row = guide.rowColOf(parentFunction.start)
+    local pos = guide.positionOf(row, 0)
+    results[#results+1] = {
+        title = lang.script.ACTION_MARK_ASYNC,
+        kind = 'quickfix',
+        edit = {
+            changes = {
+                [uri] = {
+                    {
+                        start  = pos,
+                        finish = pos,
+                        newText = '---@async\n',
+                    }
                 }
             }
         },
@@ -326,6 +364,8 @@ local function solveDiagnostic(uri, diag, start, results)
         solveAmbiguity1(uri, diag, results)
     elseif diag.code == 'trailing-space' then
         solveTrailingSpace(uri, diag, results)
+    elseif diag.code == 'await-in-sync' then
+        solveAwaitInSync(uri, diag, results)
     end
     disableDiagnostic(uri, diag.code, start, results)
 end
@@ -530,7 +570,7 @@ local function checkJsonToLua(results, uri, start, finish)
         kind = 'refactor.rewrite',
         command = {
             title = lang.script.COMMAND_JSON_TO_LUA,
-            command = 'lua.jsonToLua:' .. sp:get_id(),
+            command = 'lua.jsonToLua',
             arguments = {
                 {
                     uri    = uri,

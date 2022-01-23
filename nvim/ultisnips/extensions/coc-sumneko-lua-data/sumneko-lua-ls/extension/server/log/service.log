@@ -1,18 +1,18 @@
-[11:32:00.891][info] [#0:/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/main.lua:49]: Lua Lsp startup, root: 	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server
-[11:32:00.892][debug][#0:/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/main.lua:50]: ROOT:	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server
-[11:32:00.892][debug][#0:/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/main.lua:51]: LOGPATH:	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/log
-[11:32:00.892][debug][#0:/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/main.lua:52]: METAPATH:	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta
-[11:32:00.893][debug][#0:/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/main.lua:53]: VERSION:	2.4.7
-[11:32:00.959][info] [#0:script/service/telemetry.lua:21]: Telemetry Token:	43BECB6D7ED6E002
-[11:32:00.970][info] [#0:script/pub/pub.lua:48]: Create brave:	1
-[11:32:00.970][info] [#0:script/pub/pub.lua:48]: Create brave:	2
-[11:32:00.970][info] [#0:script/pub/pub.lua:48]: Create brave:	3
-[11:32:00.970][info] [#0:script/pub/pub.lua:48]: Create brave:	4
-[11:32:00.970][debug][#0:script/service/service.lua:138]: 
+[22:16:34.467][info] [#0:/Users/rxrossi/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/main.lua:49]: Lua Lsp startup, root: 	/Users/rxrossi/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server
+[22:16:34.467][debug][#0:/Users/rxrossi/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/main.lua:50]: ROOT:	/Users/rxrossi/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server
+[22:16:34.467][debug][#0:/Users/rxrossi/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/main.lua:51]: LOGPATH:	/Users/rxrossi/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/log
+[22:16:34.467][debug][#0:/Users/rxrossi/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/main.lua:52]: METAPATH:	/Users/rxrossi/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/meta
+[22:16:34.468][debug][#0:/Users/rxrossi/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/main.lua:53]: VERSION:	2.6.0
+[22:16:34.498][info] [#0:script/service/telemetry.lua:21]: Telemetry Token:	167C35969D4787A1
+[22:16:34.501][info] [#0:script/pub/pub.lua:48]: Create brave:	1
+[22:16:34.501][info] [#0:script/pub/pub.lua:48]: Create brave:	2
+[22:16:34.501][info] [#0:script/pub/pub.lua:48]: Create brave:	3
+[22:16:34.501][info] [#0:script/pub/pub.lua:48]: Create brave:	4
+[22:16:34.501][debug][#0:script/service/service.lua:139]: 
 ========= Medical Examination Report =========
     --------------- Memory ---------------
-        Total: 1.298 MB
-        # 00 : 1.298 MB
+        Total: 1.336 MB
+        # 00 : 1.336 MB
         # 01 : 0.000 MB
         # 02 : 0.000 MB
         # 03 : 0.000 MB
@@ -26,11 +26,11 @@
     --------------- Cache ---------------
         Total: 1
         Dead:  0
-    --------------- Proto ---------------
+    ---------------  RPC  ---------------
         Holdon:   0
         Waiting:  0
 ==============================================
-[11:32:01.005][debug][#0:script/client.lua:251]: Client init	{
+[22:16:34.610][debug][#0:script/client.lua:402]: Client init	{
     capabilities = {
         general = {
             markdown = {
@@ -409,19 +409,19 @@
         changeConfiguration = true,
     },
     locale = "en_US",
-    processId = 12265,
-    rootPath = "/Users/alexignez/dotfiles",
-    rootUri = "file:///Users/alexignez/dotfiles",
+    processId = 56224,
+    rootPath = "/Users/rxrossi/dotfiles",
+    rootUri = "file:///Users/rxrossi/dotfiles",
     trace = "off",
-    workDoneToken = "6fdeb9b1-e721-4f26-bed1-5f7dfbcdac97",
+    workDoneToken = "3d77c615-1379-4b22-b69a-236c991bbb6b",
     workspaceFolders = {
         [1] = {
-            name = "dotfiles",
-            uri = "file:///Users/alexignez/dotfiles",
+            name = "/Users/rxrossi",
+            uri = "file:///Users/rxrossi/dotfiles",
         },
     },
 }
-[11:32:01.005][info] [#0:script/language.lua:135]: VSC language: en-us
-[11:32:01.005][info] [#0:script/language.lua:136]: LS  language: en-us
-[11:32:01.005][info] [#0:script/workspace/workspace.lua:34]: Workspace inited: 	file:///Users/alexignez/dotfiles
-[11:32:01.005][info] [#0:script/workspace/workspace.lua:43]: Log path: 	/Users/alexignez/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/log/file_Users_alexignez_dotfiles.log
+[22:16:34.610][info] [#0:script/language.lua:135]: VSC language: en-us
+[22:16:34.610][info] [#0:script/language.lua:136]: LS  language: en-us
+[22:16:34.610][info] [#0:script/workspace/workspace.lua:39]: Workspace init root: 	file:///Users/rxrossi/dotfiles
+[22:16:34.610][info] [#0:script/workspace/workspace.lua:43]: Log path: 	/Users/rxrossi/dotfiles/nvim/ultisnips/extensions/coc-sumneko-lua-data/sumneko-lua-ls/extension/server/log/file_Users_rxrossi_dotfiles.log

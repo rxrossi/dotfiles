@@ -18,6 +18,7 @@ local function isToBeClosed(source)
     return false
 end
 
+---@async
 return function (uri, callback)
     local ast = files.getState(uri)
     if not ast then
@@ -25,7 +26,11 @@ return function (uri, callback)
     end
 
     local cache = {}
+    ---@async
     local function checkFunction(source)
+        if not source then
+            return
+        end
         if cache[source] ~= nil then
             return cache[source]
         end
@@ -81,7 +86,7 @@ return function (uri, callback)
     end
 
     -- 只检查局部函数
-    guide.eachSourceType(ast.ast, 'function', function (source)
+    guide.eachSourceType(ast.ast, 'function', function (source) ---@async
         checkFunction(source)
     end)
 end

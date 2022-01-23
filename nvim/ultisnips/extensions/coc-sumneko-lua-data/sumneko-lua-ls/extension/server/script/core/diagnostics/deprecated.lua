@@ -8,6 +8,7 @@ local await    = require 'await'
 local noder    = require 'core.noder'
 
 local types = {'getglobal', 'getfield', 'getindex', 'getmethod'}
+---@async
 return function (uri, callback)
     local ast = files.getState(uri)
     if not ast then
@@ -16,16 +17,16 @@ return function (uri, callback)
 
     local cache = {}
 
-    guide.eachSourceTypes(ast.ast, types, function (src)
+    guide.eachSourceTypes(ast.ast, types, function (src) ---@async
         if src.type == 'getglobal' then
             local key = src[1]
             if not key then
                 return
             end
-            if config.get 'Lua.diagnostics.globals'[key] then
+            if config.get(uri, 'Lua.diagnostics.globals')[key] then
                 return
             end
-            if config.get 'Lua.runtime.special'[key] then
+            if config.get(uri, 'Lua.runtime.special')[key] then
                 return
             end
         end
@@ -82,7 +83,7 @@ return function (uri, callback)
             end
             table.sort(versions)
             if #versions > 0 then
-                message = ('%s(%s)'):format(message, lang.script('DIAG_DEFINED_VERSION', table.concat(versions, '/'), config.get 'Lua.runtime.version'))
+                message = ('%s(%s)'):format(message, lang.script('DIAG_DEFINED_VERSION', table.concat(versions, '/'), config.get(uri, 'Lua.runtime.version')))
             end
         end
         cache[id] = {

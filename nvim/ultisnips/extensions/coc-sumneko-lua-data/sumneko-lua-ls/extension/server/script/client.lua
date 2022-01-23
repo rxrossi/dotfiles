@@ -5,6 +5,8 @@ local proto     = require 'proto'
 local define    = require 'proto.define'
 local config    = require 'config'
 local converter = require 'proto.converter'
+local json      = require 'json-beautify'
+local await     = require 'await'
 
 local m = {}
 
@@ -40,6 +42,10 @@ function m.getOption(name)
 end
 
 function m.getAbility(name)
+    if not m.info
+    or not m.info.capabilities then
+        return nil
+    end
     local current = m.info.capabilities
     while true do
         local parent, nextPos = name:match '^([^%.]+)()'
@@ -57,6 +63,23 @@ function m.getAbility(name)
         end
     end
     return current
+end
+
+function m.getOffsetEncoding()
+    if m._offsetEncoding then
+        return m._offsetEncoding
+    end
+    local clientEncodings = m.getAbility 'offsetEncoding'
+    if type(clientEncodings) == 'table' then
+        for _, encoding in ipairs(clientEncodings) do
+            if encoding == 'utf-8' then
+                m._offsetEncoding = 'utf-8'
+                return m._offsetEncoding
+            end
+        end
+    end
+    m._offsetEncoding = 'utf-16'
+    return m._offsetEncoding
 end
 
 local function packMessage(...)
@@ -86,9 +109,8 @@ end
 ---@param type message.type
 ---@param message string
 ---@param titles  string[]
----@return string action
----@return integer index
-function m.awaitRequestMessage(type, message, titles)
+---@param callback fun(action: string, index: integer)
+function m.requestMessage(type, message, titles, callback)
     proto.notify('window/logMessage', {
         type = define.MessageType[type] or 3,
         message = message,
@@ -101,15 +123,29 @@ function m.awaitRequestMessage(type, message, titles)
         }
         map[title] = i
     end
-    local item = proto.awaitRequest('window/showMessageRequest', {
+    proto.request('window/showMessageRequest', {
         type    = define.MessageType[type] or 3,
         message = message,
         actions = actions,
-    })
-    if not item then
-        return nil
-    end
-    return item.title, map[item.title]
+    }, function (item)
+        if item then
+            callback(item.title, map[item.title])
+        else
+            callback(nil, nil)
+        end
+    end)
+end
+
+---@param type message.type
+---@param message string
+---@param titles  string[]
+---@return string action
+---@return integer index
+---@async
+function m.awaitRequestMessage(type, message, titles)
+    return await.wait(function (waker)
+        m.requestMessage(type, message, titles, waker)
+    end)
 end
 
 ---@param type message.type
@@ -163,28 +199,139 @@ end
 ---@field isGlobal? boolean
 ---@field uri?      uri
 
+---@param cfg table
+---@param uri uri
+---@param changes config.change[]
+---@return boolean
+local function applyConfig(cfg, uri, changes)
+    local ws = require 'workspace'
+    local scp = ws.getScope(uri)
+    local ok = false
+    for _, change in ipairs(changes) do
+        if scp:isChildUri(change.uri)
+        or scp:isLinkedUri(change.uri) then
+            cfg[change.key] = config.getRaw(change.uri, change.key)
+            ok = true
+        end
+    end
+    return ok
+end
+
+local function tryModifySpecifiedConfig(uri, finalChanges)
+    if #finalChanges == 0 then
+        return false
+    end
+    local workspace = require 'workspace'
+    local loader    = require 'config.loader'
+    local scp = workspace.getScope(uri)
+    if scp:get('lastLocalType') ~= 'json' then
+        return false
+    end
+    local suc = applyConfig(scp:get('lastLocalConfig'), uri, finalChanges)
+    if not suc then
+        return false
+    end
+    local path = workspace.getAbsolutePath(uri, CONFIGPATH)
+    util.saveFile(path, json.beautify(scp:get('lastLocalConfig'), { indent = '    ' }))
+    return true
+end
+
+local function tryModifyRC(uri, finalChanges, create)
+    if #finalChanges == 0 then
+        return false
+    end
+    local workspace = require 'workspace'
+    local loader    = require 'config.loader'
+    local path = workspace.getAbsolutePath(uri, '.luarc.json')
+    if not path then
+        return false
+    end
+    local buf = util.loadFile(path)
+    if not buf and not create then
+        return false
+    end
+    local scp = workspace.getScope(uri)
+    local rc = scp:get('lastRCConfig') or {
+        ['$schema'] = lang.id == 'zh-cn' and [[https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema-zh-cn.json]] or [[https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json]]
+    }
+    local suc = applyConfig(rc, uri, finalChanges)
+    if not suc then
+        return false
+    end
+    util.saveFile(path, json.beautify(rc, { indent = '    ' }))
+    return true
+end
+
+local function tryModifyClient(uri, finalChanges)
+    if #finalChanges == 0 then
+        return false
+    end
+    if not m.getOption 'changeConfiguration' then
+        return false
+    end
+    local ws = require 'workspace'
+    local scp = ws.getScope(uri)
+    local scpChanges = {}
+    for _, change in ipairs(finalChanges) do
+        if  change.uri
+        and (scp:isChildUri(change.uri) or scp:isLinkedUri(change.uri)) then
+            scpChanges[#scpChanges+1] = change
+        end
+    end
+    if #scpChanges == 0 then
+        return false
+    end
+    proto.notify('$/command', {
+        command   = 'lua.config',
+        data      = scpChanges,
+    })
+    return true
+end
+
+---@param finalChanges config.change[]
+local function tryModifyClientGlobal(finalChanges)
+    if #finalChanges == 0 then
+        return
+    end
+    if not m.getOption 'changeConfiguration' then
+        return
+    end
+    local changes = {}
+    for i = #finalChanges, 1, -1 do
+        local change = finalChanges[i]
+        if change.isGlobal then
+            changes[#changes+1] = change
+            finalChanges[i] = finalChanges[#finalChanges]
+            finalChanges[#finalChanges] = nil
+        end
+    end
+    proto.notify('$/command', {
+        command   = 'lua.config',
+        data      = changes,
+    })
+end
+
 ---@param changes config.change[]
 ---@param onlyMemory boolean
 function m.setConfig(changes, onlyMemory)
     local finalChanges = {}
     for _, change in ipairs(changes) do
         if change.action == 'add' then
-            local suc = config.add(change.key, change.value)
+            local suc = config.add(change.uri, change.key, change.value)
             if suc then
                 finalChanges[#finalChanges+1] = change
             end
         elseif change.action == 'set' then
-            local suc = config.set(change.key, change.value)
+            local suc = config.set(change.uri, change.key, change.value)
             if suc then
                 finalChanges[#finalChanges+1] = change
             end
         elseif change.action == 'prop' then
-            local suc = config.prop(change.key, change.prop, change.value)
+            local suc = config.prop(change.uri, change.key, change.prop, change.value)
             if suc then
                 finalChanges[#finalChanges+1] = change
             end
         end
-        change.uri = m.info.rootUri
     end
     if onlyMemory then
         return
@@ -192,31 +339,27 @@ function m.setConfig(changes, onlyMemory)
     if #finalChanges == 0 then
         return
     end
-    if  m.getOption 'changeConfiguration'
-    and config.getSource() == 'client' then
-        proto.notify('$/command', {
-            command   = 'lua.config',
-            data      = finalChanges,
-        })
-    else
-        local messages = {}
-        if not m.getOption 'changeConfiguration' then
-            messages[1] = lang.script('WINDOW_CLIENT_NOT_SUPPORT_CONFIG')
-        elseif config.getSource() ~= 'client' then
-            messages[1] = lang.script('WINDOW_LCONFIG_NOT_SUPPORT_CONFIG')
+    xpcall(function ()
+        local ws = require 'workspace'
+        if #ws.folders == 0 then
+            tryModifyClient(finalChanges)
+            return
         end
-        for _, change in ipairs(finalChanges) do
-            if change.action == 'add' then
-                messages[#messages+1] = lang.script('WINDOW_MANUAL_CONFIG_ADD', change)
-            elseif change.action == 'set' then
-                messages[#messages+1] = lang.script('WINDOW_MANUAL_CONFIG_SET', change)
-            elseif change.action == 'prop' then
-                messages[#messages+1] = lang.script('WINDOW_MANUAL_CONFIG_PROP', change)
+        tryModifyClientGlobal(finalChanges)
+        for _, scp in ipairs(ws.folders) do
+            if tryModifySpecifiedConfig(scp.uri, finalChanges) then
+                goto CONTINUE
             end
+            if tryModifyRC(scp.uri, finalChanges, false) then
+                goto CONTINUE
+            end
+            if tryModifyClient(scp.uri, finalChanges) then
+                goto CONTINUE
+            end
+            tryModifyRC(scp.uri, finalChanges, true)
+            ::CONTINUE::
         end
-        local message = table.concat(messages, '\n')
-        m.showMessage('Info', message)
-    end
+    end, log.error)
 end
 
 ---@alias textEditor {start: integer, finish: integer, text: string}
@@ -238,6 +381,14 @@ function m.editText(uri, edits)
     })
 end
 
+function m.setReady()
+    m._ready = true
+end
+
+function m.isReady()
+    return m._ready == true
+end
+
 local function hookPrint()
     if TEST then
         return
@@ -254,6 +405,7 @@ function m.init(t)
     m.client(t.clientInfo.name)
     nonil.disable()
     lang(LOCALE or t.locale)
+    converter.setOffsetEncoding(m.getOffsetEncoding())
     hookPrint()
 end
 

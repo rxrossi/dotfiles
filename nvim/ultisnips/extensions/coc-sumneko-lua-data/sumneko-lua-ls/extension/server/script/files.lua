@@ -1,4 +1,5 @@
 local platform = require 'bee.platform'
+local fs       = require 'bee.filesystem'
 local config   = require 'config'
 local glob     = require 'glob'
 local furi     = require 'file-uri'
@@ -29,6 +30,33 @@ m.fileCount      = 0
 m.astCount       = 0
 m.astMap         = {} -- setmetatable({}, { __mode = 'v' })
 
+local fixedUri = {}
+--- 获取文件的真实uri(真实大小写)
+---@param uri uri
+---@return uri
+function m.getRealUri(uri)
+    if platform.OS ~= 'Windows' then
+        return uri
+    end
+    local filename = furi.decode(uri)
+    local path = fs.path(filename)
+    local suc, res = pcall(fs.exists, path)
+    if not suc or not res then
+        return uri
+    end
+    suc, res = pcall(fs.canonical, path)
+    if not suc or res:string():gsub('/', '\\') == filename then
+        return uri
+    end
+    filename = res:string()
+    local ruri = furi.encode(filename)
+    if not fixedUri[ruri] then
+        fixedUri[ruri] = true
+        log.warn(('Fix real file uri: %s -> %s'):format(uri, ruri))
+    end
+    return ruri
+end
+
 --- 打开文件
 ---@param uri uri
 function m.open(uri)
@@ -36,6 +64,7 @@ function m.open(uri)
         cache = {},
     }
     m.onWatch('open', uri)
+    m.addRef(uri)
 end
 
 --- 关闭文件
@@ -47,6 +76,7 @@ function m.close(uri)
         file.trusted = false
     end
     m.onWatch('close', uri)
+    m.delRef(uri)
 end
 
 --- 是否打开
@@ -65,8 +95,12 @@ function m.getOpenedCache(uri)
 end
 
 --- 标记为库文件
-function m.setLibraryPath(uri, libraryPath)
-    m.libraryMap[uri] = libraryPath
+---@param scp scope
+---@param uri uri
+---@param libraryUri uri
+function m.setLibraryUri(scp, uri, libraryUri)
+    scp:get 'libraryMap' [uri] = libraryUri
+    scp:addLink(uri)
 end
 
 --- 是否是库文件
@@ -79,8 +113,9 @@ function m.getLibraryPath(uri)
     return m.libraryMap[uri]
 end
 
-function m.flushAllLibrary()
-    m.libraryMap = {}
+---@param scp scope
+function m.flushAllLibrary(scp)
+    scp:set('libraryMap', {})
 end
 
 --- 是否存在
@@ -120,8 +155,15 @@ end
 --- 设置文件文本
 ---@param uri uri
 ---@param text string
-function m.setText(uri, text, isTrust, instance)
+---@param isTrust boolean
+---@param version integer
+function m.setText(uri, text, isTrust, version)
     if not text then
+        return
+    end
+    if #text > 1024 * 1024 * 10 then
+        local client = require 'client'
+        client.showMessage('Warning', lang.script('WORKSPACE_SKIP_HUGE_FILE', uri))
         return
     end
     --log.debug('setText', uri)
@@ -129,7 +171,6 @@ function m.setText(uri, text, isTrust, instance)
     if not m.fileMap[uri] then
         m.fileMap[uri] = {
             uri = uri,
-            version = 0,
         }
         m.fileCount = m.fileCount + 1
         create = true
@@ -140,9 +181,10 @@ function m.setText(uri, text, isTrust, instance)
         return
     end
     if not isTrust then
-        local encoding = config.get 'Lua.runtime.fileEncoding'
+        local encoding = config.get(uri, 'Lua.runtime.fileEncoding')
         text = encoder.decode(encoding, text)
     end
+    file.version = version
     if file.originText == text then
         return
     end
@@ -150,16 +192,19 @@ function m.setText(uri, text, isTrust, instance)
     file.text       = newText
     file.trusted    = isTrust
     file.originText = text
+    file.rows       = nil
     file.words      = nil
-    m.astMap[uri] = nil
+    m.astMap[uri]   = nil
     file.cache = {}
     file.cacheActiveTime = math.huge
-    file.version = file.version + 1
     m.globalVersion = m.globalVersion + 1
     await.close('files.version')
     m.onWatch('version')
     if create then
         m.onWatch('create', uri)
+        m.onWatch('update', uri)
+    else
+        m.onWatch('update', uri)
     end
     if DEVELOP then
         if text ~= newText then
@@ -168,7 +213,6 @@ function m.setText(uri, text, isTrust, instance)
     end
 
     --if instance or TEST then
-    m.onWatch('update', uri)
     --else
     --    await.call(function ()
     --        await.close('update:' .. uri)
@@ -309,6 +353,28 @@ function m.getChildFiles(uri)
     return results
 end
 
+function m.addRef(uri)
+    local file = m.fileMap[uri]
+    if not file then
+        return nil
+    end
+    file._ref = (file._ref or 0) + 1
+    return function ()
+        m.delRef(uri)
+    end
+end
+
+function m.delRef(uri)
+    local file = m.fileMap[uri]
+    if not file then
+        return
+    end
+    file._ref = (file._ref or 0) - 1
+    if file._ref <= 0 then
+        m.remove(uri)
+    end
+end
+
 --- 移除文件
 ---@param uri uri
 function m.remove(uri)
@@ -320,7 +386,6 @@ function m.remove(uri)
     m.fileMap[uri]        = nil
     m.astMap[uri]         = nil
     m._pairsCache         = nil
-    m.flushFileCache(uri)
 
     m.fileCount     = m.fileCount - 1
     m.globalVersion = m.globalVersion + 1
@@ -328,43 +393,6 @@ function m.remove(uri)
     await.close('files.version')
     m.onWatch('version')
     m.onWatch('remove', originUri)
-end
-
---- 移除所有文件
-function m.removeAll()
-    local ws = require 'workspace.workspace'
-    m.globalVersion = m.globalVersion + 1
-    await.close('files.version')
-    m.onWatch('version')
-    m._pairsCache = nil
-    for uri in pairs(m.fileMap) do
-        if not m.libraryMap[uri] then
-            m.fileCount     = m.fileCount - 1
-            m.fileMap[uri]  = nil
-            m.astMap[uri]   = nil
-            m.onWatch('remove', uri)
-        end
-    end
-    ws.flushCache()
-    --m.notifyCache = {}
-end
-
---- 移除所有关闭的文件
-function m.removeAllClosed()
-    m.globalVersion = m.globalVersion + 1
-    await.close('files.version')
-    m.onWatch('version')
-    m._pairsCache = nil
-    for uri in pairs(m.fileMap) do
-        if  not m.openMap[uri]
-        and not m.libraryMap[uri] then
-            m.fileCount     = m.fileCount - 1
-            m.fileMap[uri]  = nil
-            m.astMap[uri]   = nil
-            m.onWatch('remove', uri)
-        end
-    end
-    --m.notifyCache = {}
 end
 
 --- 获取一个包含所有文件uri的数组
@@ -417,7 +445,7 @@ function m.compileState(uri, text)
     local client = require 'client'
     if  not m.isOpen(uri)
     and not m.isLibrary(uri)
-    and #text >= config.get 'Lua.workspace.preloadFileSize' * 1000 then
+    and #text >= config.get(uri, 'Lua.workspace.preloadFileSize') * 1000 then
         if not m.notifyCache['preloadFileSize'] then
             m.notifyCache['preloadFileSize'] = {}
             m.notifyCache['skipLargeFileCount'] = 0
@@ -427,7 +455,7 @@ function m.compileState(uri, text)
             m.notifyCache['skipLargeFileCount'] = m.notifyCache['skipLargeFileCount'] + 1
             local message = lang.script('WORKSPACE_SKIP_LARGE_FILE'
                         , ws.getRelativePath(uri)
-                        , config.get 'Lua.workspace.preloadFileSize'
+                        , config.get(uri, 'Lua.workspace.preloadFileSize')
                         , #text / 1000
                     )
             if m.notifyCache['skipLargeFileCount'] <= 1 then
@@ -438,16 +466,16 @@ function m.compileState(uri, text)
         end
         return nil
     end
-    local prog <close> = progress.create(lang.script.WINDOW_COMPILING, 0.5)
+    local prog <close> = progress.create(ws.getScope(uri), lang.script.WINDOW_COMPILING, 0.5)
     prog:setMessage(ws.getRelativePath(uri))
     local clock = os.clock()
     local state, err = parser.compile(text
         , 'Lua'
-        , config.get 'Lua.runtime.version'
+        , config.get(uri, 'Lua.runtime.version')
         , {
-            special           = config.get 'Lua.runtime.special',
-            unicodeName       = config.get 'Lua.runtime.unicodeName',
-            nonstandardSymbol = config.get 'Lua.runtime.nonstandardSymbol',
+            special           = config.get(uri, 'Lua.runtime.special'),
+            unicodeName       = config.get(uri, 'Lua.runtime.unicodeName'),
+            nonstandardSymbol = config.get(uri, 'Lua.runtime.nonstandardSymbol'),
         }
     )
     local passed = os.clock() - clock
@@ -457,6 +485,7 @@ function m.compileState(uri, text)
     --await.delay()
     if state then
         state.uri = uri
+        state.lua = text
         state.ast.uri = uri
         local clock = os.clock()
         parser.luadoc(state)
@@ -488,14 +517,23 @@ function m.getState(uri)
     if not file then
         return nil
     end
-    local ast = m.astMap[uri]
-    if not ast then
-        ast = m.compileState(uri, file.text)
-        m.astMap[uri] = ast
+    local state = m.astMap[uri]
+    if not state then
+        state = m.compileState(uri, file.text)
+        m.astMap[uri] = state
+        file.ast = state
         --await.delay()
     end
     file.cacheActiveTime = timer.clock()
-    return ast
+    return state
+end
+
+function m.getLastState(uri)
+    local file = m.fileMap[uri]
+    if not file then
+        return nil
+    end
+    return file.ast
 end
 
 ---设置文件的当前可见范围
@@ -597,13 +635,9 @@ function m.getCache(uri)
 end
 
 --- 获取文件关联
-function m.getAssoc()
-    if m.assocVersion == config.get 'version' then
-        return m.assocMatcher
-    end
-    m.assocVersion = config.get 'version'
+function m.getAssoc(uri)
     local patt = {}
-    for k, v in pairs(config.get 'files.associations') do
+    for k, v in pairs(config.get(uri, 'files.associations')) do
         if v == 'lua' then
             patt[#patt+1] = k
         end
@@ -623,7 +657,7 @@ function m.isLua(uri)
     if ext == 'lua' then
         return true
     end
-    local matcher = m.getAssoc()
+    local matcher = m.getAssoc(uri)
     local path = furi.decode(uri)
     return matcher(path)
 end
@@ -703,32 +737,17 @@ function m.getDllWords(uri)
 end
 
 --- 注册事件
+---@param callback async fun(ev: string, uri: uri)
 function m.watch(callback)
     m.watchList[#m.watchList+1] = callback
 end
 
-function m.onWatch(ev, ...)
+function m.onWatch(ev, uri)
     for _, callback in ipairs(m.watchList) do
-        xpcall(callback, log.error, ev, ...)
+        await.call(function ()
+            callback(ev, uri)
+        end)
     end
-end
-
-function m.flushCache()
-    for uri, file in pairs(m.fileMap) do
-        file.cacheActiveTime = math.huge
-        m.astMap[uri] = nil
-        file.cache = {}
-    end
-end
-
-function m.flushFileCache(uri)
-    local file = m.fileMap[uri]
-    if not file then
-        return
-    end
-    file.cacheActiveTime = math.huge
-    m.astMap[uri] = nil
-    file.cache = {}
 end
 
 function m.init()

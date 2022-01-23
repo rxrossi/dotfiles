@@ -11,22 +11,16 @@ local files       = require 'files'
 local guide       = require 'parser.guide'
 
 local function asFunction(source, oop)
-    local name
-    name, oop   = buildName(source, oop)
+    local name  = buildName(source, oop)
     local arg   = buildArg(source, oop)
     local rtn   = buildReturn(source)
     local lines = {}
-    lines[1] = ('%s %s(%s)'):format(oop and 'method' or 'function', name or '', arg)
-    lines[2] = rtn
-    return table.concat(lines, '\n')
-end
-
-local function asDocFunction(source)
-    local name = buildName(source)
-    local arg  = buildArg(source)
-    local rtn  = buildReturn(source)
-    local lines = {}
-    lines[1] = ('function %s(%s)'):format(name or '', arg)
+    lines[1] = string.format('%s%s %s(%s)'
+        , vm.isAsync(source) and 'async ' or ''
+        , oop and 'method' or 'function'
+        , name or ''
+        , arg
+    )
     lines[2] = rtn
     return table.concat(lines, '\n')
 end
@@ -44,6 +38,7 @@ local function asDocTypeName(source)
     end
 end
 
+---@async
 local function asValue(source, title)
     local name    = buildName(source, false) or ''
     local type    = infer.searchAndViewInfers(source)
@@ -59,6 +54,9 @@ local function asValue(source, title)
     local pack = {}
     pack[#pack+1] = title
     pack[#pack+1] = name .. ':'
+    if vm.isAsync(source, true) then
+        pack[#pack+1] = 'async'
+    end
     if  cont
     and (  type == 'table'
         or type == 'any'
@@ -76,10 +74,12 @@ local function asValue(source, title)
     return table.concat(pack, ' ')
 end
 
+---@async
 local function asLocal(source)
     return asValue(source, 'local')
 end
 
+---@async
 local function asGlobal(source)
     return asValue(source, 'global')
 end
@@ -111,6 +111,7 @@ local function isGlobalField(source)
     end
 end
 
+---@async
 local function asField(source)
     if isGlobalField(source) then
         return asGlobal(source)
@@ -156,7 +157,7 @@ local function formatNumber(n)
 end
 
 local function asNumber(source)
-    if not config.get 'Lua.hover.viewNumber' then
+    if not config.get(guide.getUri(source), 'Lua.hover.viewNumber') then
         return nil
     end
     local num = source[1]
@@ -175,8 +176,10 @@ local function asNumber(source)
     return formatNumber(num)
 end
 
+---@async
 return function (source, oop)
-    if source.type == 'function' then
+    if source.type == 'function'
+    or source.type == 'doc.type.function' then
         return asFunction(source, oop)
     elseif source.type == 'local'
     or     source.type == 'getlocal'
@@ -198,8 +201,6 @@ return function (source, oop)
     elseif source.type == 'number'
     or     source.type == 'integer' then
         return asNumber(source)
-    elseif source.type == 'doc.type.function' then
-        return asDocFunction(source)
     elseif source.type == 'doc.type.name' then
         return asDocTypeName(source)
     elseif source.type == 'doc.field.name' then

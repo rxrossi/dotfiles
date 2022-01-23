@@ -21,5 +21,8 @@ ln -s -f ~/dotfiles/nvim/ultisnips/ ~/.config/coc
 ## Vim wiki on Box
 ln -s -f ~/Box/vimwiki ~/vimwiki
 
+# Box
+ln -s -f ~/Library/CloudStorage/Box-Box/ ~/Box
+
 ## Alacritty
 ln -s -f ~/dotfiles/alacritty.yml ~/.config/alacritty.yml

@@ -134,7 +134,7 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # Added by serverless binary installer
 export PATH="$HOME/.serverless/bin:$PATH"
-# source ~/dotfiles/zshignored
+source ~/dotfiles/zshignored
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

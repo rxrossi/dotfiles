@@ -3,6 +3,7 @@
 ## Req
 - karabiner
 - Box
+- ripgrep
 - fonts (source code pro)
 - Box
 - nvm

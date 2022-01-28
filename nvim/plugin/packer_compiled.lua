@@ -227,7 +227,7 @@ _G.packer_plugins = {
   vimwiki = {
     loaded = true,
     path = "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/vimwiki",
-    url = "https://github.com/vimwiki/vimwiki"
+    url = "vimwiki/vimwiki"
   }
 }
 

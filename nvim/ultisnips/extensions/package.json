@@ -8,7 +8,7 @@
     "coc-graphql": ">=0.0.1",
     "coc-json": ">=1.4.1",
     "coc-prettier": ">=1.1.25",
-    "coc-pyright": ">=1.1.210",
+    "coc-pyright": ">=1.1.215",
     "coc-sh": ">=0.6.1",
     "coc-snippets": ">=2.4.7",
     "coc-spell-checker": ">=1.2.0",

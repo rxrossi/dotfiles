@@ -6,6 +6,7 @@
 - ripgrep
 - fonts (source code pro)
 - Box
+- FZF = $(brew --prefix)/opt/fzf/install
 - nvm
 - neovim
   - packer

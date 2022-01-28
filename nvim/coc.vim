@@ -1,4 +1,5 @@
-let g:coc_global_extensions=[ 'coc-tsserver', 'coc-css', 'coc-prettier', 'coc-tslint-plugin', 'coc-eslint', 'coc-json', 'coc-graphql', 'coc-styled-components', 'coc-vimlsp', 'coc-sumneko-lua', 'coc-sh', 'coc-svg', 'coc-pyright', 'coc-spell-checker', 'coc-cspell-dicts', 'coc-flow', 'coc-snippets', 'coc-emmet' ]
+let g:coc_global_extensions=[ 'coc-tsserver', 'coc-css', 'coc-prettier', 'coc-tslint-plugin', 'coc-eslint', 'coc-json', 'coc-styled-components', 'coc-vimlsp', 'coc-sumneko-lua', 'coc-sh', 'coc-svg', 'coc-pyright', 'coc-spell-checker', 'coc-cspell-dicts', 'coc-flow', 'coc-snippets', 'coc-emmet' ]
+"  'coc-graphql'
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()

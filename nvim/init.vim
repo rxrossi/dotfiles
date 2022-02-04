@@ -1,8 +1,13 @@
 :lua require'init'
 
+set nocompatible
+filetype plugin on
+syntax on
+
 source  $HOME/.config/nvim/defx_settings.vim
 source  $HOME/.config/nvim/coc.vim
 source  $HOME/.config/nvim/codereview.vim
+
 
 set encoding=utf-8
 set hidden
@@ -99,4 +104,5 @@ nnoremap <Leader>dh <Cmd>lua require'dap'.run_to_cursor()<CR>
 let @t = 'yiwea //ÄkbÄkbphhxxxh"mciw//i**i=kqÄkb'
 
 
+let g:table_mode_corner='|'
 

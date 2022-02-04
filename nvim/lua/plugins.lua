@@ -71,5 +71,7 @@ return require('packer').startup(function(use)
   use 'junegunn/goyo.vim'
   use 'AndrewRadev/linediff.vim'
 
+  use 'dhruvasagar/vim-table-mode'
+
 end)
 

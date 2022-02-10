@@ -72,6 +72,7 @@ return require('packer').startup(function(use)
   use 'AndrewRadev/linediff.vim'
 
   use 'dhruvasagar/vim-table-mode'
+  use 'mzlogin/vim-markdown-toc'
 
 end)
 

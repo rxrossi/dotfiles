@@ -23,7 +23,8 @@ vim.fn.sign_define(
 
 dap.adapters.node2 = {
   type = "executable",
-  command = os.getenv('HOME') .. "/.asdf/installs/nodejs/12.21.0/bin/node",
+  command = os.getenv('HOME') .. "/.nvm/versions/node/v12.22.10/bin/node",
+
   args = {
     sep_os_replacer(
        global.dap_path .. "/jsnode/vscode-node-debug2/out/src/nodeDebug.js"
@@ -105,7 +106,7 @@ dap.configurations.dart = {
 }
 
 jestDapVars = {
-  testName = 'single1'
+  -- testName = 'single1'
 }
 
 dap.configurations.typescript = {

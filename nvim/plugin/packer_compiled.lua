@@ -204,6 +204,11 @@ _G.packer_plugins = {
     path = "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/vim-indentwise",
     url = "https://github.com/jeetsukumaran/vim-indentwise"
   },
+  ["vim-markdown-toc"] = {
+    loaded = true,
+    path = "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/vim-markdown-toc",
+    url = "https://github.com/mzlogin/vim-markdown-toc"
+  },
   ["vim-obsession"] = {
     loaded = true,
     path = "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/vim-obsession",
@@ -240,8 +245,8 @@ time([[Defining packer_plugins]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file DIInstall lua require("packer.load")({'DAPInstall.nvim'}, { cmd = "DIInstall", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file DIList lua require("packer.load")({'DAPInstall.nvim'}, { cmd = "DIList", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file DIInstall lua require("packer.load")({'DAPInstall.nvim'}, { cmd = "DIInstall", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 time([[Defining lazy-load commands]], false)
 
 if should_profile then save_profiles() end

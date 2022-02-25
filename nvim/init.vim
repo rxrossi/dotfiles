@@ -44,7 +44,7 @@ inoremap <silent> <C-S>         <C-O>:update<CR><ESC>
 
 " Find files using Telescope command-line sugar.
 nnoremap <leader><leader> <cmd>Telescope <cr>
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>ff <cmd>Telescope find_files find_command=rg,--hidden,--files<cr>
 nnoremap <leader>fg <cmd>:lua require("telescope").extensions.live_grep_raw.live_grep_raw()<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope command_history<cr>
@@ -70,6 +70,8 @@ autocmd FileType fugitive          nnoremap <buffer> ca :G commit -n --amend<CR>
 
 " ColorScheme
 colorscheme base16-materia
+" colorscheme base16-one-light
+
 function! TweakBase16()
     " Override the diff-mode highlights of base16.
     highlight DiffAdd    term=bold ctermfg=0 ctermbg=2 guifg=#2b2b2b guibg=#a5c261
@@ -77,7 +79,7 @@ function! TweakBase16()
     highlight DiffChange term=bold ctermfg=0 ctermbg=4 guifg=#2b2b2b guibg=#6d9cbe
     highlight DiffText   term=reverse cterm=bold ctermfg=0 ctermbg=4 gui=bold guifg=#2b2b2b guibg=#6d9cbe
 endfunction
-autocmd BufEnter * if &diff |  call TweakBase16() | endif
+" autocmd BufEnter * if &diff |  call TweakBase16() | endif
 
 nnoremap Y y$
 nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
@@ -101,10 +103,13 @@ nnoremap <Leader>dh <Cmd>lua require'dap'.run_to_cursor()<CR>
 nnoremap <Leader>dt <Cmd>lua require'dapui'.toggle()<CR>
 nnoremap <Leader>dC <Cmd>lua require'dap'.clear_breakpoints()<CR>
 
+let g:table_mode_corner='|'
 
 " js timestamp milliseconds to date as comment
 let @t = 'yiwea //ÄkbÄkbphhxxxh"mciw//i**i=kqÄkb'
 
+noremap <space>h :lua require("harpoon.mark").add_file()<CR>
+noremap <space>g :lua require("harpoon.ui").toggle_quick_menu()<CR>
 
-let g:table_mode_corner='|'
+nnoremap <leader>fw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
 

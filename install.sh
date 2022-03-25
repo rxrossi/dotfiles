@@ -1,5 +1,7 @@
 # Make dirs
 mkdir -p  ~/.vim/undodir
+mkdir -p  ~/.config/nvim
+mkdir -p  ~/.config/karabiner
 
 # Ln
 
@@ -14,9 +16,7 @@ ln -s -f ~/dotfiles/zshenv ~/.zshenv
 ln -s -f ~/dotfiles/tmux.conf ~/.tmux.conf
 
 ## Neovim
-ln -s -f ~/dotfiles/nvim/ ~/.config
-
-ln -s -f ~/dotfiles/nvim/ultisnips/ ~/.config/coc
+ln -s -f ~/dotfiles/nvim/ ~/.config/nvim
 
 ## Vim wiki on Box
 ln -s -f ~/Box/vimwiki ~/vimwiki

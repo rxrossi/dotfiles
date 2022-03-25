@@ -43,8 +43,6 @@
   ],
   "javascript.validate.enable": false,
   "prettier.semi": true,
-  "prettier.tslintIntegration": true,
-  "prettier.eslintIntegration": true,
   "eslint.autoFixOnSave": true,
   "eslint.quiet": true,
   "coc.preferences.floatActions": false,
@@ -95,6 +93,7 @@
     "ZDSV",
     "ZJIT",
     "algoliasearch",
+    "authorisation",
     "behaviour",
     "behaviours",
     "branchn",
@@ -138,12 +137,13 @@
     "testid",
     "unbuyable",
     "upsert",
+    "upserting",
     "walkthrough",
     "worldstores",
     "wsrun"
   ],
   "cSpell.enabledLanguageIds": [
-    "gitcommit",
+        "gitcommit",
         "csharp",
         "go",
         "javascript",
@@ -154,6 +154,8 @@
         "typescript",
         "typescriptreact",
         "yml",
-        "vimwiki"
-    ]
+        "vimwiki",
+        "fugitive"
+    ],
+    "Lua.telemetry.enable": false
 }

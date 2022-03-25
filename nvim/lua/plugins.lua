@@ -73,6 +73,7 @@ return require('packer').startup(function(use)
 
   use 'dhruvasagar/vim-table-mode'
   use 'mzlogin/vim-markdown-toc'
+  use 'ThePrimeagen/harpoon'
 
 end)
 

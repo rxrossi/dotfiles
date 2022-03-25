@@ -8,6 +8,8 @@ source  $HOME/.config/nvim/defx_settings.vim
 source  $HOME/.config/nvim/coc.vim
 source  $HOME/.config/nvim/codereview.vim
 
+set wrap
+set linebreak
 
 set encoding=utf-8
 set hidden
@@ -113,3 +115,4 @@ noremap <space>g :lua require("harpoon.ui").toggle_quick_menu()<CR>
 
 nnoremap <leader>fw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
 
+nmap <space>e <Cmd>CocCommand explorer<CR>

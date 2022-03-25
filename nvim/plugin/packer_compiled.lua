@@ -108,6 +108,11 @@ _G.packer_plugins = {
     path = "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/goyo.vim",
     url = "https://github.com/junegunn/goyo.vim"
   },
+  harpoon = {
+    loaded = true,
+    path = "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/harpoon",
+    url = "https://github.com/ThePrimeagen/harpoon"
+  },
   ["linediff.vim"] = {
     loaded = true,
     path = "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/linediff.vim",
@@ -254,5 +259,6 @@ if should_profile then save_profiles() end
 end)
 
 if not no_errors then
+  error_msg = error_msg:gsub('"', '\\"')
   vim.api.nvim_command('echohl ErrorMsg | echom "Error in packer_compiled: '..error_msg..'" | echom "Please check your config for correctness" | echohl None')
 end

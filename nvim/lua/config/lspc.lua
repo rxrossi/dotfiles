@@ -65,19 +65,48 @@ local lsp_installer = require("nvim-lsp-installer")
 -- Register a handler that will be called for each installed server when it's ready (i.e. when installation is finished
 -- or if the server is already installed).
 lsp_installer.on_server_ready(function(server)
-	local opts = {
-		capabilities = capabilities,
-	}
+	local keymaps_opts = { noremap = true, silent = true }
+	vim.api.nvim_set_keymap("n", "<space>e", "<cmd>lua vim.diagnostic.open_float()<CR>", keymaps_opts)
+	vim.api.nvim_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", keymaps_opts)
+	vim.api.nvim_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", keymaps_opts)
+	vim.api.nvim_set_keymap("n", "<space>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", keymaps_opts)
 
+	local opts = {}
 
-	-- (optional) Customize the options passed to the server
 	if server.name == "sumneko_lua" then
 		opts = require("lua-dev").setup({})
 	end
 
-	-- This setup() function will take the provided server configuration and decorate it with the necessary properties
-	-- before passing it onwards to lspconfig.
-	-- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+	opts.capabilities = capabilities
+	opts.on_attach = function(client, bufnr)
+		if server.name == "tsserver" then
+			client.resolved_capabilities.document_formatting = false
+		end
+
+		local set_buf_n_keymap = function(from, to)
+			vim.api.nvim_buf_set_keymap(bufnr, "n", from, to, keymaps_opts)
+		end
+
+		-- Enable completion triggered by <c-x><c-o>
+		vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+
+		-- Mappings.
+		-- See `:help vim.lsp.*` for documentation on any of the below functions
+		set_buf_n_keymap("gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
+		set_buf_n_keymap("gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
+		set_buf_n_keymap("gr", "<cmd>lua vim.lsp.buf.references()<CR>")
+		set_buf_n_keymap("K", "<cmd>lua vim.lsp.buf.hover()<CR>")
+		set_buf_n_keymap("gy", "<cmd>lua vim.lsp.buf.implementation()<CR>")
+		set_buf_n_keymap("<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
+		set_buf_n_keymap("<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
+		set_buf_n_keymap("<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>")
+		set_buf_n_keymap("<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>")
+		set_buf_n_keymap("<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
+		set_buf_n_keymap("<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
+		set_buf_n_keymap("<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+		set_buf_n_keymap("<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
+	end
+
 	server:setup(opts)
 end)
 

@@ -1,11 +1,12 @@
 return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 
-	use("tpope/vim-commentary")
 	use("tpope/vim-fugitive")
 	use("tpope/vim-unimpaired")
 	use("tpope/vim-dispatch")
 	use("tpope/vim-obsession")
+
+  use({ "JoosepAlviste/nvim-ts-context-commentstring", event = "BufReadPost" })
 
 	use("RRethy/nvim-base16")
 

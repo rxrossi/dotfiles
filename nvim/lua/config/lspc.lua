@@ -72,13 +72,7 @@ lsp_installer.on_server_ready(function(server)
 
 	-- (optional) Customize the options passed to the server
 	if server.name == "sumneko_lua" then
-		opts.settings = {
-			Lua = {
-				diagnostics = {
-					globals = { "vim" },
-				},
-			},
-		}
+		opts = require("lua-dev").setup({})
 	end
 
 	-- This setup() function will take the provided server configuration and decorate it with the necessary properties

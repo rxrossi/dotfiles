@@ -4,6 +4,7 @@ require('config/gitsigns')
 require('config/telescope')
 require('config/lspc')
 require('config/null-ls')
+require('config/nvim-tree')
 
 -- vim.opt_local.suffixesadd:prepend('.lua')
 -- vim.opt_local.suffixesadd:prepend('init.lua')

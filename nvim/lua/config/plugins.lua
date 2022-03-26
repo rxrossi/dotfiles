@@ -6,7 +6,13 @@ return require("packer").startup(function(use)
 	use("tpope/vim-dispatch")
 	use("tpope/vim-obsession")
 
-  use({ "JoosepAlviste/nvim-ts-context-commentstring", event = "BufReadPost" })
+	use({ "JoosepAlviste/nvim-ts-context-commentstring", event = "BufReadPost" })
+	use({
+		"numToStr/Comment.nvim",
+		config = function()
+			require("Comment").setup()
+		end,
+	})
 
 	use("RRethy/nvim-base16")
 
@@ -49,4 +55,14 @@ return require("packer").startup(function(use)
 	use("hrsh7th/cmp-nvim-lsp-signature-help")
 
 	use("folke/lua-dev.nvim")
+
+	use({
+		"kyazdani42/nvim-tree.lua",
+		requires = {
+			"kyazdani42/nvim-web-devicons", -- optional, for file icon
+		},
+		config = function()
+			require("nvim-tree").setup({})
+		end,
+	})
 end)

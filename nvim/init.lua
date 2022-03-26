@@ -1,16 +1,18 @@
-require('config/plugins')
-require('config/treesitter')
-require('config/gitsigns')
-require('config/telescope')
-require('config/lspc')
-require('config/null-ls')
-require('config/nvim-tree')
+require("config/plugins")
+require("config/treesitter")
+require("config/gitsigns")
+require("config/telescope")
+require("config/lspc")
+require("config/null-ls")
+require("config/nvim-tree")
 
 -- vim.opt_local.suffixesadd:prepend('.lua')
 -- vim.opt_local.suffixesadd:prepend('init.lua')
 -- vim.opt_local.path:prepend(vim.fn.stdpath('config')..'/lua')
 
 vim.cmd([[
+  set termguicolors
+
   set number
   set relativenumber
 
@@ -63,4 +65,3 @@ vim.cmd([[
 
   noremap <silent> <Leader>p :lua vim.lsp.buf.formatting()<CR>
 ]])
-

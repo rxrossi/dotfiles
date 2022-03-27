@@ -60,7 +60,7 @@ vim.cmd([[
   let g:rooter_manual_only = 1
   let g:rooter_patterns = ['.git', '.svn', 'package.json', '!node_modules']
   " cd into Package
-  command Pcd execute "cd " . FindRootDirectory()
+  command! Pcd execute "cd " . FindRootDirectory()
   " cd into Git root by using Gcd provided by Fugitive
 
   noremap <silent> <Leader>p :lua vim.lsp.buf.formatting()<CR>

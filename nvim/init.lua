@@ -5,6 +5,7 @@ require("config/telescope")
 require("config/lspc")
 require("config/null-ls")
 require("config/nvim-tree")
+require("aw")
 
 -- vim.opt_local.suffixesadd:prepend('.lua')
 -- vim.opt_local.suffixesadd:prepend('init.lua')
@@ -15,6 +16,7 @@ vim.cmd([[
 
   set number
   set relativenumber
+  set noswapfile
 
   set wrap
   set linebreak
@@ -43,6 +45,7 @@ vim.cmd([[
 
   set undofile
 
+
   set completeopt=menuone,noselect
 
   set fcs=eob:\ " replace tilde on empty lines with space
@@ -64,4 +67,17 @@ vim.cmd([[
   " cd into Git root by using Gcd provided by Fugitive
 
   noremap <silent> <Leader>p :lua vim.lsp.buf.formatting()<CR>
+
+  autocmd! bufwritepost $MYVIMRC source $MYVIMRC
+
+]])
+
+function AddWordToCSpell()
+	package.loaded["aw"] = nil
+	require("aw").addWordToCSpell()
+end
+
+vim.cmd([[
+  autocmd! bufwritepost aw.lua source $MYVIMRC
+  command! AW lua AddWordToCSpell() <CR>
 ]])

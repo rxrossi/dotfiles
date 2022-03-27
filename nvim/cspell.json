@@ -1,10 +1,32 @@
 {
   "version": "0.2",
 
-  "words": ["buyability", "nvim", "dotfiles", "reassignable"],
+  "words": [
+		"dunelm",
+		"Unbuyability",
+		"unbuyable",
+    "lspc",
+    "vimlang",
+    "materia",
+    "menuone",
+    "noselect",
+    "bufwritepost",
+    "buyability",
+    "nvim",
+    "dotfiles",
+    "reassignable",
+    "prettierd",
+    "stylua",
+    "builtins",
+    "gitsigns",
+    "augroup",
+    "autocmd"
+  ],
 
   // flagWords - list of words to be always considered incorrect
   // This is useful for offensive words and common spelling errors.
   // For example "hte" should be "the"
-  "flagWords": ["hte"]
+  "flagWords": ["hte"],
+
+  "dictionaries": ["vimlang"]
 }

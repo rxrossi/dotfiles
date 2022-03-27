@@ -67,6 +67,23 @@ lsp_installer.on_server_ready(function(server)
 			client.resolved_capabilities.document_formatting = false
 		end
 
+		if client.resolved_capabilities.document_highlight then
+			vim.api.nvim_exec(
+				[[
+          augroup lsp_document_highlight
+            autocmd!
+            autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+            autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+          augroup END
+
+          hi! link LspReferenceRead NvimTreeWindowPicker
+          hi! link LspReferenceText NvimTreeWindowPicker
+          hi! link LspReferenceWrite NvimTreeWindowPicker
+        ]],
+				false
+			)
+		end
+
 		local set_buf_n_keymap = function(from, to)
 			vim.api.nvim_buf_set_keymap(bufnr, "n", from, to, keymaps_opts)
 		end

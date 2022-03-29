@@ -7,7 +7,11 @@ require("telescope").setup({
 			sort_mru = true,
 		},
 		buffers = {
+			layout_config = {
+				vertical = { width = 0.999, height = 0.999 },
+			},
 			sort_mru = true,
+			previewer = false,
 		},
 	},
 })

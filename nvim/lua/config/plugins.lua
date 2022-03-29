@@ -58,4 +58,12 @@ return require("packer").startup(function(use)
 
 	use({ "kyazdani42/nvim-tree.lua", requires = { "kyazdani42/nvim-web-devicons" } })
 	use("folke/lsp-colors.nvim")
+	use("preservim/vim-markdown")
+	use({
+		"folke/todo-comments.nvim",
+		requires = "nvim-lua/plenary.nvim",
+		config = function()
+			require("todo-comments").setup({})
+		end,
+	})
 end)

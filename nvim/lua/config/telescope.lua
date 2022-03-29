@@ -1,3 +1,17 @@
+require("telescope").setup({
+	defaults = {
+		layout_strategy = "vertical",
+	},
+	pickers = {
+		oldfiles = {
+			sort_mru = true,
+		},
+		buffers = {
+			sort_mru = true,
+		},
+	},
+})
+
 vim.cmd([[
   nnoremap <leader><leader> <cmd>Telescope <cr>
   nnoremap <leader>ff <cmd>Telescope find_files find_command=rg,--hidden,--files<cr>

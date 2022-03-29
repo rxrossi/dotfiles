@@ -86,3 +86,13 @@ vim.cmd([[
   autocmd! bufwritepost aw.lua source $MYVIMRC
   command! AW lua AddWordToCSpell() <CR>
 ]])
+
+require("nvim-treesitter.configs").setup({
+	-- One of "all", "maintained" (parsers with maintainers), or a list of languages
+	ensure_installed = "maintained",
+
+	highlight = {
+		enable = true,
+		additional_vim_regex_highlighting = false,
+	},
+})

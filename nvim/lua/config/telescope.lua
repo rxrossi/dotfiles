@@ -1,15 +1,20 @@
 require("telescope").setup({
 	defaults = {
 		layout_strategy = "vertical",
+		layout_config = { vertical = { width = 0.999, height = 0.999 } },
 	},
 	pickers = {
+		find_files = {
+			previewer = false,
+			theme = "dropdown",
+		},
 		oldfiles = {
+			theme = "dropdown",
+			previewer = false,
 			sort_mru = true,
 		},
 		buffers = {
-			layout_config = {
-				vertical = { width = 0.999, height = 0.999 },
-			},
+			theme = "dropdown",
 			sort_mru = true,
 			previewer = false,
 		},

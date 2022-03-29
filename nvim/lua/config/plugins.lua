@@ -28,7 +28,7 @@ return require("packer").startup(function(use)
 		},
 	})
 
-	use("Raimondi/delimitMate")
+	use("windwp/nvim-autopairs")
 
 	use("jeetsukumaran/vim-indentwise")
 

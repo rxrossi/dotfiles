@@ -46,6 +46,8 @@ local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protoco
 
 local lsp_installer = require("nvim-lsp-installer")
 
+require("grammar-guard").init()
+
 -- Register a handler that will be called for each installed server when it's ready (i.e. when installation is finished
 -- or if the server is already installed).
 lsp_installer.on_server_ready(function(server)
@@ -59,6 +61,27 @@ lsp_installer.on_server_ready(function(server)
 
 	if server.name == "sumneko_lua" then
 		opts = require("lua-dev").setup({})
+	end
+
+	if server.name == "ltex" then
+		opts = {
+			settings = {
+				ltex = {
+					enabled = { "latex", "tex", "bib", "markdown" },
+					language = "en",
+					diagnosticSeverity = "information",
+					sentenceCacheSize = 2000,
+					additionalRules = {
+						enablePickyRules = true,
+						motherTongue = "pt-BR",
+					},
+					trace = { server = "verbose" },
+					dictionary = {},
+					disabledRules = {},
+					hiddenFalsePositives = {},
+				},
+			},
+		}
 	end
 
 	opts.capabilities = capabilities
@@ -106,6 +129,12 @@ lsp_installer.on_server_ready(function(server)
 		set_buf_n_keymap("<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
 		set_buf_n_keymap("<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
 		set_buf_n_keymap("<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
+
+		local on_references = vim.lsp.handlers["textDocument/references"]
+		vim.lsp.handlers["textDocument/references"] = vim.lsp.with(on_references, {
+			-- Use location list instead of quickfix list
+			loclist = true,
+		})
 	end
 
 	server:setup(opts)

@@ -25,6 +25,7 @@ return require("packer").startup(function(use)
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-telescope/telescope-dap.nvim" },
 			{ "nvim-telescope/telescope-live-grep-raw.nvim" },
+			{ "kyazdani42/nvim-web-devicons" },
 		},
 	})
 
@@ -56,7 +57,6 @@ return require("packer").startup(function(use)
 
 	use("folke/lua-dev.nvim")
 
-	use({ "kyazdani42/nvim-tree.lua", requires = { "kyazdani42/nvim-web-devicons" } })
 	use("folke/lsp-colors.nvim")
 	use("preservim/vim-markdown")
 	use({
@@ -66,4 +66,16 @@ return require("packer").startup(function(use)
 			require("todo-comments").setup({})
 		end,
 	})
+
+	use({
+		"brymer-meneses/grammar-guard.nvim",
+		requires = {
+			"neovim/nvim-lspconfig",
+			"williamboman/nvim-lsp-installer",
+		},
+	})
+
+	use("~/nvim-tree.lua")
+
+	use("ThePrimeagen/nvim-treesitter-context")
 end)

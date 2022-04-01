@@ -76,9 +76,9 @@ lsp_installer.on_server_ready(function(server)
             autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
           augroup END
 
-          hi! link LspReferenceRead NvimTreeWindowPicker
-          hi! link LspReferenceText NvimTreeWindowPicker
-          hi! link LspReferenceWrite NvimTreeWindowPicker
+          hi! LspReferenceRead  gui=reverse guibg=reverse
+          hi! LspReferenceText gui=NONE cterm=underline
+          hi! LspReferenceWrite  gui=reverse guibg=reverse
         ]],
 				false
 			)

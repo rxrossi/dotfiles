@@ -34,4 +34,5 @@ vim.cmd([[
   nnoremap <leader>fh <cmd>Telescope command_history<cr>
   nnoremap <leader>fc <cmd>Telescope commands<cr>
   nnoremap <leader>fo <cmd>Telescope oldfiles<cr>
+  nnoremap <leader>fw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
 ]])

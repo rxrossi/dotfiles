@@ -7,6 +7,10 @@ require("config/null-ls")
 require("config/nvim-tree")
 require("aw")
 
+vim.cmd([[
+  source  $HOME/.config/nvim/code-review.vim
+]])
+
 -- vim.opt_local.suffixesadd:prepend('.lua')
 -- vim.opt_local.suffixesadd:prepend('init.lua')
 -- vim.opt_local.path:prepend(vim.fn.stdpath('config')..'/lua')

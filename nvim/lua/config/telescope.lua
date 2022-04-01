@@ -2,7 +2,6 @@ require("telescope").setup({
 	defaults = {
 		layout_strategy = "vertical",
 		layout_config = { vertical = { width = 0.999, height = 0.999 } },
-		theme = "dropdown",
 	},
 	pickers = {
 		builtin = {
@@ -11,15 +10,15 @@ require("telescope").setup({
 		},
 		find_files = {
 			previewer = false,
-			theme = "dropdown",
+			theme = "ivy",
 		},
 		oldfiles = {
-			theme = "dropdown",
+			theme = "ivy",
 			previewer = false,
 			sort_mru = true,
 		},
 		buffers = {
-			theme = "dropdown",
+			theme = "ivy",
 			sort_mru = true,
 			previewer = false,
 		},
@@ -30,6 +29,7 @@ vim.cmd([[
   nnoremap <leader><leader> <cmd>Telescope <cr>
   nnoremap <leader>ff <cmd>Telescope find_files find_command=rg,--hidden,--files<cr>
   nnoremap <leader>fg <cmd>:lua require("telescope").extensions.live_grep_raw.live_grep_raw({theme = "default"})<cr>
+  nnoremap <leader>fq <cmd>Telescope quickfix<cr>
   nnoremap <leader>fb <cmd>Telescope buffers<cr>
   nnoremap <leader>fh <cmd>Telescope command_history<cr>
   nnoremap <leader>fc <cmd>Telescope commands<cr>

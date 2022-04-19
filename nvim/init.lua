@@ -8,6 +8,7 @@ require("config/nvim-tree")
 require("aw")
 require("cspell-ca")
 require("config/luasnip")
+require("config/dap_cfg")
 
 vim.cmd([[
   source  $HOME/.config/nvim/code-review.vim

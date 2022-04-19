@@ -76,4 +76,7 @@ return require("packer").startup(function(use)
 	use({ "L3MON4D3/LuaSnip" })
 	use("onsails/lspkind-nvim")
 	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
+
+	use("mfussenegger/nvim-dap")
+	use("rcarriga/nvim-dap-ui")
 end)

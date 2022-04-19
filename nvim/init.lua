@@ -6,6 +6,8 @@ require("config/lspc")
 require("config/null-ls")
 require("config/nvim-tree")
 require("aw")
+require("cspell-ca")
+require("config/luasnip")
 
 vim.cmd([[
   source  $HOME/.config/nvim/code-review.vim
@@ -14,6 +16,12 @@ vim.cmd([[
 -- vim.opt_local.suffixesadd:prepend('.lua')
 -- vim.opt_local.suffixesadd:prepend('init.lua')
 -- vim.opt_local.path:prepend(vim.fn.stdpath('config')..'/lua')
+
+vim.diagnostic.config({
+	virtual_text = {
+		source = true,
+	},
+})
 
 vim.cmd([[
   set termguicolors
@@ -91,16 +99,6 @@ vim.cmd([[
   command! AW lua AddWordToCSpell() <CR>
 ]])
 
-require("nvim-treesitter.configs").setup({
-	-- One of "all", "maintained" (parsers with maintainers), or a list of languages
-	ensure_installed = "maintained",
-
-	highlight = {
-		enable = true,
-		additional_vim_regex_highlighting = false,
-	},
-})
-
 require("nvim-autopairs").setup({})
 
 vim.cmd([[
@@ -144,3 +142,11 @@ require("treesitter-context").setup({
 		-- rust = true,
 	},
 })
+
+vim.cmd([[
+  packadd cfilter
+]])
+
+vim.cmd([[
+  command! S source $MYVIMRC
+]])

@@ -44,9 +44,15 @@ local function addWordToCSpell()
 	local text = "\n\t\t" .. '"' .. currentWord .. '",'
 	local wordsLineNr = 4
 	appendLineTo(cSpellJsonFilePath, wordsLineNr, text)
-	print(currentWord .. " was added to the dictionary")
+end
+
+local function addWord(word)
+	local text = "\n\t\t" .. '"' .. word .. '",'
+	local wordsLineNr = 4
+	appendLineTo(cSpellJsonFilePath, wordsLineNr, text)
 end
 
 return {
 	addWordToCSpell = addWordToCSpell,
+	addWord = addWord,
 }

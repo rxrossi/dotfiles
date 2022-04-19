@@ -59,13 +59,6 @@ return require("packer").startup(function(use)
 
 	use("folke/lsp-colors.nvim")
 	use("preservim/vim-markdown")
-	use({
-		"folke/todo-comments.nvim",
-		requires = "nvim-lua/plenary.nvim",
-		config = function()
-			require("todo-comments").setup({})
-		end,
-	})
 
 	use({
 		"brymer-meneses/grammar-guard.nvim",
@@ -82,4 +75,5 @@ return require("packer").startup(function(use)
 	use({ "saadparwaiz1/cmp_luasnip" })
 	use({ "L3MON4D3/LuaSnip" })
 	use("onsails/lspkind-nvim")
+	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 end)

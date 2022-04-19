@@ -1,5 +1,18 @@
 local cmp = require("cmp")
 
+local luasnip = require("luasnip")
+
+local has_words_before = function()
+	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+luasnip.add_snippets("all", {
+	luasnip.parser.parse_snippet("cljs", "console.log(JSON.stringify($0, null, 2))"),
+	luasnip.parser.parse_snippet("desc", 'describe("$1", () => {\n\t$0\n})'),
+	luasnip.parser.parse_snippet("it", 'it("$1", $2() => {\n\t$0\n})'),
+})
+
 local kind_icons = {
 	Text = "",
 	Method = "",
@@ -69,6 +82,25 @@ cmp.setup({
 		end,
 	},
 	mapping = {
+		["<C-k>"] = cmp.mapping(function(fallback)
+			if luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			elseif has_words_before() then
+				cmp.complete()
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+		["<C-n>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item()
+			end
+		end, { "i", "s" }),
+		["<C-p>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item()
+			end
+		end, { "i", "s" }),
 		["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
 		["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
 		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
@@ -80,8 +112,8 @@ cmp.setup({
 		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 	},
 	sources = {
-		{ name = "nvim_lua", max_item_count = 5 },
-		{ name = "nvim_lsp", max_item_count = 5 },
+		{ name = "nvim_lua" },
+		{ name = "nvim_lsp" },
 		{ name = "path", max_item_count = 5 },
 		{ name = "luasnip", max_item_count = 5 },
 		{

@@ -208,7 +208,6 @@ lsp_installer.on_server_ready(function(server)
 		set_buf_n_keymap("gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
 		set_buf_n_keymap("gr", "<cmd>lua vim.lsp.buf.references()<CR>")
 		set_buf_n_keymap("K", "<cmd>lua vim.lsp.buf.hover()<CR>")
-		set_buf_n_keymap("gy", "<cmd>lua vim.lsp.buf.implementation()<CR>")
 		set_buf_n_keymap("<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
 		set_buf_n_keymap("<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
 		set_buf_n_keymap("<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>")
@@ -217,6 +216,8 @@ lsp_installer.on_server_ready(function(server)
 		set_buf_n_keymap("<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
 		set_buf_n_keymap("<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
 		set_buf_n_keymap("<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
+		set_buf_n_keymap("gY", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
+		set_buf_n_keymap("gI", "<cmd>lua vim.lsp.buf.implementation()<CR>")
 
 		local on_references = vim.lsp.handlers["textDocument/references"]
 		vim.lsp.handlers["textDocument/references"] = vim.lsp.with(on_references, {

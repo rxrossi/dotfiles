@@ -1,5 +1,8 @@
 local dap = require("dap")
 
+dap.defaults.fallback.terminal_win_cmd = [[vs new | let g:dap_t_buff_nr=bufnr('%')]]
+vim.cmd([[ autocmd TermClose * exec 'echo' . g:dap_t_buff_nr | exec 'bd!' . g:dap_t_buff_nr ]])
+
 dap.adapters.node2 = {
 	type = "executable",
 	command = "node",
@@ -37,6 +40,8 @@ function Debug_jest(o)
 	}
 
 	dap.run(config)
+
+	require("dapui").setup()
 end
 
 -- lua Debug_jest({test_file = "customerPromisesCheckoutDeliveries/dtc-and-dc-different-carrier.spec.ts", config_path = "/packages/stacks/customer/delivery-promise-service/src/__api__/jest.config.js" })
@@ -54,4 +59,6 @@ vim.cmd([[
 
   nnoremap <Leader>dt <Cmd>lua require'dapui'.toggle()<CR>
   nnoremap <Leader>dC <Cmd>lua require'dap'.clear_breakpoints()<CR>
+  nnoremap <Leader>dr <Cmd>lua require'dap'.run_last()<CR>
+  nnoremap <Leader>dx <Cmd>lua require'dap'.disconnect({terminateDebuggee = true})<CR>
 ]])

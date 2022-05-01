@@ -27,6 +27,8 @@ vim.diagnostic.config({
 vim.cmd([[
   set termguicolors
 
+  set splitright
+
   set number
   set relativenumber
   set noswapfile

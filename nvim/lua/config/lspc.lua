@@ -175,10 +175,10 @@ lsp_installer.on_server_ready(function(server)
 	opts.capabilities = capabilities
 	opts.on_attach = function(client, bufnr)
 		if server.name == "tsserver" then
-			client.resolved_capabilities.document_formatting = false
+			client.server_capabilities.document_formatting = false
 		end
 
-		if client.resolved_capabilities.document_highlight then
+		if client.server_capabilities.document_highlight then
 			vim.api.nvim_exec(
 				[[
           augroup lsp_document_highlight

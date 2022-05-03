@@ -81,6 +81,9 @@ vim.cmd([[
   command! Pcd execute "cd " . FindRootDirectory()
   " cd into Git root by using Gcd provided by Fugitive
 
+  " better output of git hooks
+  let g:fugitive_pty = 0
+
   noremap <silent> <Leader>p :lua vim.lsp.buf.formatting()<CR>
 
   autocmd! bufwritepost $MYVIMRC source $MYVIMRC

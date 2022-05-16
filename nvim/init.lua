@@ -84,7 +84,7 @@ vim.cmd([[
   " better output of git hooks
   let g:fugitive_pty = 0
 
-  noremap <silent> <Leader>p :lua vim.lsp.buf.formatting()<CR>
+  noremap <silent> <Leader>p :lua print('use space f instead')<CR>
 
   autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 

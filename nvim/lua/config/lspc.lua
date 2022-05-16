@@ -175,7 +175,7 @@ lsp_installer.on_server_ready(function(server)
 	opts.capabilities = capabilities
 	opts.on_attach = function(client, bufnr)
 		if server.name == "tsserver" then
-			client.server_capabilities.document_formatting = false
+			client.server_capabilities.documentFormattingProvider = false
 		end
 
 		if client.server_capabilities.document_highlight then
@@ -215,7 +215,7 @@ lsp_installer.on_server_ready(function(server)
 		set_buf_n_keymap("<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
 		set_buf_n_keymap("<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
 		set_buf_n_keymap("<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
-		set_buf_n_keymap("<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
+		set_buf_n_keymap("<space>f", "<cmd>lua vim.lsp.buf.format()<CR>")
 		set_buf_n_keymap("gY", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
 		set_buf_n_keymap("gI", "<cmd>lua vim.lsp.buf.implementation()<CR>")
 

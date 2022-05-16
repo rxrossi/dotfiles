@@ -2,6 +2,9 @@
   "version": "0.2",
 
   "words": [
+		"groupby",
+    "uncommited",
+		"ellipsize",
 		"Orderline",
 		"Fulfillable",
 		"orderlines",

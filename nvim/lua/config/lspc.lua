@@ -178,7 +178,7 @@ lsp_installer.on_server_ready(function(server)
 			client.server_capabilities.documentFormattingProvider = false
 		end
 
-		if client.server_capabilities.document_highlight then
+		if client.server_capabilities.documentHighlightProvider then
 			vim.api.nvim_exec(
 				[[
           augroup lsp_document_highlight

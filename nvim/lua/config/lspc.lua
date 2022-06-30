@@ -161,7 +161,7 @@ lsp_installer.on_server_ready(function(server)
 					sentenceCacheSize = 2000,
 					additionalRules = {
 						enablePickyRules = true,
-						motherTongue = "pt-BR",
+						-- motherTongue = "pt-BR",
 					},
 					trace = { server = "verbose" },
 					dictionary = {},
@@ -223,6 +223,10 @@ lsp_installer.on_server_ready(function(server)
 		vim.lsp.handlers["textDocument/references"] = vim.lsp.with(on_references, {
 			-- Use location list instead of quickfix list
 			loclist = true,
+		})
+
+		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+			border = "rounded",
 		})
 	end
 

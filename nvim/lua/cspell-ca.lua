@@ -87,6 +87,7 @@ null_ls.register({
 			"-c",
 			vim.fn.expand("~/dotfiles/nvim/cspell.json"),
 			"--show-suggestions",
+			"-u",
 			"--locale",
 			"en-GB,pt-BR",
 		},

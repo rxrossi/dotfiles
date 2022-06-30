@@ -32,9 +32,27 @@ function CompareWithPreviousCommit(sourceCommit)
   execute ReviewLocalBranches(sourceCommit, targetCommit)
 endfunction
 
+function CompareWithMain()
+  let l:gitBranchOutput = split(execute("!git rev-parse --abbrev-ref HEAD"), "\n")
+  let l:currentBranch = map(map(l:gitBranchOutput, 'trim(v:val)')[2:], 'trim(v:val, "* ")')[0]
+
+  execute ReviewLocalBranches(l:currentBranch, "main")
+endfunction
+
+function CompareWith(targetBranch)
+  echo "targetBranch" . a:targetBranch
+  let l:gitBranchOutput = split(execute("!git rev-parse --abbrev-ref HEAD"), "\n")
+  let l:currentBranch = map(map(l:gitBranchOutput, 'trim(v:val)')[2:], 'trim(v:val, "* ")')[0]
+
+  execute ReviewLocalBranches(l:currentBranch, a:targetBranch)
+endfunction
+
 command! -nargs=* -range CompareWithPrevious call CompareWithPreviousCommit(<f-args>)
 
 command! -nargs=* -range -complete=custom,CodeReview_complete CodeReviewLocal call ReviewLocalBranches(<f-args>)
+
+command! -nargs=* -range CompareWithMain call CompareWithMain()
+command! -nargs=* -range -complete=custom,CodeReview_complete CompareBranchWith call CompareWith(<f-args>)
 
 function ReviewRemoteBranch (sourceBranch, targetBranch = "main")
   execute "!git fetch"

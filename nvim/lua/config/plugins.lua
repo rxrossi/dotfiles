@@ -24,7 +24,7 @@ return require("packer").startup(function(use)
 			{ "nvim-lua/popup.nvim" },
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-telescope/telescope-dap.nvim" },
-			{ "nvim-telescope/telescope-live-grep-raw.nvim" },
+			{ "nvim-telescope/telescope-live-grep-args.nvim" },
 			{ "kyazdani42/nvim-web-devicons" },
 		},
 	})
@@ -73,7 +73,7 @@ return require("packer").startup(function(use)
 
 	use("~/nvim-tree.lua")
 
-	use("ThePrimeagen/nvim-treesitter-context")
+	use("nvim-treesitter/nvim-treesitter-context")
 
 	use({ "saadparwaiz1/cmp_luasnip" })
 	use({ "L3MON4D3/LuaSnip" })

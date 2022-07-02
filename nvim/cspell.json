@@ -2,6 +2,9 @@
   "version": "0.2",
 
   "words": [
+    "WORKDIR",
+    "unmock",
+    "POAP",
     "upsert",
     "Gateron",
     "Keycaps",

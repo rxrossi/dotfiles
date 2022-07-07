@@ -162,4 +162,7 @@ vim.cmd([[
 
 vim.cmd([[
   command! S source $MYVIMRC
+  hi Normal guibg=NONE ctermbg=NONE
+  hi NormalNC guibg=NONE ctermbg=NONE
+  hi QuickFixLine ctermfg=NONE cterm=bold guifg=#ea9560 gui=bold guibg=NONE
 ]])

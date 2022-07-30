@@ -81,9 +81,6 @@ vim.cmd([[
   command! Pcd execute "cd " . FindRootDirectory()
   " cd into Git root by using Gcd provided by Fugitive
 
-  " better output of git hooks
-  let g:fugitive_pty = 0
-
   noremap <silent> <Leader>p :lua print('use space f instead')<CR>
 
   autocmd! bufwritepost $MYVIMRC source $MYVIMRC

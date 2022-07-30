@@ -1,5 +1,4 @@
 require("telescope").load_extension("live_grep_args")
-
 require("telescope").setup({
 	defaults = {
 		layout_strategy = "vertical",
@@ -35,7 +34,7 @@ require("telescope").setup({
 vim.cmd([[
   nnoremap <leader><leader> <cmd>Telescope <cr>
   nnoremap <leader>ff <cmd>Telescope find_files find_command=rg,--hidden,--files<cr>
-  nnoremap <leader>fg <cmd>:lua require("telescope").extensions.live_grep_args.live_grep_args({theme = "default"})<cr>
+  nnoremap <leader>fg <cmd>:lua require('telescope').extensions.live_grep_args.live_grep_args({ vimgrep_arguments = { "rg", "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case", "--hidden" } })<cr>
   nnoremap <leader>fm <cmd>Telescope marks<cr>
   nnoremap <leader>fq <cmd>Telescope quickfix<cr>
   nnoremap <leader>fb <cmd>Telescope buffers<cr>

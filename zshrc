@@ -94,6 +94,7 @@ bindkey '^E' edit-command-line                   # Opens Vim to edit current com
 alias dot="cd ~/dotfiles"
 alias dotv="cd ~/dotfiles && v"
 alias bujo="cd ~/Box/bujo && v index.md"
+alias o="cd ~/Library/Mobile\ Documents/iCloud\~md\~obsidian/Documents/MainVault/ && v +NvimTreeOpen"
 alias wws="cd ~/winWorkSpace"
 alias vim="nvim"
 alias v="nvim"

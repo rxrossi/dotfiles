@@ -155,6 +155,7 @@ require("treesitter-context").setup({
 
 vim.cmd([[
   packadd cfilter
+  let g:vim_markdown_no_extensions_in_markdown = 1
 ]])
 
 vim.cmd([[

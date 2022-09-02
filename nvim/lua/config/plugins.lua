@@ -62,6 +62,7 @@ return require("packer").startup(function(use)
 
 	use("folke/lsp-colors.nvim")
 	use("preservim/vim-markdown")
+	use("godlygeek/tabular")
 
 	use({
 		"brymer-meneses/grammar-guard.nvim",
@@ -82,4 +83,7 @@ return require("packer").startup(function(use)
 
 	use("mfussenegger/nvim-dap")
 	use("rcarriga/nvim-dap-ui")
+
+	use("junegunn/goyo.vim")
+
 end)

@@ -3,6 +3,7 @@ require("telescope").setup({
 	defaults = {
 		layout_strategy = "vertical",
 		layout_config = { vertical = { width = 0.999, height = 0.999 } },
+    file_ignore_patterns = {"node_modules", ".git"},
 	},
 	pickers = {
 		builtin = {
@@ -39,7 +40,14 @@ vim.cmd([[
   nnoremap <leader>fq <cmd>Telescope quickfix<cr>
   nnoremap <leader>fb <cmd>Telescope buffers<cr>
   nnoremap <leader>fh <cmd>Telescope command_history<cr>
-  nnoremap <leader>fc <cmd>Telescope commands<cr>
   nnoremap <leader>fo <cmd>Telescope oldfiles<cr>
   nnoremap <leader>fw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
 ]])
+
+vim.keymap.set({ "n", "s" }, "<leader>fc", function() 
+  local full_path = vim.api.nvim_exec([[echo FindRootDirectory()]], true)
+  local cwd = vim.api.nvim_exec([[echo getcwd()]], true)
+  local from_vim_root_path = string.sub(full_path, string.len(cwd) + 2)
+
+  require('telescope.builtin').find_files( { cwd = from_vim_root_path })
+end)

@@ -95,7 +95,6 @@ alias dot="cd ~/dotfiles"
 alias dotv="cd ~/dotfiles && v"
 alias bujo="cd ~/Box/bujo && v index.md"
 alias o="cd ~/Library/Mobile\ Documents/iCloud\~md\~obsidian/Documents/MainVault/ && v +NvimTreeOpen"
-alias wws="cd ~/winWorkSpace"
 alias vim="nvim"
 alias v="nvim"
 alias ga="git add ."
@@ -106,6 +105,7 @@ alias gac="git add . && git commit"
 alias tls="tmux ls"
 alias tat="tmux attach-session -t "
 bindkey '^R' history-incremental-search-backward
+alias create-ts-repo="yarn init -y && git init && echo node_modules > .gitignore && yarn add --dev jest typescript ts-jest @types/jest && npx tsc --init && yarn ts-jest config:init"
 
 
 # . $HOME/.asdf/asdf.sh
@@ -131,7 +131,7 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
- alias python='python3'
+alias python='python3'
 
 # Added by serverless binary installer
 export PATH="$HOME/.serverless/bin:$PATH"
@@ -143,3 +143,8 @@ export VISUAL=$(which nvim)
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# pnpm
+export PNPM_HOME="/Users/rxrossi/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end

@@ -32,6 +32,8 @@ require("telescope").setup({
 	},
 })
 
+require("telescope").load_extension "file_browser"
+
 vim.cmd([[
   nnoremap <leader><leader> <cmd>Telescope <cr>
   nnoremap <leader>ff <cmd>Telescope find_files find_command=rg,--hidden,--files<cr>
@@ -41,6 +43,8 @@ vim.cmd([[
   nnoremap <leader>fb <cmd>Telescope buffers<cr>
   nnoremap <leader>fh <cmd>Telescope command_history<cr>
   nnoremap <leader>fo <cmd>Telescope oldfiles<cr>
+  nnoremap <leader>fd <cmd>Telescope file_browser path=%:p:h<cr>
+
   nnoremap <leader>fw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
 ]])
 
@@ -51,3 +55,4 @@ vim.keymap.set({ "n", "s" }, "<leader>fc", function()
 
   require('telescope.builtin').find_files( { cwd = from_vim_root_path })
 end)
+

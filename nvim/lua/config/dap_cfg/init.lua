@@ -24,7 +24,26 @@ dap.configurations.typescript = {
   }
 }
 
-require("dapui").setup()
+require("dapui").setup({
+  layouts = {
+    {
+      elements = {
+      -- Elements can be strings or table with id and size keys.
+        "breakpoints",
+      },
+      size = 40, -- 40 columns
+      position = "left",
+    },
+    {
+      elements = {
+        "repl",
+        "watches",
+      },
+      size = 0.25, -- 25% of total lines
+      position = "bottom",
+    },
+  },
+})
 
 vim.cmd([[ 
   nnoremap <Leader>df <Cmd>lua require("dapui").float_element("scopes", {enter = true})<CR>
@@ -35,6 +54,10 @@ vim.cmd([[
   nnoremap <Leader>dh <Cmd>lua require'dap'.run_to_cursor()<CR>
   nnoremap <silent> <leader>db :lua require'dap'.toggle_breakpoint()<CR>
   nnoremap <silent> <leader>dc :lua require'dap'.continue()<CR>
+  nnoremap <silent> <leader>dj :lua require'dap'.step_into()<CR>
+  nnoremap <silent> <leader>dk :lua require'dap'.step_out()<CR>
+  nnoremap <silent> <leader>du :lua require'dap'.step_over()<CR>
+
 
   nnoremap <Leader>dt <Cmd>lua require'dapui'.toggle()<CR>
   nnoremap <Leader>dC <Cmd>lua require'dap'.clear_breakpoints()<CR>

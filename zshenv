@@ -7,3 +7,4 @@ function upfind() {
   echo "$path"
 }
 . "$HOME/.cargo/env"
+

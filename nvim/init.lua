@@ -14,10 +14,6 @@ vim.cmd([[
   source  $HOME/.config/nvim/code-review.vim
 ]])
 
--- vim.opt_local.suffixesadd:prepend('.lua')
--- vim.opt_local.suffixesadd:prepend('init.lua')
--- vim.opt_local.path:prepend(vim.fn.stdpath('config')..'/lua')
-
 vim.diagnostic.config({
 	virtual_text = {
 		source = true,
@@ -205,3 +201,12 @@ vim.cmd([[
   nnoremap <C-n> :exe "colo " .. NextColors()<CR>
   nnoremap <C-p> :exe "colo " .. PrevColors()<CR>
 ]])
+
+
+-- local set_buf_n_keymap = function(from, to)
+--   vim.api.nvim_buf_set_keymap(bufnr, "n", from, to, keymaps_opts)
+-- end
+--
+-- set_buf_n_keymap("<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+vim.api.nvim_set_keymap('v', '<leader>ca', '<ESC><cmd>lua vim.lsp.buf.range_code_action()<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>ca', '<ESC><cmd>lua vim.lsp.buf.code_action()<CR>', {noremap = true})

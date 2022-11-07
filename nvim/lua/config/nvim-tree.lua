@@ -57,6 +57,7 @@ require("nvim-tree").setup({
 	},
 	git = {
 		enable = true,
+    show_on_dirs = true,
 		ignore = true,
 		timeout = 400,
 	},

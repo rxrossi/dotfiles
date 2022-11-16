@@ -9,6 +9,7 @@ require("aw")
 require("cspell-ca")
 require("config/luasnip")
 require("config/dap_cfg")
+require("config/rust_tools_lsp_config")
 
 vim.cmd([[
   source  $HOME/.config/nvim/code-review.vim
@@ -166,13 +167,12 @@ vim.cmd([[
 ]])
 
 
--- venn.nvim: enable or disable keymappings
 function _G.Toggle_venn()
     local venn_enabled = vim.inspect(vim.b.venn_enabled)
     if venn_enabled == "nil" then
         vim.b.venn_enabled = true
         vim.cmd[[setlocal ve=all]]
-        -- draw a line on HJKL keystokes
+        -- draw a line on H J K L keystrokes
         vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<CR>", {noremap = true})
         vim.api.nvim_buf_set_keymap(0, "n", "K", "<C-v>k:VBox<CR>", {noremap = true})
         vim.api.nvim_buf_set_keymap(0, "n", "L", "<C-v>l:VBox<CR>", {noremap = true})
@@ -185,7 +185,7 @@ function _G.Toggle_venn()
         vim.b.venn_enabled = nil
     end
 end
--- toggle keymappings for venn using <leader>v
+-- toggle key mappings for venn using <leader>v
 vim.api.nvim_set_keymap('n', '<leader>v', ":lua Toggle_venn()<CR>", { noremap = true})
 
 vim.cmd([[
@@ -198,15 +198,28 @@ vim.cmd([[
       let idx = index(g:colors, g:colors_name)
       return (idx - 1 < 0 ? g:colors[-1] : g:colors[idx - 1])
   endfunc
-  nnoremap <C-n> :exe "colo " .. NextColors()<CR>
-  nnoremap <C-p> :exe "colo " .. PrevColors()<CR>
+  nnoremap <C-n> :exe "colorscheme " .. NextColors()<CR>
+  nnoremap <C-p> :exe "colorscheme " .. PrevColors()<CR>
 ]])
 
 
--- local set_buf_n_keymap = function(from, to)
---   vim.api.nvim_buf_set_keymap(bufnr, "n", from, to, keymaps_opts)
--- end
---
--- set_buf_n_keymap("<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
 vim.api.nvim_set_keymap('v', '<leader>ca', '<ESC><cmd>lua vim.lsp.buf.range_code_action()<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>ca', '<ESC><cmd>lua vim.lsp.buf.code_action()<CR>', {noremap = true})
+
+require('peek').setup({
+  auto_load = true,         -- whether to automatically load preview when
+                            -- entering another markdown buffer
+  close_on_bdelete = true,  -- close preview window on buffer delete
+
+  syntax = true,            -- enable syntax highlighting, affects performance
+
+  theme = 'dark',           -- 'dark' or 'light'
+
+  update_on_change = true,
+
+  -- relevant if update_on_change is true
+  throttle_at = 200000,     -- start throttling when file exceeds this
+                            -- amount of bytes in size
+  throttle_time = 'auto',   -- minimum amount of time in milliseconds
+                            -- that has to pass before starting new render
+})

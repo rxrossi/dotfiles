@@ -152,3 +152,6 @@ export PATH="$PNPM_HOME:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
+export DENO_INSTALL="/Users/rxrossi/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+

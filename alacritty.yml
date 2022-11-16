@@ -1,6 +1,6 @@
 key_bindings:
   - { key: Space, mods: Control, chars: "\x00" }
-  - { key: Key6, mods: Control, chars: "\x1b[94;5u" }
+  - { key: Key6, mods: Control, chars: "\x1e" }
 
 font:
   normal:
@@ -8,6 +8,9 @@ font:
   size: 16.0
 window:
   opacity: 0.99
+  dimensions:
+    columns: 200
+    lines: 70
 
   # Available values:
   # - full: borders and title bar

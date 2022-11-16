@@ -13,6 +13,16 @@ dap.adapters.codelldb = {
 }
 dap.adapters.cpp = dap.adapters.codelldb
 dap.adapters.lldb = dap.adapters.codelldb
+dap.adapters.lldb_vscode= {
+   type = "executable",
+   command = os.getenv('HOME') .. '/codelldb/extension/adapter/codelldb',
+   name = "rt_lldb",
+}
+-- dap.adapter = {
+--   type = "executable",
+--   command = "lldb-vscode",
+--   name = "rt_lldb",
+-- }
 
 dap.adapters.node2 = {
 	type = "executable",

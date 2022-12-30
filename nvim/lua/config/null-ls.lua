@@ -6,6 +6,7 @@ local sources = {
 	null_ls.builtins.diagnostics.eslint.with({
 	  only_local = true
 	}),
+  null_ls.builtins.diagnostics.cfn_lint
 }
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})

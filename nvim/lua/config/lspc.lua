@@ -14,18 +14,10 @@ luasnip.add_snippets("all", {
   -- luasnip.parser.parse_snippet("al", '## ' .. os.date("%Y-%m-%d %H:%M:%S") .. '\n\n$0\n\n---'),
   luasnip.s("alo", {
     luasnip.t("## "),
-    luasnip.function_node(function () return { os.date("%Y-%m-%d %H:%M:%S") } end, {}),
-    luasnip.t({"", "", ""}),
+    luasnip.function_node(function() return { os.date("%Y-%m-%d %H:%M:%S") } end, {}),
+    luasnip.t({ "", "", "" }),
     luasnip.insert_node(0),
-    luasnip.t({"", "", "---"}),
-    -- luasnip.t(""),
-    -- end, { "%A, %B %d of %Y" })
-    -- os.date("%A, %B %d of %Y"),
-    -- luasnip.t(" and the clocks were striking thirteen."),
-
-    -- luasnip.t('## '),
-    -- luasnip.extras.partial(os.date, "%Y-%m-%d %H:%M:%S"),
-    -- luasnip.t(' ---')
+    luasnip.t({ "" }),
   })
 })
 
@@ -164,6 +156,20 @@ lsp_installer.on_server_ready(function(server)
   vim.api.nvim_set_keymap("n", "<space>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", keymaps_opts)
 
   local opts = {}
+
+  if server.name == "yamlls" then
+    opts = {
+      settings = {
+        yaml = {
+          customTags = { "!Ref", "!ImportValue", "!GetAtt", "!Sub" },
+          schemas = {
+            -- ["https://raw.githubusercontent.com/awslabs/goformation/master/schema/sam.schema.json"] = {"**/template.yml", "**/template.yaml"},
+            -- ["https://raw.githubusercontent.com/aws/serverless-application-model/develop/samtranslator/schema/schema.json"] = {"**/template.yml", "**/template.yaml"},
+          },
+        }
+      }
+    }
+  end
 
   if server.name == "ltex" then
     opts = {

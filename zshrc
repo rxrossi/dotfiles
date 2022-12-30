@@ -105,8 +105,11 @@ alias gac="git add . && git commit"
 alias tls="tmux ls"
 alias tat="tmux attach-session -t "
 bindkey '^R' history-incremental-search-backward
-alias create-ts-repo="yarn init -y && git init && echo node_modules > .gitignore && yarn add --dev jest typescript ts-jest @types/jest && npx tsc --init && yarn ts-jest config:init"
-
+alias create-ts-repo="yarn init -y \
+&& git init && \
+echo node_modules > .gitignore \
+&& yarn add --dev typescript jest @types/jest @swc/core @swc/jest && npx tsc --init \
+&& echo 'module.exports = { \n  transform: { \n    \"^.+.(t|j)sx?$\": [\"@swc/jest\"], \n  },\n};' > jest.config.js;"
 
 # . $HOME/.asdf/asdf.sh
 # . $HOME/.asdf/completions/asdf.bash
@@ -124,9 +127,7 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 # Fix character not in range when cding into a git dir
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
+export ANDROID_HOME=$HOME/Library/Android/sdk export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
@@ -155,3 +156,5 @@ eval "$(rbenv init -)"
 export DENO_INSTALL="/Users/rxrossi/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
+
+export PATH="~/Downloads/StepFunctionsLocal:$PATH"

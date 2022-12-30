@@ -63,6 +63,7 @@ vim.cmd([[
   set fcs=eob:\ " replace tilde on empty lines with space
 
   noremap  <silent> <C-S>         :update<CR>
+  noremap  <silent> <space>h      *N
   vnoremap <silent> <C-S>         <C-C>:update<CR><ESC>
   inoremap <silent> <C-S>         <C-O>:update<CR><ESC>
 

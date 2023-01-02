@@ -1,0 +1,28 @@
+{
+    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+    "Lua.workspace.library": [
+        "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/neodev.nvim/types/stable",
+        "/usr/local/share/nvim/runtime",
+        "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/cmp-buffer",
+        "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
+        "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/cmp-nvim-lua",
+        "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/cmp-path",
+        "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
+        "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
+        "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/LuaSnip",
+        "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+        "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/mason.nvim",
+        "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/neodev.nvim",
+        "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/nvim-base16",
+        "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/nvim-cmp",
+        "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+        "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+        "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
+        "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/packer.nvim",
+        "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+        "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/popup.nvim",
+        "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/telescope-live-grep-args.nvim",
+        "/Users/rxrossi/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+        "${3rd}/luassert/library"
+    ]
+}

@@ -1,6 +1,5 @@
 # Make dirs
 mkdir -p  ~/.vim/undodir
-mkdir -p  ~/.config/nvim
 mkdir -p  ~/.config/karabiner
 
 # Ln

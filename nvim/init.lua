@@ -371,20 +371,19 @@ local on_attach = function(client, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, '[W]orkspace [L]ist Folders')
 
-    if client.server_capabilities.documentHighlightProvider then
-
-  vim.api.nvim_exec2(
-    [[
+  if client.server_capabilities.documentHighlightProvider then
+    vim.api.nvim_exec2(
+      [[
 		augroup lsp_document_highlight
 		autocmd!
 		autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
 		autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
 		augroup END
 		]],
-    {
-      output = false,
-    }
-  )
+      {
+        output = false,
+      }
+    )
   end
 
   -- Create a command `:Format` local to the LSP buffer

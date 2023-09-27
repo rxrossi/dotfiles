@@ -371,6 +371,8 @@ local on_attach = function(client, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, '[W]orkspace [L]ist Folders')
 
+    if client.server_capabilities.documentHighlightProvider then
+
   vim.api.nvim_exec2(
     [[
 		augroup lsp_document_highlight
@@ -383,6 +385,7 @@ local on_attach = function(client, bufnr)
       output = false,
     }
   )
+  end
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
@@ -504,3 +507,36 @@ function ReviewBranch()
 end
 
 vim.cmd [[ :command! ReviewBranch lua ReviewBranch() ]]
+
+require('lspconfig').tailwindcss.setup {
+  filetypes = {
+    'css',
+    'scss',
+    'sass',
+    'postcss',
+    'html',
+    'javascript',
+    'javascriptreact',
+    'typescript',
+    'typescriptreact',
+    'svelte',
+    'vue',
+    'rust',
+    'rs',
+  },
+  init_options = {
+    userLanguages = {
+      eelixir = 'html-eex',
+      eruby = 'erb',
+      rust = 'html',
+    },
+  },
+  root_dir = require('lspconfig').util.root_pattern(
+    'tailwind.config.js',
+    'tailwind.config.ts',
+    'postcss.config.js',
+    'postcss.config.ts',
+    'package.json',
+    'node_modules'
+  ),
+}

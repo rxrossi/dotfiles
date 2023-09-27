@@ -539,3 +539,19 @@ require('lspconfig').tailwindcss.setup {
     'node_modules'
   ),
 }
+
+vim.cmd([[
+  augroup HighlightTODO
+    autocmd!
+    autocmd WinEnter,VimEnter * :silent! call matchadd('IncSearch', 'TODO', -1)
+  augroup END
+]])
+
+-- vim.cmd([[
+--   augroup HighlightDuplicatedLines
+--     autocmd!
+--     autocmd WinEnter,VimEnter,BufReadPost,BufEnter * :silent! syn clear IncSearch | g/^\(.*\)\n\ze\%(.*\n\)*\1$/exe 'syn match IncSearch "^' . escape(getline('.'), '".\^$*[]') . '$"' | nohlsearch
+--   augroup end
+-- ]])
+
+

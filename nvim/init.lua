@@ -61,7 +61,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
+  { 'folke/which-key.nvim',               opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -110,19 +110,10 @@ require('lazy').setup({
     end,
   },
 
-  {
-    -- Add indentation guides even on blank lines
-    'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help indent_blankline.txt`
-    opts = {
-      char = '┊',
-      show_trailing_blankline_indent = false,
-    },
-  },
+  { 'lukas-reineke/indent-blankline.nvim' },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',              opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -154,18 +145,9 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
-  -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
-  --       These are some example plugins that I've included in the kickstart repository.
-  --       Uncomment any of the lines below to enable them.
-  -- require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
-
-  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
-  --    up-to-date with whatever is in the kickstart repo.
-  --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  --
-  --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
+  'jeetsukumaran/vim-indentwise',
+  'michaeljsmith/vim-indent-object',
+  'nvim-treesitter/nvim-treesitter-context',
   { import = 'custom.plugins' },
 }, {})
 
@@ -331,6 +313,8 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
+vim.keymap.set('n', '<space>f', vim.lsp.buf.format, { desc = 'Format the file' })
+
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(client, bufnr)
@@ -348,9 +332,17 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
+  local vmap = function(keys, func, desc)
+    if desc then
+      desc = 'LSP: ' .. desc
+    end
+
+    vim.keymap.set('v', keys, func, { buffer = bufnr, desc = desc })
+  end
+
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-  nmap('<space>f', vim.lsp.buf.format, '[F]ormat buffer')
+  vmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
@@ -540,12 +532,16 @@ require('lspconfig').tailwindcss.setup {
   ),
 }
 
-vim.cmd([[
+vim.cmd [[
   augroup HighlightTODO
     autocmd!
     autocmd WinEnter,VimEnter * :silent! call matchadd('IncSearch', 'TODO', -1)
   augroup END
-]])
+]]
+
+vim.diagnostic.config {
+  virtual_text = false,
+}
 
 -- vim.cmd([[
 --   augroup HighlightDuplicatedLines
@@ -553,5 +549,3 @@ vim.cmd([[
 --     autocmd WinEnter,VimEnter,BufReadPost,BufEnter * :silent! syn clear IncSearch | g/^\(.*\)\n\ze\%(.*\n\)*\1$/exe 'syn match IncSearch "^' . escape(getline('.'), '".\^$*[]') . '$"' | nohlsearch
 --   augroup end
 -- ]])
-
-

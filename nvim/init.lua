@@ -57,6 +57,8 @@ require('lazy').setup({
 
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
+
+      'hrsh7th/cmp-path',
     },
   },
 
@@ -66,7 +68,10 @@ require('lazy').setup({
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
-    config = function()
+    config = function(onedark)
+      vim.cmd [[
+        let g:onedark_config = { 'style': 'darker' }
+      ]]
       vim.cmd.colorscheme 'onedark'
     end,
   },
@@ -355,12 +360,11 @@ end
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  -- pyright = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+  clangd = {},
+  gopls = {},
+  rust_analyzer = {},
+  tsserver = {},
+  html = { filetypes = { 'html', 'twig', 'hbs' } },
 
   lua_ls = {
     Lua = {
@@ -414,7 +418,7 @@ cmp.setup {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete {},
+    ['<C-Space>'] = cmp.mapping.complete { reason = 'auto' },
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
@@ -439,8 +443,12 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
-    { name = 'nvim_lsp' },
+    {
+      name = 'nvim_lsp',
+      keyword_length = 0,
+    },
     { name = 'luasnip' },
+    { name = 'path' },
   },
 }
 
@@ -511,3 +519,4 @@ vim.diagnostic.config {
 --     autocmd WinEnter,VimEnter,BufReadPost,BufEnter * :silent! syn clear IncSearch | g/^\(.*\)\n\ze\%(.*\n\)*\1$/exe 'syn match IncSearch "^' . escape(getline('.'), '".\^$*[]') . '$"' | nohlsearch
 --   augroup end
 -- ]])
+--

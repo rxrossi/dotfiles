@@ -34,6 +34,7 @@ require('lazy').setup({
       -- Automatically install LSPs to stdpath for neovim
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
+      'simrat39/rust-tools.nvim',
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -43,7 +44,6 @@ require('lazy').setup({
       'folke/neodev.nvim',
     },
   },
-
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -217,7 +217,7 @@ require('nvim-treesitter.configs').setup {
   auto_install = true,
 
   highlight = { enable = true },
-  indent = { enable = true },
+  indent = { enable = false },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -403,53 +403,50 @@ mason_lspconfig.setup_handlers {
 -- See `:help cmp`
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
+local defaults = require 'cmp.config.default' ()
+
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
----@diagnostic disable-next-line: missing-fields
 cmp.setup {
+  completion = {
+    completeopt = 'menu,menuone,noinsert',
+  },
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
   },
   mapping = cmp.mapping.preset.insert {
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-n>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
+    ['<C-p>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete { reason = 'auto' },
-    ['<CR>'] = cmp.mapping.confirm {
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm { select = true }, -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<S-CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
-    },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
+    }, -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<C-CR>'] = function(fallback)
+      cmp.abort()
+      fallback()
+    end,
   },
-  sources = {
-    {
-      name = 'nvim_lsp',
-      keyword_length = 0,
-    },
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
+  }, {
+    { name = 'buffer' },
+  }),
+  experimental = {
+    ghost_text = {
+      hl_group = 'CmpGhostText',
+    },
   },
+  sorting = defaults.sorting,
 }
 
 function ReviewBranch()
@@ -511,6 +508,26 @@ vim.cmd [[
 
 vim.diagnostic.config {
   virtual_text = false,
+}
+
+local rt = require 'rust-tools'
+
+rt.setup {
+  server = {
+    on_attach = function(_, bufnr)
+      -- Hover actions
+      vim.keymap.set('n', '<Leader>ha', rt.hover_actions.hover_actions, { buffer = bufnr })
+      -- Code action groups
+      vim.keymap.set('n', '<Leader>a', rt.code_action_group.code_action_group, { buffer = bufnr })
+    end,
+  },
+  dap = {
+    adapter = {
+      type = "executable",
+      command = "~/.local/share/nvim/mason/bin/codelldb",
+      name = "rt_lldb",
+    },
+  },
 }
 
 -- vim.cmd([[

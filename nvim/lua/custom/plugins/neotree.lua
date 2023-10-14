@@ -1,12 +1,12 @@
 return {
-  "nvim-neo-tree/neo-tree.nvim",
-  branch = "v2.x",
+  'nvim-neo-tree/neo-tree.nvim',
+  branch = 'v2.x',
   dependencies = {
-    "nvim-lua/plenary.nvim",
-    "MunifTanjim/nui.nvim",
+    'nvim-lua/plenary.nvim',
+    'MunifTanjim/nui.nvim',
   },
-  opts = function()
-    return {
+  config = function()
+    local config = {
       use_popups_for_input = false,
       use_default_mappings = false,
       close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
@@ -211,13 +211,14 @@ return {
           },
         },
       },
-
     }
-  end,
-  config = function()
+
+    local neotree = require 'neo-tree'
+
+    neotree.setup(config)
+
     vim.keymap.set('n', '<space>n', ':Neotree current reveal<cr>', {})
 
     vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
-  end
-
+  end,
 }

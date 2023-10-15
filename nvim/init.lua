@@ -30,29 +30,40 @@ local plugins = {
       require('onedark').load()
     end
   },
-  { import = "plugins" }
+  'tpope/vim-unimpaired',
+  'tpope/vim-sleuth',
+  { 'numToStr/Comment.nvim',              opts = {} },
+  'jeetsukumaran/vim-indentwise',
+  'michaeljsmith/vim-indent-object',
+  'nvim-treesitter/nvim-treesitter-context',
+  { import = "plugins" },
 }
 require("lazy").setup(plugins, {})
+
+vim.cmd [[ packadd cfilter ]]
 
 vim.o.number = true
 vim.o.relativenumber = true
 
 vim.o.expandtab = true
-vim.o.tabstop = 2
-vim.o.shiftwidth = 2
 
 vim.o.hlsearch = false
 
-vim.o.undofile = true
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
+vim.opt.undofile = true
 
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
-vim.wo.signcolumn = 'yes'
+vim.o.signcolumn = 'yes'
 
 vim.o.completeopt = 'menuone,noselect'
 
 vim.o.termguicolors = true
+
+vim.o.foldmethod = "indent"
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -70,3 +81,7 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+vim.diagnostic.config {
+  virtual_text = false,
+}

@@ -19,47 +19,46 @@ local plugins = {
       vim.o.timeout = true
       vim.o.timeoutlen = 300
     end,
-    opts = {}
+    opts = {},
   },
   {
     "navarasu/onedark.nvim",
     opts = {
-      style = 'darker'
+      style = "darker",
     },
     config = function()
-      require('onedark').load()
-    end
+      require("onedark").load()
+    end,
   },
-  'tpope/vim-unimpaired',
-  'tpope/vim-sleuth',
-  { 'numToStr/Comment.nvim',              opts = {} },
-  'jeetsukumaran/vim-indentwise',
-  'michaeljsmith/vim-indent-object',
-  'nvim-treesitter/nvim-treesitter-context',
+  "tpope/vim-unimpaired",
+  "tpope/vim-sleuth",
+  { "numToStr/Comment.nvim", opts = {} },
+  "jeetsukumaran/vim-indentwise",
+  "michaeljsmith/vim-indent-object",
+  "nvim-treesitter/nvim-treesitter-context",
   { import = "plugins" },
 }
 require("lazy").setup(plugins, {})
 
-vim.cmd [[ packadd cfilter ]]
+vim.cmd([[ packadd cfilter ]])
 
 vim.o.number = true
 vim.o.relativenumber = true
 
 vim.o.expandtab = true
 
-vim.o.hlsearch = false
-
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
-vim.opt.undofile = true
-
+vim.o.hlsearch = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
-vim.o.signcolumn = 'yes'
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undofile = true
 
-vim.o.completeopt = 'menuone,noselect'
+vim.o.signcolumn = "yes"
+
+vim.o.completeopt = "menuone,noselect"
 
 vim.o.termguicolors = true
 
@@ -67,21 +66,21 @@ vim.o.foldmethod = "indent"
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank()
   end,
   group = highlight_group,
-  pattern = '*',
+  pattern = "*",
 })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
-vim.diagnostic.config {
+vim.diagnostic.config({
   virtual_text = false,
-}
+})

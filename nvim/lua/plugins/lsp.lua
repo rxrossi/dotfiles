@@ -129,7 +129,12 @@ return {
         -- For example, a handler override for the `rust_analyzer`:
         ["rust_analyzer"] = function(_)
           -- local rust_tools_opts = require("lazyvim.util").opts("rust-tools.nvim")
-          local rust_tools_opts = require("lazy.core.config").plugins["rust-tools.nvim"].opts()
+          local rust_tools_opts = require("lazy.core.config").plugins["rust-tools.nvim"]
+          if rust_tools_opts.opts then
+            rust_tools_opts = rust_tools_opts.opts{}
+           else 
+            rust_tools_opts = {}
+          end
 
           local opts = {
             on_attach = function(_, bufnr)

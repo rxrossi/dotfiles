@@ -123,7 +123,9 @@ return {
       },
       {
         "<leader>to",
-        function() require("neotest").output.open({ enter = true, auto_close = true }) end,
+        function() require("neotest").output.open(
+          { enter = true, auto_close = true }
+        ) end,
         desc =
         "Show Output"
       },
@@ -136,6 +138,8 @@ return {
       { "<leader>tS",  function() require("neotest").run.stop() end,                         desc = "Stop" },
       { "<leader>tdr", function() require("neotest").run.run({ strategy = "dap" }) end,      desc = "Debug Nearest" },
       { "<leader>tdl", function() require("neotest").run.run_last({ strategy = "dap" }) end, desc = "Debug last" },
+
+      { "<leader>tl", function() require("neotest").run.run_last() end, desc = "Run last" },
     },
   },
 }

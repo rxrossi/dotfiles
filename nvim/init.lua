@@ -84,3 +84,11 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 vim.diagnostic.config({
   virtual_text = false,
 })
+
+vim.cmd [[
+  augroup HighlightTODO
+    autocmd!
+    autocmd WinEnter,VimEnter * :silent! call matchadd('IncSearch', 'TODO', -1)
+  augroup END
+]]
+

@@ -19,7 +19,6 @@ return {
       "nvim-lua/plenary.nvim",
     },
     config = function()
-      print("hey there!")
       local dap = require("dap")
       local dapui = require("dapui")
 

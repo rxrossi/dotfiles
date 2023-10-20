@@ -106,8 +106,7 @@ return {
           vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts_with_desc("Go to type definition"))
           vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts_with_desc("Rename"))
           vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts_with_desc("Code action"))
-          vim.keymap.set("n", "gr", vim.lsp.buf.references, opts_with_desc("Find references"))
-          vim.keymap.set("n", "<leader>f", function()
+          vim.keymap.set("n", "<space>f", function()
             vim.lsp.buf.format({ async = true })
           end, opts_with_desc("Format file"))
         end,
@@ -118,26 +117,61 @@ return {
     "williamboman/mason-lspconfig.nvim",
     opts = {},
     config = function()
+      local shared_on_attach = function(client, bufnr)
+        if client.server_capabilities.documentHighlightProvider then
+          vim.api.nvim_exec2(
+            [[
+		augroup lsp_document_highlight
+		autocmd!
+		autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+		autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+		augroup END
+		]],
+            {
+              output = false,
+            }
+          )
+        end
+
+        local nmap = function(keys, func, desc)
+          if desc then
+            desc = "LSP: " .. desc
+          end
+
+          vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+        end
+
+        nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
+        nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace Symbols")
+
+        nmap("gr", require("telescope.builtin").lsp_references, "Go to references")
+        nmap("gy", require("telescope.builtin").lsp_implementations, "Go to Implementation")
+      end
+
       require("mason-lspconfig").setup_handlers({
         -- The first entry (without a key) will be the default handler
         -- and will be called for each installed server that doesn't have
         -- a dedicated handler.
         function(server_name) -- default handler (optional)
-          require("lspconfig")[server_name].setup({})
+          require("lspconfig")[server_name].setup({
+            on_attach = shared_on_attach,
+          })
         end,
         -- Next, you can provide a dedicated handler for specific servers.
         -- For example, a handler override for the `rust_analyzer`:
         ["rust_analyzer"] = function(_)
           -- local rust_tools_opts = require("lazyvim.util").opts("rust-tools.nvim")
           local rust_tools_opts = require("lazy.core.config").plugins["rust-tools.nvim"]
-          if rust_tools_opts.opts then
-            rust_tools_opts = rust_tools_opts.opts{}
-           else 
-            rust_tools_opts = {}
+
+          if type(rust_tools_opts.opts) == "table" then
+            rust_tools_opts = rust_tools_opts.opts
+          elseif type(rust_tools_opts.opts) == "function" then
+            rust_tools_opts = rust_tools_opts.opts()
           end
 
           local opts = {
-            on_attach = function(_, bufnr)
+            on_attach = function(client, bufnr)
+              shared_on_attach(client, bufnr)
               local rt = require("rust-tools")
 
               local opts_with_desc = function(desc)

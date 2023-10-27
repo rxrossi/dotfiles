@@ -62,7 +62,7 @@ vim.o.completeopt = "menuone,noselect"
 
 vim.o.termguicolors = true
 
-vim.o.foldmethod = "indent"
+vim.cmd([[set foldmethod=indent]])
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -85,10 +85,9 @@ vim.diagnostic.config({
   virtual_text = false,
 })
 
-vim.cmd [[
+vim.cmd([[
   augroup HighlightTODO
     autocmd!
     autocmd WinEnter,VimEnter * :silent! call matchadd('IncSearch', 'TODO', -1)
   augroup END
-]]
-
+]])

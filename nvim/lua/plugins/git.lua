@@ -57,7 +57,7 @@ return {
             return "]c"
           end
           vim.schedule(function()
-            gs.next_hunk()
+            gs.next_hunk({wrap = false, foldopen = true, preview = true})
           end)
           return "<Ignore>"
         end, { expr = true })
@@ -93,7 +93,6 @@ return {
         map("n", "<leader>hD", function()
           gs.diffthis("~")
         end)
-        map("n", "<leader>td", gs.toggle_deleted)
 
         -- Text object
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")

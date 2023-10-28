@@ -10,3 +10,8 @@ alias v="nvim"
 # set -U fish_greeting
 
 set -gx PATH /Library/PostgreSQL/16/bin $PATH
+
+#!/bin/bash
+set -Ua fish_user_paths $HOME/.cargo/bin
+
+

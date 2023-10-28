@@ -21,15 +21,7 @@ local plugins = {
     end,
     opts = {},
   },
-  {
-    "navarasu/onedark.nvim",
-    opts = {
-      style = "darker",
-    },
-    config = function()
-      require("onedark").load()
-    end,
-  },
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000, init = function () vim.cmd([[colorscheme catppuccin]]) end },
   "tpope/vim-unimpaired",
   "tpope/vim-sleuth",
   { "numToStr/Comment.nvim", opts = {} },

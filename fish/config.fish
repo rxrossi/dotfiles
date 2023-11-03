@@ -14,4 +14,6 @@ set -gx PATH /Library/PostgreSQL/16/bin $PATH
 #!/bin/bash
 set -Ua fish_user_paths $HOME/.cargo/bin
 
+# Show the full path instead of a single letter
+set fish_prompt_pwd_dir_length 0
 

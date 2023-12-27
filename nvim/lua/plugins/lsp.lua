@@ -85,6 +85,7 @@ return {
 
           vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts_with_desc("Go to declaration"))
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts_with_desc("Go to definition"))
+          vim.keymap.set("n", "gY", vim.lsp.buf.type_definition, opts_with_desc("Go to type definition"))
           vim.keymap.set("n", "K", vim.lsp.buf.hover, opts_with_desc("Hover"))
           vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, opts_with_desc("Go to implementation"))
           vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts_with_desc("Signature help"))

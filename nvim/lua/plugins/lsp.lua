@@ -85,6 +85,7 @@ return {
 
           vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts_with_desc("Go to declaration"))
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts_with_desc("Go to definition"))
+          vim.keymap.set("n", "gr", vim.lsp.buf.references, opts_with_desc("Find references"))
           vim.keymap.set("n", "gY", vim.lsp.buf.type_definition, opts_with_desc("Go to type definition"))
           vim.keymap.set("n", "K", vim.lsp.buf.hover, opts_with_desc("Hover"))
           vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, opts_with_desc("Go to implementation"))
@@ -133,20 +134,6 @@ return {
             }
           )
         end
-
-        local nmap = function(keys, func, desc)
-          if desc then
-            desc = "LSP: " .. desc
-          end
-
-          vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
-        end
-
-        nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
-        nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace Symbols")
-
-        nmap("gr", require("telescope.builtin").lsp_references, "Go to references")
-        nmap("gy", require("telescope.builtin").lsp_implementations, "Go to Implementation")
       end
 
       require("mason-lspconfig").setup_handlers({

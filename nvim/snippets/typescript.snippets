@@ -16,3 +16,6 @@ snippet desc "Test describe"
   describe("${1}", () => {
     ${0}
   })
+
+snippet cljs "console log with stringified data"
+  console.log(JSON.stringify("${0}", null, 2)

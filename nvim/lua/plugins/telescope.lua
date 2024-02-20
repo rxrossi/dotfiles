@@ -9,14 +9,14 @@ function setup_alt()
   local alternates_picker = function(alternates, opts)
     opts = opts or {}
     pickers
-      .new(opts, {
-        prompt_title = "alternates",
-        finder = finders.new_table({
-          results = alternates,
-        }),
-        sorter = conf.generic_sorter(opts),
-      })
-      :find()
+        .new(opts, {
+          prompt_title = "alternates",
+          finder = finders.new_table({
+            results = alternates,
+          }),
+          sorter = conf.generic_sorter(opts),
+        })
+        :find()
   end
 
   function alt(path)
@@ -59,36 +59,85 @@ end
 
 return {
   "nvim-telescope/telescope.nvim",
-  tag = "0.1.4",
-  -- or                              , branch = '0.1.x',
   dependencies = { "nvim-lua/plenary.nvim" },
-  opts = {
-    pickers = {
-      buffers = {
-        ignore_current_buffer = true,
-        sort_mru = true,
-      },
-    },
-  },
+  opts = {},
   config = function()
+    local opt = require("telescope.themes").get_ivy({
+      defaults = {
+        layout_strategy = "vertical",
+        layout_config = { height = 0.99 },
+      },
+      layout_strategy = "vertical",
+      layout_config = { height = 0.99 },
+      pickers = {
+        buffers = {
+          ignore_current_buffer = true,
+          sort_mru = true,
+        },
+      },
+    })
+
+    require("telescope").setup(opt)
+    local builtin = require("telescope.builtin")
+
     -- See `:help telescope.builtin`
-    vim.keymap.set("n", "<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find recently opened files" })
-    vim.keymap.set("n", "<leader><space>", require("telescope.builtin").buffers, { desc = "[ ] Find existing buffers" })
+    vim.keymap.set("n", "<leader>?", function()
+      builtin.oldfiles(opt)
+    end, { desc = "[?] Find recently opened files" })
+
+    vim.keymap.set("n", "<leader><space>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+
     vim.keymap.set("n", "<leader>/", function()
       -- You can pass additional configuration to telescope to change theme, layout, etc.
-      require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+      builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
         winblend = 10,
         previewer = false,
       }))
     end, { desc = "[/] Fuzzily search in current buffer" })
 
-    vim.keymap.set("n", "<leader>gf", require("telescope.builtin").git_files, { desc = "Search [G]it [F]iles" })
-    vim.keymap.set("n", "<leader>sf", require("telescope.builtin").find_files, { desc = "[S]earch [F]iles" })
-    vim.keymap.set("n", "<leader>sh", require("telescope.builtin").help_tags, { desc = "[S]earch [H]elp" })
-    vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string, { desc = "[S]earch current [W]ord" })
-    vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc = "[S]earch by [G]rep" })
-    vim.keymap.set("n", "<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" })
-    vim.keymap.set("n", "<leader>sr", require("telescope.builtin").resume, { desc = "[S]earch [R]esume" })
+    vim.keymap.set("n", "<leader>gf", function()
+      builtin.git_files(opt)
+    end, { desc = "Search [G]it [F]iles" })
+
+    vim.keymap.set("n", "<leader>sf", function()
+      builtin.find_files(opt)
+    end, { desc = "[S]earch [F]iles" })
+
+    vim.keymap.set("n", "<leader>sh", function()
+      builtin.help_tags(opt)
+    end, { desc = "[S]earch [H]elp" })
+
+    vim.keymap.set("n", "<leader>sw", function()
+      builtin.grep_string(opt)
+    end, { desc = "[S]earch current [W]ord" })
+
+    vim.keymap.set("n", "<leader>sg", function()
+      builtin.live_grep(opt)
+    end, { desc = "[S]earch by [G]rep" })
+
+    vim.keymap.set("n", "<leader>sd", function()
+      builtin.diagnostics(opt)
+    end, { desc = "[S]earch [D]iagnostics" })
+
+    vim.keymap.set("n", "<leader>sr", function()
+      builtin.resume(opt)
+    end, { desc = "[S]earch [R]esume" })
+
+    vim.keymap.set("n", "<leader>ds", function()
+      builtin.lsp_document_symbols(opt)
+    end, { desc = "Document Symbols" })
+
+    vim.keymap.set("n", "<leader>ws", function()
+      builtin.lsp_dynamic_workspace_symbols(opt)
+    end, { desc = "Workspace Symbols" })
+
+    -- vim.keymap.set("n", "gr", function()
+    --   builtin.lsp_references(opt)
+    -- end, { desc = "Find references" })
+
+    vim.keymap.set("n", "gy", function()
+      builtin.lsp_implementations(opt)
+    end, { desc = "Go to Implementation" })
 
     setup_alt()
   end,

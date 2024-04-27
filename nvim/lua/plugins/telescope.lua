@@ -9,14 +9,14 @@ function setup_alt()
   local alternates_picker = function(alternates, opts)
     opts = opts or {}
     pickers
-        .new(opts, {
-          prompt_title = "alternates",
-          finder = finders.new_table({
-            results = alternates,
-          }),
-          sorter = conf.generic_sorter(opts),
-        })
-        :find()
+      .new(opts, {
+        prompt_title = "alternates",
+        finder = finders.new_table({
+          results = alternates,
+        }),
+        sorter = conf.generic_sorter(opts),
+      })
+      :find()
   end
 
   function alt(path)
@@ -59,11 +59,20 @@ end
 
 return {
   "nvim-telescope/telescope.nvim",
-  dependencies = { "nvim-lua/plenary.nvim" },
-  opts = {},
+  dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-ui-select.nvim" },
   config = function()
     local opt = require("telescope.themes").get_ivy({
       defaults = {
+        vimgrep_arguments = {
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--multiline",
+        },
         layout_strategy = "vertical",
         layout_config = { height = 0.99 },
       },
@@ -140,5 +149,6 @@ return {
     end, { desc = "Go to Implementation" })
 
     setup_alt()
+    require("telescope").load_extension("ui-select")
   end,
 }

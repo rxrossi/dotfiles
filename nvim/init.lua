@@ -66,15 +66,16 @@ vim.keymap.set("i", "<c-k>", vim.lsp.buf.signature_help, { desc = "Show signatur
 
 vim.cmd([[ set linebreak ]])
 
-vim.api.nvim_create_augroup("foldmethod", {})
-vim.api.nvim_create_autocmd("BufEnter", {
-  callback = function()
-    vim.cmd([[
-      set foldmethod=indent
-    ]])
-  end,
-  group = "foldmethod",
-})
+vim.cmd([[
+  set foldmethod=indent
+  set foldlevelstart=999
+  set foldlevel=999
+  autocmd FileType git setlocal foldmethod=syntax
+  autocmd FileType typescript setlocal foldmethod=indent
+  autocmd FileType javascript setlocal foldmethod=indent
+  autocmd FileType go setlocal foldmethod=syntax
+  autocmd FileType markdown setlocal conceallevel=2
+]])
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -101,6 +102,13 @@ vim.cmd([[
 augroup HighlightTODO
 autocmd!
 autocmd WinEnter,VimEnter * :silent! call matchadd('IncSearch', 'TODO', -1)
+augroup END
+]])
+
+vim.cmd([[
+augroup HighlightNOTE
+autocmd!
+autocmd WinEnter,VimEnter * :silent! call matchadd('IncSearch', 'NOTE', -1)
 augroup END
 ]])
 
@@ -186,3 +194,5 @@ end
 vim.api.nvim_create_user_command("SqlMagic", function()
   format_dat_sql()
 end, {})
+
+

@@ -64,6 +64,27 @@ vim.o.termguicolors = true
 vim.keymap.set("n", "<space>f", vim.lsp.buf.format, { desc = "Format the file" })
 vim.keymap.set("i", "<c-k>", vim.lsp.buf.signature_help, { desc = "Show signature help" })
 
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "go",
+  callback = function()
+    vim.keymap.set(
+      "n",
+      "<space>tt",
+      function()
+        vim.cmd("wa | lcd %:p:h | compiler go | set makeprg=go\\ test | silent Make %:p:h")
+        vim.cmd("Gcd")
+      end,
+      { desc = "test the current file" }
+    )
+  end,
+})
+
+-- ":lcd %:p:h | compiler go | set makeprg=go\\ test | silent make %:p:h | Gcd | copen<cr>",
+
+vim.keymap.set("n", "<space>cc", ":cd %:p:h<CR>", { desc = "cd into current's file dir" })
+vim.keymap.set("n", "<space>o", ":Oil<CR>", { desc = "Open Oil<>" })
+
 vim.cmd([[ set linebreak ]])
 
 vim.cmd([[
@@ -73,7 +94,8 @@ vim.cmd([[
   autocmd FileType git setlocal foldmethod=syntax
   autocmd FileType typescript setlocal foldmethod=indent
   autocmd FileType javascript setlocal foldmethod=indent
-  autocmd FileType go setlocal foldmethod=syntax
+  autocmd FileType go setlocal foldmethod=indent | setlocal makeprg=go\ test
+  autocmd FileType go compiler go
   autocmd FileType markdown setlocal conceallevel=2
 ]])
 
@@ -101,7 +123,7 @@ vim.diagnostic.config({
 vim.cmd([[
 augroup HighlightTODO
 autocmd!
-autocmd WinEnter,VimEnter * :silent! call matchadd('IncSearch', 'TODO', -1)
+autocmd WinEnter,VimEnter * :silent! call matchadd('@comment.todo', 'TODO', -1)
 augroup END
 ]])
 
@@ -109,6 +131,13 @@ vim.cmd([[
 augroup HighlightNOTE
 autocmd!
 autocmd WinEnter,VimEnter * :silent! call matchadd('IncSearch', 'NOTE', -1)
+augroup END
+]])
+
+vim.cmd([[
+augroup HighlightQUESTION
+autocmd!
+autocmd WinEnter,VimEnter * :silent! call matchadd('@comment.warning', 'Q:', -1)
 augroup END
 ]])
 
@@ -194,5 +223,3 @@ end
 vim.api.nvim_create_user_command("SqlMagic", function()
   format_dat_sql()
 end, {})
-
-

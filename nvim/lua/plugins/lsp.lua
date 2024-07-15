@@ -117,6 +117,25 @@ return {
 
           require("rust-tools").setup(vim.tbl_deep_extend("force", rust_tools_opts or {}, { server = opts }))
         end,
+        ["gopls"] = function(_)
+          local opts = {
+            on_attach = function(client, bufnr)
+              shared_on_attach(client, bufnr)
+            end,
+            settings = {
+              gopls = {
+                buildFlags = { "-tags=unit" },
+                analyses = {
+                  unusedparams = true,
+                },
+                staticcheck = true,
+                gofumpt = true,
+              },
+            },
+          }
+
+          require("lspconfig").gopls.setup(opts)
+        end,
       })
     end,
   },

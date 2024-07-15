@@ -15,6 +15,7 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
+      "fredrikaverpil/neotest-golang",
       "antoinemadec/FixCursorHold.nvim",
     },
     opts = {
@@ -23,18 +24,14 @@ return {
       -- or a table of adapter names, mapped to adapter configs.
       -- The adapter will then be automatically loaded with the config.
       adapters = {},
-      -- Example for loading neotest-go with a custom config
-      -- adapters = {
-      --   ["neotest-go"] = {
-      --     args = { "-tags=integration" },
-      --   },
-      -- },
       status = { virtual_text = true },
       output = { open_on_run = true },
+      -- consumers = {
+      --   "quickfix"
+      -- },
       quickfix = {
-        open = function()
-          vim.cmd("copen")
-        end,
+        open = true,
+        enabled = true,
       },
     },
     config = function(_, opts)
@@ -63,6 +60,16 @@ return {
           require("neotest-rust")({
             args = { "--no-capture" },
           }),
+          require("neotest-golang")({
+            dap_go_enabled = true,
+            go_test_args = {
+              "-v",
+              "-race",
+              "-count=1",
+              '-tags="unit"',
+              "-coverprofile=" .. vim.fn.getcwd() .. "/coverage.out",
+            },
+          }), -- Apply configuration
         }
         for name, config in pairs(opts.adapters or {}) do
           if type(name) == "number" then

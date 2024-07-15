@@ -27,6 +27,16 @@ function ReviewBranch(base_branch)
   end, {})
 end
 
+function ReviewCommit(c)
+  vim.cmd("Git difftool " .. c .. "~1 " .. c .. " --name-status")
+  vim.cmd("Gitsigns change_base " .. c .. "~1 true")
+
+  vim.keymap.set("n", "<space><space>", function()
+    vim.cmd(":Gitsigns diffthis")
+  end, {})
+end
+
 vim.cmd([[command! -nargs=* -range -complete=custom,ReviewBranch_complete ReviewBranch lua ReviewBranch(<f-args>)]])
+vim.cmd([[command! -nargs=* -range -complete=custom,ReviewBranch_complete ReviewCommit lua ReviewCommit(<f-args>)]])
 
 return {}

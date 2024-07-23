@@ -72,7 +72,7 @@ vim.api.nvim_create_autocmd("FileType", {
       "n",
       "<space>tt",
       function()
-        vim.cmd("wa | lcd %:p:h | compiler go | set makeprg=go\\ test | silent Make %:p:h")
+        vim.cmd("wa | lcd %:p:h | compiler go | set makeprg=go\\ test\\ \\-tags=unit | silent Make %:p:h")
         vim.cmd("Gcd")
       end,
       { desc = "test the current file" }
@@ -123,21 +123,21 @@ vim.diagnostic.config({
 vim.cmd([[
 augroup HighlightTODO
 autocmd!
-autocmd WinEnter,VimEnter * :silent! call matchadd('@comment.todo', 'TODO', -1)
+autocmd WinEnter,VimEnter * :silent! call matchadd('@comment.todo', 'TODO:', -1)
 augroup END
 ]])
 
 vim.cmd([[
 augroup HighlightNOTE
 autocmd!
-autocmd WinEnter,VimEnter * :silent! call matchadd('IncSearch', 'NOTE', -1)
+autocmd WinEnter,VimEnter * :silent! call matchadd('IncSearch', 'NOTE:', -1)
 augroup END
 ]])
 
 vim.cmd([[
 augroup HighlightQUESTION
 autocmd!
-autocmd WinEnter,VimEnter * :silent! call matchadd('@comment.warning', 'Q:', -1)
+autocmd WinEnter,VimEnter * :silent! call matchadd('@comment.warning', 'QUESTION:', -1)
 augroup END
 ]])
 

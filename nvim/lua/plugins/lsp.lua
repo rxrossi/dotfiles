@@ -124,7 +124,7 @@ return {
             end,
             settings = {
               gopls = {
-                buildFlags = { "-tags=unit" },
+                buildFlags = { "-tags=unit,integration,contract" },
                 analyses = {
                   unusedparams = true,
                 },

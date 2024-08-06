@@ -12,10 +12,14 @@ endfunction
 ]])
 
 function ReviewBranch(base_branch)
-  local merge_base = vim.fn.system("git merge-base " .. (base_branch or "main") .. " HEAD"):gsub("[\n\r]", " ")
+  -- local merge_base = vim.fn.system("git merge-base " .. (base_branch or "main") .. " HEAD"):gsub("[\n\r]", " ")
+  -- print(merge_base)
+
+  local merge_base = base_branch
 
   vim.cmd("Git difftool --name-status " .. merge_base)
-  vim.cmd("Gitsigns change_base " .. merge_base .. "true")
+
+  vim.cmd("Gitsigns change_base " .. merge_base .. " true")
 
   -- vim.cmd("Neotree git_base=" .. merge_base)
   -- vim.keymap.set("n", "<space>N", function()

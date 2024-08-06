@@ -64,19 +64,26 @@ vim.o.termguicolors = true
 vim.keymap.set("n", "<space>f", vim.lsp.buf.format, { desc = "Format the file" })
 vim.keymap.set("i", "<c-k>", vim.lsp.buf.signature_help, { desc = "Show signature help" })
 
+function runGo(cmd)
+  vim.cmd("wa | lcd %:p:h | compiler go | set makeprg=go\\ " .. cmd .. "\\ \\-tags=unit  | silent Make %:p:h")
+  vim.cmd("Gcd")
+end
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "go",
   callback = function()
-    vim.keymap.set(
-      "n",
-      "<space>tt",
-      function()
-        vim.cmd("wa | lcd %:p:h | compiler go | set makeprg=go\\ test\\ \\-tags=unit | silent Make %:p:h")
-        vim.cmd("Gcd")
-      end,
-      { desc = "test the current file" }
-    )
+    vim.keymap.set("n", "<space>tt", function()
+      runGo("test")
+    end, { desc = "test the current file" })
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "go",
+  callback = function()
+    vim.keymap.set("n", "<space>tb", function()
+      runGo("build")
+    end, { desc = "test the current file" })
   end,
 })
 
@@ -130,14 +137,14 @@ augroup END
 vim.cmd([[
 augroup HighlightNOTE
 autocmd!
-autocmd WinEnter,VimEnter * :silent! call matchadd('IncSearch', 'NOTE:', -1)
+autocmd WinEnter,VimEnter * :silent! call matchadd('@comment.todo', 'NOTE:', -1)
 augroup END
 ]])
 
 vim.cmd([[
 augroup HighlightQUESTION
 autocmd!
-autocmd WinEnter,VimEnter * :silent! call matchadd('@comment.warning', 'QUESTION:', -1)
+autocmd WinEnter,VimEnter * :silent! call matchadd('@comment.todo', 'QUESTION:', -1)
 augroup END
 ]])
 

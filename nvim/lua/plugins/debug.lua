@@ -2,7 +2,33 @@ return {
   {
     "mfussenegger/nvim-dap",
     dependencies = {
-      "leoluz/nvim-dap-go",
+      {
+        "leoluz/nvim-dap-go",
+        ft = "go",
+        dependences = "mfussenegger/nvim-dap",
+        opts = {
+          dap_configurations = {
+            {
+              type = "go",
+              name = "Attach remote",
+              mode = "remote",
+              request = "attach",
+            },
+          },
+        },
+        config = function(_, opts)
+          require("dap-go").setup(opts)
+
+          vim.keymap.set("n", "<leader>dt", function()
+            require("dap-go").debug_test()
+          end, { desc = "Debug Test" })
+
+          vim.keymap.set("n", "<leader>dl", function()
+            require("dap-go").debug_last()
+          end, { desc = "Debug last" })
+          -- vim.keymap.set("n", "<leader>dl" function() require('dap-go').debug_last() end, { desc = "Debug last"})
+        end,
+      },
       "rcarriga/nvim-dap-ui",
       "theHamsta/nvim-dap-virtual-text",
       "nvim-neotest/nvim-nio",
@@ -36,6 +62,9 @@ return {
       vim.keymap.set("n", "<leader>dv", dap.step_over, { desc = "Debug: Step Over" })
       vim.keymap.set("n", "<leader>du", dap.step_out, { desc = "Debug: Step Out" })
       vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
+      vim.keymap.set("n", "<Leader>dr", function()
+        require("dap").repl.open()
+      end, { desc = "Debug: open repl" })
       vim.keymap.set("n", "<leader>dh", function()
         require("dap.ui.widgets").hover()
       end, { desc = "Debug: Hover" })

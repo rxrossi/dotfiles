@@ -15,7 +15,7 @@ function ReviewBranch(base_branch)
   -- local merge_base = vim.fn.system("git merge-base " .. (base_branch or "main") .. " HEAD"):gsub("[\n\r]", " ")
   -- print(merge_base)
 
-  local merge_base = base_branch
+  local merge_base = base_branch or "main"
 
   vim.cmd("Git difftool --name-status " .. merge_base)
 

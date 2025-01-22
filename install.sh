@@ -1,6 +1,7 @@
 # Make dirs
 mkdir -p  ~/.vim/undodir
 mkdir -p  ~/.config/karabiner
+mkdir -p  ~/.config/alacritty
 
 # Ln
 ## Karabiner
@@ -13,7 +14,8 @@ ln -s -f ~/dotfiles/tmux.conf ~/.tmux.conf
 ln -s -f ~/dotfiles/nvim/ ~/.config/nvim
 
 ## Alacritty
-ln -s -f ~/dotfiles/alacritty.yml ~/.config/alacritty.yml
+ln -s -f ~/dotfiles/alacritty.toml ~/.config/alacritty.toml
+ln -s -f ~/dotfiles/alacritty/ ~/.config/alacritty/
 
-## fish
-ln -s -f ~/dotfiles/fish/ ~/.config/fish
+## zshrc
+ln -s -f ~/dotfiles/zshrc.zshrc ~/.zshrc

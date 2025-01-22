@@ -22,6 +22,7 @@ return {
   },
   {
     "simrat39/rust-tools.nvim",
+    event = "VeryLazy",
     opts = function()
       local ok, mason_registry = pcall(require, "mason-registry")
       local adapter ---@type any
@@ -45,16 +46,7 @@ return {
           adapter = adapter,
         },
         tools = {
-          on_initialized = function()
-            print("init")
-            vim.cmd([[
-                  augroup RustLSP
-                    autocmd CursorHold                      *.rs silent! lua vim.lsp.buf.document_highlight()
-                    autocmd CursorMoved,InsertEnter         *.rs silent! lua vim.lsp.buf.clear_references()
-                    autocmd BufEnter,CursorHold,InsertLeave *.rs silent! lua vim.lsp.codelens.refresh()
-                  augroup END
-                ]])
-          end,
+          on_initialized = function() end,
         },
       }
     end,
@@ -62,30 +54,19 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
+    event = "VeryLazy",
     opts = {},
     config = function()
-      local shared_on_attach = function(client, bufnr)
-        if client.server_capabilities.documentHighlightProvider then
-          vim.api.nvim_exec2(
-            [[
-		augroup lsp_document_highlight
-		autocmd!
-		autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-		autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-		augroup END
-		]],
-            {
-              output = false,
-            }
-          )
-        end
-      end
+      local shared_on_attach = function(client, bufnr) end
 
       require("mason-lspconfig").setup_handlers({
         -- The first entry (without a key) will be the default handler
         -- and will be called for each installed server that doesn't have
         -- a dedicated handler.
         function(server_name) -- default handler (optional)
+          if server_name == "tsserver" then
+            server_name = "ts_ls"
+          end
           require("lspconfig")[server_name].setup({
             on_attach = shared_on_attach,
           })
@@ -202,8 +183,8 @@ return {
           end
 
           vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts_with_desc("Go to declaration"))
-          vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts_with_desc("Go to definition"))
-          vim.keymap.set("n", "gr", vim.lsp.buf.references, opts_with_desc("Find references"))
+          -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts_with_desc("Go to definition")) use ctrl-] instead, because you can use ctrl-t to go back
+          vim.keymap.set("n", "gr", vim.lsp.buf.references, opts_with_desc("Find references")) 
           vim.keymap.set("n", "gY", vim.lsp.buf.type_definition, opts_with_desc("Go to type definition"))
           vim.keymap.set("n", "K", vim.lsp.buf.hover, opts_with_desc("Hover"))
           vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, opts_with_desc("Go to implementation"))
@@ -223,7 +204,6 @@ return {
           vim.keymap.set("n", "<leader>wl", function()
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
           end, opts_with_desc("List LSP workspaces folders"))
-          vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts_with_desc("Go to type definition"))
           vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts_with_desc("Rename"))
           vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts_with_desc("Code action"))
           vim.keymap.set("n", "<space>f", function()

@@ -1,5 +1,9 @@
+-- set efm^=%.%#\ expected\ %.%#\ at\ %f:%l\ %.%#,%A%f:%l:\ | lcd %:p:h | make %:p:h | copen
+-- set efm^=%.%#\\ expected\\ %.%#\\ at\\ %f:%l\\ %.%#,%A%f:%l:\\ | lcd %:p:h | make %:p:h | copen
+
 function runGo(cmd)
-  vim.cmd("wa | lcd %:p:h | compiler go | set makeprg=go\\ " .. cmd .. "\\ \\-tags=unit  | silent Make %:p:h")
+  vim.cmd(
+    "wa | lcd %:p:h | compiler go | set efm^=%.%#\\ expected\\ %.%#\\ at\\ %f:%l\\ %.%#,%A%f:%l:\\ | set makeprg=go\\ " .. cmd .. "\\ \\-tags=unit  | silent Make %:p:h")
   vim.cmd("Gcd")
 end
 

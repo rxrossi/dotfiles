@@ -62,6 +62,7 @@ return {
           }),
           require("neotest-golang")({
             dap_go_enabled = true,
+            testify_enabled = true,
             go_test_args = {
               "-v",
               "-race",

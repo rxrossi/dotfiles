@@ -21,20 +21,27 @@ local plugins = {
     end,
     opts = {},
   },
+  -- {
+  --   "catppuccin/nvim",
+  --   name = "catppuccin",
+  --   priority = 1000,
+  --   init = function()
+  --     vim.cmd([[colorscheme catppuccin]])
+  --   end,
+  -- },
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    "EdenEast/nightfox.nvim",
     priority = 1000,
     init = function()
-      vim.cmd([[colorscheme catppuccin]])
+      vim.cmd([[colorscheme nightfox]])
     end,
   },
   "tpope/vim-unimpaired",
-  "tpope/vim-sleuth",
   { "numToStr/Comment.nvim", opts = {} },
   "jeetsukumaran/vim-indentwise",
   "michaeljsmith/vim-indent-object",
   "nvim-treesitter/nvim-treesitter-context",
+  "LunarVim/bigfile.nvim",
   { import = "plugins" },
 }
 require("lazy").setup(plugins, {})
@@ -61,31 +68,36 @@ vim.o.completeopt = "menuone,noselect"
 
 vim.o.termguicolors = true
 
+vim.opt.laststatus = 3
+
 vim.keymap.set("n", "<space>f", vim.lsp.buf.format, { desc = "Format the file" })
 vim.keymap.set("i", "<c-k>", vim.lsp.buf.signature_help, { desc = "Show signature help" })
+vim.keymap.set("n", "<space>h", vim.lsp.buf.document_highlight, { desc = "highlight symbol" })
+vim.keymap.set("n", "<space>l", vim.lsp.buf.clear_references, { desc = "clear highlight symbol" })
 
-function runGo(cmd)
-  vim.cmd("wa | lcd %:p:h | compiler go | set makeprg=go\\ " .. cmd .. "\\ \\-tags=unit  | silent Make %:p:h")
-  vim.cmd("Gcd")
-end
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "go",
-  callback = function()
-    vim.keymap.set("n", "<space>tt", function()
-      runGo("test")
-    end, { desc = "test the current file" })
-  end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "go",
-  callback = function()
-    vim.keymap.set("n", "<space>tb", function()
-      runGo("build")
-    end, { desc = "test the current file" })
-  end,
-})
+-- -- set efm=%A%f:%l:\ ,%f:%l:\ %m| make | copen
+-- function runGo(cmd)
+--   vim.cmd("wa | lcd %:p:h | compiler go | set efm=%A%f:%l:\\ ,%f:%l:\\ %m | set makeprg=go\\ " .. cmd .. "\\ \\-tags=unit  | silent Make %:p:h")
+--   vim.cmd("Gcd")
+-- end
+--
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "go",
+--   callback = function()
+--     vim.keymap.set("n", "<space>tt", function()
+--       runGo("test")
+--     end, { desc = "test the current file" })
+--   end,
+-- })
+--
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "go",
+--   callback = function()
+--     vim.keymap.set("n", "<space>tb", function()
+--       runGo("build")
+--     end, { desc = "test the current file" })
+--   end,
+-- })
 
 -- ":lcd %:p:h | compiler go | set makeprg=go\\ test | silent make %:p:h | Gcd | copen<cr>",
 
@@ -122,6 +134,14 @@ vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous dia
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+
+vim.cmd([[
+set autoindent       " Enable automatic indentation
+set expandtab        " Use spaces instead of tabs
+set tabstop=2        " Number of spaces a <Tab> counts for while editing
+set shiftwidth=2     " Number of spaces to use for each step of (auto)indent
+set softtabstop=2    " Number of spaces a <Tab> counts for while performing editing operations
+]])
 
 vim.diagnostic.config({
   virtual_text = false,

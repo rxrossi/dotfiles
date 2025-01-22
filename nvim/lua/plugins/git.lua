@@ -11,6 +11,9 @@ return {
         changedelete = { text = "~" },
         untracked = { text = "┆" },
       },
+      diff_opts = {
+        vertical = true,
+      },
       signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
       numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
       linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
@@ -54,7 +57,7 @@ return {
             return "]c"
           end
           vim.schedule(function()
-            gs.next_hunk({wrap = false, foldopen = true, preview = true})
+            gs.next_hunk({ wrap = false, foldopen = true, preview = true })
           end)
           return "<Ignore>"
         end, { expr = true })
@@ -96,4 +99,5 @@ return {
       end,
     },
   },
+  "tpope/vim-rhubarb",
 }

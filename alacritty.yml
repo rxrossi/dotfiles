@@ -1,7 +1,7 @@
 font:
   normal:
     family: JetbrainsMono Nerd Font
-  size: 16.0
+  size: 12.0
 
 key_bindings:
   - { chars: "\x00", key: Space, mods: Control }
@@ -52,7 +52,8 @@ env:
 
 import:
 # uncomment the flavour you want below:
-~/.config/alacritty/catppuccin-mocha.toml
-#  - ~/.config/alacritty/catppuccin/catppuccin-macchiato.yml
+# ~/.config/alacritty/catppuccin-mocha.toml
+# - ~/.config/alacritty/nightfox.toml
+ - ~/.config/alacritty/catppuccin/catppuccin-macchiato.yml
 #  - ~/.config/alacritty/catppuccin/catppuccin-frappe.yml
 #  - ~/.config/alacritty/catppuccin/catppuccin-latte.yml

@@ -9,14 +9,14 @@ function setup_alt()
   local alternates_picker = function(alternates, opts)
     opts = opts or {}
     pickers
-      .new(opts, {
-        prompt_title = "alternates",
-        finder = finders.new_table({
-          results = alternates,
-        }),
-        sorter = conf.generic_sorter(opts),
-      })
-      :find()
+        .new(opts, {
+          prompt_title = "alternates",
+          finder = finders.new_table({
+            results = alternates,
+          }),
+          sorter = conf.generic_sorter(opts),
+        })
+        :find()
   end
 
   function alt(path)
@@ -59,8 +59,10 @@ end
 
 return {
   "nvim-telescope/telescope.nvim",
-  dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-ui-select.nvim" },
+  dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-ui-select.nvim", "nvim-telescope/telescope-live-grep-args.nvim" },
   config = function()
+    local lga_actions = require("telescope-live-grep-args.actions")
+
     local opt = require("telescope.themes").get_ivy({
       defaults = {
         vimgrep_arguments = {
@@ -85,6 +87,24 @@ return {
           sort_mru = true,
         },
       },
+      extensions = {
+        live_grep_args = {
+          auto_quoting = true, -- enable/disable auto-quoting
+          -- define mappings, e.g.
+          mappings = {         -- extend mappings
+            i = {
+              ["<C-k>"] = lga_actions.quote_prompt(),
+              ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+              -- freeze the current list and start a fuzzy search in the frozen list
+              ["<C-space>"] = lga_actions.to_fuzzy_refine,
+            },
+          },
+          -- ... also accepts theme settings, for example:
+          -- theme = "dropdown", -- use dropdown theme
+          -- theme = { }, -- use own theme spec
+          -- layout_config = { mirror=true }, -- mirror preview pane
+        }
+      }
     })
 
     require("telescope").setup(opt)
@@ -122,7 +142,7 @@ return {
     end, { desc = "[S]earch current [W]ord" })
 
     vim.keymap.set("n", "<leader>sg", function()
-      builtin.live_grep(opt)
+      require("telescope").extensions.live_grep_args.live_grep_args()
     end, { desc = "[S]earch by [G]rep" })
 
     vim.keymap.set("n", "<leader>sd", function()
@@ -151,5 +171,6 @@ return {
 
     setup_alt()
     require("telescope").load_extension("ui-select")
+    require("telescope").load_extension("live_grep_args")
   end,
 }

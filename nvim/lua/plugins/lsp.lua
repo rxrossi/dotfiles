@@ -1,4 +1,9 @@
 return {
+  {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
+  },
   { "folke/neodev.nvim", opts = {} },
   { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
 
@@ -184,7 +189,7 @@ return {
 
           vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts_with_desc("Go to declaration"))
           -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts_with_desc("Go to definition")) use ctrl-] instead, because you can use ctrl-t to go back
-          vim.keymap.set("n", "gr", vim.lsp.buf.references, opts_with_desc("Find references")) 
+          vim.keymap.set("n", "gr", vim.lsp.buf.references, opts_with_desc("Find references"))
           vim.keymap.set("n", "gY", vim.lsp.buf.type_definition, opts_with_desc("Go to type definition"))
           vim.keymap.set("n", "K", vim.lsp.buf.hover, opts_with_desc("Hover"))
           vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, opts_with_desc("Go to implementation"))

@@ -1,221 +1,125 @@
 return {
   {
-    "pmizio/typescript-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = {},
-  },
-  { "folke/neodev.nvim", opts = {} },
-  { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
-
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "ron", "rust", "toml" })
-      end
-    end,
-  },
-
-  {
-    "williamboman/mason.nvim",
-    optional = true,
-    opts = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "codelldb" })
-      end
-    end,
-  },
-  {
-    "simrat39/rust-tools.nvim",
-    event = "VeryLazy",
-    opts = function()
-      local ok, mason_registry = pcall(require, "mason-registry")
-      local adapter ---@type any
-      if ok then
-        -- rust tools configuration for debugging support
-        local codelldb = mason_registry.get_package("codelldb")
-        local extension_path = codelldb:get_install_path() .. "/extension/"
-        local codelldb_path = extension_path .. "adapter/codelldb"
-        local liblldb_path = ""
-        if vim.loop.os_uname().sysname:find("Windows") then
-          liblldb_path = extension_path .. "lldb\\bin\\liblldb.dll"
-        elseif vim.fn.has("mac") == 1 then
-          liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
-        else
-          liblldb_path = extension_path .. "lldb/lib/liblldb.so"
-        end
-        adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
-      end
-      return {
-        dap = {
-          adapter = adapter,
-        },
-        tools = {
-          on_initialized = function() end,
-        },
-      }
-    end,
-    config = function() end,
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    event = "VeryLazy",
-    opts = {},
+    "neovim/nvim-lspconfig",
     config = function()
-      local shared_on_attach = function(client, bufnr) end
+      require('lspconfig').lua_ls.setup {}
 
-      require("mason-lspconfig").setup_handlers({
-        -- The first entry (without a key) will be the default handler
-        -- and will be called for each installed server that doesn't have
-        -- a dedicated handler.
-        function(server_name) -- default handler (optional)
-          if server_name == "tsserver" then
-            server_name = "ts_ls"
-          end
-          require("lspconfig")[server_name].setup({
-            on_attach = shared_on_attach,
-          })
-        end,
-        -- Next, you can provide a dedicated handler for specific servers.
-        -- For example, a handler override for the `rust_analyzer`:
-        ["rust_analyzer"] = function(_)
-          -- local rust_tools_opts = require("lazyvim.util").opts("rust-tools.nvim")
-          local rust_tools_opts = require("lazy.core.config").plugins["rust-tools.nvim"]
+      vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format() end)
 
-          if type(rust_tools_opts.opts) == "table" then
-            rust_tools_opts = rust_tools_opts.opts
-          elseif type(rust_tools_opts.opts) == "function" then
-            rust_tools_opts = rust_tools_opts.opts()
-          end
+      vim.lsp.enable('bashls')
 
-          local opts = {
-            on_attach = function(client, bufnr)
-              shared_on_attach(client, bufnr)
-              local rt = require("rust-tools")
+      vim.lsp.enable('eslint')
 
-              local opts_with_desc = function(desc)
-                return { buffer = bufnr, desc = desc }
-              end
+      vim.lsp.enable('css_variables')
 
-              vim.keymap.set("n", "<Leader>cr", rt.hover_actions.hover_actions, opts_with_desc("Rust hover actions"))
-            end,
-          }
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-          require("rust-tools").setup(vim.tbl_deep_extend("force", rust_tools_opts or {}, { server = opts }))
-        end,
-        ["gopls"] = function(_)
-          local opts = {
-            on_attach = function(client, bufnr)
-              shared_on_attach(client, bufnr)
-            end,
-            settings = {
-              gopls = {
-                buildFlags = { "-tags=unit,integration,contract" },
-                analyses = {
-                  unusedparams = true,
-                },
-                staticcheck = true,
-                gofumpt = true,
+      vim.lsp.config('cssls', {
+        capabilities = capabilities,
+      })
+
+      vim.lsp.enable('cssls')
+
+      vim.lsp.enable('cssmodules_ls')
+
+      vim.lsp.enable('emmet_ls')
+
+      vim.lsp.config('html', {
+        capabilities = capabilities,
+      })
+
+      vim.lsp.enable('html')
+
+      vim.lsp.config('jsonls', {
+        capabilities = capabilities,
+      })
+
+      vim.lsp.enable('jsonls')
+
+      vim.lsp.enable('terraformls')
+
+      vim.lsp.config('dockerls', {
+        settings = {
+          docker = {
+            languageserver = {
+              formatter = {
+                ignoreMultilineInstructions = true,
               },
             },
           }
-
-          require("lspconfig").gopls.setup(opts)
-        end,
-        ["emmet_language_server"] = function(_)
-          require("lspconfig").emmet_language_server.setup({
-            filetypes = {
-              "css",
-              "eruby",
-              "html",
-              "javascript",
-              "javascriptreact",
-              "less",
-              "sass",
-              "scss",
-              "pug",
-              "templ",
-              "typescriptreact",
-            },
-            -- Read more about this options in the [vscode docs](https://code.visualstudio.com/docs/editor/emmet#_emmet-configuration).
-            -- **Note:** only the options listed in the table are supported.
-            init_options = {
-              ---@type table<string, string>
-              includeLanguages = {},
-              --- @type string[]
-              excludeLanguages = {},
-              --- @type string[]
-              extensionsPath = {},
-              --- @type table<string, any> [Emmet Docs](https://docs.emmet.io/customization/preferences/)
-              preferences = {},
-              --- @type boolean Defaults to `true`
-              showAbbreviationSuggestions = true,
-              --- @type "always" | "never" Defaults to `"always"`
-              showExpandedAbbreviation = "always",
-              --- @type boolean Defaults to `false`
-              showSuggestionsAsSnippets = false,
-              --- @type table<string, any> [Emmet Docs](https://docs.emmet.io/customization/syntax-profiles/)
-              syntaxProfiles = {},
-              --- @type table<string, string> [Emmet Docs](https://docs.emmet.io/customization/snippets/#variables)
-              variables = {},
-            },
-          })
-        end,
+        }
       })
+      vim.lsp.enable('dockerls')
+
+      vim.lsp.enable('marksman')
+
+      vim.keymap.set('n', 'grt', function() vim.lsp.buf.type_definition() end)
+      vim.keymap.set('n', '<leader>d', function()
+        vim.diagnostic.setqflist({ open = true, title = "LSP Diagnostics" })
+      end)
     end,
   },
   {
-    "neovim/nvim-lspconfig",
-    config = function()
-      vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
-      vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-      vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-      vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
-
-      -- Use LspAttach autocommand to only map the following keys
-      -- after the language server attaches to the current buffer
-      vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-        callback = function(ev)
-          -- Enable completion triggered by <c-x><c-o>
-          vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-
-          -- Buffer local mappings.
-          -- See `:help vim.lsp.*` for documentation on any of the below functions
-          local opts = { buffer = ev.buf }
-          local opts_with_desc = function(desc)
-            return vim.tbl_extend("force", opts, { desc = desc })
-          end
-
-          vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts_with_desc("Go to declaration"))
-          -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts_with_desc("Go to definition")) use ctrl-] instead, because you can use ctrl-t to go back
-          vim.keymap.set("n", "gr", vim.lsp.buf.references, opts_with_desc("Find references"))
-          vim.keymap.set("n", "gY", vim.lsp.buf.type_definition, opts_with_desc("Go to type definition"))
-          vim.keymap.set("n", "K", vim.lsp.buf.hover, opts_with_desc("Hover"))
-          vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, opts_with_desc("Go to implementation"))
-          vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts_with_desc("Signature help"))
-          vim.keymap.set(
-            "n",
-            "<leader>wa",
-            vim.lsp.buf.add_workspace_folder,
-            opts_with_desc("Add folder to LSP workspace")
-          )
-          vim.keymap.set(
-            "n",
-            "<leader>wr",
-            vim.lsp.buf.remove_workspace_folder,
-            opts_with_desc("Remove folder to LSP workspace")
-          )
-          vim.keymap.set("n", "<leader>wl", function()
-            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-          end, opts_with_desc("List LSP workspaces folders"))
-          vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts_with_desc("Rename"))
-          vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts_with_desc("Code action"))
-          vim.keymap.set("n", "<space>f", function()
-            vim.lsp.buf.format({ async = true })
-          end, opts_with_desc("Format file"))
-        end,
-      })
-    end,
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
   },
+  {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    config = function()
+      require("typescript-tools").setup {
+        settings = {
+          -- spawn additional tsserver instance to calculate diagnostics on it
+          separate_diagnostic_server = true,
+          -- "change"|"insert_leave" determine when the client asks the server about diagnostic
+          publish_diagnostic_on = "insert_leave",
+          -- array of strings("fix_all"|"add_missing_imports"|"remove_unused"|
+          -- "remove_unused_imports"|"organize_imports") -- or string "all"
+          -- to include all supported code actions
+          -- specify commands exposed as code_actions
+          expose_as_code_action = "all",
+          -- string|nil - specify a custom path to `tsserver.js` file, if this is nil or file under path
+          -- not exists then standard path resolution strategy is applied
+          tsserver_path = nil,
+          -- specify a list of plugins to load by tsserver, e.g., for support `styled-components`
+          -- (see 💅 `styled-components` support section)
+          tsserver_plugins = {},
+          -- this value is passed to: https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
+          -- memory limit in megabytes or "auto"(basically no limit)
+          tsserver_max_memory = "auto",
+          -- described below
+          tsserver_format_options = {},
+          tsserver_file_preferences = {},
+          -- locale of all tsserver messages, supported locales you can find here:
+          -- https://github.com/microsoft/TypeScript/blob/3c221fc086be52b19801f6e8d82596d04607ede6/src/compiler/utilitiesPublic.ts#L620
+          tsserver_locale = "en",
+          -- mirror of VSCode's `typescript.suggest.completeFunctionCalls`
+          complete_function_calls = false,
+          include_completions_with_insert_text = true,
+          -- CodeLens
+          -- WARNING: Experimental feature also in VSCode, because it might hit performance of server.
+          -- possible values: ("off"|"all"|"implementations_only"|"references_only")
+          code_lens = "off",
+          -- by default code lenses are displayed on all referencable values and for some of you it can
+          -- be too much this option reduce count of them by removing member references from lenses
+          disable_member_code_lens = true,
+          -- JSXCloseTag
+          -- WARNING: it is disabled by default (maybe you configuration or distro already uses nvim-ts-autotag,
+          -- that maybe have a conflict if enable this feature. )
+          jsx_close_tag = {
+            enable = true,
+            filetypes = { "javascriptreact", "typescriptreact" },
+          }
+        },
+      }
+    end,
+  }
 }

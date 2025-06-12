@@ -1,0 +1,67 @@
+return {
+  "olimorris/codecompanion.nvim",
+  opts = {},
+  config = function()
+    require("codecompanion").setup({
+      strategies = {
+        chat = {
+          tools = {
+            ["next_edit_suggestion"] = {
+              opts = {
+                --- the default is to open in a new tab, and reuse existing tabs
+                --- where possible
+                ---@type string|fun(path: string):integer?
+                jump_action = 'tabnew',
+              },
+            }
+          }
+        }
+      }
+    })
+  end,
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "nvim-treesitter/nvim-treesitter",
+    {
+      -- support for image pasting
+      "HakonHarnes/img-clip.nvim",
+      event = "VeryLazy",
+      opts = {
+        -- recommended settings
+        default = {
+          embed_image_as_base64 = false,
+          prompt_for_file_name = false,
+          drag_and_drop = {
+            insert_mode = true,
+          },
+          -- required for Windows users
+          use_absolute_path = true,
+        },
+      },
+    },
+    {
+      "MeanderingProgrammer/render-markdown.nvim",
+      ft = { "markdown", "codecompanion" }
+    },
+    {
+      "OXY2DEV/markview.nvim",
+      lazy = false,
+      opts = {
+        preview = {
+          filetypes = { "markdown", "codecompanion" },
+          ignore_buftypes = {},
+        },
+      },
+    },
+    {
+      "echasnovski/mini.diff",
+      config = function()
+        local diff = require("mini.diff")
+        diff.setup({
+          -- Disabled by default
+          source = diff.gen_source.none(),
+        })
+      end,
+    }
+  },
+}

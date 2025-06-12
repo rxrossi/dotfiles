@@ -102,10 +102,6 @@ source $ZSH/oh-my-zsh.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 # bun completions
 [ -s "/Users/alex/.bun/_bun" ] && source "/Users/alex/.bun/_bun"
 
@@ -124,3 +120,18 @@ if [ -f '/Users/alex/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/
 if [ -f '/Users/alex/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/alex/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 source <(fzf --zsh)
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+
+. "$HOME/.cargo/env"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# pnpm
+export PNPM_HOME="/Users/alexignez/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

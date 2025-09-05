@@ -2,6 +2,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
+      -- help lspconfig-all to get the list of configs
       require('lspconfig').lua_ls.setup {}
 
       vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format() end)
@@ -38,6 +39,10 @@ return {
       vim.lsp.enable('jsonls')
 
       vim.lsp.enable('terraformls')
+
+      vim.lsp.enable('solidity_ls')
+
+      vim.lsp.enable('biome')
 
       vim.lsp.config('dockerls', {
         settings = {

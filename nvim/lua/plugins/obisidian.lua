@@ -1,8 +1,8 @@
 return {
-  "epwalsh/obsidian.nvim",
+  "obsidian-nvim/obsidian.nvim",
   version = "*", -- recommended, use latest release instead of latest commit
   lazy = true,
-  cmd = "ObsidianToday",
+  cmd = "Obsidian",
   ft = "markdown",
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -16,7 +16,15 @@ return {
       },
     },
     ui = {
-      enable = false,            -- set to false to disable all additional syntax features
+      enable = false, -- set to false to disable all additional syntax features
+    },
+    completion = {
+      -- Enables completion using nvim_cmp
+      nvim_cmp = false,
+      -- Enables completion using blink.cmp
+      blink = true,
+      -- Trigger completion at 2 chars.
+      min_chars = 2,
     },
   },
 }

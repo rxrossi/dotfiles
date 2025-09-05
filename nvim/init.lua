@@ -10,6 +10,8 @@ require('highlight')
 
 require('persistent_undo')
 
+require('biome')
+
 vim.cmd([[packadd cfilter]])
 
 vim.cmd([[ set linebreak ]])
@@ -19,6 +21,11 @@ vim.cmd([[
   set foldlevelstart=999
   set foldlevel=999
 ]])
+
+vim.o.shiftwidth = 2
+vim.o.tabstop = 2
+vim.o.softtabstop = 2
+vim.o.expandtab = true
 
 -- gra
 -- grr

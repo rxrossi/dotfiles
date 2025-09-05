@@ -1,7 +1,10 @@
 return {
   "copilotlsp-nvim/copilot-lsp",
+  opts = {
+    move_count_threshold = 3,
+  },
   init = function()
-    vim.g.copilot_nes_debounce = 10
+    vim.g.copilot_nes_debounce = 100
     vim.lsp.enable("copilot_ls")
     vim.keymap.set("n", "<tab>", function()
       -- Try to jump to the start of the suggestion edit.

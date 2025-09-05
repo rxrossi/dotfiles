@@ -7,6 +7,10 @@ return {
   },
   config = function()
     require('telescope').setup {
+      defaults = {
+        layout_strategy = 'vertical',
+        layout_config = { width = 0.99, height = 0.99 },
+      },
       pickers = {
         find_files = { hidden = true },
         live_grep = { additional_args = { "--hidden" } }

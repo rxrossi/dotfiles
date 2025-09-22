@@ -9,6 +9,7 @@ return {
     "nvim-telescope/telescope.nvim",
   },
   opts = {
+    legacy_commands = false,
     workspaces = {
       {
         name = "default",

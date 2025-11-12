@@ -1,27 +1,19 @@
 return {
-  "copilotlsp-nvim/copilot-lsp",
-  opts = {
-    move_count_threshold = 3,
+  "zbirenbaum/copilot.lua",
+  dependencies = {
+    "copilotlsp-nvim/copilot-lsp",
   },
-  init = function()
-    vim.g.copilot_nes_debounce = 100
-    vim.lsp.enable("copilot_ls")
-    vim.keymap.set("n", "<tab>", function()
-      -- Try to jump to the start of the suggestion edit.
-      -- If already at the start, then apply the pending suggestion and jump to the end of the edit.
-      local _ = require("copilot-lsp.nes").walk_cursor_start_edit()
-          or (
-            require("copilot-lsp.nes").apply_pending_nes() and require("copilot-lsp.nes").walk_cursor_end_edit()
-          )
-    end)
-
-    vim.keymap.set("i", "<tab>", function()
-      -- Try to jump to the start of the suggestion edit.
-      -- If already at the start, then apply the pending suggestion and jump to the end of the edit.
-      local _ = require("copilot-lsp.nes").walk_cursor_start_edit()
-          or (
-            require("copilot-lsp.nes").apply_pending_nes() and require("copilot-lsp.nes").walk_cursor_end_edit()
-          )
-    end)
-  end,
+  config = function() 
+    require("copilot").setup({
+      nes = {
+        enabled = true,
+        auto_trigger = true,
+        keymap = {
+          accept_and_goto = "<leader>p",
+          accept = false,
+          dismiss = "<Esc>",
+        },
+      },
+    })
+  end
 }

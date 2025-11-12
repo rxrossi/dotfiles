@@ -34,6 +34,7 @@ return {
     vim.keymap.set('n', '<leader><space>', builtin.buffers, { desc = 'Telescope buffers' })
     vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Telescope help tags' })
     vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'Telescope grep string' })
+    vim.keymap.set('n', '<leader>so', builtin.lsp_document_symbols, { desc = 'Telescope lsp document symbols' })
 
     require('config.telescope_multigrep').setup()
   end

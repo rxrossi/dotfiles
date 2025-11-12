@@ -5,13 +5,6 @@ return {
     dependencies = {
       'rafamadriz/friendly-snippets',
       'Kaiser-Yang/blink-cmp-avante',
-      {
-        "fang2hou/blink-copilot",
-        opts = {
-          max_completions = 1, -- Global default for max completions
-          max_attempts = 2,    -- Global default for max attempts
-        }
-      }
     },
     build = 'cargo build --release',
 

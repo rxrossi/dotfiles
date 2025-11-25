@@ -50,3 +50,9 @@ vim.o.expandtab = true
 
 -- gO - outline
 
+-- Autored on change
+vim.cmd([[
+  set autoread
+  au FocusGained,BufEnter * :checktime
+  au CursorHold,CursorHoldI * :checktime
+]])

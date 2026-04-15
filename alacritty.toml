@@ -1,7 +1,10 @@
 [general] 
 import = [
   # "~/.config/alacritty/catppuccin-mocha.toml"
-  "~/.config/alacritty/nightfox.toml"
+  # "~/.config/alacritty/nightfox.toml"
+  # "~/.config/alacritty/dracula.toml"
+  # "~/.config/alacritty/flexoki-dark.toml"
+  "~/.config/alacritty/everforest.toml"
 ]
 
 [env]

@@ -1,7 +1,7 @@
 return {
-	"EdenEast/nightfox.nvim",
+	"neanias/everforest-nvim",
 	priority = 1000,
 	init = function()
-		vim.cmd([[colorscheme nightfox]])
+		vim.cmd([[colorscheme everforest]])
 	end,
 }

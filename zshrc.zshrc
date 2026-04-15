@@ -113,12 +113,6 @@ export EDITOR=nvim
 alias v="nvim"
 alias dotv="nvim ~/dotfiles/"
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/alex/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/alex/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/alex/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/alex/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
 source <(fzf --zsh)
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
@@ -129,3 +123,23 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PATH="$HOME/.local/bin:$PATH"
+
+# opencode
+export PATH=/Users/arossi/.opencode/bin:$PATH
+
+# Added by Antigravity
+export PATH="/Users/arossi/.antigravity/antigravity/bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/arossi/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/arossi/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/arossi/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/arossi/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# pnpm
+export PNPM_HOME="/Users/arossi/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

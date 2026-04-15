@@ -10,8 +10,6 @@ require('highlight')
 
 require('persistent_undo')
 
-require('biome')
-
 vim.cmd([[packadd cfilter]])
 
 vim.cmd([[ set linebreak ]])

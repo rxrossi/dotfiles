@@ -40,6 +40,17 @@ return {
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
+      providers = {
+        path = {
+          opts = {
+            -- Pi Ctrl+G edits a temporary file. Use Neovim's cwd for path
+            -- completion instead of the temp file's directory.
+            get_cwd = function(_)
+              return vim.fn.getcwd()
+            end,
+          },
+        },
+      },
     },
 
     -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance

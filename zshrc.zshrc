@@ -110,6 +110,8 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 export EDITOR=nvim
+# Pi Ctrl+G external editor: open Neovim with cwd pinned to the project.
+export VISUAL="$HOME/.local/bin/pi-vim"
 alias v="nvim"
 alias dotv="nvim ~/dotfiles/"
 

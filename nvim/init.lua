@@ -54,3 +54,14 @@ vim.cmd([[
   au FocusGained,BufEnter * :checktime
   au CursorHold,CursorHoldI * :checktime
 ]])
+
+
+vim.cmd([[
+  nnoremap <leader>y :call system('pbcopy', expand('%') . ':' . line('.'))<CR>[106;5u
+]])
+
+--- transparent background
+vim.cmd([[
+  hi Normal guibg=NONE ctermbg=NONE
+  hi NormalNC guibg=NONE ctermbg=NONE
+]])

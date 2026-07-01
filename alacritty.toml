@@ -173,7 +173,7 @@ mods = "Alt"
 
 [window]
 decorations = "buttonless"
-opacity = 1
+opacity = 1 # was 0.90
 
 [window.dimensions]
 columns = 200

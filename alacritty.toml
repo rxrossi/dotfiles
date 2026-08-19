@@ -42,6 +42,11 @@ mods = "Control"
 chars = "\u001b[51;5u"
 
 [[keyboard.bindings]]
+key = "Key4"
+mods = "Control"
+chars = "\u001b[52;5u"
+
+[[keyboard.bindings]]
 chars = "\u001Ba"
 key = "A"
 mods = "Alt"

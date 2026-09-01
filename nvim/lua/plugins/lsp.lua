@@ -52,6 +52,8 @@ return {
         }
       })
 
+      vim.lsp.enable('lua_ls')
+
       vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format() end)
 
       vim.lsp.enable('bashls')
